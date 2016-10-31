@@ -1,0 +1,1 @@
+C:\Users\Shahbaaz Sheikh\Documents\Visual Studio 2015\Projects\StorageUnitManagementSystem\StorageUnitManagementSystem\bin\x64\Debug\StorageUnitManagementSystem.exe.config
