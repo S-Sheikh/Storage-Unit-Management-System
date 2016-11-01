@@ -25,7 +25,7 @@ namespace StorageUnitManagementSystem
     public partial class MainWindow
     {
         private SUBL _suBL;
-        
+        //TEST
         
 
         public List<StorageUnit> suObjects { get; set; }
