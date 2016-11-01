@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StorageUnitManagementSystem"
         mc:Ignorable="d"
+                      
          
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:classes="clr-namespace:StorageUnitManagementSystem.BL.Classes"
         Title="MainWindow" Height="710" Width="780" MinHeight="710"  MinWidth="780" MaxHeight="710" MaxWidth="780"
                       ShowMaxRestoreButton="False" WindowStartupLocation="CenterScreen" GlowBrush="{DynamicResource AccentBaseColorBrush}" 
                       BorderThickness="2"  >
-    
-    
-    
+    <Window.DataContext>
+        <classes:Client/>
+    </Window.DataContext>
+
+
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="About Us" />
@@ -22,7 +26,9 @@
                    Height="20"
                    Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
                         <Rectangle.OpacityMask>
-                            <VisualBrush Stretch="Fill" /> --><!--Visual="{StaticResource appbar_cupcake}"  This adds a cuppyCakey picture pic--><!--
+                            <VisualBrush Stretch="Fill" /> -->
+            <!--Visual="{StaticResource appbar_cupcake}"  This adds a cuppyCakey picture pic-->
+            <!--
                         </Rectangle.OpacityMask>
                     </Rectangle>
                     <TextBlock Margin="4 0 0 0"
@@ -34,15 +40,15 @@
     </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroWindow.Resources>
-
         <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
-            <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="20"></Setter> 
+            <Setter Property="Controls:ControlsHelper.HeaderFontSize" Value="20"></Setter>
         </Style>
     </Controls:MetroWindow.Resources>
 
 
+
     <Grid Name="gdMain" Height="Auto" Width="Auto">
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="206*"/>
             <RowDefinition Height="129*"/>
@@ -64,235 +70,221 @@
                     </Grid.ColumnDefinitions>
                     <TabControl x:Name="tabControl" Margin="10" Grid.ColumnSpan="5" Grid.Row="1">
                         <TabItem Header="Home" Width="100" />
-                        <TabItem Header="Clients" Width="100" Margin="-5,0,5,0.4" >
+                        <TabItem Header="Clients" Width="100" >
                             <Grid Height="Auto" Margin="0,0,-10,3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="737*"/>
-                                    <ColumnDefinition Width="9*"/>
-                                </Grid.ColumnDefinitions>
-                                <TabControl Name="tabClients" Height="Auto" Margin="10,10,10,0" TabStripPlacement="Left" >
-                                    <TabItem Header="Add Client" Margin="0,35,0,-38" Width="0" >
-                                        <ScrollViewer BorderBrush="Black" BorderThickness="2">
-                                            <Grid x:Name="gdAddClient" Width="645" Height="450">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="13"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="28"/>
-                                                    <RowDefinition Height="Auto" MinHeight="28"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="Auto" MinHeight="36"/>
-                                                    <RowDefinition Height="Auto" MinHeight="31"/>
-                                                    <RowDefinition Height="99"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="30*"/>
-                                                    <ColumnDefinition Width="161*"/>
-                                                    <ColumnDefinition Width="160*"/>
-                                                    <ColumnDefinition Width="147*"/>
-                                                    <ColumnDefinition Width="141*"/>
-                                                    <ColumnDefinition Width="28*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Label x:Name="label" Content="Deposit(R) :" HorizontalAlignment="Right" Margin="0,4.8,77.2,5.2" Grid.Row="12" Width="71" Grid.Column="1"/>
-                                                <Label x:Name="label1" Content="Name: " HorizontalAlignment="Right" Margin="0,4.8,100.2,0.2" Grid.Row="2" Width="48" Grid.Column="1"/>
-                                                <Label x:Name="label2" Content="Surname: " HorizontalAlignment="Right" Margin="0,4.8,85.2,0.2" Grid.Row="3" Width="63" Grid.Column="1"/>
-                                                <Label x:Name="label3" Content="Telephone: " HorizontalAlignment="Right" Margin="0,4.8,78.2,30.4" Grid.Row="4" Width="70" Grid.Column="1" Grid.RowSpan="2"/>
-                                                <Label x:Name="label4" Content="Email: " HorizontalAlignment="Right" Margin="0,5.8,104.2,30.6" Grid.Row="5" Width="44" Grid.Column="1" Grid.RowSpan="2"/>
-                                                <Label x:Name="label5" Content="Address: " HorizontalAlignment="Right" Margin="0,3.6,90.2,1.6" Grid.Row="6" Width="58" Grid.Column="1"/>
-                                                <Label x:Name="label6" Content="Number of Units" HorizontalAlignment="Right" Margin="0,3.2,50.2,1" Grid.Row="10" Width="98" Grid.Column="1"/>
-                                                <Label x:Name="label7" Content="Unit Class" HorizontalAlignment="Right" Margin="0,4,86.2,0.2" Grid.Row="11" Width="62" Grid.Column="1"/>
-                                                <TextBox x:Name="textBox" Grid.Column="2" Height="23" Margin="4.8,4.8,10.4,0" Grid.Row="12" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="textBox1" Grid.Column="2" Height="23" Margin="4.8,4.8,10.4,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="textBox2" Grid.Column="2" Height="23" Margin="4.8,4.8,10.4,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="textBox3" Grid.Column="2" Height="23" Margin="4.8,4.8,10.4,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="textBox4" Grid.Column="2" Height="23" Margin="4.8,5.8,10.4,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="textBox5" Grid.Column="2" Height="23" Margin="4.8,3.6,10.4,0" Grid.Row="6" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="textBox6" Grid.Column="2" Height="23" Margin="4.8,3.4,10.4,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="textBox7" Grid.Column="2" Height="23" Margin="4.8,3.4,10.4,0" Grid.Row="8" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <TextBox x:Name="textBox8" Grid.Column="3" Height="23" Margin="0,4.4,10.4,0" Grid.Row="9" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Width="73"/>
-                                                <Label x:Name="label8" Content="Code: " Grid.Column="3" Margin="0,3,93.4,0" Grid.Row="9" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right" Width="44"/>
-                                                <ComboBox x:Name="comboBox" Grid.Column="2" HorizontalAlignment="Left" Margin="4.8,4,0,0" Grid.Row="11" VerticalAlignment="Top" Width="120" Height="22" >
-                                                    <ComboBoxItem Content="class A" IsSelected="True"/>
-                                                    <ComboBoxItem Content="class B"/>
-                                                    <ComboBoxItem Content="class C"/>
-                                                    <ComboBoxItem Content="class D"/>
-                                                    <ComboBoxItem Content="class E"/>
-                                                    <ComboBoxItem Content="class F"/>
-                                                </ComboBox>
-                                                <TextBox x:Name="textBox9" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="4.8,3.2,0,0" Grid.Row="10" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                                <Button x:Name="button" Content="SUBMIT" Grid.Column="2" Margin="0,30.8,10.2,80.2" Grid.Row="13" HorizontalAlignment="Right" Width="88" Grid.RowSpan="2"/>
-                                                <Label x:Name="label9" Content="Title: " HorizontalAlignment="Right" Margin="0,5,110.2,0" Grid.Row="1" Width="38" Height="26" VerticalAlignment="Top" Grid.Column="1"/>
-                                                <TextBox x:Name="textBox10" Grid.Column="2" Height="23" Margin="4.8,5,10.4,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                                <Label x:Name="label12" Content="Contract Date: " Margin="0,4.8,59.2,0" Grid.Row="13" VerticalAlignment="Top" HorizontalAlignment="Right" Width="89" Height="26" Grid.Column="1"/>
-                                                <TextBox x:Name="textBox11" Grid.Column="2" Height="23" Margin="4.8,4.8,10.4,0" Grid.Row="13" TextWrapping="Wrap" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                <TabControl x:Name="tabControlClients" Margin="10,10,9.6,-8.6" TabStripPlacement="Left">
+                                    <TabItem x:Name="tabItemAddClients" Header="Add Clients" Margin="0,36,-2.2,-39">
+                                        <Border  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="6,0,4.2,1.2">
+                                            <Grid HorizontalAlignment="Right" Margin="0,0.4,0.4,7.6" Width="568">
+                                                <Label x:Name="lblHeader" Content="Add Clients"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="219,3,0,0" HorizontalAlignment="Left" Width="125"/>
+                                                <Label x:Name="lblId" Content="ID Number:"   VerticalAlignment="Top" Margin="50,35,70,0" HorizontalAlignment="Left" Width="76"/>
+                                                <TextBox x:Name="txtBoxId"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" VerticalAlignment="Top" Margin="0,40,0,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="ID Number Must Be 13-Digits" TextChanged="addClientTextBoxValidation"/>
+                                                <Label x:Name="lblName" Content="Name:"   VerticalAlignment="Top" Margin="50,65,0,0" HorizontalAlignment="Left" Width="58"/>
+                                                <TextBox x:Name="txtBoxName" VerticalAlignment="Top" Margin="0,70,0,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
+                                                <Label x:Name="lblSurname" Content="Surname:"    VerticalAlignment="Top" Margin="50,95,0,0" HorizontalAlignment="Left" Width="64"/>
+                                                <TextBox x:Name="txtBoxSurname" VerticalAlignment="Top" Margin="0,98,0,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
+                                                <Label x:Name="lblDateOfBith" Content="Date of Birth:"  VerticalAlignment="Top" Margin="50,123,0,0" RenderTransformOrigin="0.017,0.548" HorizontalAlignment="Left" Width="89"/>
+                                                <TextBox x:Name="txtBoxDateOfBirth" VerticalAlignment="Top" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" Margin="144,128,144,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="DD-MM-YYYY" Text="{Binding Path=DateOfBirth, StringFormat=dd-MM-yyyy}"/>
+                                                <Label x:Name="lblCellPhone" Content="Cell Phone:"   VerticalAlignment="Top" Margin="50,156,0,0" RenderTransformOrigin="0.462,1.5" HorizontalAlignment="Left" Width="89"/>
+                                                <Label x:Name="lblTelephone" Content="Telephone:"    VerticalAlignment="Top" Margin="50,185,0,0" HorizontalAlignment="Left" Width="76"/>
+                                                <TextBox x:Name="txtBoxTelephone" VerticalAlignment="Top" Margin="144,188,144,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Must Be 10 Digits" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" TextChanged="txtBoxTelephone_TextChanged"/>
+                                                <Label x:Name="lblAddress" Content="Address:"   VerticalAlignment="Top" Margin="50,214,0,0" HorizontalAlignment="Left" Width="64"/>
+                                                <TextBox x:Name="txtBoxAddress" VerticalAlignment="Top" Margin="144,218,144,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Address Line 1"/>
+                                                <TextBox x:Name="txtBoxProvince" VerticalAlignment="Top" Margin="144,308,144,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
+                                                <Label x:Name="lblLine2"  VerticalAlignment="Top" Margin="50,214,0,0" HorizontalAlignment="Left" Width="64"/>
+                                                <TextBox x:Name="txtBoxLine2" VerticalAlignment="Top" Margin="144,248,144,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Address Line 2"/>
 
+                                                <TextBox x:Name="txtBoxCity" VerticalAlignment="Top" Margin="144,278,144,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
+                                                <TextBox x:Name="txtBoxCode" VerticalAlignment="Top" Margin="334,338,0,0" HorizontalAlignment="Left" Width="90" Controls:TextBoxHelper.Watermark="Only Digits" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput"/>
+                                                <Label x:Name="lblAddressCode" Content="Code:"   VerticalAlignment="Top" Margin="280,335,0,0" HorizontalAlignment="Left" Width="40"/>
+                                                <Label x:Name="lblAddress_Line_2" Content="Province:"   VerticalAlignment="Top" Margin="50,305,0,0" RenderTransformOrigin="0.462,1.5" HorizontalAlignment="Left" Width="78"/>
+                                                <TextBox x:Name="txtBoxCellPhone" VerticalAlignment="Top"  Margin="144,158,144,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Must Be 10 Digits" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" TextChanged="txtBoxCellPhone_TextChanged"/>
+                                                <Label x:Name="lblAddress_Line_1" Content="City:"   VerticalAlignment="Top" Margin="50,275,0,0" HorizontalAlignment="Left" Width="64"/>
+                                                <Label x:Name="lblEmail" Content="Email:"   VerticalAlignment="Top" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" Margin="50,365,0,0" RenderTransformOrigin="0.462,1.5" HorizontalAlignment="Left" Width="78"/>
+                                                <TextBox x:Name="txtBoxEmail" VerticalAlignment="Top" Margin="144,368,144,0" HorizontalAlignment="Center" Width="280" Controls:TextBoxHelper.Watermark="Valid Email"/>
+                                                <Button x:Name="btnAddClient" Style="{StaticResource AccentedSquareButtonStyle}" Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,220,8"  Controls:ButtonHelper.CornerRadius="10" Content="Submit" Click="btnAddClient_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1"  />
                                             </Grid>
-                                        </ScrollViewer>
+                                        </Border>
                                     </TabItem>
-                                    <TabItem Header="Remove Client" Margin="0,35,0,-35" Width="0">
-                                        <Border BorderBrush="Black" Margin="5" BorderThickness="2">
-                                            <Grid Name="gdRemoveClient" Margin="5" Width="Auto" Height="Auto">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="379*"/>
-                                                    <ColumnDefinition Width="198*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="46*"/>
-                                                    <RowDefinition Height="332*"/>
-                                                    <RowDefinition Height="59*"/>
-                                                </Grid.RowDefinitions>
-                                                <Button x:Name="button4" Content="Search" HorizontalAlignment="Left" Margin="292,13,0,0" VerticalAlignment="Top" Width="74" Height="23"/>
-                                                <Label x:Name="label16" Content="Enter Client UnitId:" HorizontalAlignment="Left" Margin="19,13,0,0" VerticalAlignment="Top"/>
-                                                <TextBox x:Name="textBox13" HorizontalAlignment="Left" Height="23" Margin="111,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="161"/>
-                                                <ListView x:Name="listView" Margin="10,10,10,17" Grid.Row="1" SelectionChanged="listView_SelectionChanged" Grid.ColumnSpan="2">
+                                    <TabItem Header="Remove Clients" Margin="0,36,-2.2,-39">
+                                        <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5">
+                                            <Grid>
+                                                <Label Content="Remove Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                <Label Content="Enter Client ID Number:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,45,0,0" FontWeight="Bold"/>
+                                                <TextBox x:Name="txtBoxRemoveClientID" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,50,50,0" TextChanged="txtBoxRemoveClientID_TextChanged" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput"  />
+                                                <Label x:Name="lblClientName"  Content="Client name:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,105,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientName"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,110,50,0" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientSurname" Content="Client Surname:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,135,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientSurname"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,140,50,0" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientUsername" Content="Client Username:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,165,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientUsername"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,170,50,0" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientCellPhone" Content="Cell Phone:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,165,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientCellPhone"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,170,50,0" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientDateOfBirth" Content="Client Date of Birth:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,195,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientDateOfBirth"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,200,50,0" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientTelephone" Content="Client Telephone:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,225,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientTelephone"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,230,50,0" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientAddress" Content="Client Address:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,255,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientAddress"  IsEnabled="False"  TextWrapping="Wrap" AcceptsReturn="True" Width="250" Height="100" HorizontalAlignment="Center" Margin="140,260,50,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientEmail" Content="Client Email:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,370,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientEmail"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,370,50,0" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientUnitClass" Content="Client Unit Class:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,354,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientUnitClass"  IsEnabled="False"  Width="250"  Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,359,50,0" Visibility="Hidden"/>
+                                                <Label x:Name="lblClientNoOfUnits" Content="Client No. of Units:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,384,0,0" Visibility="Hidden"/>
+                                                <TextBox x:Name="txtBoxRemoveClientNoOfUnits"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,389,50,0" Visibility="Hidden"/>
+                                                <Button x:Name="btnRemoveClient" Height="25" Width="101" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,420,0,0"  Controls:ButtonHelper.CornerRadius="10" Content="Remove Client" Click="btnRemoveClient_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Visibility="Hidden" />
+                                                <Button x:Name="btnRemoveSearch" Height="25" Width="68" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="440,50,0,0"  Controls:ButtonHelper.CornerRadius="10" Content="Search" Click="bntRemoveSearch_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" />
+                                            </Grid>
+                                        </Border>
+                                    </TabItem>
+                                    <TabItem Header="Restore Clients" Margin="0,36,-2.2,-39">
+                                        <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="2,10,8.2,0.2">
+                                            <Grid>
+                                                <Label Content="Restore Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                <ListView x:Name="lvRestoreClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectionChanged="lvRestoreClient_SelectionChanged"  SelectedIndex="{Binding Path=SelectedIndexValue}" ItemsSource="{Binding Path=Items}">
                                                     <ListView.View>
                                                         <GridView>
-                                                            <GridViewColumn/>
+                                                            <GridViewColumn x:Name="idRestoreColumn" Width="100" DisplayMemberBinding="{Binding idNumber}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="idNumber" Click="lvClientsColumnHeader_Click">ID</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="nameRestoreColumn" Width="100" DisplayMemberBinding="{Binding FirstName}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="FirstName" Click="lvClientsColumnHeader_Click">Name</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="surnameRestoreColumn"  Width="100" DisplayMemberBinding="{Binding LastName}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="LastName" Click="lvClientsColumnHeader_Click">Surname</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="dateOfBirthRestoreColumn"  Width="120" DisplayMemberBinding="{Binding DateOfBirth}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="DateOfBirth" Click="lvClientsColumnHeader_Click">Date of Birth</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="emailRestoreColumn"  Width="150" DisplayMemberBinding="{Binding EMailAddress}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="EMailAddress" Click="lvClientsColumnHeader_Click">Email</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="telephoneRestoreColumn"  Width="150" DisplayMemberBinding="{Binding Telephone}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Telephone" Click="lvClientsColumnHeader_Click">Telephone</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="cellphoneRestoreColumn"  Width="150" DisplayMemberBinding="{Binding Cellphone}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Cellphone" Click="lvClientsColumnHeader_Click">Cellphone</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="addressRestoreColumn"  Width="350" DisplayMemberBinding="{Binding Address}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Address" >Address</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                        </GridView>
+                                                    </ListView.View>
+
+                                                </ListView>
+                                                <Label Content="Enter Client ID:" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,355,0,0"/>
+                                                <TextBox x:Name="txtBoxRestoreClientID"  Width="250" Height="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="120,10,0,80" TextChanged="txtBoxRestoreClientID_TextChanged" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput"  />
+                                                <Button x:Name="btnRestoreSearch" Height="25" Width="68" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="400,0,0,80"  Controls:ButtonHelper.CornerRadius="10" Content="Search" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreSearch_Click" />
+                                                <Button x:Name="btnRestoreClient" Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="220,0,0,40"  Controls:ButtonHelper.CornerRadius="10" Content="Restore Client" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreClient_Click" />
+                                                <Button x:Name="btnRestoreListAll" Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="386,0,0,39.8"  Controls:ButtonHelper.CornerRadius="10" Content="List All" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreListAll_Click" />
+                                            </Grid>
+                                        </Border>
+                                    </TabItem>
+                                    <TabItem Header="List Clients"  Margin="0,36,-2.2,-39">
+                                        <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5">
+                                            <Grid>
+                                                <Label Content="List Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                <ListView x:Name="lvListClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
+                                                    <ListView.View>
+                                                        <GridView>
+                                                            <GridViewColumn x:Name="idListColumn" Width="100" DisplayMemberBinding="{Binding idNumber}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="idNumber" Click="lvListClientsColumnHeader_Click">ID</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="nameListeColumn" Width="100" DisplayMemberBinding="{Binding FirstName}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="FirstName" Click="lvListClientsColumnHeader_Click">name</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="surnameListColumn"  Width="100" DisplayMemberBinding="{Binding LastName}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="LastName" Click="lvListClientsColumnHeader_Click">Surname</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="dateOfBirthListColumn"  Width="120" DisplayMemberBinding="{Binding DateOfBirth}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="DateOfBirth" Click="lvListClientsColumnHeader_Click">Date of Birth</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="emailListColumn"  Width="150" DisplayMemberBinding="{Binding EMailAddress}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="EMailAddress" Click="lvListClientsColumnHeader_Click">Email</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="telephoneListColumn"  Width="150" DisplayMemberBinding="{Binding Telephone}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Telephone" Click="lvListClientsColumnHeader_Click">Telephone</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="cellphoneListColumn"  Width="150" DisplayMemberBinding="{Binding Cellphone}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Cellphone" Click="lvListClientsColumnHeader_Click">Cellphone</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="addressListColumn"  Width="350" DisplayMemberBinding="{Binding Address}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Address" >Address</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
                                                         </GridView>
                                                     </ListView.View>
                                                 </ListView>
-                                                <Button x:Name="button5" Content="Remove Client" HorizontalAlignment="Right" Margin="0,10,67,0" Grid.Row="2" VerticalAlignment="Top" Width="Auto"/>
+                                               
+                                                    <Image x:Name="imgRefresh" Height="30" Width="64" Margin="260,0,0,80" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
+                                                        <Image.Source>
+                                                            <BitmapImage DecodePixelWidth="64" UriSource="Images/refresh.png"/>
+                                                        </Image.Source>
+                                                    </Image>
 
-                                            </Grid>
-                                        </Border>
-                                    </TabItem>
-                                    <TabItem Header="Restore Client" Margin="0,35,0,-38" Width="0">
+                                                <ComboBox x:Name="cboListSearch" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,49.9" SelectionChanged="cboListSearch_SelectionChanged" SelectedIndex="0" DropDownOpened="cboListSearch_DropDownOpened" >
+                                                   <ComboBoxItem>Search by:</ComboBoxItem>
 
-                                        <Border BorderBrush="Black" Margin="5" BorderThickness="2">
-                                            <Grid Name="gdRestoreClient" Width="Auto" Height="Auto" Margin="2,0,0,0">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="50*"/>
-                                                    <RowDefinition Height="340*"/>
-                                                    <RowDefinition Height="57*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="353*"/>
-                                                    <ColumnDefinition Width="232*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Label x:Name="label17" Content="Enter Client UnitId:" HorizontalAlignment="Left" Margin="30,14,0,0" VerticalAlignment="Top" Height="26" Width="87"/>
-                                                <TextBox x:Name="textBox14" HorizontalAlignment="Left" Height="23" Margin="122,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174"/>
-                                                <Button x:Name="button6" Content="Search" Margin="313,17,0,0" VerticalAlignment="Top" Height="23" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="75"/>
-                                                <ListView x:Name="listView1" Margin="10,10,10,14" Grid.Row="1" SelectionChanged="listView1_SelectionChanged" Grid.ColumnSpan="2">
-                                                    <ListView.View>
-                                                        <GridView>
-                                                            <GridViewColumn/>
-                                                        </GridView>
-                                                    </ListView.View>
-                                                </ListView>
-                                                <Button x:Name="button7" Content="Restore Client" Margin="0,10,40,0" Grid.Row="2" HorizontalAlignment="Right" Height="20" VerticalAlignment="Top"/>
-                                            </Grid>
-
-                                        </Border>
-                                    </TabItem>
-                                    <TabItem Header="List Client" Margin="0,35,0,-38" Width="0">
-                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5,10,5,5">
-                                            <Grid Name="gdListClient" Width="Auto" Height="Auto">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="46*"/>
-                                                    <RowDefinition Height="44*"/>
-                                                    <RowDefinition Height="301*"/>
-                                                    <RowDefinition Height="25*"/>
-                                                    <RowDefinition Height="36*"/>
-                                                    <RowDefinition Height="17*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="429*"/>
-                                                    <ColumnDefinition Width="110*"/>
-                                                    <ColumnDefinition Width="23*"/>
-                                                    <ColumnDefinition Width="25*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Label x:Name="label13" Content="SELECT UNIT CLASS" HorizontalAlignment="Center" Margin="257,10,56,0" VerticalAlignment="Top" Height="26" Width="116" FontWeight="Bold"/>
-                                                <TabControl x:Name="tabControl1" Margin="10" Grid.Row="1" Grid.ColumnSpan="4" Grid.RowSpan="3">
-                                                    <TabItem Header="Class A">
-                                                        <Grid Height="Auto" Width="Auto" Margin="0,0,5,0">
-                                                            <ListView x:Name="lvClassA" Height="285" Margin="10,10,10,0" VerticalAlignment="Top">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class B">
-                                                        <Grid Height="Auto" Width="Auto" Margin="0,0,5,0">
-                                                            <ListView x:Name="lvClassB" Height="285" Margin="10,10,10,0" VerticalAlignment="Top">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class C">
-                                                        <Grid Height="Auto" Width="Auto" Margin="0,0,5,0">
-                                                            <ListView x:Name="lvClassC" Height="302" Margin="10,10,10,0" VerticalAlignment="Top">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class D">
-                                                        <Grid Height="Auto" Width="Auto" Margin="0,0,5,0">
-                                                            <ListView x:Name="lvClassD" Height="285" Margin="10,10,10,0" VerticalAlignment="Top">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class E">
-                                                        <Grid Height="Auto" Width="Auto" Margin="0,0,5,0">
-                                                            <ListView x:Name="lvClassE" Height="285" Margin="10,10,10,0" VerticalAlignment="Top">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class F">
-                                                        <Grid Height="Auto" Width="Auto" Margin="0,0,5,0">
-                                                            <ListView x:Name="lvClassF" Height="285" Margin="10,10,10,0" VerticalAlignment="Top">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                        </Grid>
-                                                    </TabItem>
-                                                </TabControl>
-                                                <ComboBox x:Name="comboBox1" Margin="88,10,0,0" Grid.Row="4" ToolTip="" HorizontalAlignment="Left" Width="90" Height="20" VerticalAlignment="Top">
-                                                    <ComboBoxItem Content="Name" IsSelected="True"/>
-                                                    <ComboBoxItem Content="Date"/>
-                                                    <ComboBoxItem Content="In Arrears"/>
-                                                    <ComboBoxItem Content="Up to Date"/>
-                                                    <ComboBoxItem Content="Client UnitId"/>
                                                 </ComboBox>
-                                                <Label x:Name="label14" Content="Sort Clients:" HorizontalAlignment="Left" Margin="10,6,0,4" Grid.Row="4" Width="73"/>
-                                                <Label x:Name="label15" Content="Search Client:" Margin="337,6,10,4" Grid.Row="4" HorizontalAlignment="Right" RenderTransformOrigin="0.738,0.542"/>
-                                                <TextBox x:Name="textBox12" Grid.ColumnSpan="3" Grid.Column="1" Margin="10.8,8.4,8.6,0" Grid.Row="4" TextWrapping="Wrap" ToolTip="enter client id" Height="21" VerticalAlignment="Top"/>
+                                                <TextBox x:Name="txtBoxListSearch" Width="150" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,49.8"></TextBox>
+                                                <Button x:Name="btnListSearch" Width="100" Height="25" Content="Search" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="286,109,0,50.8" Click="btnListSearch_Click"></Button>
                                             </Grid>
                                         </Border>
                                     </TabItem>
 
+                                    <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5">
+                                        <Grid>
+                                        </Grid>
+                                    </Border>
+
+                                    <Label x:Name="label" Content="Label" Height="100" Width="100"/>
                                 </TabControl>
                             </Grid>
                         </TabItem>
+                        <TabItem Header="Lease Units" Margin="0,0,-12,0.4" >
+                        <!--=================================================================================================================================================================================-->
+                        <Grid>
+                            <TabControl x:Name="LeasUnitsTabControl" Margin="10" TabStripPlacement="Left">
+                                <TabItem Header="New Contract"  Margin="0,36,-2.2,-39">
+                                    <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="568" Height="458.4">
+                                        
+                                    </Border>
+                                </TabItem>
+                            </TabControl>
+                        </Grid>
+                          </TabItem>
+                        <!--=================================================================================================================================================================================-->
                         <TabItem Header="Units" Width="100" Margin="9,0,-9,-2">
                             <Grid>
                                 <TabControl x:Name="tabControl2" Margin="10" TabStripPlacement="Left">
@@ -301,17 +293,16 @@
                                             <Grid>
                                                 <Label x:Name="label18" Content="Add A New Unit" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="0,10,0,0"/>
                                                 <Label x:Name="label19" Content="Choose Unit Class :" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
-                                                <ComboBox x:Name="cb_addClass" SelectedIndex="0"   HorizontalAlignment="Left" Margin="125,51,0,0"  VerticalAlignment="Top" Width="125"  DropDownOpened="cb_addClass_DropDownOpened" SelectionChanged="cb_addClass_SelectionChanged"  >
-                                                    <ComboBoxItem  Name="cb_addClass_defaultItem">---Select Class---</ComboBoxItem>
+                                                <ComboBox x:Name="comboBox7" HorizontalAlignment="Left" Margin="125,51,0,0"  VerticalAlignment="Top" Width="100">
+                                                    <ComboBoxItem Content="Class A" IsSelected="True"/>
+                                                    <ComboBoxItem Content="Class B"/>
+                                                    <ComboBoxItem Content="Class C"/>
+                                                    <ComboBoxItem Content="Class D"/>
+                                                    <ComboBoxItem Content="Class E"/>
+                                                    <ComboBoxItem Content="Class F"/>
                                                 </ComboBox>
-                                                <Label x:Name="label21" Content="Current Unit Dimensions :" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
-                                                <Label x:Name="lb_currentDimensions" Content="....." HorizontalAlignment="Left" Margin="156,80,0,0" VerticalAlignment="Top"/>
-                                                <Label Name="lb_currentPrice" Content="....." HorizontalAlignment="Left" Margin="120,111,0,0" VerticalAlignment="Top"/>
-                                                <Label x:Name="label28" Content="Current Unit Price :" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
-                                                <Label x:Name="label29" Content="Enter Number of New Units :" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top"/>
-                                                <TextBox x:Name="tb_noOfNewUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="177,145,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="48"/>
-                                                <Button x:Name="btn_addNewUnits"  Content="ADD" HorizontalAlignment="Center" Margin="0,183,0,0"  VerticalAlignment="Top" Width="75" Click="btn_addNewUnits_Click"/>
                                             </Grid>
+
                                         </Border>
                                     </TabItem>
                                     <TabItem Header="List Units" Margin="0,38,-2,-42">
@@ -336,7 +327,7 @@
                                                                 <ComboBoxItem Content="Occupied" IsSelected="True"/>
                                                                 <ComboBoxItem Content="Vacant"/>
                                                                 <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="Name"/>
+                                                                <ComboBoxItem Content="name"/>
                                                             </ComboBox>
                                                         </Grid>
                                                     </TabItem>
@@ -358,7 +349,7 @@
                                                                 <ComboBoxItem Content="Occupied" IsSelected="True"/>
                                                                 <ComboBoxItem Content="Vacant"/>
                                                                 <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="Name"/>
+                                                                <ComboBoxItem Content="name"/>
                                                             </ComboBox>
                                                         </Grid>
                                                     </TabItem>
@@ -380,7 +371,7 @@
                                                                 <ComboBoxItem Content="Occupied" IsSelected="True"/>
                                                                 <ComboBoxItem Content="Vacant"/>
                                                                 <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="Name"/>
+                                                                <ComboBoxItem Content="name"/>
                                                             </ComboBox>
                                                         </Grid>
                                                     </TabItem>
@@ -402,7 +393,7 @@
                                                                 <ComboBoxItem Content="Occupied" IsSelected="True"/>
                                                                 <ComboBoxItem Content="Vacant"/>
                                                                 <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="Name"/>
+                                                                <ComboBoxItem Content="name"/>
                                                             </ComboBox>
                                                         </Grid>
                                                     </TabItem>
@@ -424,7 +415,7 @@
                                                                 <ComboBoxItem Content="Occupied" IsSelected="True"/>
                                                                 <ComboBoxItem Content="Vacant"/>
                                                                 <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="Name"/>
+                                                                <ComboBoxItem Content="name"/>
                                                             </ComboBox>
                                                         </Grid>
                                                     </TabItem>
@@ -446,7 +437,7 @@
                                                                 <ComboBoxItem Content="Occupied" IsSelected="True"/>
                                                                 <ComboBoxItem Content="Vacant"/>
                                                                 <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="Name"/>
+                                                                <ComboBoxItem Content="name"/>
                                                             </ComboBox>
                                                         </Grid>
                                                     </TabItem>
@@ -455,7 +446,7 @@
                                             </Grid>
                                         </Border>
                                     </TabItem>
-                                    <TabItem Header="Search Units" Margin="0,40,-2.4,-38.8">
+                                    <TabItem Header="Search Units" Margin="0,38,-2,-42">
                                         <Border BorderBrush="Black" BorderThickness="2" Margin="5,10,5,5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -487,23 +478,24 @@
                         <TabItem Header="System" Width="100" />
                         <TabItem Header="Reports" Width="120" Margin="10,0,-10,0" />
                     </TabControl>
-                    <Label x:Name="label10" Content="STORAGE UNIT MANAGEMENT SYSTEM" Margin="16,20,0,9" Grid.Column="3" HorizontalAlignment="Left" Width="221"/>
+                    <Label x:Name="label10" Content="Storage Unit Management System" Margin="16,20,0,9" Grid.Column="3" HorizontalAlignment="Left" Width="221" FontWeight="Bold"/>
                     <Label x:Name="label11" Content="User: " Grid.Column="4" Margin="0,20,171,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,0.5" HorizontalAlignment="Right" Width="40" Height="26"/>
-                    <Button x:Name="button1" Content="Help" Margin="10,10.2,0,0" Grid.Row="2" Width="40" Click="button1_Click" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.455,0.216"/>
+                    <Button x:Name="button1" Content="Help" Margin="10,10,0,0" Grid.Row="2" Width="40" Click="button1_Click" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <Button x:Name="button2" Content="Support" Margin="10,10,10,0" Grid.Row="2" Width="82" Grid.Column="1" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                     <TextBlock x:Name="textBlock1" Grid.Column="4" Margin="0,25,10,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" HorizontalAlignment="Right" Width="144" ToolTip="current user" Height="16"/>
                     <TextBlock x:Name="textBlock2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="237">
                         <TextBlock.TextAlignment>Center</TextBlock.TextAlignment>
                         <Hyperlink NavigateUri="www.google.com" RequestNavigate="Hyperlink_RequestNavigate">                          
-                            www.storagemanagement.com
+                            www.OnesAndZeros.com
                         </Hyperlink>
                     </TextBlock>
-                    <Button x:Name="button3" Content="Logout" Grid.Column="2" HorizontalAlignment="Left" Margin="9.8,10.2,0,0" Grid.Row="2" VerticalAlignment="Top" Width="94" Height="21" Click="button3_Click" Grid.ColumnSpan="2"/>
-                    <Label x:Name="max" Content="Label" Grid.Column="4" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Height="31" Width="209" HorizontalContentAlignment="Left"/>
+                    <Button x:Name="button3" Content="Logout" Grid.Column="2" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="94" Height="21" Click="button3_Click" Grid.ColumnSpan="2"/>
+
 
                 </Grid>
             </Border>
         </Grid>
     </Grid>
-    
+
 </Controls:MetroWindow>
+    

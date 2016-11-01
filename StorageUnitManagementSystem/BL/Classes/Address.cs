@@ -8,7 +8,7 @@ namespace StorageUnitManagementSystem.BL.Classes
     public class Address
     {
         private string _line1; //'x'x All correct according to UML/specs
-        private string _line2;
+       private string _line2;
         private string _city;
         private string _province;
         private string _postalCode;
@@ -96,6 +96,11 @@ namespace StorageUnitManagementSystem.BL.Classes
             //Re-use      : none
             //Input       : None
             //Output      : None
+            this.Line1 = Line1;
+            this.Line2 = Line2;
+            this.City = City;
+            this.Province = Province;
+            this.PostalCode = PostalCode;
             //
         } // end method
 
@@ -143,6 +148,7 @@ namespace StorageUnitManagementSystem.BL.Classes
             //
         } // end method
 
+
         public override string ToString()
         {
             //
@@ -153,7 +159,7 @@ namespace StorageUnitManagementSystem.BL.Classes
             //Output      : string
             //              - meaningful string containing all the Address info
             //
-            return _line1 + ", " + _line2 + ", " + _city + ", " + _province + ", " + _postalCode;
+            return _line1 + ", " + _city + ", " + _province + ", " + _postalCode;//deleted line 2"
         } // end method
     }
 }

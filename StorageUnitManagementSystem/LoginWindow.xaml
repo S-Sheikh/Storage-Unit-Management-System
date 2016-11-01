@@ -21,39 +21,30 @@
             <RowDefinition Height="54*"/>
             <RowDefinition Height="383*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="13,25,107,0" Height="266" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1">
-            <Grid Margin="-1,1,1,-1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="146*"/>
-                    <ColumnDefinition Width="321*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="58*"/>
-                    <RowDefinition Height="49*"/>
-                    <RowDefinition Height="55*"/>
-                    <RowDefinition Height="54*"/>
-                    <RowDefinition Height="48*"/>
-                </Grid.RowDefinitions>
-                <Label x:Name="label" Content="Login " Width="44" HorizontalAlignment="Left" Margin="113,22,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1" Height="26"/>
-                <Label x:Name="label1" Content="Username:" Margin="0,10,11,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right" Width="66"/>
-                <Label x:Name="label2" Content="Password:" Margin="0,10,10,0" Grid.Row="2" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right" Width="62"/>
-                <TextBox x:Name="textBox" Grid.Column="1" Height="23" Margin="10,10,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="301"/>
-                <TextBox x:Name="textBox1" Grid.Column="1" Height="23" Margin="10,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="301"/>
-                <Button x:Name="btnLogin" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="63,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="117" Click="btnLogin_Click" Height="20"/>
-                <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Right" Margin="0,22,102,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="Auto">
-                    <Hyperlink NavigateUri="www.google.com" RequestNavigate="Hyperlink_Register">                          
-                            register
-                        </Hyperlink>
-                </TextBlock>
-                <TextBlock x:Name="textBlock1" Width="87" Grid.Column="1" Margin="0,22,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Height="16">
-                    <Hyperlink NavigateUri="www.google.com" RequestNavigate="Hyperlink_ForgotPassword">                          
-                            forgot password
-                        </Hyperlink>
-                </TextBlock>
+        <Label x:Name="label3" Content="Storage Unit Management System" Margin="113.4,108,145.2,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="1" Height="37" Width="331" HorizontalAlignment="Center" Grid.RowSpan="2" />
+        <Grid Margin="65.4,34.8,59.2,139.4" Grid.Column="1" Grid.RowSpan="2" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="146*"/>
+                <ColumnDefinition Width="321*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="58*"/>
+                <RowDefinition Height="49*"/>
+                <RowDefinition Height="55*"/>
+                <RowDefinition Height="54*"/>
+                <RowDefinition Height="48*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="label" Content="Login " Width="57" HorizontalAlignment="Left" Margin="53.4,22,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.Column="1" FontSize="14"/>
+            <Label x:Name="label1" Content="Username:" Margin="0,9.4,45.6,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right" Width="66"/>
+            <Label x:Name="label2" Content="Password:" Margin="0,9.4,44.6,0" Grid.Row="2" VerticalAlignment="Top" Height="27" HorizontalAlignment="Right" Width="62"/>
+            <TextBox x:Name="textBox" Height="23" Margin="120,9.4,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="301" Grid.ColumnSpan="2"/>
+            <TextBox x:Name="textBox1" Height="23" Margin="120,9.4,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="301" Grid.ColumnSpan="2"/>
+            <Button x:Name="btnLogin" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="28.4,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="117" Click="btnLogin_Click" Height="20"/>
+            <TextBlock x:Name="textBlock" Grid.Column="1" HorizontalAlignment="Right" Margin="0,22,102,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="Auto"><Hyperlink NavigateUri="www.google.com" RequestNavigate="Hyperlink_Register"><Run Text="Register"/></Hyperlink></TextBlock>
+            <TextBlock x:Name="textBlock1" Width="87" Grid.Column="1" Margin="0,22,10,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Right" Height="16"><Hyperlink NavigateUri="www.google.com" RequestNavigate="Hyperlink_ForgotPassword" ><Run Text="Forgot Password" /></Hyperlink></TextBlock>
+            <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="-4,-6,-0.2,0" Height="266" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
 
-            </Grid>
-        </Border>
-        <Label x:Name="label3" Content="Storage Unit Management System" Margin="83,10,177,0" Grid.Row="1" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Grid.Column="1" Height="37" Width="331" HorizontalAlignment="Center"/>
+        </Grid>
 
     </Grid>
 </Controls:MetroWindow>

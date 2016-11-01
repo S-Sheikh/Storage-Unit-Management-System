@@ -49,12 +49,11 @@ namespace StorageUnitManagementSystem.DAL
                     StorageUnit.UnitClassification = Convert.ToString(sdr["suClassification"]);
                     StorageUnit.UnitPrice = Convert.ToDouble(sdr["suPrice"]);
                     StorageUnit.UnitSize = Convert.ToString(sdr["suSize"]);
+                    StorageUnit.UnitOwnerId = Convert.ToString(sdr["suOwner"]);
                     StorageUnit.UnitArrears = (Convert.ToInt16(sdr["suArrears"]) == 1) ? true : false;//First Converts Object to Int16 and then Int16 to Boolean Value
                     StorageUnit.UnitOccupied = (Convert.ToInt16(sdr["suOccupied"]) == 1) ? true : false;
                     StorageUnit.UnitInAdvance = (Convert.ToInt16(sdr["suAdvance"]) == 1) ? true : false;
                     StorageUnit.UnitUpToDate = (Convert.ToInt16(sdr["suUpToDate"]) == 1) ? true : false;
-                    StorageUnit.UnitOwnerId = Convert.ToString(sdr["suOwner"]);
-
 
                     StorageUnits.Add(StorageUnit);
                     bRead = sdr.Read(); // Priming read (must have 1st read before loop)
@@ -370,9 +369,5 @@ namespace StorageUnitManagementSystem.DAL
             } // end finally
             return rc; // single return
         } // end method
-
-        
-
-
     } // end class
 }
