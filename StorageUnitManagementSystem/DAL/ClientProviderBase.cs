@@ -13,7 +13,6 @@ namespace ClientManagementSystem.DAL
         /// It returns the list of business objects
         /// </summary>
         public abstract List<Client> SelectAll();
-        public abstract List<Client> SelectAll(string name);
 
         /// <summary>
         /// This method gets a single Client object from the Client datastore.
@@ -23,8 +22,6 @@ namespace ClientManagementSystem.DAL
         /// <param name="ID">The ID of the Client to load from the datastore.</param>
         /// <param name="Client">The Client object loaded from the datastore.</param>
         public abstract int SelectClient(string ID, ref Client Client);
-
-        public abstract int SelectClientName(string Name, ref Client Client);
 
         /// <summary>
         /// This method inserts a row in the Client datastore. 

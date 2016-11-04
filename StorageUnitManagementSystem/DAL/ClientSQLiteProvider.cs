@@ -78,69 +78,6 @@ namespace ClientManagementSystem.DAL
             return Clients; // Single return
         } // end method
 
-
-        public override List<Client> SelectAll(string name)
-        {
-            //
-            //Method Name : List<Client> SelectAll()
-            //Purpose     : Try to get all the Client objects from the datastore
-            //Re-use      : None
-            //Input       : None        
-            //Output      : - ref List<Client>
-            //                - the list that will contain the Client objects loaded from datastore         
-            //
-
-            List<Client> Clients; // will be returned, thus can not be declared in try block
-
-            try
-            {
-                _sqlCon = new SQLiteConnection(_conStr);  // new connection
-                bool bRead = false;
-                Clients = new List<Client>(); // this ensures that if there are no records,
-                                              // the returned list will not be null, but
-                                              // it will be empty (Count = 0)
-
-                _sqlCon.Open(); // open connection
-                string selectQuery = "SELECT * FROM Clients WHERE clientFirstNames = '" + name + "'";
-                SQLiteCommand sqlCommand = new SQLiteCommand(selectQuery, _sqlCon); // setup command
-                SQLiteDataReader sdr = sqlCommand.ExecuteReader();
-                bRead = sdr.Read(); // Priming read (must have 2nd read in loop)
-                while (bRead == true) // false indicates no more rows/records
-                {
-                    Client Client = new Client();
-                    //unit.Address = new Address();
-                    //unit.Phone = new Phone();
-                    Client.Address = new Address();
-                    Client.FirstName = Convert.ToString(sdr["clientFirstNames"]);
-                    Client.idNumber = Convert.ToString(sdr["clientID"]);
-                    Client.LastName = Convert.ToString(sdr["clientLastName"]);
-                    Client.DateOfBirth = Convert.ToString(sdr["clientDateOfBirth"]);
-                    Client.Cellphone = Convert.ToString(sdr["clientCellphone"]);
-                    Client.EMailAddress = Convert.ToString(sdr["clientEmail"]);
-                    Client.Telephone = Convert.ToString(sdr["clientTelephone"]);
-                    Client.Address.Line1 = Convert.ToString(sdr["clientALine1"]);
-                    Client.Address.Line2 = Convert.ToString(sdr["clientALine2"]);
-                    Client.Address.City = Convert.ToString(sdr["clientACity"]);
-                    Client.Address.Province = Convert.ToString(sdr["clientAProvince"]);
-                    Client.Address.PostalCode = Convert.ToString(sdr["clientPostalCode"]);
-                    Client.Archived = (Convert.ToInt16(sdr["clientArchived"]) == 1) ? true : false;//First Converts Object to Int16 and then Int16 to Boolean Value
-
-                    Clients.Add(Client);
-                    bRead = sdr.Read(); // Priming read (must have 1st read before loop)
-                } // end while
-                sdr.Close(); // close reader
-            } // end try
-            catch (Exception ex)
-            {
-                throw ex;
-            } // end catch
-            finally
-            {
-                _sqlCon.Close();  // Close connection
-            } // end finally
-            return Clients; // Single return
-        } // end method
-
         public override int SelectClient(string ID, ref Client Client)
         {
             //
@@ -203,68 +140,7 @@ namespace ClientManagementSystem.DAL
             } // end finally
             return rc; // single return
         } // end method
-        public override int SelectClientName(string Name, ref Client Client)
-        {
-            //
-            //Method Name : int SelectSalaryEmployee(string ID, ref Client Client)
-            //Purpose     : Try to get a single Client object from the Client datastore
-            //Re-use      : 
-            //Input       : string ID
-            //              - The ID of the Client to load from the datastore
-            //              ref Client Client
-            //              - The Client object loaded from the datastore
-            //Output      : - int
-            //                0 : Client loaded from datastore
-            //               -1 : no Client was loaded from the datastore (not found)
-            //
-
-            int rc = 0;  // will be returned, thus can not be declared in try block
-
-            try
-            {
-                _sqlCon = new SQLiteConnection(_conStr); // new connection
-                bool bRead = false;
-                Client = new Client();
-
-                _sqlCon.Open(); // open connection
-                string selectQuery = "SELECT * FROM Clients WHERE [clientFirstNames] = '" + Name + "'";
-                SQLiteCommand sqlCommand = new SQLiteCommand(selectQuery, _sqlCon); // setup command
-                SQLiteDataReader sdr = sqlCommand.ExecuteReader();
-                bRead = sdr.Read();
-                if (bRead == true) // false indicates no row/record read
-                {
-                    Client.idNumber = Convert.ToString(sdr["clientID"]);
-                    Client.FirstName = Convert.ToString(sdr["clientFirstNames"]);
-                    Client.LastName = Convert.ToString(sdr["clientLastName"]);
-                    Client.DateOfBirth = Convert.ToString(sdr["clientDateOfBirth"]);
-                    Client.Cellphone = Convert.ToString(sdr["clientCellphone"]);
-                    Client.EMailAddress = Convert.ToString(sdr["clientEmail"]);
-                    Client.Telephone = Convert.ToString(sdr["clientTelephone"]);
-                    Client.Address.Line1 = Convert.ToString(sdr["clientALine1"]);
-                    Client.Address.Line2 = Convert.ToString(sdr["clientALine2"]);
-                    Client.Address.City = Convert.ToString(sdr["clientACity"]);
-                    Client.Address.Province = Convert.ToString(sdr["clientAProvince"]);
-                    Client.Address.PostalCode = Convert.ToString(sdr["clientPostalCode"]);
-                    Client.Archived = (Convert.ToInt16(sdr["clientArchived"]) == 1) ? true : false;//First Converts Object to Int16 and then Int16 to Boolean Value
-                    rc = 0;
-                } // end if
-                else
-                {
-
-                    rc = -1;
-                } // end else
-                sdr.Close();  // close reader
-            } // end try
-            catch (Exception ex)
-            {
-                throw ex;
-            } // end catch
-            finally
-            {
-                _sqlCon.Close();  // Close connection
-            } // end finally
-            return rc; // single return
-        } // end method
+       
 
         public override int Insert(Client Client)
         {

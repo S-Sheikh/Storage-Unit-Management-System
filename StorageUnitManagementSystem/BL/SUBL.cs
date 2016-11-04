@@ -99,7 +99,7 @@ namespace StorageUnitManagementSystem.BL
             //              - The name of the data provider to use
             //Output      : None
             //
-            if (Provider == "StorageUnitManagementSQLiteProvider")
+            if (Provider == "StorageUnitSQLiteProvider")
             {
                 providerBase = new StroageUnitManagementSQLiteProvider();
             } // end if

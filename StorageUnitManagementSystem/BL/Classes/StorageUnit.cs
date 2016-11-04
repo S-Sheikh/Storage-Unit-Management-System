@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StorageUnitManagementSystem.BL.Classes
 {
-    public class StorageUnit
+    public class StorageUnit 
     {
         private string _unitClassification;
         private string _unitSize;
@@ -99,6 +99,11 @@ namespace StorageUnitManagementSystem.BL.Classes
         {
             get { return _unitPrice; }
             set { _unitPrice = value; }
+        }
+
+        public IEnumerator<StorageUnit> GetEnumerator()
+        {
+            throw new NotImplementedException();
         }
     }
 }

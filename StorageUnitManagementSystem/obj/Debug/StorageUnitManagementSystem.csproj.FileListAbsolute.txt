@@ -110,3 +110,6 @@ C:\Users\Watlinton\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\MainWi
 C:\Users\Watlinton\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.g.resources
 C:\Users\Watlinton\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.Properties.Resources.resources
 C:\Users\Watlinton\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csproj.GenerateResource.Cache
+C:\Users\Shahbaaz Sheikh\Desktop\OPG_Repo\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe.config
+C:\Users\Shahbaaz Sheikh\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe
+C:\Users\Shahbaaz Sheikh\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.pdb
