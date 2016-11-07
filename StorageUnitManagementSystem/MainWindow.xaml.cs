@@ -1078,6 +1078,9 @@ namespace StorageUnitManagementSystem
             listViewSortAdornerUnits = new SortAdorner(listViewSortColUnits, newDir);
             AdornerLayer.GetAdornerLayer(listViewSortColUnits).Add(listViewSortAdornerUnits);
             lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+
+
+
         }
 
         private void TbNoOfNewUnits_TextChanged(object sender, TextChangedEventArgs e)
