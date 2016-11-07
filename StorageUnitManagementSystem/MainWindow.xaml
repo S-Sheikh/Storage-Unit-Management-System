@@ -408,6 +408,11 @@
                                                         </GridView>
                                                     </ListView.View>
                                                 </ListView>
+                                                <Image x:Name="ImgRefreshUnits" Height="30" Width="auto"  HorizontalAlignment="Center"  MouseDown="imgRefreshUnits_MouseDown" Margin="0,355,0,56">
+                                                    <Image.Source>
+                                                        <BitmapImage DecodePixelWidth="64" UriSource="Images/refresh.png"/>
+                                                    </Image.Source>
+                                                </Image>
                                             </Grid>
                                         </Border>
                                     </TabItem>
