@@ -588,6 +588,28 @@ namespace StorageUnitManagementSystem
             }
         }
 
+
+        private void imgRefreshUnits_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            List<Client> clientObjects = new List<Client>();
+            clientObjects = _cbl.SelectAll();
+            LvListClient.Items.Clear();
+
+            if (clientObjects.Count > 0)
+            {
+                LvListClient.Items.Clear();
+                foreach (Client temp in clientObjects)
+                {
+                    if (temp.Archived == Convert.ToBoolean(0))
+                        LvListClient.Items.Add(temp);
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("There are no Clients to list", "No Clients");
+            }
+        }
         private void cboListSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -1063,6 +1085,9 @@ namespace StorageUnitManagementSystem
             listViewSortAdornerUnits = new SortAdorner(listViewSortColUnits, newDir);
             AdornerLayer.GetAdornerLayer(listViewSortColUnits).Add(listViewSortAdornerUnits);
             lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+
+
+
         }
 
         private void TbNoOfNewUnits_TextChanged(object sender, TextChangedEventArgs e)
