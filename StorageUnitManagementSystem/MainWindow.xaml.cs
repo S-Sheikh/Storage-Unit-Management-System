@@ -42,8 +42,9 @@ namespace StorageUnitManagementSystem
             _cbl = new CBL("ClientSQLiteProvider");
             _subl = new SUBL("StorageUnitSQLiteProvider");
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
-            DataContext = new Client();
-            DataContext = new StorageUnit();
+            MessageBox.Show("dsadsa");
+            //DataContext = new Client();
+            //DataContext = new StorageUnit();
             //Test
         }
 
