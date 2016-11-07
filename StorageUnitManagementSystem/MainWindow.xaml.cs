@@ -23,6 +23,7 @@ namespace StorageUnitManagementSystem
     /// </summary>
     public partial class MainWindow
     {
+        private SUBL _suBL;
         private CBL _cbl;
         private SUBL _subl;
         private LUBL _lubl;
@@ -32,7 +33,10 @@ namespace StorageUnitManagementSystem
         public List<string> Data { get; } = new List<string> {"Client ID", "Name", "Surname", "City", "Province"};
         private GridViewColumnHeader _listViewSortCol = null;
         private SortAdorner _listViewSortAdorner = null;
-
+        private GridViewColumnHeader listViewSortColUnits = null;
+        private SortAdorner listViewSortAdornerUnits = null;
+        public List<StorageUnit> suObjects { get; set; }
+        private StorageUnit insertStorageUnit;
         public MainWindow()
         {
             InitializeComponent();
@@ -40,6 +44,7 @@ namespace StorageUnitManagementSystem
             _subl = new SUBL("StorageUnitSQLiteProvider");
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
             DataContext = new Client();
+            DataContext = new StorageUnit();
 
         }
 
@@ -112,6 +117,7 @@ namespace StorageUnitManagementSystem
         {
 
         }
+
 
         private void btnAddClient_Click(object sender, RoutedEventArgs e)
         {
@@ -391,7 +397,28 @@ namespace StorageUnitManagementSystem
             }
         }
 
+        private void cb_addClass_DropDownOpened(object sender, EventArgs e)
+        {
 
+            cb_addClass.Items.Clear();
+            //suObjects.Clear();
+            //MessageBox.Show(cb_addClass.SelectedItem.ToString());
+            suObjects = _suBL.SelectAll();
+            List<string> classArray = new List<string>();
+            foreach (StorageUnit unit in suObjects)
+            {
+                classArray.Add(unit.UnitClassification);
+            }
+
+            // You can convert it back to an array if you would like to
+            string[] classStrings = classArray.ToArray();
+            classStrings = classStrings.Distinct().ToArray();
+            for (int x = 0; x < classStrings.Length; x++)
+            {
+                cb_addClass.Items.Add(classStrings[x]);
+            }
+            cb_addClass.SelectedIndex = 0;
+        }
         private void btnRestoreSearch_Click(object sender, RoutedEventArgs e)
         {
             int rc = 0;
@@ -754,6 +781,39 @@ namespace StorageUnitManagementSystem
             return availableUnits;
         }
 
+        private void cb_addClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+
+                foreach (StorageUnit unit in suObjects)
+                {
+                    if (unit.UnitClassification == cb_addClass.SelectedValue.ToString())
+                    {
+                        lb_currentPrice.Content = "R" + unit.UnitPrice;
+                        char[] charSize = unit.UnitSize.ToCharArray();
+                        lb_currentDimensions.Content = "Width : " + charSize[0] + "m ; "
+                            + "Length : " + charSize[2] + "m ; "
+                            + "Height : " + charSize[4] + "m ; ";
+                        insertStorageUnit = new StorageUnit();
+                        insertStorageUnit.UnitSize = unit.UnitSize;
+                        insertStorageUnit.UnitPrice = unit.UnitPrice;
+                        insertStorageUnit.UnitArrears = Convert.ToBoolean(0);
+                        insertStorageUnit.UnitUpToDate = Convert.ToBoolean(0);
+                        insertStorageUnit.UnitInAdvance = Convert.ToBoolean(0);
+                        insertStorageUnit.UnitOccupied = Convert.ToBoolean(0);
+                        insertStorageUnit.UnitOwnerId = null;
+                        break;
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                //Go Home WPF , You're Drunk
+            }
+        }
+
         private int CountOccupiedUnits(string unitClass) //returns number of occupied units
         {
             int occupiedUnits = 0;
@@ -847,6 +907,59 @@ namespace StorageUnitManagementSystem
                 LblTotal.Content = ".....";
             }
 
+        }
+
+        private void btn_addNewUnits_Click(object sender, RoutedEventArgs e)
+        {
+            int rc = 0;
+            if (!string.IsNullOrEmpty(tb_noOfNewUnits.Text))
+            {
+                try
+                {
+
+                    StorageUnit suObject = new StorageUnit();
+                    suObject.UnitClassification = cb_addClass.SelectedValue.ToString();
+                    suObject.UnitSize = insertStorageUnit.UnitSize;
+                    suObject.UnitPrice = insertStorageUnit.UnitPrice;
+                    suObject.UnitArrears = insertStorageUnit.UnitArrears;
+                    suObject.UnitUpToDate = insertStorageUnit.UnitUpToDate;
+                    suObject.UnitInAdvance = insertStorageUnit.UnitInAdvance;
+                    suObject.UnitOccupied = insertStorageUnit.UnitOccupied;
+                    suObject.UnitOwnerId = "0";
+
+                    for (int x = 0; x < Convert.ToInt16(tb_noOfNewUnits.Text); x++)
+                    {
+                        suObjects.Clear();
+                        suObjects = _suBL.SelectAll();
+                        int max = 0;
+                        foreach (StorageUnit temp in suObjects)
+                        {
+                            if (Convert.ToInt16(temp.UnitId) >= max)
+                            {
+                                max = Convert.ToInt16(temp.UnitId);
+                            }
+                        }
+                        suObject.UnitId = Convert.ToString(max + 1);
+                        rc = _suBL.Insert(suObject);
+                    }
+                    if (rc == 0)
+                    {
+                        this.ShowMessageAsync("Success", "Added New Unit/s ");
+                    }
+                    else
+                    {
+                        this.ShowMessageAsync("Error", "Could not Add New Unit");
+                    }
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.ToString());
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("Warning", "Please Enter all options");
+            }
         }
 
         private void BtnLeaseSubmit_Click(object sender, RoutedEventArgs e)
@@ -946,6 +1059,26 @@ namespace StorageUnitManagementSystem
                 this.ShowMessageAsync("Empty Fields", "Fields Cannot Be Empty!");
             }
            
+        }
+
+        private void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+            string sortBy = column.Tag.ToString();
+            if (listViewSortColUnits != null)
+            {
+                AdornerLayer.GetAdornerLayer(listViewSortColUnits).Remove(listViewSortAdornerUnits);
+                lv_Units.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (listViewSortColUnits == column && listViewSortAdornerUnits.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            listViewSortColUnits = column;
+            listViewSortAdornerUnits = new SortAdorner(listViewSortColUnits, newDir);
+            AdornerLayer.GetAdornerLayer(listViewSortColUnits).Add(listViewSortAdornerUnits);
+            lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
         private void TbNoOfNewUnits_TextChanged(object sender, TextChangedEventArgs e)

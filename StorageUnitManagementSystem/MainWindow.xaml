@@ -324,162 +324,85 @@
                         <!--=================================================================================================================================================================================-->
                         <TabItem Header="Units" Width="100" Margin="9,0,-9,-2">
                             <Grid>
-                                <TabControl x:Name="TabControl2" Margin="10" TabStripPlacement="Left">
+                                <TabControl x:Name="tabControl2" Margin="10" TabStripPlacement="Left">
                                     <TabItem Header="Add Units" Margin="0,36,-2.2,-39">
                                         <Border BorderBrush="Black" BorderThickness="2" Margin="5">
                                             <Grid>
-                                                <Label x:Name="Label18" Content="Add A New Unit" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="0,10,0,0"/>
-                                                <Label x:Name="Label19" Content="Choose Unit Class :" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
-                                                <ComboBox x:Name="ComboBox7" HorizontalAlignment="Left" Margin="125,51,0,0"  VerticalAlignment="Top" Width="100" DropDownOpened="CbLeaseSelectClass_DropDownOpened">
-                                                    <ComboBoxItem Content="Class A" IsSelected="True"/>
-                                                    
+                                                <Label x:Name="label18" Content="Add A New Unit" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                                                <Label x:Name="label19" Content="Choose Unit Class :" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
+                                                <ComboBox x:Name="cb_addClass" SelectedIndex="0"   HorizontalAlignment="Left" Margin="125,51,0,0"  VerticalAlignment="Top" Width="125"  DropDownOpened="cb_addClass_DropDownOpened" SelectionChanged="cb_addClass_SelectionChanged"  >
+                                                    <ComboBoxItem  Name="cb_addClass_defaultItem">---Select Class---</ComboBoxItem>
                                                 </ComboBox>
+                                                <Label  Content="Current Unit Dimensions :" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
+                                                <Label x:Name="lb_currentDimensions" Content="....." HorizontalAlignment="Left" Margin="156,80,0,0" VerticalAlignment="Top"/>
+                                                <Label Name="lb_currentPrice" Content="....." HorizontalAlignment="Left" Margin="120,111,0,0" VerticalAlignment="Top"/>
+                                                <Label Content="Current Unit Price :" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
+                                                <Label Content="Enter Number of New Units :" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top"/>
+                                                <TextBox x:Name="tb_noOfNewUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="177,145,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="48"/>
+                                                <Button x:Name="btn_addNewUnits"  Content="ADD" HorizontalAlignment="Center" Margin="0,183,0,0"  VerticalAlignment="Top" Width="75" Click="btn_addNewUnits_Click"/>
                                             </Grid>
-
                                         </Border>
                                     </TabItem>
                                     <TabItem Header="List Units" Margin="0,38,-2,-42">
                                         <Border BorderBrush="Black" BorderThickness="2" Margin="5">
                                             <Grid>
-                                                <TabControl x:Name="TabControl4" Margin="8,71,8,8">
-                                                    <TabItem Header="Class A">
-                                                        <Grid>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="287*"/>
-                                                                <RowDefinition Height="51*"/>
-                                                            </Grid.RowDefinitions>
-                                                            <ListView x:Name="ListView2" Margin="10">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                            <Label x:Name="Label23" Content="Sort Units:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-                                                            <ComboBox x:Name="ComboBox2" Text="Sort Client by:" HorizontalAlignment="Left" Margin="92,15,0,0" ToolTip="" Grid.Row="1" Height="26" VerticalAlignment="Top" Width="82">
-                                                                <ComboBoxItem Content="Occupied" IsSelected="True"/>
-                                                                <ComboBoxItem Content="Vacant"/>
-                                                                <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="name"/>
-                                                            </ComboBox>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class B">
-                                                        <Grid>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="287*"/>
-                                                                <RowDefinition Height="51*"/>
-                                                            </Grid.RowDefinitions>
-                                                            <ListView x:Name="ListView3" Margin="10">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                            <Label x:Name="Label2345" Content="Sort Units:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-                                                            <ComboBox x:Name="ComboBox3" Text="Sort Client by:" HorizontalAlignment="Left" Margin="92,15,0,0" ToolTip="" Grid.Row="1" Height="26" VerticalAlignment="Top">
-                                                                <ComboBoxItem Content="Occupied" IsSelected="True"/>
-                                                                <ComboBoxItem Content="Vacant"/>
-                                                                <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="name"/>
-                                                            </ComboBox>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class C">
-                                                        <Grid>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="287*"/>
-                                                                <RowDefinition Height="51*"/>
-                                                            </Grid.RowDefinitions>
-                                                            <ListView x:Name="ListView5" Margin="10">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                            <Label x:Name="Label234" Content="Sort Units:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-                                                            <ComboBox x:Name="ComboBox4" Text="Sort Client by:" HorizontalAlignment="Left" Margin="92,15,0,0" ToolTip="" Grid.Row="1" Height="26" VerticalAlignment="Top">
-                                                                <ComboBoxItem Content="Occupied" IsSelected="True"/>
-                                                                <ComboBoxItem Content="Vacant"/>
-                                                                <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="name"/>
-                                                            </ComboBox>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class D">
-                                                        <Grid>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="287*"/>
-                                                                <RowDefinition Height="51*"/>
-                                                            </Grid.RowDefinitions>
-                                                            <ListView x:Name="ListView6" Margin="10">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                            <Label x:Name="Label236" Content="Sort Units:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-                                                            <ComboBox x:Name="ComboBox5" Text="Sort Client by:" HorizontalAlignment="Left" Margin="92,15,0,0" ToolTip="" Grid.Row="1" Height="26" VerticalAlignment="Top">
-                                                                <ComboBoxItem Content="Occupied" IsSelected="True"/>
-                                                                <ComboBoxItem Content="Vacant"/>
-                                                                <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="name"/>
-                                                            </ComboBox>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class E">
-                                                        <Grid>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="287*"/>
-                                                                <RowDefinition Height="51*"/>
-                                                            </Grid.RowDefinitions>
-                                                            <ListView x:Name="ListView7" Margin="10">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                            <Label x:Name="Label25" Content="Sort Units:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-                                                            <ComboBox x:Name="ComboBox6" Text="Sort Client by:" HorizontalAlignment="Left" Margin="92,15,0,0" ToolTip="" Grid.Row="1" Height="26" VerticalAlignment="Top">
-                                                                <ComboBoxItem Content="Occupied" IsSelected="True"/>
-                                                                <ComboBoxItem Content="Vacant"/>
-                                                                <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="name"/>
-                                                            </ComboBox>
-                                                        </Grid>
-                                                    </TabItem>
-                                                    <TabItem Header="Class F">
-                                                        <Grid>
-                                                            <Grid.RowDefinitions>
-                                                                <RowDefinition Height="287*"/>
-                                                                <RowDefinition Height="51*"/>
-                                                            </Grid.RowDefinitions>
-                                                            <ListView x:Name="ListView8" Margin="10">
-                                                                <ListView.View>
-                                                                    <GridView>
-                                                                        <GridViewColumn/>
-                                                                    </GridView>
-                                                                </ListView.View>
-                                                            </ListView>
-                                                            <Label x:Name="Label123" Content="Sort Units:" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-                                                            <ComboBox x:Name="ComboBox9" Text="Sort Client by:" HorizontalAlignment="Left" Margin="92,15,0,0" ToolTip="" Grid.Row="1" Height="26" VerticalAlignment="Top">
-                                                                <ComboBoxItem Content="Occupied" IsSelected="True"/>
-                                                                <ComboBoxItem Content="Vacant"/>
-                                                                <ComboBoxItem Content="Date"/>
-                                                                <ComboBoxItem Content="name"/>
-                                                            </ComboBox>
-                                                        </Grid>
-                                                    </TabItem>
-                                                </TabControl>
-                                                <Label x:Name="Label22" Content="SELECT UNIT CLASS" HorizontalAlignment="Left" Margin="244,29,0,0" VerticalAlignment="Top" FontWeight="Bold" Width="Auto"/>
+                                                <TabControl x:Name="tabControl4" Margin="8,71,8,8"/>
+                                                <Label  Content="List Units" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top" FontWeight="Bold" Width="Auto"/>
+                                                <ListView x:Name="lv_Units" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
+                                                    <ListView.View>
+                                                        <GridView>
+                                                            <GridViewColumn x:Name="clm_unitID" Width="50" DisplayMemberBinding="{Binding idNumber}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="idNumber" Click="lvUnitsColumnHeader_Click">ID</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitClass" Width="120" DisplayMemberBinding="{Binding FirstName}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Class" Click="lvUnitsColumnHeader_Click">Classification</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitPrice"  Width="100" DisplayMemberBinding="{Binding LastName}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Price" Click="lvUnitsColumnHeader_Click">Price</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitSize"  Width="120" DisplayMemberBinding="{Binding DateOfBirth}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Size" Click="lvUnitsColumnHeader_Click">Size</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitArrears"  Width="100" DisplayMemberBinding="{Binding EMailAddress}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Arrears" Click="lvUnitsColumnHeader_Click">Arrears</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitOccupied"  Width="100" DisplayMemberBinding="{Binding Telephone}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Occupied" Click="lvUnitsColumnHeader_Click">Occupied</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitAdvance"  Width="100" DisplayMemberBinding="{Binding Cellphone}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Advance" Click="lvUnitsColumnHeader_Click">Advance Payment</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitUpToDate"  Width="100" DisplayMemberBinding="{Binding Address}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="UpToDate" >Up To Date</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitOwner"  Width="100" DisplayMemberBinding="{Binding Address}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="Owner" >Leasee ID</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
                                             </Grid>
                                         </Border>
                                     </TabItem>
-                                    <TabItem Header="Search Units" Margin="0,38,-2,-42">
+                                    <TabItem Header="Search Units" Margin="0,40,-2.4,-38.8">
                                         <Border BorderBrush="Black" BorderThickness="2" Margin="5,10,5,5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
@@ -493,19 +416,18 @@
                                                     <RowDefinition Height="15*"/>
                                                     <RowDefinition Height="101*"/>
                                                 </Grid.RowDefinitions>
-                                                <Label x:Name="Label26" Content="Unit ID:" HorizontalAlignment="Left" Margin="63.6,60,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="50"/>
-                                                <TextBox x:Name="TextBox23" Grid.Column="2" HorizontalAlignment="Right" Height="23" Margin="0,60,16,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228"/>
-                                                <Button x:Name="Button9" Content="Search" Grid.Column="1" Margin="0,9.8,150,0" Grid.Row="1" VerticalAlignment="Top" Height="20" HorizontalAlignment="Right" Width="100" Grid.ColumnSpan="2"/>
-                                                <Button x:Name="Button10" Content="Advanced Search" Grid.Column="2" Margin="0,10.2,16,0" Grid.Row="1" VerticalAlignment="Top" Height="20" HorizontalAlignment="Right" Width="100"/>
-                                                <Label x:Name="Label27" Content="Specific Search" Grid.Column="1" HorizontalAlignment="Left" Margin="24.6,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="26" Width="90"/>
-                                                <RadioButton x:Name="RadioButton" Content="All vacant units" Grid.Column="2" Margin="0,10.4,145,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="99" Height="15"/>
-                                                <RadioButton x:Name="RadioButton1" Content="all occupied units" Grid.Column="2" Margin="0,44.4,133,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="111" Height="15"/>
+                                                <Label x:Name="label26" Content="Unit ID:" HorizontalAlignment="Left" Margin="63.6,60,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="50"/>
+                                                <TextBox x:Name="textBox23" Grid.Column="2" HorizontalAlignment="Right" Height="23" Margin="0,60,16,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228"/>
+                                                <Button x:Name="button9" Content="Search" Grid.Column="1" Margin="0,9.8,150,0" Grid.Row="1" VerticalAlignment="Top" Height="20" HorizontalAlignment="Right" Width="100" Grid.ColumnSpan="2"/>
+                                                <Button x:Name="button10" Content="Advanced Search" Grid.Column="2" Margin="0,10.2,16,0" Grid.Row="1" VerticalAlignment="Top" Height="20" HorizontalAlignment="Right" Width="100"/>
+                                                <Label x:Name="label27" Content="Specific Search" Grid.Column="1" HorizontalAlignment="Left" Margin="24.6,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="26" Width="90"/>
+                                                <RadioButton x:Name="radioButton" Content="All vacant units" Grid.Column="2" Margin="0,10.4,145,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="99" Height="15"/>
+                                                <RadioButton x:Name="radioButton1" Content="all occupied units" Grid.Column="2" Margin="0,44.4,133,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="111" Height="15"/>
 
                                             </Grid>
                                         </Border>
                                     </TabItem>
                                 </TabControl>
-
                             </Grid>
                         </TabItem>
                         <TabItem Header="System" Width="100" />

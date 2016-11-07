@@ -113,3 +113,31 @@ C:\Users\Watlinton\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\Storag
 C:\Users\Shahbaaz Sheikh\Desktop\OPG_Repo\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe.config
 C:\Users\Shahbaaz Sheikh\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe
 C:\Users\Shahbaaz Sheikh\Desktop\OPG_Repo\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.pdb
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe.config
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.pdb
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe.manifest
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.application
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.pdb
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\MahApps.Metro.dll
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\System.Data.SQLite.dll
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\MahApps.Metro.pdb
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\MahApps.Metro.xml
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\System.Data.SQLite.xml
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\LoginWindow.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\MainWindow.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\App.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem_MarkupCompile.cache
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem_MarkupCompile.lref
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\App.baml
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\LoginWindow.baml
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\MainWindow.baml
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.g.resources
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.Properties.Resources.resources
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csproj.GenerateResource.Cache
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe.manifest
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.application

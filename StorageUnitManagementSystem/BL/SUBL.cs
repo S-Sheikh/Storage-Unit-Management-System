@@ -7,7 +7,7 @@ using StorageUnitManagementSystem.DAL;
 
 namespace StorageUnitManagementSystem.BL
 {
-    class SUBL
+    public class SUBL
     {
         private StorageUnitManagementProviderBase providerBase;
 
@@ -109,13 +109,13 @@ namespace StorageUnitManagementSystem.BL
                 //{
                 //    providerBase = new StorageUnitXMLProvider();
                 //} // end if
-                  //    else
-                  //    {
-                  //        if (Provider == "StorageUnitCSVProvider")
-                  //        {
-                  //            providerBase = new StorageUnitCSVProvider();
-                  //        } // end if
-                  //    } // end else
+                //    else
+                //    {
+                //        if (Provider == "StorageUnitCSVProvider")
+                //        {
+                //            providerBase = new StorageUnitCSVProvider();
+                //        } // end if
+                //    } // end else
             } // end else
         } // end method
     }

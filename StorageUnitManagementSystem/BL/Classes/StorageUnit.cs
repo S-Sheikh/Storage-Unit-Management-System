@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StorageUnitManagementSystem.BL.Classes
 {
-    public class StorageUnit 
+    public class StorageUnit
     {
         private string _unitClassification;
         private string _unitSize;
@@ -32,6 +32,22 @@ namespace StorageUnitManagementSystem.BL.Classes
             _unitOccupied = unitOccupied;
             _unitOwnerId = unitOwnerId;
         }
+
+        public StorageUnit(string unitId, string unitClassification, string unitSize, double unitPrice, bool unitArrears, bool unitUpToDate, bool unitInAdvance, bool unitOccupied, string unitOwnerId)
+        {
+            _unitId = unitId;
+            _unitClassification = unitClassification;
+            _unitSize = unitSize;
+            _unitPrice = unitPrice;
+            _unitArrears = unitArrears;
+            _unitUpToDate = unitUpToDate;
+            _unitInAdvance = unitInAdvance;
+            _unitOccupied = unitOccupied;
+            _unitOwnerId = unitOwnerId;
+        }
+
+
+
 
         public bool UnitOccupied
         {
@@ -80,14 +96,7 @@ namespace StorageUnitManagementSystem.BL.Classes
             set { _unitClassification = value; }
         }
 
-        public StorageUnit(string unitClassification, string unitSize, double unitPrice, string unitPaymentStatus, bool unitOccupied, string unitOwnerId)
-        {
-            _unitClassification = unitClassification;
-            _unitSize = unitSize;
-            _unitPrice = unitPrice;
-            _unitOccupied = unitOccupied;
-            _unitOwnerId = unitOwnerId;
-        }
+
 
         public string UnitSize
         {
@@ -99,11 +108,6 @@ namespace StorageUnitManagementSystem.BL.Classes
         {
             get { return _unitPrice; }
             set { _unitPrice = value; }
-        }
-
-        public IEnumerator<StorageUnit> GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -31,8 +31,8 @@ namespace StorageUnitManagementSystem.DAL
                 _sqlCon = new SQLiteConnection(_conStr);  // new connection
                 bool bRead = false;
                 StorageUnits = new List<StorageUnit>(); // this ensures that if there are no records,
-                                                              // the returned list will not be null, but
-                                                              // it will be empty (Count = 0)
+                                                        // the returned list will not be null, but
+                                                        // it will be empty (Count = 0)
 
                 _sqlCon.Open(); // open connection
                 string selectQuery = "SELECT * FROM StorageUnits";
@@ -49,11 +49,12 @@ namespace StorageUnitManagementSystem.DAL
                     StorageUnit.UnitClassification = Convert.ToString(sdr["suClassification"]);
                     StorageUnit.UnitPrice = Convert.ToDouble(sdr["suPrice"]);
                     StorageUnit.UnitSize = Convert.ToString(sdr["suSize"]);
-                    StorageUnit.UnitOwnerId = Convert.ToString(sdr["suOwner"]);
                     StorageUnit.UnitArrears = (Convert.ToInt16(sdr["suArrears"]) == 1) ? true : false;//First Converts Object to Int16 and then Int16 to Boolean Value
                     StorageUnit.UnitOccupied = (Convert.ToInt16(sdr["suOccupied"]) == 1) ? true : false;
                     StorageUnit.UnitInAdvance = (Convert.ToInt16(sdr["suAdvance"]) == 1) ? true : false;
                     StorageUnit.UnitUpToDate = (Convert.ToInt16(sdr["suUpToDate"]) == 1) ? true : false;
+                    StorageUnit.UnitOwnerId = Convert.ToString(sdr["suOwnerID"]);
+
 
                     StorageUnits.Add(StorageUnit);
                     bRead = sdr.Read(); // Priming read (must have 1st read before loop)
@@ -130,6 +131,158 @@ namespace StorageUnitManagementSystem.DAL
             return rc; // single return
         } // end method
 
+
+        //public override int Insert(StorageUnit StorageUnit)
+        //{
+        //    //
+        //    //Method Name : int Insert(StorageUnit StorageUnit)
+        //    //Purpose     : Try to insert a row in the StorageUnit datastore
+        //    //Re-use      : DoesExist()
+        //    //Input       : StorageUnit StorageUnit
+        //    //              - The StorageUnit object to add to the StorageUnit datastore
+        //    //Output      : - int
+        //    //                0 : StorageUnit inserted into datastore
+        //    //               -1 : StorageUnit not inserted because a duplicate was found
+        //    //
+        //    int rc = 0; // will be returned, thus can not be declared in try block
+
+        //    try
+        //    {
+        //        bool doesExist = false;
+        //        int rowsAffected = 0;
+
+        //        doesExist = DoesExist(StorageUnit.UnitId);
+        //        if (doesExist == false)
+        //        {
+        //            //TO:DO 
+        //            _sqlCon = new SQLiteConnection(_conStr); // new connection
+        //            _sqlCon.Open(); // open connection
+        //            string insertQuery = "INSERT INTO StorageUnits([suID], [suClassification], [suPrice], " +
+        //                                 "[suSize],[suArrears],[suOccupied],[suAdvance],[suUpToDate] ) VALUES(" +
+        //                                 "@seID, @suClassification, @suPrice, @suSize,@suArrears,@suOccupied," +
+        //                                 "@suAdvance,@suUpToDate)";
+        //            SQLiteCommand sqlCommand = new SQLiteCommand(insertQuery, _sqlCon); // setup command
+        //            SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
+        //            {
+        //                new SQLiteParameter("@suID",DbType.String),
+        //                new SQLiteParameter("@suClassification",DbType.String),
+        //                new SQLiteParameter("@suPrice", DbType.VarNumeric),
+        //                new SQLiteParameter("@suSize", DbType.String),
+        //                new SQLiteParameter("@suArrears",DbType.Int16),
+        //                new SQLiteParameter("@suOccupied",DbType.Int16),
+        //                new SQLiteParameter("@suAdvance",DbType.Int16),
+        //                new SQLiteParameter("@suUpToDate",DbType.Int16)
+
+        //            };
+        //            sqlParams[0].Value = StorageUnit.UnitId; // Populate SQLiteParameters from StorageUnit
+        //            sqlParams[1].Value = StorageUnit.UnitClassification;
+        //            sqlParams[2].Value = StorageUnit.UnitPrice;
+        //            sqlParams[3].Value = StorageUnit.UnitSize;
+        //            sqlParams[4].Value = StorageUnit.UnitArrears ? 1 : 0; // ? 1 : 0 Converts Boolean to Int16 for Database Storage 
+        //            sqlParams[5].Value = StorageUnit.UnitOccupied ? 1 : 0;
+        //            sqlParams[6].Value = StorageUnit.UnitInAdvance ? 1 : 0;
+        //            sqlParams[7].Value = StorageUnit.UnitUpToDate ? 1 : 0;
+        //            sqlCommand.Parameters.AddRange(sqlParams);
+        //            rowsAffected = sqlCommand.ExecuteNonQuery();
+        //            if (rowsAffected == 1) // Test rowsAffected
+        //            {
+        //                // 1 row affected, thus 1 row added to datastore, thus success
+        //                rc = 0;
+        //            } // end if  
+        //        } // end if
+        //        else
+        //        {
+        //            rc = -1;
+        //        } // end else
+
+        //    } // end try
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    } // end catch
+        //    finally
+        //    {
+        //        _sqlCon.Close();  // Close connection
+        //    } // end finally
+        //    return rc; // Single return
+        //} // end method
+
+
+        //public override int Insert(StorageUnit StorageUnit)
+        //{
+        //    //
+        //    //Method Name : int Insert(StorageUnit StorageUnit)
+        //    //Purpose     : Try to insert a row in the StorageUnit datastore
+        //    //Re-use      : DoesExist()
+        //    //Input       : StorageUnit StorageUnit
+        //    //              - The StorageUnit object to add to the StorageUnit datastore
+        //    //Output      : - int
+        //    //                0 : StorageUnit inserted into datastore
+        //    //               -1 : StorageUnit not inserted because a duplicate was found
+        //    //
+        //    int rc = 0; // will be returned, thus can not be declared in try block
+
+        //    try
+        //    {
+        //        bool doesExist = false;
+        //        int rowsAffected = 0;
+
+        //        doesExist = DoesExist(StorageUnit.UnitId);
+        //        if (doesExist == false)
+        //        {
+        //            //TO:DO 
+        //            _sqlCon = new SQLiteConnection(_conStr); // new connection
+        //            _sqlCon.Open(); // open connection
+        //            string insertQuery = "INSERT INTO StorageUnits([suID], [suClassification], [suPrice], " +
+        //                                 "[suSize],[suArrears],[suOccupied],[suAdvance],[suUpToDate] ) VALUES(" +
+        //                                 "@seID, @suClassification, @suPrice, @suSize,@suArrears,@suOccupied," +
+        //                                 "@suAdvance,@suUpToDate)";
+        //            SQLiteCommand sqlCommand = new SQLiteCommand(insertQuery, _sqlCon); // setup command
+        //            SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
+        //            {
+        //                new SQLiteParameter("@suID",DbType.String),
+        //                new SQLiteParameter("@suClassification",DbType.String),
+        //                new SQLiteParameter("@suPrice", DbType.VarNumeric),
+        //                new SQLiteParameter("@suSize", DbType.String),
+        //                new SQLiteParameter("@suArrears",DbType.Int16),
+        //                new SQLiteParameter("@suOccupied",DbType.Int16),
+        //                new SQLiteParameter("@suAdvance",DbType.Int16),
+        //                new SQLiteParameter("@suUpToDate",DbType.Int16)
+
+        //            };
+        //            sqlParams[0].Value = StorageUnit.UnitId; // Populate SQLiteParameters from StorageUnit
+        //            sqlParams[1].Value = StorageUnit.UnitClassification;
+        //            sqlParams[2].Value = StorageUnit.UnitPrice;
+        //            sqlParams[3].Value = StorageUnit.UnitSize;
+        //            sqlParams[4].Value = StorageUnit.UnitArrears ? 1 : 0; // ? 1 : 0 Converts Boolean to Int16 for Database Storage 
+        //            sqlParams[5].Value = StorageUnit.UnitOccupied ? 1 : 0;
+        //            sqlParams[6].Value = StorageUnit.UnitInAdvance ? 1 : 0;
+        //            sqlParams[7].Value = StorageUnit.UnitUpToDate ? 1 : 0;
+        //            sqlCommand.Parameters.AddRange(sqlParams);
+        //            rowsAffected = sqlCommand.ExecuteNonQuery();
+        //            if (rowsAffected == 1) // Test rowsAffected
+        //            {
+        //                // 1 row affected, thus 1 row added to datastore, thus success
+        //                rc = 0;
+        //            } // end if  
+        //        } // end if
+        //        else
+        //        {
+        //            rc = -1;
+        //        } // end else
+
+        //    } // end try
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    } // end catch
+        //    finally
+        //    {
+        //        _sqlCon.Close();  // Close connection
+        //    } // end finally
+        //    return rc; // Single return
+        //} // end method
+
         public override int Insert(StorageUnit StorageUnit)
         {
             //
@@ -156,9 +309,9 @@ namespace StorageUnitManagementSystem.DAL
                     _sqlCon = new SQLiteConnection(_conStr); // new connection
                     _sqlCon.Open(); // open connection
                     string insertQuery = "INSERT INTO StorageUnits([suID], [suClassification], [suPrice], " +
-                                         "[suSize],[suArrears],[suOccupied],[suAdvance],[suUpToDate] ) VALUES(" +
-                                         "@seID, @suClassification, @suPrice, @suSize,@suArrears,@suOccupied," +
-                                         "@suAdvance,@suUpToDate)";
+                                         "[suSize],[suArrears],[suOccupied],[suAdvance],[suUpToDate],[suOwnerID] ) VALUES(" +
+                                         "@suID, @suClassification, @suPrice, @suSize,@suArrears,@suOccupied," +
+                                         "@suAdvance,@suUpToDate,@suOwnerID)";
                     SQLiteCommand sqlCommand = new SQLiteCommand(insertQuery, _sqlCon); // setup command
                     SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
                     {
@@ -166,13 +319,14 @@ namespace StorageUnitManagementSystem.DAL
                         new SQLiteParameter("@suClassification",DbType.String),
                         new SQLiteParameter("@suPrice", DbType.VarNumeric),
                         new SQLiteParameter("@suSize", DbType.String),
-                        new SQLiteParameter("@suArrears",DbType.Int16), 
-                        new SQLiteParameter("@suOccupied",DbType.Int16), 
-                        new SQLiteParameter("@suAdvance",DbType.Int16), 
-                        new SQLiteParameter("@suUpToDate",DbType.Int16)
+                        new SQLiteParameter("@suArrears",DbType.Int16),
+                        new SQLiteParameter("@suOccupied",DbType.Int16),
+                        new SQLiteParameter("@suAdvance",DbType.Int16),
+                        new SQLiteParameter("@suUpToDate",DbType.Int16),
+                        new SQLiteParameter("@suOwnerID",DbType.String),
 
                     };
-                    sqlParams[0].Value = StorageUnit.UnitId; // Populate SQLiteParameters from StorageUnit
+                    sqlParams[0].Value = StorageUnit.UnitId;
                     sqlParams[1].Value = StorageUnit.UnitClassification;
                     sqlParams[2].Value = StorageUnit.UnitPrice;
                     sqlParams[3].Value = StorageUnit.UnitSize;
@@ -180,6 +334,8 @@ namespace StorageUnitManagementSystem.DAL
                     sqlParams[5].Value = StorageUnit.UnitOccupied ? 1 : 0;
                     sqlParams[6].Value = StorageUnit.UnitInAdvance ? 1 : 0;
                     sqlParams[7].Value = StorageUnit.UnitUpToDate ? 1 : 0;
+                    sqlParams[8].Value = StorageUnit.UnitOwnerId;
+
                     sqlCommand.Parameters.AddRange(sqlParams);
                     rowsAffected = sqlCommand.ExecuteNonQuery();
                     if (rowsAffected == 1) // Test rowsAffected
@@ -369,5 +525,9 @@ namespace StorageUnitManagementSystem.DAL
             } // end finally
             return rc; // single return
         } // end method
+
+
+
+
     } // end class
 }
