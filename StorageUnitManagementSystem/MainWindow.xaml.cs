@@ -44,7 +44,7 @@ namespace StorageUnitManagementSystem
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
             DataContext = new Client();
             DataContext = new StorageUnit();
-
+            //Test
         }
 
 
