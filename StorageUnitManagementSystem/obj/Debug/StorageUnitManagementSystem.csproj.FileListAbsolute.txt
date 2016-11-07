@@ -126,7 +126,6 @@ C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\MahApps.Metro.pdb
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\MahApps.Metro.xml
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\System.Data.SQLite.xml
-C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\LoginWindow.g.cs
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\MainWindow.g.cs
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\App.g.cs

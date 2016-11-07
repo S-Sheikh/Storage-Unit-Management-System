@@ -446,7 +446,7 @@
                         </TabItem>
                         <TabItem Header="System" Width="100" >
                             <Grid Margin="0,-24,0,24">
-                                <TabControl x:Name="tabControl1" HorizontalAlignment="Left" Height="477" Margin="10,-26,0,0" VerticalAlignment="Top" Width="672" TabStripPlacement="Left" SelectionChanged="tabControl1_SelectionChanged_1">
+                                <TabControl x:Name="tabControl1" HorizontalAlignment="Left" Height="477" Margin="10,-26,0,0" VerticalAlignment="Top" Width="672" TabStripPlacement="Left" >
                                     <TabItem Header="New Unit Pricing" Margin="10,101,-10,-100">
                                         <Border  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="20,69,5,4">
                                             <Grid Margin="0,-2,-2,-2">
@@ -526,9 +526,9 @@
                                                 <TextBox x:Name="textBox15" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="3"/>
                                                 <Button x:Name="button8" Content="SAVE" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="4" Height="25"/>
                                                 <Label x:Name="label20" Content="Username: " HorizontalAlignment="Left" Margin="58,7,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="65"/>
-                                                <Label x:Name="label21" Content="Password: " HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.308" Grid.Row="2" Height="26" Width="63"/>
+                                                <Label x:Name="label210" Content="Password: " HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.308" Grid.Row="2" Height="26" Width="63"/>
                                                 <Label x:Name="label24" Content="Role: " HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="38"/>
-                                                <Label x:Name="label28" Content="Add A New User" HorizontalAlignment="Left" Margin="164,37,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" FontWeight="Bold"/>
+                                                <Label x:Name="label280" Content="Add A New User" HorizontalAlignment="Left" Margin="164,37,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" FontWeight="Bold"/>
 
                                             </Grid>
                                         </Border>
