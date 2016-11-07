@@ -23,9 +23,8 @@ namespace StorageUnitManagementSystem
     /// </summary>
     public partial class MainWindow
     {
-        private SUBL _suBL;
-        private CBL _cbl;
         private SUBL _subl;
+        private CBL _cbl;
         private LUBL _lubl;
         public Client ClientObj { get; set; }
         public List<StorageUnit> StorageUnits { get; set; }
@@ -403,7 +402,7 @@ namespace StorageUnitManagementSystem
             cb_addClass.Items.Clear();
             //suObjects.Clear();
             //MessageBox.Show(cb_addClass.SelectedItem.ToString());
-            suObjects = _suBL.SelectAll();
+            suObjects = _subl.SelectAll();
             List<string> classArray = new List<string>();
             foreach (StorageUnit unit in suObjects)
             {
@@ -930,7 +929,7 @@ namespace StorageUnitManagementSystem
                     for (int x = 0; x < Convert.ToInt16(tb_noOfNewUnits.Text); x++)
                     {
                         suObjects.Clear();
-                        suObjects = _suBL.SelectAll();
+                        suObjects = _subl.SelectAll();
                         int max = 0;
                         foreach (StorageUnit temp in suObjects)
                         {
@@ -940,7 +939,7 @@ namespace StorageUnitManagementSystem
                             }
                         }
                         suObject.UnitId = Convert.ToString(max + 1);
-                        rc = _suBL.Insert(suObject);
+                        rc = _subl.Insert(suObject);
                     }
                     if (rc == 0)
                     {
