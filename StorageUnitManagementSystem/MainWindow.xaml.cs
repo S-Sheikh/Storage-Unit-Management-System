@@ -744,7 +744,6 @@ namespace StorageUnitManagementSystem
         {
             TxtBoxTelephone.MaxLength = 10;
         }
-
         private void CbLeaseSelectClass_DropDownOpened(object sender, EventArgs e)
         {
             CbLeaseSelectClass.Items.Clear();
@@ -849,20 +848,6 @@ namespace StorageUnitManagementSystem
             catch (Exception)
             {
                 //Go Home WPF , You're Drunk
-            }
-        }
-
-        public bool TryParseInt32(string text, ref double value)
-        {
-            double tmp;
-            if (double.TryParse(text, out tmp))
-            {
-                value = tmp;
-                return true;
-            }
-            else
-            {
-                return false; // Leave "value" as it was
             }
         }
 
