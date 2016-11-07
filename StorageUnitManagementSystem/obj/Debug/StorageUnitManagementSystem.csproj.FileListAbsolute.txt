@@ -141,3 +141,30 @@ C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csproj.GenerateResource.Cache
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe.manifest
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.application
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\LoginWindow.g.cs
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\MainWindow.g.cs
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\App.g.cs
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem_MarkupCompile.cache
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem_MarkupCompile.lref
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.pdb
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe.config
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe.manifest
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.application
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.pdb
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\MahApps.Metro.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\System.Data.SQLite.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\MahApps.Metro.pdb
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\MahApps.Metro.xml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\System.Data.SQLite.xml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\App.baml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\LoginWindow.baml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\MainWindow.baml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.g.resources
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.Properties.Resources.resources
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csproj.GenerateResource.Cache
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe.manifest
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.application
