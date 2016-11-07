@@ -592,22 +592,21 @@ namespace StorageUnitManagementSystem
         private void imgRefreshUnits_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
-            List<Client> clientObjects = new List<Client>();
-            clientObjects = _cbl.SelectAll();
+            List<StorageUnit> clientObjects = new List<StorageUnit>();
+            clientObjects = _subl.SelectAll();
             LvListClient.Items.Clear();
 
             if (clientObjects.Count > 0)
             {
                 LvListClient.Items.Clear();
-                foreach (Client temp in clientObjects)
+                foreach (StorageUnit temp in clientObjects)
                 {
-                    if (temp.Archived == Convert.ToBoolean(0))
                         LvListClient.Items.Add(temp);
                 }
             }
             else
             {
-                this.ShowMessageAsync("There are no Clients to list", "No Clients");
+                this.ShowMessageAsync("There are no Storage Units to list", "No Units");
             }
         }
         private void cboListSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
