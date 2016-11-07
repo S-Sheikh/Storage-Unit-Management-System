@@ -572,7 +572,7 @@ namespace StorageUnitManagementSystem
             List<Client> clientObjects = new List<Client>();
             clientObjects = _cbl.SelectAll();
             LvListClient.Items.Clear();
-
+            
             if (clientObjects.Count > 0)
             {
                 LvListClient.Items.Clear();
