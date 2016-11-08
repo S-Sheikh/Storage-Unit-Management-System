@@ -309,6 +309,7 @@
                                                 <Label x:Name="LblTot" Content="Total Unit Price :" HorizontalAlignment="Left" Margin="12,295,0,0" VerticalAlignment="Top"/>
                                                 <Label x:Name="LblTotal" Content="....." HorizontalAlignment="Center" Margin="172,295,342,0" VerticalAlignment="Top" Width="50"/>
                                                 <Button x:Name="BtnLeaseSubmit"  Content="Submit" HorizontalAlignment="Center" Margin="246,336,243,0"  VerticalAlignment="Top" Width="75" Click="BtnLeaseSubmit_Click" />
+                                                <controls:ProgressRing IsActive="False" Visibility="Collapsed" Name="progressBarEmail" />
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -473,8 +474,8 @@
                                                 <Label x:Name="label2" Content="Previous Price:" HorizontalAlignment="Left" Margin="78,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="86"/>
                                                 <Label x:Name="label3" Content="New Price:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="66"/>
                                                 <Button x:Name="button" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="14,22,0,0" VerticalAlignment="Top" Width="75" Grid.Row="4" Height="26"/>
-                                                <TextBox x:Name="textBox" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
-                                                <TextBox x:Name="textBox1" controls:TextBoxHelper.Watermark="Enter New Price" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+                                                <TextBox x:Name="textBox" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" controls:TextBoxHelper.Watermark="Price in Rands"/>
+                                                <TextBox x:Name="textBox1" controls:TextBoxHelper.Watermark="Price in Rands" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
 
                                             </Grid>
                                         </Border>
@@ -521,14 +522,14 @@
                                                     <ColumnDefinition Width="19*"/>
                                                     <ColumnDefinition Width="25*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <TextBox x:Name="textBox13" HorizontalAlignment="Left" Height="26" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="1"/>
-                                                <TextBox x:Name="textBox14" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="2"/>
-                                                <TextBox x:Name="textBox15" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="3"/>
+                                                <TextBox x:Name="textBox13" HorizontalAlignment="Left" Height="26" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="1" controls:TextBoxHelper.Watermark="Can Contain Only Letters"/>
+                                                <TextBox x:Name="textBox14" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="2" controls:TextBoxHelper.Watermark="Password"/>
+                                                <TextBox x:Name="textBox15" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="3" controls:TextBoxHelper.Watermark="Can Contain Only Letters"/>
                                                 <Button x:Name="button8" Content="SAVE" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="4" Height="25"/>
                                                 <Label x:Name="label20" Content="Username: " HorizontalAlignment="Left" Margin="58,7,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="65"/>
                                                 <Label x:Name="label210" Content="Password: " HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.308" Grid.Row="2" Height="26" Width="63"/>
                                                 <Label x:Name="label24" Content="Role: " HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="38"/>
-                                                <Label x:Name="label280" Content="Add A New User" HorizontalAlignment="Left" Margin="164,37,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" FontWeight="Bold"/>
+                                                <Label x:Name="label280" Content="Add A New Employee" HorizontalAlignment="Left" Margin="164,37,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" FontWeight="Bold"/>
 
                                             </Grid>
                                         </Border>
@@ -553,13 +554,13 @@
                                                 <Label x:Name="label15" Content="Username:" HorizontalAlignment="Left" Margin="68,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="70"/>
                                                 <Label x:Name="label16" Content="Password:" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="65"/>
                                                 <Label x:Name="label17" Content=" Role:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Grid.Row="4" Height="26" Width="40"/>
-                                                <TextBox x:Name="textBox10" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="1"/>
-                                                <TextBox x:Name="textBox11" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="2"/>
-                                                <TextBox x:Name="textBox12" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="3"/>
-                                                <TextBox x:Name="textBox16" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="4"/>
+                                                <TextBox x:Name="textBox10" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="1" controls:TextBoxHelper.Watermark="Employee Username"/>
+                                                <TextBox x:Name="textBox11" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="2" controls:TextBoxHelper.Watermark="Can Contain Only Letters"/>
+                                                <TextBox x:Name="textBox12" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="3" controls:TextBoxHelper.Watermark="Password"/>
+                                                <TextBox x:Name="textBox16" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="4" controls:TextBoxHelper.Watermark="Role"/>
                                                 <Button x:Name="button7" Content="GO" Grid.Column="2" HorizontalAlignment="Left" Margin="10,9,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Height="26"/>
                                                 <Button x:Name="button11" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="55,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Height="25"/>
-                                                <Label x:Name="label8" Content="Edit an Existing User" Grid.Column="1" HorizontalAlignment="Left" Margin="55,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                                                <Label x:Name="label8" Content="Edit an Existing Employee" Grid.Column="1" HorizontalAlignment="Left" Margin="55,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
 
                                             </Grid>
                                         </Border>

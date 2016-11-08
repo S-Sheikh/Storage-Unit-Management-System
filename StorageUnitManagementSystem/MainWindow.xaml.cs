@@ -16,7 +16,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
+using System.Web.Mail;
 using MahApps.Metro.Controls;
+using EASendMail;
+using MailMessage = System.Net.Mail.MailMessage;
+using SmtpClient = EASendMail.SmtpClient;
+using SmtpMail = EASendMail.SmtpMail;
 
 namespace StorageUnitManagementSystem
 {
@@ -34,10 +39,12 @@ namespace StorageUnitManagementSystem
         public List<string> Data { get; } = new List<string> {"Client ID", "Name", "Surname", "City", "Province"};
         private GridViewColumnHeader _listViewSortCol = null;
         private SortAdorner _listViewSortAdorner = null;
-        private GridViewColumnHeader listViewSortColUnits = null;
-        private SortAdorner listViewSortAdornerUnits = null;
-        public List<StorageUnit> suObjects { get; set; }
-        private StorageUnit insertStorageUnit;
+        private GridViewColumnHeader _listViewSortColUnits = null;
+        private SortAdorner _listViewSortAdornerUnits = null;
+        public List<StorageUnit> SuObjects { get; set; }
+        private StorageUnit _insertStorageUnit;
+        public string LeasserEmail { get; set; } = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -404,9 +411,9 @@ namespace StorageUnitManagementSystem
             cb_addClass.Items.Clear();
             //suObjects.Clear();
             //MessageBox.Show(cb_addClass.SelectedItem.ToString());
-            suObjects = _subl.SelectAll();
+            SuObjects = _subl.SelectAll();
             List<string> classArray = new List<string>();
-            foreach (StorageUnit unit in suObjects)
+            foreach (StorageUnit unit in SuObjects)
             {
                 classArray.Add(unit.UnitClassification);
             }
@@ -807,7 +814,7 @@ namespace StorageUnitManagementSystem
             try
             {
 
-                foreach (StorageUnit unit in suObjects)
+                foreach (StorageUnit unit in SuObjects)
                 {
                     if (unit.UnitClassification == cb_addClass.SelectedValue.ToString())
                     {
@@ -816,14 +823,14 @@ namespace StorageUnitManagementSystem
                         lb_currentDimensions.Content = "Width : " + charSize[0] + "m ; "
                             + "Length : " + charSize[2] + "m ; "
                             + "Height : " + charSize[4] + "m ; ";
-                        insertStorageUnit = new StorageUnit();
-                        insertStorageUnit.UnitSize = unit.UnitSize;
-                        insertStorageUnit.UnitPrice = unit.UnitPrice;
-                        insertStorageUnit.UnitArrears = Convert.ToBoolean(0);
-                        insertStorageUnit.UnitUpToDate = Convert.ToBoolean(0);
-                        insertStorageUnit.UnitInAdvance = Convert.ToBoolean(0);
-                        insertStorageUnit.UnitOccupied = Convert.ToBoolean(0);
-                        insertStorageUnit.UnitOwnerId = null;
+                        _insertStorageUnit = new StorageUnit();
+                        _insertStorageUnit.UnitSize = unit.UnitSize;
+                        _insertStorageUnit.UnitPrice = unit.UnitPrice;
+                        _insertStorageUnit.UnitArrears = Convert.ToBoolean(0);
+                        _insertStorageUnit.UnitUpToDate = Convert.ToBoolean(0);
+                        _insertStorageUnit.UnitInAdvance = Convert.ToBoolean(0);
+                        _insertStorageUnit.UnitOccupied = Convert.ToBoolean(0);
+                        _insertStorageUnit.UnitOwnerId = null;
                         break;
                     }
 
@@ -876,8 +883,8 @@ namespace StorageUnitManagementSystem
 
         private void TbNoOfNewUnits_KeyDown(object sender, KeyEventArgs e)
         {
-            string LblCurrentPrice = LbCurrentPrice.Content.ToString();
-            char[] ch = LblCurrentPrice.ToCharArray();
+            string lblCurrentPrice = LbCurrentPrice.Content.ToString();
+            char[] ch = lblCurrentPrice.ToCharArray();
             ch[0] = ' '; // index starts at 0! --->> Remove the 'R' character at the 1st position 
             string newLblCurrentPrice = new string(ch);
             double unitPrice = 0;
@@ -926,20 +933,20 @@ namespace StorageUnitManagementSystem
 
                     StorageUnit suObject = new StorageUnit();
                     suObject.UnitClassification = cb_addClass.SelectedValue.ToString();
-                    suObject.UnitSize = insertStorageUnit.UnitSize;
-                    suObject.UnitPrice = insertStorageUnit.UnitPrice;
-                    suObject.UnitArrears = insertStorageUnit.UnitArrears;
-                    suObject.UnitUpToDate = insertStorageUnit.UnitUpToDate;
-                    suObject.UnitInAdvance = insertStorageUnit.UnitInAdvance;
-                    suObject.UnitOccupied = insertStorageUnit.UnitOccupied;
+                    suObject.UnitSize = _insertStorageUnit.UnitSize;
+                    suObject.UnitPrice = _insertStorageUnit.UnitPrice;
+                    suObject.UnitArrears = _insertStorageUnit.UnitArrears;
+                    suObject.UnitUpToDate = _insertStorageUnit.UnitUpToDate;
+                    suObject.UnitInAdvance = _insertStorageUnit.UnitInAdvance;
+                    suObject.UnitOccupied = _insertStorageUnit.UnitOccupied;
                     suObject.UnitOwnerId = "0";
 
                     for (int x = 0; x < Convert.ToInt16(tb_noOfNewUnits.Text); x++)
                     {
-                        suObjects.Clear();
-                        suObjects = _subl.SelectAll();
+                        SuObjects.Clear();
+                        SuObjects = _subl.SelectAll();
                         int max = 0;
-                        foreach (StorageUnit temp in suObjects)
+                        foreach (StorageUnit temp in SuObjects)
                         {
                             if (Convert.ToInt16(temp.UnitId) >= max)
                             {
@@ -971,7 +978,7 @@ namespace StorageUnitManagementSystem
 
         private void BtnLeaseSubmit_Click(object sender, RoutedEventArgs e)
         {
-            string leasserEmail = "";
+            bool found = false;
             string lblCurrentPrice = LbCurrentPrice.Content.ToString();
             char[] ch = lblCurrentPrice.ToCharArray();
             ch[0] = ' '; // index starts at 0! --->> Remove the 'R' character at the 1st position 
@@ -1057,17 +1064,17 @@ namespace StorageUnitManagementSystem
                             LbCurrentPrice.Content = ".....";
                             LblAvailableUnits.Content = ".....";
                             LblTotal.Content = ".....";
-                            foreach (Client temp in Clients)
+                            Clients = _cbl.SelectAll();
+                            foreach (Client client in Clients)
                             {
-                                if (temp.idNumber.Equals(LeaseId.Text) && temp.Archived == Convert.ToBoolean(0))
+                                if (client.idNumber == LeaseId.Text)
                                 {
-                                    leasserEmail = temp.EMailAddress;
-                                    break;
-
+                                   LeasserEmail = client.EMailAddress;
                                 }
+                               
                             }
-                            SendEMailThroughGmail("onesandzeroesmail@gmail.com","watlinton@gmail.com","RE : Contract to lease unit",
-                                "Please refer to the attached document","Onesandzeroes.");
+                            SendEmail("onesandzeroesmail@gmail.com", LeasserEmail, "RE : Contract to lease unit",
+                                "Please refer to the attached document","C:\\Test\\TESTI.txt");
                         }
                     }
                     else
@@ -1089,60 +1096,113 @@ namespace StorageUnitManagementSystem
         }
 
         //method to send email to Gmail
-        public void SendEMailThroughGmail(string from,string to,string subject,string body,string emailPassword)
+        //public void SendEMailThroughGmail(string from,string to,string subject,string body,string emailPassword)
+        //{
+        //    try
+        //    {
+        //        //Mail Message
+        //        MailMessage mM = new MailMessage();
+        //        //Mail Address
+        //        mM.From = new MailAddress(from);
+        //        //receiver email id
+        //        mM.To.Add(to);
+        //        //subject of the email
+        //        mM.Subject = subject;
+        //        //deciding for the attachment
+        //        //attachment = @"C:\\attachedfile.jpg"
+        //        mM.Attachments.Add(new Attachment(@"C:\\Finish.txt"));
+        //        //add the body of the email
+        //        mM.Body = body;
+        //        mM.IsBodyHtml = true;
+        //        //SMTP client
+        //        SmtpClient sC = new SmtpClient("smtp.gmail.com");
+        //        //port number for Gmail mail
+        //        sC.Port = 465;
+        //        //sC.Port = 587;
+        //       // sC.Port = 487;
+        //        //credentials to login in to Gmail account
+        //        sC.Credentials = new NetworkCredential(from, emailPassword);
+        //        //enabled SSL
+        //        sC.EnableSsl = true;
+        //        //Send an email
+        //        sC.Send(mM);
+        //    }//end of try block
+        //    catch (Exception ex)
+        //    {
+
+        //    }//end of catch
+        //}//end of Email Method
+
+        public void SendEmail(string from, string to, string subject, string body,string attachment)
         {
+            SmtpMail oMail = new SmtpMail("TryIt");
+            SmtpClient oSmtp = new SmtpClient();
+
+            // Set sender email address, please change it to yours
+            oMail.From = from;
+
+            // Set recipient email address, please change it to yours
+            oMail.To = to;
+
+            // Set email subject
+            oMail.Subject = subject;
+
+            // Set Html body
+            //oMail.HtmlBody = "<font size=\"5\">This is</font> <font color=\"red\"><b>a test</b></font>";
+            oMail.HtmlBody = body;
+
+            // Your SMTP server address
+            SmtpServer oServer = new SmtpServer("smtp.gmail.com");
+
+            // User and password for ESMTP authentication, if your server doesn't require
+            // User authentication, please remove the following codes.            
+            oServer.User = "onesandzeroesmail@gmail.com";
+            oServer.Password = "Onesandzeroes.";
+
+            // If your smtp server requires SSL connection, please add this line
+             oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
+
             try
             {
-                //Mail Message
-                MailMessage mM = new MailMessage();
-                //Mail Address
-                mM.From = new MailAddress(from);
-                //receiver email id
-                mM.To.Add(to);
-                //subject of the email
-                mM.Subject = subject;
-                //deciding for the attachment
-                //attachment = @"C:\\attachedfile.jpg"
-                mM.Attachments.Add(new Attachment(@"C:\\Finish.txt"));
-                //add the body of the email
-                mM.Body = body;
-                mM.IsBodyHtml = true;
-                //SMTP client
-                SmtpClient sC = new SmtpClient("smtp.gmail.com");
-                //port number for Gmail mail
-                sC.Port = 465;
-                //sC.Port = 587;
-               // sC.Port = 487;
-                //credentials to login in to Gmail account
-                sC.Credentials = new NetworkCredential(from, emailPassword);
-                //enabled SSL
-                sC.EnableSsl = true;
-                //Send an email
-                sC.Send(mM);
-            }//end of try block
-            catch (Exception ex)
-            {
+                // Add attachment from local disk
+                oMail.AddAttachment(attachment);
 
-            }//end of catch
-        }//end of Email Method
+                // Add attachment from remote website
+                //oMail.AddAttachment("http://www.emailarchitect.net/webapp/img/logo.jpg");
+               // this.ShowMessageAsync("Sending Email", "Start to send email with attachment ...!");
+                progressBarEmail.IsActive = true;
+                progressBarEmail.Visibility = Visibility.Visible;
+                oSmtp.SendMail(oServer, oMail);
+                progressBarEmail.IsActive = false;
+                progressBarEmail.Visibility = Visibility.Collapsed;
+                //this.ShowMessageAsync("Sending Email", "Email was sent successfully!");
+            }
+            catch (Exception ep)
+            {
+                this.ShowMessageAsync("Sending Email Failed", ep.Message);
+                progressBarEmail.IsActive = false;
+                progressBarEmail.Visibility = Visibility.Collapsed;
+            }
+        
+    }
 
         private void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
             string sortBy = column.Tag.ToString();
-            if (listViewSortColUnits != null)
+            if (_listViewSortColUnits != null)
             {
-                AdornerLayer.GetAdornerLayer(listViewSortColUnits).Remove(listViewSortAdornerUnits);
+                AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Remove(_listViewSortAdornerUnits);
                 lv_Units.Items.SortDescriptions.Clear();
             }
 
             ListSortDirection newDir = ListSortDirection.Ascending;
-            if (listViewSortColUnits == column && listViewSortAdornerUnits.Direction == newDir)
+            if (_listViewSortColUnits == column && _listViewSortAdornerUnits.Direction == newDir)
                 newDir = ListSortDirection.Descending;
 
-            listViewSortColUnits = column;
-            listViewSortAdornerUnits = new SortAdorner(listViewSortColUnits, newDir);
-            AdornerLayer.GetAdornerLayer(listViewSortColUnits).Add(listViewSortAdornerUnits);
+            _listViewSortColUnits = column;
+            _listViewSortAdornerUnits = new SortAdorner(_listViewSortColUnits, newDir);
+            AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Add(_listViewSortAdornerUnits);
             lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
 
 
