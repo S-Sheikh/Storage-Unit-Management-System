@@ -70,7 +70,7 @@
                     </Grid.ColumnDefinitions>
                     <TabControl x:Name="TabControl" Margin="10" Grid.ColumnSpan="5" Grid.Row="1">
                         <TabItem Header="Home" Width="100" />
-                        <TabItem Header="Clients" Width="100" >
+                        <TabItem Header="Clients" Width="100" HorizontalAlignment="Center" >
                             <Grid Height="Auto" Margin="0,0,-10,3">
                                 <TabControl x:Name="TabControlClients" Margin="10,10,9.6,-8.6" TabStripPlacement="Left">
                                     <TabItem x:Name="TabItemAddClients" Header="Add Clients" Margin="0,36,-2.2,-39">
@@ -276,7 +276,7 @@
                                 </TabControl>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Lease Units" Margin="0,0,-12,0.4" >
+                        <TabItem Header="Lease Units"  HorizontalAlignment="Center" >
                             <!--==================================================================================================================================================================================-->
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -326,7 +326,7 @@
                             </Grid>
                         </TabItem>
                         <!--=================================================================================================================================================================================-->
-                        <TabItem   Header="Units" Width="100" Margin="9,0,-9,-2">
+                        <TabItem   Header="Units" Width="100"  Margin="20,0,-20,0" >
                             <Grid>
                                 
                                 <TabControl x:Name="tabControl2" Margin="10" TabStripPlacement="Left">
@@ -569,7 +569,7 @@
 
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Reports" Width="120" Margin="10,0,-10,0" />
+                        <TabItem Header="Reports" Width="120"  />
                     </TabControl>
                     <Label x:Name="Label10" Content="Storage Unit Management System" Margin="16,20,0,9" Grid.Column="3" HorizontalAlignment="Left" Width="221" FontWeight="Bold"/>
                     <Label x:Name="Label11" Content="User: " Grid.Column="4" Margin="0,20,171,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,0.5" HorizontalAlignment="Right" Width="40" Height="26"/>
