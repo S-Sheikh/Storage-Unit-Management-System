@@ -46,7 +46,7 @@ namespace StorageUnitManagementSystem
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
             DataContext = new Client();
             DataContext = new StorageUnit();
-
+            //Test
         }
 
 
@@ -574,7 +574,7 @@ namespace StorageUnitManagementSystem
             List<Client> clientObjects = new List<Client>();
             clientObjects = _cbl.SelectAll();
             LvListClient.Items.Clear();
-
+            
             if (clientObjects.Count > 0)
             {
                 LvListClient.Items.Clear();
@@ -1222,6 +1222,3 @@ namespace StorageUnitManagementSystem
       
     }
 }
-
-    
-
