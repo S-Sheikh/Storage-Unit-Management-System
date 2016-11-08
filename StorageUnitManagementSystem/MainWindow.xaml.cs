@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using MahApps.Metro.Controls;
 
@@ -722,7 +724,7 @@ namespace StorageUnitManagementSystem
                 //txtBoxId.Foreground = System.Windows.Media.Brushes.Red;
                 TxtBoxId.SetValue(TextBoxHelper.WatermarkProperty, "ID number cannot be empty!");
             }
-            else if (TxtBoxId.Text.Length > 13)
+            else if (TxtBoxId.Text.Length > 12)
             {
                 TxtBoxId.MaxLength = 13;
             }
@@ -969,102 +971,160 @@ namespace StorageUnitManagementSystem
 
         private void BtnLeaseSubmit_Click(object sender, RoutedEventArgs e)
         {
+            string leasserEmail = "";
             string lblCurrentPrice = LbCurrentPrice.Content.ToString();
             char[] ch = lblCurrentPrice.ToCharArray();
             ch[0] = ' '; // index starts at 0! --->> Remove the 'R' character at the 1st position 
             string newLblCurrentPrice = new string(ch);
-            
-            double currentPrice = double.Parse(newLblCurrentPrice);
             int rc = 0;
-            if (!(LeaseId.Text.Equals("") && LeaseName.Text.Equals("") && LeaseSurname.Text.Equals("")))
+            try
             {
-                if (_cbl.DoesExist(LeaseId.Text))
+                double currentPrice = double.Parse(newLblCurrentPrice);
+
+                if (!(LeaseId.Text.Equals("") && LeaseName.Text.Equals("") && LeaseSurname.Text.Equals("")))
                 {
-                    LeaseUnits leaseUnit = new LeaseUnits();
-                    leaseUnit.Client.idNumber = LeaseId.Text;
-                    leaseUnit.Client.FirstName = LeaseName.Text;
-                    leaseUnit.Client.LastName = LeaseSurname.Text;
-                    leaseUnit.StorageUnit.UnitPrice = currentPrice;
-                    leaseUnit.NoOfUnits = int.Parse(TbNoOfNewUnits.Text);
-                    if (CbLeaseSelectClass.SelectedValue.ToString() == "A")
+                    if (_cbl.DoesExist(LeaseId.Text))
                     {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                        LeaseUnits leaseUnit = new LeaseUnits();
+                        leaseUnit.Client.idNumber = LeaseId.Text;
+                        leaseUnit.Client.FirstName = LeaseName.Text;
+                        leaseUnit.Client.LastName = LeaseSurname.Text;
+                        leaseUnit.StorageUnit.UnitPrice = currentPrice;
+                        leaseUnit.NoOfUnits = int.Parse(TbNoOfNewUnits.Text);
+                        if (CbLeaseSelectClass.SelectedValue.ToString() == "A")
                         {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "B")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "C")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "D")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "E")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "E")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        rc = _lubl.Insert(leaseUnit);
+                        if (rc == 0)
+                        {
+                            this.ShowMessageAsync("Contract Successfully Created", "Contract Will Be Sent to Client!");
+                            LeaseId.Clear();
+                            LeaseName.Clear();
+                            LeaseSurname.Clear();
+                            TbNoOfNewUnits.Clear();
+                            LbCurrentDimensions.Content = ".....";
+                            LbCurrentPrice.Content = ".....";
+                            LblAvailableUnits.Content = ".....";
+                            LblTotal.Content = ".....";
+                            foreach (Client temp in Clients)
+                            {
+                                if (temp.idNumber.Equals(LeaseId.Text) && temp.Archived == Convert.ToBoolean(0))
+                                {
+                                    leasserEmail = temp.EMailAddress;
+                                    break;
+
+                                }
+                            }
+                            SendEMailThroughGmail("onesandzeroesmail@gmail.com","watlinton@gmail.com","RE : Contract to lease unit",
+                                "Please refer to the attached document","Onesandzeroes.");
                         }
                     }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "B")
+                    else
                     {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "C")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "D")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "E")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "E")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    rc = _lubl.Insert(leaseUnit);
-                    if (rc == 0)
-                    {
-                        this.ShowMessageAsync("Contract Successfully Created", "Contract Will Be Sent To Client!");
-                        LeaseId.Clear();
-                        LeaseName.Clear();
-                        LeaseSurname.Clear();
-                        TbNoOfNewUnits.Clear();
-                        LbCurrentDimensions.Content = ".....";
-                        LbCurrentPrice.Content = ".....";
-                        LblAvailableUnits.Content = ".....";
-                        LblTotal.Content = ".....";
+                        this.ShowMessageAsync("Client Does Not Exist", "Please Add A Client!");
                     }
                 }
                 else
                 {
-                    this.ShowMessageAsync("Client Does Not Exist", "Please Add A Client!");
+                    this.ShowMessageAsync("Empty Fields", "Fields Cannot Be Empty!");
                 }
+
             }
-            else
+            catch (Exception)
             {
                 this.ShowMessageAsync("Empty Fields", "Fields Cannot Be Empty!");
             }
-           
+            
         }
+
+        //method to send email to Gmail
+        public void SendEMailThroughGmail(string from,string to,string subject,string body,string emailPassword)
+        {
+            try
+            {
+                //Mail Message
+                MailMessage mM = new MailMessage();
+                //Mail Address
+                mM.From = new MailAddress(from);
+                //receiver email id
+                mM.To.Add(to);
+                //subject of the email
+                mM.Subject = subject;
+                //deciding for the attachment
+                //attachment = @"C:\\attachedfile.jpg"
+                mM.Attachments.Add(new Attachment(@"C:\\Finish.txt"));
+                //add the body of the email
+                mM.Body = body;
+                mM.IsBodyHtml = true;
+                //SMTP client
+                SmtpClient sC = new SmtpClient("smtp.gmail.com");
+                //port number for Gmail mail
+                sC.Port = 465;
+                //sC.Port = 587;
+               // sC.Port = 487;
+                //credentials to login in to Gmail account
+                sC.Credentials = new NetworkCredential(from, emailPassword);
+                //enabled SSL
+                sC.EnableSsl = true;
+                //Send an email
+                sC.Send(mM);
+            }//end of try block
+            catch (Exception ex)
+            {
+
+            }//end of catch
+        }//end of Email Method
 
         private void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
         {
@@ -1104,7 +1164,7 @@ namespace StorageUnitManagementSystem
             Clients = _cbl.SelectAll();
             foreach (Client temp in Clients)
             {
-                if (LeaseId.Text.Equals(temp.idNumber))
+                if (LeaseId.Text.Equals(temp.idNumber) && temp.Archived == Convert.ToBoolean(0))
                 {
                     LeaseName.Text = temp.FirstName;
                     LeaseSurname.Text = temp.LastName;

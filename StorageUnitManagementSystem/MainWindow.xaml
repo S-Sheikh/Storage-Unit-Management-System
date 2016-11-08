@@ -70,7 +70,7 @@
                     </Grid.ColumnDefinitions>
                     <TabControl x:Name="TabControl" Margin="10" Grid.ColumnSpan="5" Grid.Row="1">
                         <TabItem Header="Home" Width="100" />
-                        <TabItem Header="Clients" Width="100" >
+                        <TabItem Header="Clients" Width="100" Margin="-3,0,3,0.4" >
                             <Grid Height="Auto" Margin="0,0,-10,3">
                                 <TabControl x:Name="TabControlClients" Margin="10,10,9.6,-8.6" TabStripPlacement="Left">
                                     <TabItem x:Name="TabItemAddClients" Header="Add Clients" Margin="0,36,-2.2,-39">
@@ -251,7 +251,7 @@
                                                     </ListView.View>
                                                 </ListView>
 
-                                                <Image x:Name="ImgRefresh" Height="30" Width="64" Margin="260,0,0,80" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
+                                                <Image x:Name="ImgRefresh" Height="30" Margin="260,0,0,80" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
                                                     <Image.Source>
                                                         <BitmapImage DecodePixelWidth="64" UriSource="Images/refresh.png"/>
                                                     </Image.Source>
@@ -397,7 +397,7 @@
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitUpToDate"  Width="100" DisplayMemberBinding="{Binding UnitUpToDate}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="UpToDate" >Up To Date</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UptoDate" >Up to Date</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitOwner"  Width="100" DisplayMemberBinding="{Binding UnitOwnerId}" >
