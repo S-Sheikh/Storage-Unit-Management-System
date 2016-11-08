@@ -42,7 +42,7 @@ namespace StorageUnitManagementSystem
             _cbl = new CBL("ClientSQLiteProvider");
             _subl = new SUBL("StorageUnitSQLiteProvider");
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
-            DataContext = new Client();
+            //DataContext = new Client();
             DataContext = new StorageUnit();
             //Test
         }
@@ -592,14 +592,14 @@ namespace StorageUnitManagementSystem
         private void imgRefreshUnits_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
-            List<StorageUnit> clientObjects = new List<StorageUnit>();
-            clientObjects = _subl.SelectAll();
+            List<StorageUnit> suObjects = new List<StorageUnit>();
+            suObjects = _subl.SelectAll();
             LvListClient.Items.Clear();
 
-            if (clientObjects.Count > 0)
+            if (suObjects.Count > 0)
             {
                 LvListClient.Items.Clear();
-                foreach (StorageUnit temp in clientObjects)
+                foreach (StorageUnit temp in suObjects)
                 {
                         LvListClient.Items.Add(temp);
                 }
@@ -1088,7 +1088,7 @@ namespace StorageUnitManagementSystem
             if (listViewSortColUnits != null)
             {
                 AdornerLayer.GetAdornerLayer(listViewSortColUnits).Remove(listViewSortAdornerUnits);
-                lv_Units.Items.SortDescriptions.Clear();
+                //lv_Units.Items.SortDescriptions.Clear();
             }
 
             ListSortDirection newDir = ListSortDirection.Ascending;
@@ -1098,7 +1098,7 @@ namespace StorageUnitManagementSystem
             listViewSortColUnits = column;
             listViewSortAdornerUnits = new SortAdorner(listViewSortColUnits, newDir);
             AdornerLayer.GetAdornerLayer(listViewSortColUnits).Add(listViewSortAdornerUnits);
-            lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+            //lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
 
 
 
