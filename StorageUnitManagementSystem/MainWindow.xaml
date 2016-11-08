@@ -70,7 +70,7 @@
                     </Grid.ColumnDefinitions>
                     <TabControl x:Name="TabControl" Margin="10" Grid.ColumnSpan="5" Grid.Row="1">
                         <TabItem Header="Home" Width="100" />
-                        <TabItem Header="Clients" Width="100" Margin="-3,0,3,0.4" >
+                        <TabItem Header="Clients" Width="100" HorizontalAlignment="Center" >
                             <Grid Height="Auto" Margin="0,0,-10,3">
                                 <TabControl x:Name="TabControlClients" Margin="10,10,9.6,-8.6" TabStripPlacement="Left">
                                     <TabItem x:Name="TabItemAddClients" Header="Add Clients" Margin="0,36,-2.2,-39">
@@ -250,8 +250,7 @@
                                                         </GridView>
                                                     </ListView.View>
                                                 </ListView>
-
-                                                <Image x:Name="ImgRefresh" Height="30" Margin="260,0,0,80" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
+                                                <Image x:Name="ImgRefresh" Height="30" Width="64" Margin="260,0,0,80" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
                                                     <Image.Source>
                                                         <BitmapImage DecodePixelWidth="64" UriSource="Images/refresh.png"/>
                                                     </Image.Source>
@@ -259,8 +258,8 @@
 
                                                 <ComboBox x:Name="CboListSearch" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,49.9" SelectionChanged="cboListSearch_SelectionChanged" SelectedIndex="0" DropDownOpened="cboListSearch_DropDownOpened" >
                                                     <ComboBoxItem>Search by:</ComboBoxItem>
-
                                                 </ComboBox>
+                                                
                                                 <TextBox x:Name="TxtBoxListSearch" Width="150" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,49.8"></TextBox>
                                                 <Button x:Name="BtnListSearch" Width="100" Height="25" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="286,109,0,50.8" Click="btnListSearch_Click" BorderThickness="0"></Button>
                                             </Grid>
@@ -276,7 +275,7 @@
                                 </TabControl>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Lease Units" Margin="0,0,-12,0.4" >
+                        <TabItem Header="Lease Units"  HorizontalAlignment="Center" >
                             <!--==================================================================================================================================================================================-->
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -309,7 +308,6 @@
                                                 <Label x:Name="LblTot" Content="Total Unit Price :" HorizontalAlignment="Left" Margin="12,295,0,0" VerticalAlignment="Top"/>
                                                 <Label x:Name="LblTotal" Content="....." HorizontalAlignment="Center" Margin="172,295,342,0" VerticalAlignment="Top" Width="50"/>
                                                 <Button x:Name="BtnLeaseSubmit"  Content="Submit" HorizontalAlignment="Center" Margin="246,336,243,0"  VerticalAlignment="Top" Width="75" Click="BtnLeaseSubmit_Click" />
-                                                <controls:ProgressRing IsActive="False" Visibility="Collapsed" Name="progressBarEmail" />
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -327,7 +325,7 @@
                             </Grid>
                         </TabItem>
                         <!--=================================================================================================================================================================================-->
-                        <TabItem   Header="Units" Width="100" Margin="9,0,-9,-2">
+                        <TabItem   Header="Units" Width="100"  Margin="21,0,-21,0" >
                             <Grid>
                                 
                                 <TabControl x:Name="tabControl2" Margin="10" TabStripPlacement="Left">
@@ -350,6 +348,7 @@
                                         </Border>
                                     </TabItem>
                                     <TabItem Header="List Units" Margin="0,38,-2,-42">
+                                        
                                         <Border BorderBrush="Black" BorderThickness="2" Margin="5">
                                             <Grid>
                                                 <Grid.DataContext>
@@ -357,6 +356,7 @@
                                                 </Grid.DataContext>
                                                 <TabControl x:Name="tabControl4" Margin="8,71,8,8"/>
                                                 <Label  Content="List Units" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top" FontWeight="Bold" Width="Auto"/>
+                                                
                                                 <ListView  x:Name="lv_Units" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
                                                     <ListView.View>
                                                         <GridView>
@@ -398,7 +398,7 @@
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitUpToDate"  Width="100" DisplayMemberBinding="{Binding UnitUpToDate}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="UptoDate" >Up to Date</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UpToDate" >Up To Date</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitOwner"  Width="100" DisplayMemberBinding="{Binding UnitOwnerId}" >
@@ -474,8 +474,8 @@
                                                 <Label x:Name="label2" Content="Previous Price:" HorizontalAlignment="Left" Margin="78,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="86"/>
                                                 <Label x:Name="label3" Content="New Price:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="66"/>
                                                 <Button x:Name="button" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="14,22,0,0" VerticalAlignment="Top" Width="75" Grid.Row="4" Height="26"/>
-                                                <TextBox x:Name="textBox" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" controls:TextBoxHelper.Watermark="Price in Rands"/>
-                                                <TextBox x:Name="textBox1" controls:TextBoxHelper.Watermark="Price in Rands" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+                                                <TextBox x:Name="textBox" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+                                                <TextBox x:Name="textBox1" controls:TextBoxHelper.Watermark="Enter New Price" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
 
                                             </Grid>
                                         </Border>
@@ -522,14 +522,14 @@
                                                     <ColumnDefinition Width="19*"/>
                                                     <ColumnDefinition Width="25*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <TextBox x:Name="textBox13" HorizontalAlignment="Left" Height="26" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="1" controls:TextBoxHelper.Watermark="Can Contain Only Letters"/>
-                                                <TextBox x:Name="textBox14" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="2" controls:TextBoxHelper.Watermark="Password"/>
-                                                <TextBox x:Name="textBox15" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="3" controls:TextBoxHelper.Watermark="Can Contain Only Letters"/>
+                                                <TextBox x:Name="textBox13" HorizontalAlignment="Left" Height="26" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="1"/>
+                                                <TextBox x:Name="textBox14" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="2"/>
+                                                <TextBox x:Name="textBox15" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="3"/>
                                                 <Button x:Name="button8" Content="SAVE" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="4" Height="25"/>
                                                 <Label x:Name="label20" Content="Username: " HorizontalAlignment="Left" Margin="58,7,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="65"/>
                                                 <Label x:Name="label210" Content="Password: " HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.308" Grid.Row="2" Height="26" Width="63"/>
                                                 <Label x:Name="label24" Content="Role: " HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="38"/>
-                                                <Label x:Name="label280" Content="Add A New Employee" HorizontalAlignment="Left" Margin="164,37,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" FontWeight="Bold"/>
+                                                <Label x:Name="label280" Content="Add A New User" HorizontalAlignment="Left" Margin="164,37,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" FontWeight="Bold"/>
 
                                             </Grid>
                                         </Border>
@@ -554,13 +554,13 @@
                                                 <Label x:Name="label15" Content="Username:" HorizontalAlignment="Left" Margin="68,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="70"/>
                                                 <Label x:Name="label16" Content="Password:" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="65"/>
                                                 <Label x:Name="label17" Content=" Role:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Grid.Row="4" Height="26" Width="40"/>
-                                                <TextBox x:Name="textBox10" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="1" controls:TextBoxHelper.Watermark="Employee Username"/>
-                                                <TextBox x:Name="textBox11" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="2" controls:TextBoxHelper.Watermark="Can Contain Only Letters"/>
-                                                <TextBox x:Name="textBox12" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="3" controls:TextBoxHelper.Watermark="Password"/>
-                                                <TextBox x:Name="textBox16" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="4" controls:TextBoxHelper.Watermark="Role"/>
+                                                <TextBox x:Name="textBox10" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="1"/>
+                                                <TextBox x:Name="textBox11" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="2"/>
+                                                <TextBox x:Name="textBox12" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="3"/>
+                                                <TextBox x:Name="textBox16" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="4"/>
                                                 <Button x:Name="button7" Content="GO" Grid.Column="2" HorizontalAlignment="Left" Margin="10,9,0,0" Grid.Row="1" VerticalAlignment="Top" Width="41" Height="26"/>
                                                 <Button x:Name="button11" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="55,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Height="25"/>
-                                                <Label x:Name="label8" Content="Edit an Existing Employee" Grid.Column="1" HorizontalAlignment="Left" Margin="55,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                                                <Label x:Name="label8" Content="Edit an Existing User" Grid.Column="1" HorizontalAlignment="Left" Margin="55,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
 
                                             </Grid>
                                         </Border>
@@ -570,7 +570,7 @@
 
                             </Grid>
                         </TabItem>
-                        <TabItem Header="Reports" Width="120" Margin="10,0,-10,0" />
+                        <TabItem Header="Reports" Width="120"  />
                     </TabControl>
                     <Label x:Name="Label10" Content="Storage Unit Management System" Margin="16,20,0,9" Grid.Column="3" HorizontalAlignment="Left" Width="221" FontWeight="Bold"/>
                     <Label x:Name="Label11" Content="User: " Grid.Column="4" Margin="0,20,171,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,0.5" HorizontalAlignment="Right" Width="40" Height="26"/>

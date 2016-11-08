@@ -243,4 +243,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-
+/StorageUnitManagementSystem/bin/Debug
+/StorageUnitManagementSystem/obj/Debug
+/StorageUnitManagementSystem/bin/Debug
