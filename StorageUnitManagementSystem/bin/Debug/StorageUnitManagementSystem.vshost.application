@@ -7,14 +7,14 @@
     <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="StorageUnitManagementSystem.exe.manifest" size="10610">
+    <dependentAssembly dependencyType="install" codebase="StorageUnitManagementSystem.exe.manifest" size="11287">
       <assemblyIdentity name="StorageUnitManagementSystem.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>98xNtIh0mmjSEi6t0ApwRU2BGKnsPUNc1lYNHqe6ERs=</dsig:DigestValue>
+        <dsig:DigestValue>BNSrDM1VwQsgrLkrFe5GSiQgGLstBhXGKtipdSJaDCs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

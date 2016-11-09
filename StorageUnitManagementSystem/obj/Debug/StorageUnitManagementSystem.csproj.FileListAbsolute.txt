@@ -219,3 +219,17 @@ C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.xml
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\EASendMail45.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\EntityFramework.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\EntityFramework.xml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache
