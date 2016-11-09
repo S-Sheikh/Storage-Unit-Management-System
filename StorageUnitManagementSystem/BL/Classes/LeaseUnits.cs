@@ -28,6 +28,7 @@ namespace StorageUnitManagementSystem.BL.Classes
         private string clientCurrentTotal;
         private bool clientWaitingList;
         private bool unitLeased;
+        private bool clientAdded;
 
         public LeaseUnits()
         {
@@ -117,6 +118,12 @@ namespace StorageUnitManagementSystem.BL.Classes
         {
             get { return unitLeased; }
             set { unitLeased = value; }
+        }
+
+        public bool ClientAdded
+        {
+            get { return clientAdded; }
+            set { clientAdded = value; }
         }
     }
 }
