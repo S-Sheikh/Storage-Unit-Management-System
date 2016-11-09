@@ -48,6 +48,7 @@ namespace StorageUnitManagementSystem
         {
             MainWindow window = new MainWindow();
             window.Show();
+            this.Close();
         }
 
         private void lettersOnlyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
