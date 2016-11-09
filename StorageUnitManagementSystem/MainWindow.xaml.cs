@@ -74,6 +74,9 @@ namespace StorageUnitManagementSystem
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             //TEST COMMITTTTTTTTTTTTTTTTTTTTTTTTTTTT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            LoginWindow login = new LoginWindow();
+            login.Show();
+            this.Close();
         }
 
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
