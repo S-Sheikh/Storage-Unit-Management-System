@@ -15,6 +15,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using MahApps.Metro.Controls;
+using EASendMail;
 
 namespace StorageUnitManagementSystem
 {
@@ -594,14 +595,14 @@ namespace StorageUnitManagementSystem
 
             List<StorageUnit> suObjects = new List<StorageUnit>();
             suObjects = _subl.SelectAll();
-            LvListClient.Items.Clear();
+            lv_Units.Items.Clear();
 
             if (suObjects.Count > 0)
             {
-                LvListClient.Items.Clear();
+                lv_Units.Items.Clear();
                 foreach (StorageUnit temp in suObjects)
                 {
-                        LvListClient.Items.Add(temp);
+                    lv_Units.Items.Add(temp);
                 }
             }
             else
@@ -1067,6 +1068,7 @@ namespace StorageUnitManagementSystem
                         LbCurrentPrice.Content = ".....";
                         LblAvailableUnits.Content = ".....";
                         LblTotal.Content = ".....";
+                        SendEmail();
                     }
                 }
                 else
@@ -1081,6 +1083,54 @@ namespace StorageUnitManagementSystem
            
         }
 
+        private void SendEmail()
+        {
+            SmtpMail oMail = new SmtpMail("TryIt");
+            SmtpClient oSmtp = new SmtpClient();
+
+            // Set sender email address, please change it to yours
+            oMail.From = "test@emailarchitect.net";
+
+            // Set recipient email address, please change it to yours
+            oMail.To = "support@emailarchitect.net";
+
+            // Set email subject
+            oMail.Subject = "test html email with attachment";
+
+            // Set Html body
+            oMail.HtmlBody = "<font size=\"5\">This is</font> <font color=\"red\"><b>a test</b></font>";
+
+            // Your SMTP server address
+            SmtpServer oServer = new SmtpServer("smtp.emailarchitect.net");
+
+            // User and password for ESMTP authentication, if your server doesn't require
+            // User authentication, please remove the following codes.            
+            oServer.User = "test@emailarchitect.net";
+            oServer.Password = "testpassword";
+
+            // If your smtp server requires SSL connection, please add this line
+            // oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
+
+            try
+            {
+                // Add attachment from local disk
+                oMail.AddAttachment("d:\\test.pdf");
+
+                // Add attachment from remote website
+                oMail.AddAttachment("http://www.emailarchitect.net/webapp/img/logo.jpg");
+
+                Console.WriteLine("start to send email with attachment ...");
+                oSmtp.SendMail(oServer, oMail);
+                Console.WriteLine("email was sent successfully!");
+            }
+            catch (Exception ep)
+            {
+                Console.WriteLine("failed to send email with the following error:");
+                Console.WriteLine(ep.Message);
+            }
+        
+    }
+
         private void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
@@ -1088,7 +1138,7 @@ namespace StorageUnitManagementSystem
             if (listViewSortColUnits != null)
             {
                 AdornerLayer.GetAdornerLayer(listViewSortColUnits).Remove(listViewSortAdornerUnits);
-                //lv_Units.Items.SortDescriptions.Clear();
+                lv_Units.Items.SortDescriptions.Clear();
             }
 
             ListSortDirection newDir = ListSortDirection.Ascending;
@@ -1098,9 +1148,7 @@ namespace StorageUnitManagementSystem
             listViewSortColUnits = column;
             listViewSortAdornerUnits = new SortAdorner(listViewSortColUnits, newDir);
             AdornerLayer.GetAdornerLayer(listViewSortColUnits).Add(listViewSortAdornerUnits);
-            //lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
-
-
+            lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
 
         }
 

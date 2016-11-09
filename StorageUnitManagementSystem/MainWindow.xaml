@@ -363,48 +363,46 @@
                             
                                                             <GridViewColumn x:Name="clm_unitID" Width="50" DisplayMemberBinding="{Binding UnitId}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="idNumber" Click="lvUnitsColumnHeader_Click">ID</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitId" Click="lvUnitsColumnHeader_Click">ID</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitClass" Width="120" DisplayMemberBinding="{Binding UnitClassification}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="Class" Click="lvUnitsColumnHeader_Click">Classification</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitClassification" Click="lvUnitsColumnHeader_Click">Classification</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitPrice"  Width="100" DisplayMemberBinding="{Binding UnitPrice}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="Price" Click="lvUnitsColumnHeader_Click">Price</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitPrice" Click="lvUnitsColumnHeader_Click">Price</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitSize"  Width="120" DisplayMemberBinding="{Binding UnitSize}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="Size" Click="lvUnitsColumnHeader_Click">Size</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitSize" Click="lvUnitsColumnHeader_Click">Size</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitArrears"  Width="100" DisplayMemberBinding="{Binding UnitArrears}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="Arrears" Click="lvUnitsColumnHeader_Click">Arrears</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitArrears" Click="lvUnitsColumnHeader_Click">Arrears</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitOccupied"  Width="100" DisplayMemberBinding="{Binding UnitOccupied}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="Occupied" Click="lvUnitsColumnHeader_Click">Occupied</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitOccupied" Click="lvUnitsColumnHeader_Click">Occupied</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitAdvance"  Width="100" DisplayMemberBinding="{Binding UnitInAdvance}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="Advance" Click="lvUnitsColumnHeader_Click">Advance Payment</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitInAdvance" Click="lvUnitsColumnHeader_Click">Advance Payment</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitUpToDate"  Width="100" DisplayMemberBinding="{Binding UnitUpToDate}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="UpToDate" >Up To Date</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitUpToDate" >Up To Date</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitOwner"  Width="100" DisplayMemberBinding="{Binding UnitOwnerId}" >
-                                                                <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="Owner" >Leasee ID</GridViewColumnHeader>
-                                                                </GridViewColumn.Header>
+                                                   
                                                             </GridViewColumn>
                                                         </GridView>
                                                     </ListView.View>
