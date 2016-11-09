@@ -47,7 +47,7 @@ namespace StorageUnitManagementSystem.DAL
                     //unit.Phone = new Phone();
                     LeaseUnit.Client = new Client();
                     LeaseUnit.StorageUnit = new StorageUnit();
-
+                    LeaseUnit.LeaseID = Convert.ToString(sdr["LeaseID"]);
                     LeaseUnit.Client.idNumber = Convert.ToString(sdr["ClientID"]);
                     LeaseUnit.Client.FirstName = Convert.ToString(sdr["ClientName"]);
                     LeaseUnit.Client.LastName = Convert.ToString(sdr["ClientSurName"]);
@@ -107,13 +107,13 @@ namespace StorageUnitManagementSystem.DAL
                 LeaseUnit = new LeaseUnits();
 
                 _sqlCon.Open(); // open connection
-                string selectQuery = "SELECT * FROM LeaseUnits WHERE [ClientID] = '" + ID + "'";
+                string selectQuery = "SELECT * FROM LeaseUnits WHERE [LeaseID] = '" + ID + "'";
                 SQLiteCommand sqlCommand = new SQLiteCommand(selectQuery, _sqlCon); // setup command
                 SQLiteDataReader sdr = sqlCommand.ExecuteReader();
                 bRead = sdr.Read();
                 if (bRead == true) // false indicates no row/record read
                 {
-
+                    LeaseUnit.LeaseID = Convert.ToString(sdr["LeaseID"]);
                     LeaseUnit.Client.idNumber = Convert.ToString(sdr["ClientID"]);
                     LeaseUnit.Client.FirstName = Convert.ToString(sdr["ClientName"]);
                     LeaseUnit.Client.LastName = Convert.ToString(sdr["ClientSurName"]);
@@ -178,11 +178,11 @@ namespace StorageUnitManagementSystem.DAL
                     //TO:DO 
                     _sqlCon = new SQLiteConnection(_conStr); // new connection
                     _sqlCon.Open(); // open connection
-                    string insertQuery = "INSERT INTO LeaseUnits([ClientID], [ClientName], [ClientSurname], " +
+                    string insertQuery = "INSERT INTO LeaseUnits([LeaseID],[ClientID], [ClientName], [ClientSurname], " +
                                          "[UnitID],[UnitClass],[UnitPrice],[NoOfUnits]," +
                                          "[ClientWaitingList],[AvailableUnits],[TypeOfPayment],[DatePaid]," +
                                          "[DateOfContractStart],[DateOfContractEnd],[AmountDeposit],[AmountOwed]," +
-                                         "[AmountPaid],[ClientCurrentTotal],[UnitLeased],[ClientAdded] ) VALUES(" +
+                                         "[AmountPaid],[ClientCurrentTotal],[UnitLeased],[ClientAdded] ) VALUES(" + "@LeaseID" +
                                          "@ClientID, @ClientName, @ClientSurname, @UnitID,@UnitClass,@UnitPrice," +
                                          "@NoOfUnits,@ClientWaitingList,@AvailableUnits,@TypeOfPayment,@DatePaid," +
                                          "@DateOfContractStart,@DateOfContractEnd,@AmountDeposit,@AmountOwed,@AmountPaid," +
@@ -190,6 +190,7 @@ namespace StorageUnitManagementSystem.DAL
                     SQLiteCommand sqlCommand = new SQLiteCommand(insertQuery, _sqlCon); // setup command
                     SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
                     {
+                        new SQLiteParameter("@LeaseID",DbType.String), 
                         new SQLiteParameter("@ClientID",DbType.String),
                         new SQLiteParameter("@ClientName",DbType.String),
                         new SQLiteParameter("@ClientSurname", DbType.String),
@@ -211,25 +212,26 @@ namespace StorageUnitManagementSystem.DAL
                         new SQLiteParameter("@ClientAdded", DbType.Int16),
 
                 };
-                    sqlParams[0].Value = LeaseUnit.Client.idNumber; // Populate SQLiteParameters from Client
-                    sqlParams[1].Value = LeaseUnit.Client.FirstName;
-                    sqlParams[2].Value = LeaseUnit.Client.LastName;
-                    sqlParams[3].Value = LeaseUnit.StorageUnit.UnitId;
-                    sqlParams[4].Value = LeaseUnit.StorageUnit.UnitClassification;
-                    sqlParams[5].Value = LeaseUnit.StorageUnit.UnitPrice;
-                    sqlParams[6].Value = LeaseUnit.NoOfUnits;
-                    sqlParams[7].Value = LeaseUnit.ClientWaitingList;
-                    sqlParams[8].Value = LeaseUnit.AvailableUnits;
-                    sqlParams[9].Value = LeaseUnit.TypeOfPayment;
-                    sqlParams[10].Value = LeaseUnit.DateOfPayment;
-                    sqlParams[11].Value = LeaseUnit.DateOfContractStart;
-                    sqlParams[12].Value = LeaseUnit.DateOfContractEnd;
-                    sqlParams[13].Value = LeaseUnit.AmountDeposited;
-                    sqlParams[14].Value = LeaseUnit.AmountOwed;
-                    sqlParams[15].Value = LeaseUnit.AmountPaid;
-                    sqlParams[16].Value = LeaseUnit.ClientCurrentTotal;
-                    sqlParams[17].Value = LeaseUnit.UnitLeased ? 1 : 0;// ? 1 : 0 Converts Boolean to Int16 for Database Storage 
-                    sqlParams[18].Value = LeaseUnit.ClientAdded ? 1 : 0;
+                    sqlParams[0].Value = LeaseUnit.LeaseID;
+                    sqlParams[1].Value = LeaseUnit.Client.idNumber; // Populate SQLiteParameters from Client
+                    sqlParams[2].Value = LeaseUnit.Client.FirstName;
+                    sqlParams[3].Value = LeaseUnit.Client.LastName;
+                    sqlParams[4].Value = LeaseUnit.StorageUnit.UnitId;
+                    sqlParams[5].Value = LeaseUnit.StorageUnit.UnitClassification;
+                    sqlParams[6].Value = LeaseUnit.StorageUnit.UnitPrice;
+                    sqlParams[7].Value = LeaseUnit.NoOfUnits;
+                    sqlParams[8].Value = LeaseUnit.ClientWaitingList;
+                    sqlParams[9].Value = LeaseUnit.AvailableUnits;
+                    sqlParams[10].Value = LeaseUnit.TypeOfPayment;
+                    sqlParams[11].Value = LeaseUnit.DateOfPayment;
+                    sqlParams[12].Value = LeaseUnit.DateOfContractStart;
+                    sqlParams[13].Value = LeaseUnit.DateOfContractEnd;
+                    sqlParams[14].Value = LeaseUnit.AmountDeposited;
+                    sqlParams[15].Value = LeaseUnit.AmountOwed;
+                    sqlParams[16].Value = LeaseUnit.AmountPaid;
+                    sqlParams[17].Value = LeaseUnit.ClientCurrentTotal;
+                    sqlParams[18].Value = LeaseUnit.UnitLeased ? 1 : 0;// ? 1 : 0 Converts Boolean to Int16 for Database Storage 
+                    sqlParams[19].Value = LeaseUnit.ClientAdded ? 1 : 0;
                     sqlCommand.Parameters.AddRange(sqlParams);
                     rowsAffected = sqlCommand.ExecuteNonQuery();
                     if (rowsAffected == 1) // Test rowsAffected
@@ -281,7 +283,7 @@ namespace StorageUnitManagementSystem.DAL
                 // A better option would be to only update the fields that actually changed
                 //
                 string updateQuery = string.Format("UPDATE LeaseUnits SET [ClientID]=@ClientID, [ClientName]=@ClientName, " +
-                                         "[clientSurname]=@clientSurname,[UnitID]=@UnitID," +
+                                                   "[clientSurname]=@clientSurname,[UnitID]=@UnitID," +
                                                    "[UnitClass]=@UnitClass,[UnitPrice]=@UnitPrice," +
                                                    "[NoOfUnits]=@NoOfUnits,[ClientWaitingList]=@ClientWaitingList," +
                                                    "[AvailableUnits]=@AvailableUnits,[TypeOfPayment]=@TypeOfPayment," +
@@ -289,11 +291,12 @@ namespace StorageUnitManagementSystem.DAL
                                                    "[DateOfContractEnd]=@DateOfContractEnd,[AmountDeposit]=@AmountDeposit," +
                                                    "[AmountOwed]=@AmountOwed,[AmountPaid]=@AmountPaid,[ClientCurrentTotal]=@ClientCurrentTotal," +
                                                    "[UnitLeased]=@UnitLeased,[ClientAdded]=@ClientAdded WHERE " +
-                                         "[ClientID] = '{0}'", LeaseUnit.Client.idNumber);
+                                         "[LeaseID] = '{0}'", LeaseUnit.LeaseID);
                 SQLiteCommand sqlCommand = new SQLiteCommand(updateQuery, _sqlCon); // setup command
                 SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
                 {
-                           new SQLiteParameter("@ClientID",DbType.String),
+                        new SQLiteParameter("@LeaseID",DbType.String),
+                        new SQLiteParameter("@ClientID",DbType.String),
                         new SQLiteParameter("@ClientName",DbType.String),
                         new SQLiteParameter("@ClientSurname", DbType.String),
                         new SQLiteParameter("@UnitID", DbType.String),
@@ -332,7 +335,7 @@ namespace StorageUnitManagementSystem.DAL
                 sqlParams[15].Value = LeaseUnit.AmountPaid;
                 sqlParams[16].Value = LeaseUnit.ClientCurrentTotal;
                 sqlParams[17].Value = LeaseUnit.UnitLeased ? 1 : 0;// ? 1 : 0 Converts Boolean to Int16 for Database Storage 
-                sqlParams[17].Value = LeaseUnit.ClientAdded ? 1 : 0;
+                sqlParams[18].Value = LeaseUnit.ClientAdded ? 1 : 0;
                 sqlCommand.Parameters.AddRange(sqlParams);
                 rowsAffected = sqlCommand.ExecuteNonQuery();
                 if (rowsAffected == 0) // Test rowsAffected
@@ -377,7 +380,7 @@ namespace StorageUnitManagementSystem.DAL
 
                 _sqlCon = new SQLiteConnection(_conStr); // New connection
                 _sqlCon.Open(); // Open connection
-                string deleteQuery = string.Format("DELETE FROM LeaseUnits WHERE [ClientID] = '{0}'", ID);
+                string deleteQuery = string.Format("DELETE FROM LeaseUnits WHERE [LeaseID] = '{0}'", ID);
                 SQLiteCommand sqlCommand = new SQLiteCommand(deleteQuery, _sqlCon); // setup command
                 rowsAffected = sqlCommand.ExecuteNonQuery();
                 if (rowsAffected == 0) // Test rowsAffected
@@ -422,7 +425,7 @@ namespace StorageUnitManagementSystem.DAL
                 bool bRead = false;
 
                 _sqlCon.Open(); // open connection
-                string selectQuery = "SELECT * FROM LeaseUnits WHERE [ClientID] = '" + ID + "'";
+                string selectQuery = "SELECT * FROM LeaseUnits WHERE [LeaseID] = '" + ID + "'";
                 SQLiteCommand sqlCommand = new SQLiteCommand(selectQuery, _sqlCon); // setup command
                 SQLiteDataReader sdr = sqlCommand.ExecuteReader();
                 bRead = sdr.Read();
