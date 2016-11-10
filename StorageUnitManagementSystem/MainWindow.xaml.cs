@@ -1070,7 +1070,7 @@ namespace StorageUnitManagementSystem
                                 this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
                             }
                         }
-                        rc = _lubl.Append(leaseUnit);
+                       // rc = _lubl.Append(leaseUnit);
                         if (rc == 0)
                         {
                             this.ShowMessageAsync("Contract Successfully Created", "Contract Will Be Sent To Client!");
