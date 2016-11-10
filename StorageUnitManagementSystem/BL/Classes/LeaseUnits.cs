@@ -10,12 +10,8 @@ namespace StorageUnitManagementSystem.BL.Classes
     public class LeaseUnits
     {
         private Client client;
-        //private string clientId;
-        //private string clientSurname;
-        //private string clientName;
         private StorageUnit storageUnit;
-        //private string unitId;
-        //private string unitClass;
+        private string leaseID;
         private int noOfUnits; 
         private int availableUnits;
         private string typeOfPayment;
@@ -47,6 +43,12 @@ namespace StorageUnitManagementSystem.BL.Classes
             get { return storageUnit; }
             set { storageUnit = value; }
         }
+        public string LeaseID
+        {
+            get { return leaseID; }
+            set { leaseID = value; }
+        }
+
 
         public int NoOfUnits
         {
@@ -125,7 +127,5 @@ namespace StorageUnitManagementSystem.BL.Classes
             get { return clientAdded; }
             set { clientAdded = value; }
         }
-
-        public string LeaseID;
     }
 }
