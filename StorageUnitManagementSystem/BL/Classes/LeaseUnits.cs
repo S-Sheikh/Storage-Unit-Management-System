@@ -127,7 +127,5 @@ namespace StorageUnitManagementSystem.BL.Classes
             get { return clientAdded; }
             set { clientAdded = value; }
         }
-
-        public string LeaseID;
     }
 }
