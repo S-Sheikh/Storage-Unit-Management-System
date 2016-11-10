@@ -1143,11 +1143,11 @@ namespace StorageUnitManagementSystem
                                 unitId = storageUnit.UnitId;
                                 break;
                             }
-                            else
-                            {
-                                unitId = storageUnit.UnitId;
-                            }
-                            //break if its 1st value you inserting
+                        if (count > 1)
+                        {
+                            unitId = StorageUnit;
+                        }
+                        //break if its 1st value you inserting
                         }
                     }
                     leaseUnit.LeaseID = unitId;
