@@ -1142,15 +1142,15 @@ namespace StorageUnitManagementSystem
                         if (storageUnit.UnitClassification == CbLeaseSelectClass.SelectedValue.ToString() &&
                             storageUnit.UnitOccupied == Convert.ToBoolean(0))
                         {
-                            if (count == 1)
-                            {
+                           // if (count == 1)
+                           // {
                                 unitId = storageUnit.UnitId;
-                                break;
-                            }
-                            else
-                            {
-                                unitId = storageUnit.UnitId;
-                            }
+                               // break;
+                            //}
+                            //if(count > 1)
+                            //{
+                            //    unitId = storageUnit.UnitId;
+                            //}
                             //break if its 1st value you inserting
                         }
                     }
