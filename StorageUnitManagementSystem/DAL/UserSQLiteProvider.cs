@@ -45,7 +45,6 @@ namespace StorageUnitManagementSystem.DAL
 
                     user.Id = Convert.ToString(sdr["UId"]);
                     user.UserName = Convert.ToString(sdr["UName"]);
-                    
                     user.Password = Convert.ToString(sdr["UPassword"]);
                     user.Role = Convert.ToString(sdr["UPosition"]);
 
@@ -97,7 +96,6 @@ namespace StorageUnitManagementSystem.DAL
                 {
                     User.Id = Convert.ToString(sdr["UId"]);
                     User.UserName = Convert.ToString(sdr["UName"]);
-                    
                     User.Password = Convert.ToString(sdr["UPassword"]);
                     User.Role = Convert.ToString(sdr["UPosition"]);
                     rc = 0;
@@ -153,15 +151,13 @@ namespace StorageUnitManagementSystem.DAL
                     SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
                     {
                         new SQLiteParameter("@UId",DbType.String),
-                        new SQLiteParameter("@UName",DbType.String),
-                        
+                        new SQLiteParameter("@UName",DbType.String), 
                         new SQLiteParameter("@UPassword", DbType.String),
                         new SQLiteParameter("@UPosition",DbType.String),
 
                     };
                     sqlParams[0].Value = User.Id; // Populate SQLiteParameters from StorageUnit
                     sqlParams[1].Value = User.UserName;
-                    
                     sqlParams[3].Value = User.Password;
                     sqlParams[4].Value = User.Role;
 
@@ -223,15 +219,13 @@ namespace StorageUnitManagementSystem.DAL
                 SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
                 {
                         new SQLiteParameter("@UId",DbType.String),
-                        new SQLiteParameter("@UName",DbType.String),
-                        
+                        new SQLiteParameter("@UName",DbType.String), 
                         new SQLiteParameter("@UPassword", DbType.String),
                         new SQLiteParameter("@UPosition",DbType.String),
 
                 };
                 sqlParams[0].Value = User.Id; // Populate SQLiteParameters from StorageUnit
-                sqlParams[1].Value = User.UserName;
-                
+                sqlParams[1].Value = User.UserName;  
                 sqlParams[3].Value = User.Password;
                 sqlParams[4].Value = User.Role;
 
