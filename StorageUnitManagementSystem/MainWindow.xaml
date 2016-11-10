@@ -9,7 +9,7 @@
          
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:classes="clr-namespace:StorageUnitManagementSystem.BL.Classes"
-        Title="MainWindow" Height="710" Width="780" MinHeight="710"  MinWidth="780" MaxHeight="710" MaxWidth="780"
+        Title="Storage Unit Management System" Height="710" Width="780" MinHeight="710"  MinWidth="780" MaxHeight="710" MaxWidth="780"
                       ShowMaxRestoreButton="False" WindowStartupLocation="CenterScreen" GlowBrush="{DynamicResource AccentBaseColorBrush}" 
                       BorderThickness="2"  >
 
