@@ -1149,7 +1149,7 @@ namespace StorageUnitManagementSystem
                             }
                         if (count > 1)
                         {
-                            unitId = StorageUnit;
+                            //unitId = StorageUnit;
                         }
                         //break if its 1st value you inserting
                         }
