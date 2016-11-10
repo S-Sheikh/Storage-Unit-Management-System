@@ -69,7 +69,7 @@
                         <ColumnDefinition Width="223*"/>
                     </Grid.ColumnDefinitions>
                     <TabControl x:Name="TabControl" Margin="10" Grid.ColumnSpan="5" Grid.Row="1">
-                        <TabItem Header="Home" Width="100" />
+                        <TabItem Header="Home" Width="100" Margin="1,0,-1,0" />
                         <TabItem Header="Clients" Width="100" HorizontalAlignment="Center" >
                             <Grid Height="Auto" Margin="0,0,-10,3">
                                 <TabControl x:Name="TabControlClients" Margin="10,10,9.6,-8.6" TabStripPlacement="Left">
