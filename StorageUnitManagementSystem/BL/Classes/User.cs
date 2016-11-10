@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace StorageUnitManagementSystem.BL.Classes
 {
-    class User
+    public class User
     {
+        private string _id;
         private string userName;
         private string password;
         private string role;
@@ -48,6 +49,19 @@ namespace StorageUnitManagementSystem.BL.Classes
             set
             {
                 role = value;
+            }
+        }
+
+        public string Id
+        {
+            get
+            {
+                return _id;
+            }
+
+            set
+            {
+                _id = value;
             }
         }
     }

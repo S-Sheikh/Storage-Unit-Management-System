@@ -144,7 +144,6 @@ C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitMana
 C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csproj.GenerateResource.Cache
 C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe.manifest
 C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.application
-C:\Users\Vevan\Desktop\OPG\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache
 C:\Users\Vevan\Desktop\OPG\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\LoginWindow.g.cs
 C:\Users\Vevan\Desktop\OPG\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\MainWindow.g.cs
 C:\Users\Vevan\Desktop\OPG\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\App.g.cs
