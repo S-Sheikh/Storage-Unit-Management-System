@@ -763,7 +763,7 @@ namespace StorageUnitManagementSystem
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        else rc = 0;
+                        
                     }
                     if (rc == 0)
                     {
@@ -779,8 +779,7 @@ namespace StorageUnitManagementSystem
                         {
                             lv_Units.Items.Add(unit);
                             rc = 1;
-                        }
-                        else rc = 0;
+                        }                        
                     }
                     if (rc == 0)
                     {
@@ -797,7 +796,6 @@ namespace StorageUnitManagementSystem
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        else rc = 0;
                     }
                     if (rc == 0)
                     {
@@ -814,7 +812,6 @@ namespace StorageUnitManagementSystem
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        else rc = 0;
                     }
                     if (rc == 0)
                     {
@@ -831,7 +828,6 @@ namespace StorageUnitManagementSystem
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        else rc = 0;
                     }
                     if (rc == 0)
                     {
