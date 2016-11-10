@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using StorageUnitManagementSystem.BL.Classes;
 using StorageUnitManagementSystem.DAL;
 
@@ -63,6 +59,11 @@ namespace StorageUnitManagementSystem.BL
         /// </summary>
         /// <param name="StorageUnit">The new StorageUnit data for the row in the StorageUnit datastore.</param>
         public int Update(LeaseUnits LeaseUnit)
+        {
+            return providerBase.Update(LeaseUnit);
+        } // end method
+
+        public int UpdatePopUp(LeaseUnits LeaseUnit)
         {
             return providerBase.Update(LeaseUnit);
         } // end method

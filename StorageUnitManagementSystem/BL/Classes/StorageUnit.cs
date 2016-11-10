@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace StorageUnitManagementSystem.BL.Classes
+﻿namespace StorageUnitManagementSystem.BL.Classes
 {
     public class StorageUnit
     {
@@ -20,34 +15,6 @@ namespace StorageUnitManagementSystem.BL.Classes
         public StorageUnit()
         {
         }
-
-        public StorageUnit(string unitClassification, string unitSize, double unitPrice, bool unitArrears, bool unitUpToDate, bool unitInAdvance, bool unitOccupied, string unitOwnerId)
-        {
-            _unitClassification = unitClassification;
-            _unitSize = unitSize;
-            _unitPrice = unitPrice;
-            _unitArrears = unitArrears;
-            _unitUpToDate = unitUpToDate;
-            _unitInAdvance = unitInAdvance;
-            _unitOccupied = unitOccupied;
-            _unitOwnerId = unitOwnerId;
-        }
-
-        public StorageUnit(string unitId, string unitClassification, string unitSize, double unitPrice, bool unitArrears, bool unitUpToDate, bool unitInAdvance, bool unitOccupied, string unitOwnerId)
-        {
-            _unitId = unitId;
-            _unitClassification = unitClassification;
-            _unitSize = unitSize;
-            _unitPrice = unitPrice;
-            _unitArrears = unitArrears;
-            _unitUpToDate = unitUpToDate;
-            _unitInAdvance = unitInAdvance;
-            _unitOccupied = unitOccupied;
-            _unitOwnerId = unitOwnerId;
-        }
-
-
-
 
         public bool UnitOccupied
         {

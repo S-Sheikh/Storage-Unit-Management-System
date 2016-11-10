@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using StorageUnitManagementSystem.BL.Classes;
 
 namespace StorageUnitManagementSystem.DAL
@@ -40,7 +36,7 @@ namespace StorageUnitManagementSystem.DAL
         /// </summary>
         /// <param name="Client">The new Client data for the row in the Client datastore.</param>
         public abstract int Update(LeaseUnits LeaseUnits);
-
+        public abstract int UpdatePopUp(LeaseUnits LeaseUnits);
         /// <summary>
         /// This method deletes a row in the Client datastore.
         /// It returns 0 to indicate the Client was found and deleted successfully, or

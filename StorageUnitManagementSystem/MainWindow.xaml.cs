@@ -1,29 +1,35 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using System.Diagnostics;
-using System.Windows.Input;
-using MahApps.Metro.Controls.Dialogs;
-using StorageUnitManagementSystem.BL;
-using StorageUnitManagementSystem.BL.Classes;
 using System.Collections.Generic;
-using System.Windows.Documents;
-using System.Windows.Media;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using MahApps.Metro.Controls;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Navigation;
 using EASendMail;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
+using Novacode;
+using StorageUnitManagementSystem.BL;
+using StorageUnitManagementSystem.BL.Classes;
+using Paragraph = Novacode.Paragraph;
+using Table = Novacode.Table;
 
-namespace StorageUnitManagementSystem
+namespace StorageUnitManagementSystem.PL
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
+        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        public Client MyClient { get; set; }
         private SUBL _subl;
         private CBL _cbl;
         private LUBL _lubl;
@@ -32,7 +38,7 @@ namespace StorageUnitManagementSystem
         public List<StorageUnit> StorageUnits { get; set; }
         public List<Client> Clients { get; set; } 
         public List<string> Data { get; } = new List<string> {"Client ID", "Name", "Surname", "City", "Province"};
-
+        public PopUp PopUp = new PopUp();
         public List<string> cb_UnitListSearchItems { get; } = new List<string>
         {
             "Vacant Units",
@@ -54,8 +60,9 @@ namespace StorageUnitManagementSystem
             _cbl = new CBL("ClientSQLiteProvider");
             _subl = new SUBL("StorageUnitSQLiteProvider");
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
-            //DataContext = new Client();
+            DataContext = new Client();
             DataContext = new StorageUnit();
+           
             //Test
         }
 
@@ -559,9 +566,28 @@ namespace StorageUnitManagementSystem
             LvListClient.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
+        private void lvLeaseUnitsClientsColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+            string sortBy = column.Tag.ToString();
+            if (_listViewSortCol != null)
+            {
+                AdornerLayer.GetAdornerLayer(_listViewSortCol).Remove(_listViewSortAdorner);
+                LvLeaseUnits.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (_listViewSortCol == column && _listViewSortAdorner.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            _listViewSortCol = column;
+            _listViewSortAdorner = new SortAdorner(_listViewSortCol, newDir);
+            AdornerLayer.GetAdornerLayer(_listViewSortCol).Add(_listViewSortAdorner);
+            LvLeaseUnits.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+        }
+
         private void btnRestoreListAll_Click(object sender, RoutedEventArgs e)
         {
-
             List<Client> clientObjects = new List<Client>();
             clientObjects = _cbl.SelectAll();
             LvRestoreClient.Items.Clear();
@@ -583,7 +609,6 @@ namespace StorageUnitManagementSystem
 
         private void imgRefresh_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
             List<Client> clientObjects = new List<Client>();
             clientObjects = _cbl.SelectAll();
             LvListClient.Items.Clear();
@@ -686,6 +711,7 @@ namespace StorageUnitManagementSystem
 
             int rc = 0;
             List<Client> clients = new List<Client>();
+            clients = _cbl.SelectAll();
             Client clientObj = new Client();
             if (CboListSearch.SelectedItem.ToString() == "Client ID")
             {
@@ -693,49 +719,53 @@ namespace StorageUnitManagementSystem
                 rc = _cbl.SelectClient(TxtBoxListSearch.Text, ref clientObj);
                 if (rc == 0)
                 {
-                    LvListClient.Items.Clear();
                     LvListClient.Items.Add(clientObj);
                 }
 
             }
             else if (CboListSearch.SelectedItem.ToString() == "Name")
-            {
-                //List< Client > clientObjects = new List<Client>();
-                //clientObjects = cbl.SelectAll(txtBoxListSearch.Text);
-                //lvListClient.Items.Clear();
-
-                //if (clientObjects.Count > 0)
-                //{
-                //    lvListClient.Items.Clear();
-                //    foreach (Client temp in clientObjects)
-                //    {
-                //        lvListClient.Items.Add(temp);
-                //    }
-                //}
+            {     
                 LvListClient.Items.Clear();
-                Client clientName = new Client();
-                rc = _cbl.SelectClientName(TxtBoxListSearch.Text, ref clientName);
-                if (rc == 0)
+                foreach (Client client in clients)
                 {
-                    LvListClient.Items.Clear();
-                    LvListClient.Items.Add(clientName);
-                }
-                else
-                {
-                    this.ShowMessageAsync("No Client loaded from datastore", "No Clients");
+                    if (TxtBoxListSearch.Text.Equals(client.FirstName))
+                    {
+                        LvListClient.Items.Add(client);
+                    }
                 }
             }
             else if (CboListSearch.SelectedItem.ToString() == "Surname")
             {
-
+                LvListClient.Items.Clear();
+                foreach (Client client in clients)
+                {
+                    if (TxtBoxListSearch.Text.Equals(client.LastName))
+                    {
+                        LvListClient.Items.Add(client);
+                    }
+                }
             }
             else if (CboListSearch.SelectedItem.ToString() == "City")
             {
-
+                LvListClient.Items.Clear();
+                foreach (Client client in clients)
+                {
+                    if (TxtBoxListSearch.Text.Equals(client.Address.City))
+                    {
+                        LvListClient.Items.Add(client);
+                    }
+                }
             }
             else if (CboListSearch.SelectedItem.ToString() == "Province")
             {
-
+                LvListClient.Items.Clear();
+                foreach (Client client in clients)
+                {
+                    if (TxtBoxListSearch.Text.Equals(client.Address.Province))
+                    {
+                        LvListClient.Items.Add(client);
+                    }
+                }
             }
             else
             {
@@ -1005,48 +1035,6 @@ namespace StorageUnitManagementSystem
             }
         }
 
-        private void TbNoOfNewUnits_KeyDown(object sender, KeyEventArgs e)
-        {
-            string LblCurrentPrice = LbCurrentPrice.Content.ToString();
-            char[] ch = LblCurrentPrice.ToCharArray();
-            ch[0] = ' '; // index starts at 0! --->> Remove the 'R' character at the 1st position 
-            string newLblCurrentPrice = new string(ch);
-            double unitPrice = 0;
-            double noOfUnits = 0;
-            string noOfUnits_ = TbNoOfNewUnits.Text;
-            try
-            {
-                foreach (StorageUnit units in StorageUnits)
-                {
-                    if (units.UnitOccupied == Convert.ToBoolean(0))
-                    {
-                        if (units.UnitPrice == double.Parse(newLblCurrentPrice))
-                        {
-                            unitPrice = units.UnitPrice;
-                            break;
-                        }
-                    }
-                }
-
-                if (double.TryParse(noOfUnits_, out noOfUnits))
-                {
-                   // TbNoOfNewUnits.Text.Remove(0);
-                    LblTotal.Content = unitPrice * Convert.ToDouble(noOfUnits);
-                }
-                else
-                {//
-                    TbNoOfNewUnits.Text.Remove(0);
-                    LblTotal.Content = ".....";
-                }
-            }
-            catch (Exception)
-            {
-                this.ShowMessageAsync("Unit Class", "Please Select A Unit Class First");
-                LblTotal.Content = ".....";
-            }
-
-        }
-
         private void btn_addNewUnits_Click(object sender, RoutedEventArgs e)
         {
             int rc = 0;
@@ -1102,8 +1090,14 @@ namespace StorageUnitManagementSystem
 
         private void BtnLeaseSubmit_Click(object sender, RoutedEventArgs e)
         {
+            string key = "";
+            string value = "";
+            string unitSize = "";
             string unitId = "";
-            StorageUnits = _subl.SelectAll();
+            string unitClass = "";
+            List<StorageUnit> storageUnits = _subl.SelectAll();
+             Clients = _cbl.SelectAll();
+            var lastItemInIndex = storageUnits[storageUnits.Count - 1]; //gets the last item in the list
             LeaseUnits leaseUnit = new LeaseUnits();
             string lblCurrentPrice = LbCurrentPrice.Content.ToString();
             char[] ch = lblCurrentPrice.ToCharArray();
@@ -1120,185 +1114,192 @@ namespace StorageUnitManagementSystem
                 //Do Nothing!!!
             }
             int rc = 0;
-            if (!(LeaseId.Text.Equals("") && LeaseName.Text.Equals("") && LeaseSurname.Text.Equals("")))
+            if (!(TxtBoxLeaseId.Text.Equals("") && LeaseName.Text.Equals("") && LeaseSurname.Text.Equals("")))
             {
-                if (_cbl.DoesExist(LeaseId.Text))
+                try
                 {
-                    //if (!(_lubl.DoesExist(LeaseId.Text)))
-                    //{
-                    //    foreach (StorageUnit storageUnit in StorageUnits)
-                    //    {
-                    //        if (storageUnit.UnitClassification == CbLeaseSelectClass.SelectedValue.ToString() &&
-                    //            storageUnit.UnitOccupied == Convert.ToBoolean(0))
-                    //        {
-                    //            unitId = storageUnit.UnitId;
-                    //            break; //break if its 1st value you inserting
-                    //        }
-                    //    }
-                    //}
-                    foreach (StorageUnit storageUnit in StorageUnits)
+                    if (_cbl.DoesExist(TxtBoxLeaseId.Text))
                     {
-                        count++;
-                        if (storageUnit.UnitClassification == CbLeaseSelectClass.SelectedValue.ToString() &&
-                            storageUnit.UnitOccupied == Convert.ToBoolean(0))
+                        foreach (StorageUnit storageUnit in storageUnits)
                         {
-                            if (count == 1)
+                            if (storageUnit.UnitClassification == CbLeaseSelectClass.SelectedValue.ToString() &&
+                                storageUnit.UnitOccupied == Convert.ToBoolean(0))
                             {
-                                unitId = storageUnit.UnitId;
-                                break;
-                            }
-                        if (count > 1)
-                        {
-                            unitId = StorageUnit;
-                        }
-                        //break if its 1st value you inserting
-                        }
-                    }
-                    leaseUnit.LeaseID = unitId;
-                    leaseUnit.StorageUnit.UnitId = unitId;
-                    leaseUnit.Client.idNumber = LeaseId.Text;
-                    leaseUnit.Client.FirstName = LeaseName.Text;
-                    leaseUnit.Client.LastName = LeaseSurname.Text;
-                    leaseUnit.StorageUnit.UnitPrice = currentPrice;
-                    leaseUnit.NoOfUnits = int.Parse(TbNoOfNewUnits.Text);
-                    leaseUnit.ClientAdded = Convert.ToBoolean(1);
-                    if (CbLeaseSelectClass.SelectedValue.ToString() == "A")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "B")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "C")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "D")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "E")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    else if (CbLeaseSelectClass.SelectedValue.ToString() == "E")
-                    {
-                        leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
-                        if (int.Parse(TbNoOfNewUnits.Text) >
-                            CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
-                        {
-                            this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
-                        }
-                    }
-                    rc = _lubl.Insert(leaseUnit);
-                    if (rc == 0)
-                    {
-                        this.ShowMessageAsync("Contract Successfully Created", "Contract Will Be Sent To Client!");
-                        LeaseId.Clear();
-                        LeaseName.Clear();
-                        LeaseSurname.Clear();
-                        TbNoOfNewUnits.Clear();
-                        LbCurrentDimensions.Content = ".....";
-                        LbCurrentPrice.Content = ".....";
-                        LblAvailableUnits.Content = ".....";
-                        LblTotal.Content = ".....";
-                        foreach (Client client in Clients)
-                        {
-                            if (client.idNumber.Equals(LeaseId.Text))
-                            {
-                                SendEmail(client.EMailAddress, "Please find the attached document!");
-                                //this.ShowMessageAsync("Email", "Send email here!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                                break;
+                                if (!(_lubl.DoesExist(storageUnit.UnitId)))
+                                {
+                                    unitId = storageUnit.UnitId;
+                                    unitSize = storageUnit.UnitSize;
+                                    unitClass = storageUnit.UnitClassification;
+                                    break;
+                                }
                             }
                         }
-                        // SendEmail();
+                        leaseUnit.LeaseID = unitId;
+                        leaseUnit.StorageUnit.UnitId = unitId;
+                        leaseUnit.Client.idNumber = TxtBoxLeaseId.Text;
+                        leaseUnit.Client.FirstName = LeaseName.Text;
+                        leaseUnit.Client.LastName = LeaseSurname.Text;
+                        leaseUnit.StorageUnit.UnitPrice = currentPrice;
+                        leaseUnit.StorageUnit.UnitSize = unitSize;
+                        leaseUnit.StorageUnit.UnitClassification = unitClass;
+                        leaseUnit.TotalUnitPrice = LblTotal.Content.ToString();
+                        leaseUnit.NoOfUnits = int.Parse(TbNoOfNewUnits.Text);
+                        leaseUnit.ClientAdded = Convert.ToBoolean(1);
+                        if (CbLeaseSelectClass.SelectedValue.ToString() == "A")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "B")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "C")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "D")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "E")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        else if (CbLeaseSelectClass.SelectedValue.ToString() == "E")
+                        {
+                            leaseUnit.StorageUnit.UnitClassification = CbLeaseSelectClass.SelectedValue.ToString();
+                            if (int.Parse(TbNoOfNewUnits.Text) >
+                                CountAvailableUnits(CbLeaseSelectClass.SelectedValue.ToString()))
+                            {
+                                this.ShowMessageAsync("Units Occupied", "Units Not Available,Please Enter Less Units");
+                            }
+                        }
+                        rc = _lubl.Insert(leaseUnit);
+                        if (rc == 0)
+                        {
+                            this.ShowMessageAsync("Contract Successfully Created", "Contract Will Be Sent To Client!");
+                            TxtBoxLeaseId.Clear();
+                            LeaseName.Clear();
+                            LeaseSurname.Clear();
+                            TbNoOfNewUnits.Clear();
+                            LbCurrentDimensions.Content = ".....";
+                            LbCurrentPrice.Content = ".....";
+                            LblAvailableUnits.Content = ".....";
+                            LblTotal.Content = ".....";
+                            foreach (Client client in Clients)
+                            {
+                                if (client.idNumber.Equals(leaseUnit.Client.idNumber))
+                                {
+                                    string fileTemplate = CreateFIle("Quotation.docx","Quotations");
+                                    string outputFileName = string.Format(fileTemplate);
+                                    //SendEmail(client.EMailAddress, "Please find the attached document!");
+                                    DocX letter = GetTemplate(leaseUnit.Client.idNumber);
+                                    letter.ReplaceText("ClientID", leaseUnit.Client.idNumber);
+                                    letter.ReplaceText("ClientName", leaseUnit.Client.FirstName);
+                                    letter.ReplaceText("ClientSurname", leaseUnit.Client.LastName);
+                                    letter.ReplaceText("UnitClass", leaseUnit.StorageUnit.UnitClassification);
+                                    letter.ReplaceText("UnitSize", leaseUnit.StorageUnit.UnitSize);
+                                    letter.ReplaceText("UnitPrice", leaseUnit.StorageUnit.UnitPrice.ToString(CultureInfo.InvariantCulture));
+                                    letter.ReplaceText("NoOfUnits", leaseUnit.NoOfUnits.ToString());
+                                    letter.ReplaceText("TotalUnitPrice", leaseUnit.TotalUnitPrice);
+                                    letter.SaveAs(outputFileName);
+                                    // Open in word:
+                                    Process.Start("WINWORD.EXE", "\"" + outputFileName + "\"");//For Debugging Purposes
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            this.ShowMessageAsync("Insert Failed", "Record Not Inserted Into Database!");
+                        }
                     }
-
-                    else
-                    {
-                        this.ShowMessageAsync("Insert Failed", "Record Not Inserted Into Database!");
-                    }
-                }
-                else
-                {
-                    this.ShowMessageAsync("Empty Fields", "Fields Cannot Be Empty!");
-                }
+            }
+                catch (Exception ex)
+            {
+                this.ShowMessageAsync("Error", ex.Message);
+            }
+        }
+            else
+            {
+                this.ShowMessageAsync("Empty Fields", "Fields Cannot Be Empty!");
             }
         }
 
+
         private void SendEmail(string to,string body)
         {
-            SmtpMail oMail = new SmtpMail("TryIt");
-            SmtpClient oSmtp = new SmtpClient();
+                ProgressRingLeaseUnits.IsActive = true;
+                SmtpMail oMail = new SmtpMail("TryIt");
+                SmtpClient oSmtp = new SmtpClient();
 
-            // Set sender email address, please change it to yours
-            oMail.From = "onesandzeroesmail@gmail.com";
+                // Set sender email address, please change it to yours
+                oMail.From = "onesandzeroesmail@gmail.com";
 
-            // Set recipient email address, please change it to yours
-            oMail.To = to;
+                // Set recipient email address, please change it to yours
+                oMail.To = to;
 
-            // Set email subject
-            oMail.Subject = "RE: Contract to be reviewed";
+                // Set email subject
+                oMail.Subject = "RE: Contract to be reviewed";
 
-            // Set Html body
-            //oMail.HtmlBody = "<font size=\"5\">This is</font> <font color=\"red\"><b>a test</b></font>";
-            oMail.HtmlBody = body;
+                // Set Html body
+                //oMail.HtmlBody = "<font size=\"5\">This is</font> <font color=\"red\"><b>a test</b></font>";
+                oMail.HtmlBody = body;
 
-            // Your SMTP server address
-            SmtpServer oServer = new SmtpServer("smtp.gmail.com");
+                // Your SMTP server address
+                SmtpServer oServer = new SmtpServer("smtp.gmail.com");
 
-            // User and password for ESMTP authentication, if your server doesn't require
-            // User authentication, please remove the following codes.            
-            oServer.User = "onesandzeroesmail@gmail.com";
-            oServer.Password = "Onesandzeroes.";
+                // User and password for ESMTP authentication, if your server doesn't require
+                // User authentication, please remove the following codes.            
+                oServer.User = "onesandzeroesmail@gmail.com";
+                oServer.Password = "Onesandzeroes.";
 
-            // If your smtp server requires SSL connection, please add this line
-            // oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
+                // If your smtp server requires SSL connection, please add this line
+                oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
 
-            try
-            {
-                // Add attachment from local disk
-                oMail.AddAttachment("C:\\Test\\TESTI.txt");
+                try
+                {
+                    // Add attachment from local disk
+                    oMail.AddAttachment(@"C:\\Users\Watlinton\\Documents\\Quotation.docx");
 
-                // Add attachment from remote website
-               // oMail.AddAttachment("http://www.emailarchitect.net/webapp/img/logo.jpg");
+                    // Add attachment from remote website
+                    // oMail.AddAttachment("http://www.emailarchitect.net/webapp/img/logo.jpg");
 
-                //Console.WriteLine("start to send email with attachment ...");
-                oSmtp.SendMail(oServer, oMail);
-               // Console.WriteLine("email was sent successfully!");
-            }
-            catch (Exception ep)
-            {
-                this.ShowMessageAsync("Sending Email Failed", ep.Message);
-            }
-        
-    }
+                    //Console.WriteLine("start to send email with attachment ...");
+                    oSmtp.SendMail(oServer, oMail);
+                    ProgressRingLeaseUnits.IsActive = false;
+                    // Console.WriteLine("email was sent successfully!");
+                }
+                catch (Exception ep)
+                {
+                    this.ShowMessageAsync("Sending Email Failed", ep.Message);
+                }
+        }
 
         private void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
         {
@@ -1328,7 +1329,6 @@ namespace StorageUnitManagementSystem
             {
                 LblTotal.Content = ".....";
             }
-
         }
 
         private void LeaseId_TextChanged(object sender, TextChangedEventArgs e)
@@ -1336,23 +1336,336 @@ namespace StorageUnitManagementSystem
             Clients = _cbl.SelectAll();
             foreach (Client temp in Clients)
             {
-                if (LeaseId.Text.Equals(temp.idNumber) && temp.Archived.Equals(Convert.ToBoolean(0)))
+                if (TxtBoxLeaseId.Text.Equals(temp.idNumber) && temp.Archived.Equals(Convert.ToBoolean(0)))
                 {
                     LeaseName.Text = temp.FirstName;
                     LeaseSurname.Text = temp.LastName;
                     break;
                 }
             }
-            if (LeaseId.Text.Equals(""))
+            if (TxtBoxLeaseId.Text.Equals(""))
             {
                 LeaseName.Clear();
                 LeaseSurname.Clear();
             }
 
-            if (!(_cbl.DoesExist(LeaseId.Text)))
+        }
+
+        private void TxtBoxListSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (TxtBoxListSearch.Text.Equals(""))
             {
-                LblClientExist.Content = "Client Does Not Exist!";
+                LvListClient.Items.Clear();
             }
-        }    
+        }
+
+        private string CreateFIle(string fileName,string folderName)
+        {
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            Directory.CreateDirectory(directory);
+            string path = Path.Combine(directory, "OnesAndZeroes",folderName,fileName);
+            return path;
+        }
+        private DocX GetTemplate(string txtBox)
+        {  
+            string address = "";
+            //string fileName = @"C:\\Users\\Watlinton\Documents\\DocXExample.docx";
+            string fileName = CreateFIle("Template.docx","Template");
+            var doc = DocX.Create(fileName);
+            LeaseUnits = _lubl.SelectAll();
+            Clients = _cbl.SelectAll();
+            // Add a Table to this document.
+            Table table = doc.AddTable(2, 5);
+            // Specify some properties for this Table.
+            table.Alignment = Alignment.center;
+            table.Design = TableDesign.LightGridAccent1;
+            
+            foreach (Client client in Clients)
+            {
+                if (client.idNumber.Equals(txtBox))
+                {
+                        address = client.Address.Line1 + "\n" +
+                        client.Address.Line2 + "\n" +
+                        client.Address.City + "\n" +
+                        client.Address.Province + "\n" +
+                        client.Address.PostalCode + "\n";
+                    if (!dictionary.ContainsKey("Address"))
+                    {
+                        dictionary.Add("Address", address);
+                    }
+                    break;
+                }           
+            }
+            foreach (LeaseUnits leaseUnit in LeaseUnits)
+            {
+                if (leaseUnit.Client.idNumber.Equals(txtBox))
+                {
+                    //char[] charSize = leaseUnit.StorageUnit.UnitSize.ToCharArray();
+                    // Set up our paragraph contents:
+                    string headerText = "Unit Quotation";
+                    string date = "Date: " + DateTime.Now.ToShortDateString();
+                    string time = "Time: " + DateTime.Now.ToShortTimeString();
+                    string clientId = "Client ID:",
+                    clientName = "Client Name: ",
+                    clientSurname = "Client Surname: ";
+                    //string unitSize =  + charSize[0] + "m X;"
+                    //                  + charSize[2] + "m X;"
+                    //                  + charSize[4] + "m X;";
+
+                    string clientDetaills = clientId + "\t" + " " + leaseUnit.Client.idNumber + "\n"
+                                     + clientName + "\t" + " " + leaseUnit.Client.FirstName + "\n"
+                                     + clientSurname + "\t" + leaseUnit.Client.LastName
+                                     + Environment.NewLine;
+
+                    // Title Formatting:
+                    var titleFormat = new Formatting();
+                    titleFormat.FontFamily = new System.Drawing.FontFamily("Arial Black");
+                    titleFormat.Size = 18D;
+                    titleFormat.FontColor = Color.Black;
+                    titleFormat.Position = 12;
+
+                    // Body Formatting
+                    var paraFormat = new Formatting();
+                    paraFormat.FontFamily = new System.Drawing.FontFamily("Calibri");
+                    paraFormat.Size = 12D;
+                    titleFormat.Position = 12;
+
+                    // Variable Formatting
+                    var variableFormat = new Formatting();
+                    variableFormat.FontFamily = new System.Drawing.FontFamily("Tahoma");
+                    variableFormat.Size = 12D;
+                    variableFormat.Position = 12;
+                    variableFormat.Bold = variableFormat.Bold;
+
+                    // Insert each prargraph, with appropriate spacing and alignment:
+                    Paragraph title = doc.InsertParagraph(headerText, false, titleFormat);
+                    title.Alignment = Alignment.center;
+                    doc.InsertParagraph(Environment.NewLine);
+
+                    Paragraph dateP = doc.InsertParagraph(date, false, paraFormat);
+                    dateP.Alignment = Alignment.right;
+
+                    Paragraph timeP = doc.InsertParagraph(time, false, paraFormat);
+                    timeP.Alignment = Alignment.right;
+
+                    Paragraph addressP = doc.InsertParagraph("1 Park Road" + "\n" +
+                                                              "Westdene" + "\n" +
+                                                              "Bloemfontein" + "\n" +
+                                                              "9301" + "\n" +
+                                                              "South Africa", false, paraFormat);
+                    addressP.Alignment = Alignment.left;
+                    doc.InsertParagraph(Environment.NewLine);
+
+                    Paragraph para = doc.InsertParagraph("Thank you for your enquiry and for giving us the opportunity " +
+                                                         "to quote on the following items:", false, paraFormat);
+                    para.Alignment = Alignment.center;
+
+                    table.Rows[0].Cells[0].Paragraphs.First().Append("Unit Class").Bold();
+                    table.Rows[0].Cells[1].Paragraphs.First().Append("Unit Size").Bold();
+                    table.Rows[0].Cells[2].Paragraphs.First().Append("Unit Price").Bold();
+                    table.Rows[0].Cells[3].Paragraphs.First().Append("Number of Units").Bold();
+                    table.Rows[0].Cells[4].Paragraphs.First().Append("Total Unit Price (R)").Bold();
+                    table.Rows[1].Cells[0].Paragraphs.First().Append(leaseUnit.StorageUnit.UnitClassification);
+                    table.Rows[1].Cells[1].Paragraphs.First().Append(leaseUnit.StorageUnit.UnitSize);
+                    table.Rows[1].Cells[2].Paragraphs.First().Append(leaseUnit.StorageUnit.UnitPrice.ToString(CultureInfo.InvariantCulture));
+                    table.Rows[1].Cells[3].Paragraphs.First().Append(leaseUnit.NoOfUnits.ToString());
+                    table.Rows[1].Cells[4].Paragraphs.First().Append(leaseUnit.TotalUnitPrice);
+                    doc.InsertTable(table);
+
+                    doc.InsertParagraph(Environment.NewLine);
+
+                    Paragraph clientDetails = doc.InsertParagraph("Client Details:", false, paraFormat);
+                    clientDetails.Alignment = Alignment.left;
+                    clientDetails.UnderlineStyle(UnderlineStyle.singleLine);
+                    clientDetails.Bold();
+
+                    Paragraph clientD = doc.InsertParagraph(clientDetaills, false, paraFormat);
+                    clientD.Alignment = Alignment.left;
+
+                    Paragraph addressTitle = doc.InsertParagraph("Client Address:", false, paraFormat);
+                    addressTitle.Alignment = Alignment.left;
+                    addressTitle.UnderlineStyle(UnderlineStyle.singleLine);
+                    addressTitle.Bold();
+
+                    Paragraph addr = doc.InsertParagraph(address, false, paraFormat);
+                    addr.Alignment = Alignment.left;
+                    doc.InsertParagraph(Environment.NewLine);
+
+                    Paragraph sign = doc.InsertParagraph("Client Signature:", false, paraFormat);
+                    sign.Alignment = Alignment.left;
+                    sign.FontSize(14);
+                    sign.Bold();
+
+
+                    if (!(dictionary.ContainsKey("ClientID") || dictionary.ContainsKey("ClientName") || dictionary.ContainsKey("ClientSurname")
+                        || dictionary.ContainsKey("UnitClass") || dictionary.ContainsKey("UnitSize") || dictionary.ContainsKey("UnitPrice")
+                        || dictionary.ContainsKey("NoOfUnits") || dictionary.ContainsKey("TotalUnitPrice")))
+                    {
+                        dictionary.Add("ClientID", leaseUnit.Client.idNumber);
+                        dictionary.Add("ClientName", leaseUnit.Client.FirstName);
+                        dictionary.Add("ClientSurname", leaseUnit.Client.LastName);
+                        dictionary.Add("UnitClass", leaseUnit.StorageUnit.UnitClassification);
+                        dictionary.Add("UnitSize", leaseUnit.StorageUnit.UnitSize);
+                        dictionary.Add("UnitPrice", leaseUnit.StorageUnit.UnitPrice.ToString(CultureInfo.InvariantCulture));
+                        dictionary.Add("NoOfUnits", leaseUnit.NoOfUnits.ToString());
+                        dictionary.Add("TotalUnitPrice", leaseUnit.TotalUnitPrice);
+                    }
+                    break;
+                }
+            }   
+            return doc;
+        }
+
+        private void BtnCheck_Click(object sender, RoutedEventArgs e)
+        {
+            double total = 0;
+            string LblCurrentPrice = LbCurrentPrice.Content.ToString();
+            char[] ch = LblCurrentPrice.ToCharArray();
+            ch[0] = ' '; // index starts at 0! --->> Remove the 'R' character at the 1st position 
+            string newLblCurrentPrice = new string(ch);
+            double unitPrice = 0;
+            double noOfUnits = 0;
+            string noOfUnits_ = TbNoOfNewUnits.GetLineText(0);
+            try
+            {
+                if (!TbNoOfNewUnits.Text.Equals(""))
+                {
+                    foreach (StorageUnit units in StorageUnits)
+                    {
+                        if (units.UnitOccupied == Convert.ToBoolean(0))
+                        {
+                            if (units.UnitPrice == double.Parse(newLblCurrentPrice))
+                            {
+                                unitPrice = units.UnitPrice;
+                                break;
+                            }
+                        }
+                    }
+                    if (double.TryParse(noOfUnits_, out noOfUnits))
+                    {
+                        LblTotal.Content = unitPrice*Convert.ToDouble(noOfUnits);
+                    }
+                    else
+                    {
+                        LblTotal.Content = ".....";
+                    }
+                }
+                else
+                {
+                    this.ShowMessageAsync("Field Cannot Be Empty!","Please Enter a Value");
+                }
+          
+        }
+            catch (Exception ex)
+            {
+                //this.ShowMessageAsync("Error", ex.Message);
+                this.ShowMessageAsync("Error!", ex.Message);
+                LblTotal.Content = ".....";
+                TbNoOfNewUnits.Clear();
+            }
+
+        }
+
+        private void LvLeaseUnits_Loaded(object sender, RoutedEventArgs e)
+        {
+            LeaseUnits = _lubl.SelectAll();
+            LvLeaseUnits.Items.Clear();
+
+            if (LeaseUnits.Count > 0)
+            {
+                LvLeaseUnits.Items.Clear();
+                foreach (LeaseUnits temp in LeaseUnits)
+                {
+                    LvLeaseUnits.Items.Add(temp);
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("There are no Clients to list", "No Clients");
+            }
+        }
+
+        private void LvListClient_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Client> clientObjects = new List<Client>();
+            clientObjects = _cbl.SelectAll();
+            LvListClient.Items.Clear();
+
+            if (clientObjects.Count > 0)
+            {
+                LvListClient.Items.Clear();
+                foreach (Client temp in clientObjects)
+                {
+                    if (temp.Archived == Convert.ToBoolean(0))
+                        LvListClient.Items.Add(temp);
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("There are no Clients to list", "No Clients");
+            }
+        }
+
+        private void LvRestoreClient_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Client> clientObjects = new List<Client>();
+            clientObjects = _cbl.SelectAll();
+            LvRestoreClient.Items.Clear();
+
+            if (clientObjects.Count > 0)
+            {
+                LvRestoreClient.Items.Clear();
+                foreach (Client temp in clientObjects)
+                {
+                    if (temp.Archived == Convert.ToBoolean(1))
+                        LvRestoreClient.Items.Add(temp);
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("There are no Clients to list", "No Clients");
+            }
+        }
+
+        private void ImgRefreshLease_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LeaseUnits = _lubl.SelectAll();
+            LvLeaseUnits.Items.Clear();
+            if (LeaseUnits.Count > 0)
+            {
+                LvLeaseUnits.Items.Clear();
+                foreach (LeaseUnits temp in LeaseUnits)
+                {
+                    LvLeaseUnits.Items.Add(temp);
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("There are no Clients to list", "No Clients");
+            }
+        }
+
+        private void BtnEditLeaseUnit_Click(object sender, RoutedEventArgs e)
+        {
+            if (LvLeaseUnits.SelectedIndex >= 0)
+            {
+                var unitObj = LvLeaseUnits.SelectedItem as LeaseUnits;
+                    PopUp.LeaseIDTxtBox.Text = unitObj.LeaseID;
+                    PopUp.ClientIDTxtBox.Text = unitObj.Client.idNumber;
+                    PopUp.LeaseNameTxtBox.Text = unitObj.Client.FirstName;
+                    PopUp.LeaseSurnameTxtBox.Text = unitObj.Client.LastName;
+                    PopUp.LeaseOwedTxtBox.Text = unitObj.AmountOwed;
+                    PopUp.LeasePaidTxtBox.Text = unitObj.AmountPaid;
+                    PopUp.LeaseDateTxtBox.Text = unitObj.DateOfPayment;
+                    PopUp.LeaseUnitTxtBox.Text = unitObj.UnitLeased.ToString();
+                    PopUp. LeaseIDTxtBox.IsEnabled = false;
+                    PopUp. ClientIDTxtBox.IsEnabled = false;
+                    PopUp.ShowDialog();
+            }
+            else
+            {
+                this.ShowMessageAsync("Item Not Selected!", "Please Select an item");
+            }
+        }     
     }
 }

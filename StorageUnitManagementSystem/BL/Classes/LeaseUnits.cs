@@ -1,131 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-
-namespace StorageUnitManagementSystem.BL.Classes
+﻿namespace StorageUnitManagementSystem.BL.Classes
 {
     public class LeaseUnits
     {
-        private Client client;
-        private StorageUnit storageUnit;
-        private string leaseID;
-        private int noOfUnits; 
-        private int availableUnits;
-        private string typeOfPayment;
-        private string dateOfPayment;
-        private string dateOfContractStart;
-        private string dateOfContractEnd;
-        private string amountPaid;
-        private string amountOwed;
-        private string amountDeposited;
-        private string clientCurrentTotal;
-        private bool clientWaitingList;
-        private bool unitLeased;
-        private bool clientAdded;
-
         public LeaseUnits()
         {
-            client = new Client();
-            storageUnit = new StorageUnit();
+            Client = new Client();
+            StorageUnit = new StorageUnit();
         }
 
-        public Client Client
-        {
-            get { return client; }
-            set { client = value; }
-        }
+        public Client Client { get; set; }
 
-        public StorageUnit StorageUnit
-        {
-            get { return storageUnit; }
-            set { storageUnit = value; }
-        }
-        public string LeaseID
-        {
-            get { return leaseID; }
-            set { leaseID = value; }
-        }
+        public StorageUnit StorageUnit { get; set; }
+
+        public string LeaseID { get; set; }
 
 
-        public int NoOfUnits
-        {
-            get { return noOfUnits; }
-            set { noOfUnits = value; }
-        }
+        public int NoOfUnits { get; set; }
 
-        public int AvailableUnits
-        {
-            get { return availableUnits; }
-            set { availableUnits = value; }
-        }
+        public int AvailableUnits { get; set; }
 
-        public string TypeOfPayment
-        {
-            get { return typeOfPayment; }
-            set { typeOfPayment = value; }
-        }
+        public string TypeOfPayment { get; set; }
 
-        public string DateOfPayment
-        {
-            get { return dateOfPayment; }
-            set { dateOfPayment = value; }
-        }
+        public string DateOfPayment { get; set; }
 
-        public string DateOfContractStart
-        {
-            get { return dateOfContractStart; }
-            set { dateOfContractStart = value; }
-        }
+        public string DateOfContractStart { get; set; }
 
-        public string DateOfContractEnd
-        {
-            get { return dateOfContractEnd; }
-            set { dateOfContractStart = value; }
-        }
+        public string DateOfContractEnd { get; set; }
 
-        public string AmountPaid
-        {
-            get { return amountPaid; }
-            set { amountPaid = value; }
-        }
+        public string AmountPaid { get; set; }
 
-        public string AmountOwed
-        {
-            get { return amountOwed; }
-            set { amountOwed = value; }
-        }
+        public string AmountOwed { get; set; }
 
-        public string AmountDeposited
-        {
-            get { return amountDeposited; }
-            set { amountDeposited = value; }
-        }
+        public string AmountDeposited { get; set; }
 
-        public string ClientCurrentTotal
-        {
-            get { return clientCurrentTotal; }
-            set { clientCurrentTotal = value; }
-        }
+        public string ClientCurrentTotal { get; set; }
 
-        public bool ClientWaitingList
-        {
-            get { return clientWaitingList; }
-            set { clientWaitingList = value; }
-        }
+        public bool ClientWaitingList { get; set; }
 
-        public bool UnitLeased
-        {
-            get { return unitLeased; }
-            set { unitLeased = value; }
-        }
+        public bool UnitLeased { get; set; }
 
-        public bool ClientAdded
-        {
-            get { return clientAdded; }
-            set { clientAdded = value; }
-        }
+        public bool ClientAdded { get; set; }
+
+        public string TotalUnitPrice { get; set; }
     }
 }

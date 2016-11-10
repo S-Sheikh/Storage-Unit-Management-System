@@ -1,0 +1,45 @@
+﻿<custom:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:custom="http://metro.mahapps.com/winfx/xaml/controls" x:Class="StorageUnitManagementSystem.PL.PopUp"
+        mc:Ignorable="d"
+
+    Title="PopUp" Height="500" Width="400"  WindowStartupLocation="CenterScreen" GlowBrush="{DynamicResource AccentBaseColorBrush}" 
+                      BorderThickness="2"  ShowMaxRestoreButton="False" >
+
+    <custom:MetroWindow.RightWindowCommands>
+        <custom:WindowCommands>
+            <Button Content="About Us" />
+
+        </custom:WindowCommands>
+    </custom:MetroWindow.RightWindowCommands>
+
+    <custom:MetroWindow.Resources>
+        <Style BasedOn="{StaticResource MetroTabItem}" TargetType="{x:Type TabItem}">
+            <Setter Property="custom:ControlsHelper.HeaderFontSize" Value="20"></Setter>
+        </Style>
+
+    </custom:MetroWindow.Resources>
+    <Grid Width="400">
+        <Label Content="Update Details" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,50"></Label>
+        <Label Content="LeaseID:" Height="25" Margin="32,0,0,395.4" HorizontalAlignment="Left" Width="80" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="LeaseIDTxtBox" Height="20" Margin="151,46,0,394.4" Width="211" HorizontalAlignment="Left"/>
+        <Label Content="Client ID:" Height="25" Margin="32,87,277,354.4"/>
+        <TextBox x:Name="ClientIDTxtBox" Width="211" Height="20" HorizontalAlignment="Left" Margin="151,86,0,354.4"/>
+        <Label Content="Name:" Height="25" Margin="32,131,277,310.4"/>
+        <TextBox x:Name="LeaseNameTxtBox" Width="211" Height="20" HorizontalAlignment="Left" Margin="151,132,0,308.4"/>
+        <Label Content="Surname:" Height="25" Margin="32,177,277,264.4"/>
+        <TextBox x:Name="LeaseSurnameTxtBox" Height="20" Margin="151,177,0,263.4" HorizontalAlignment="Left" Width="211"/>
+        <Label Content="Amount Owed:" Height="25" Margin="32,217,268,224.4"/>
+        <TextBox x:Name="LeaseOwedTxtBox" Width="211" Height="20" HorizontalAlignment="Left" Margin="151,216,0,224.4"/>
+        <Label Content="Amount Paid:" Height="25" Margin="32,263,277,178.4"/>
+        <TextBox x:Name="LeasePaidTxtBox" Width="211" Height="20" HorizontalAlignment="Left" Margin="151,262,0,178.4"/>
+        <Label Content="Date Paid:" Height="25" Margin="32,304,291,137.4"/>
+        <TextBox x:Name="LeaseDateTxtBox" Width="211" Height="20" HorizontalAlignment="Left" Margin="151,304,0,136.4"/>
+        <Label Content="Unit Leased:" Height="25" Margin="32,361,277,80.4"/>
+        <TextBox x:Name="LeaseUnitTxtBox" Width="211" Height="20" HorizontalAlignment="Left" Margin="151,361,0,79.4"/>
+        <Button x:Name="UpdateBtn" Content="Update" Width="100" Height="30" Margin="149,404,140.6,32.4" Style="{StaticResource AccentedSquareButtonStyle}"  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" custom:ControlsHelper.ContentCharacterCasing="Normal" Click="Update_Click"/>
+    </Grid>
+</custom:MetroWindow>

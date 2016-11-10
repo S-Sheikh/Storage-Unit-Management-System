@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using StorageUnitManagementSystem.Annotations;
 
 namespace StorageUnitManagementSystem.BL.Classes
 {
@@ -16,39 +15,15 @@ namespace StorageUnitManagementSystem.BL.Classes
         private bool _archived;
         private string _eMailAddress;
         private Address _address;
-
- 
-
       
         public Client()
         {
             _address = new Address();
         }
-
-        public Client(string idNumber, string firstNames, string lastName,
-                      string username,string dateOfBirth,string cellphone, string telephone,
-                      string eMailAddress, Address address,bool archived)
-        {
-            _idNumber = idNumber;
-            _firstName = firstNames;
-            _lastName = lastName;
-            _dateOfBirth = dateOfBirth;
-            _cellphone = cellphone;
-            _telephone = telephone;
-            _archived = archived;
-            _eMailAddress = eMailAddress;
-            _address = new Address();
-            this.Address.Line1 = address.Line1;
-            this.Address.Line2 = address.Line2;
-            this.Address.City = address.City;
-            this.Address.PostalCode = address.PostalCode;
-            this.Address.Province = address.Province;
-        }
-
         public string idNumber
         {
             get { return _idNumber; }
-            set { _idNumber = value; }
+            set{  _idNumber = value;}
         }
 
         public string FirstName
@@ -99,5 +74,6 @@ namespace StorageUnitManagementSystem.BL.Classes
             set { _archived = value; }
         }
 
+       
     }
 }

@@ -1,10 +1,9 @@
-﻿<controls:MetroWindow x:Class="StorageUnitManagementSystem.MainWindow"
+﻿<controls:MetroWindow x:Class="StorageUnitManagementSystem.PL.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StorageUnitManagementSystem"
-        mc:Ignorable="d"
+                      mc:Ignorable="d"
                       
          
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -102,7 +101,8 @@
                                                 <Label x:Name="LblAddressLine1" Content="City:"   VerticalAlignment="Top" Margin="50,275,0,0" HorizontalAlignment="Left" Width="64"/>
                                                 <Label x:Name="LblEmail" Content="Email:"   VerticalAlignment="Top" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" Margin="50,365,0,0" RenderTransformOrigin="0.462,1.5" HorizontalAlignment="Left" Width="78"/>
                                                 <TextBox x:Name="TxtBoxEmail" VerticalAlignment="Top" Margin="144,368,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Valid Email"/>
-                                                <Button x:Name="BtnAddClient" Style="{StaticResource AccentedSquareButtonStyle}" Height="auto" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,224,10"  controls:ButtonHelper.CornerRadius="10" Content="Submit" Click="btnAddClient_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ButtonHelper.PreserveTextCase="True"  />
+                                                <Button x:Name="BtnAddClient" Style="{StaticResource AccentedSquareButtonStyle}" Height="auto" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,198,10.4"  controls:ButtonHelper.CornerRadius="10" Content="Submit" Click="btnAddClient_Click" 
+                                                        BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ButtonHelper.PreserveTextCase="True" Width="70"  />
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -133,7 +133,7 @@
                                                 <Label x:Name="LblClientNoOfUnits" Content="Client No. of Units:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,384,0,0" Visibility="Hidden"/>
                                                 <TextBox x:Name="TxtBoxRemoveClientNoOfUnits"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,389,50,0" Visibility="Hidden"/>
                                                 <Button x:Name="BtnRemoveClient" Height="25" Width="101" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,420,0,0"  controls:ButtonHelper.CornerRadius="10" Content="Remove Client" Click="btnRemoveClient_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Visibility="Hidden" />
-                                                <Button x:Name="BtnRemoveSearch" Height="25" Width="68" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="440,50,0,0"  controls:ButtonHelper.CornerRadius="10" Content="Search" Click="bntRemoveSearch_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" />
+                                                <Button x:Name="BtnRemoveSearch" Width="68" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="438,48,10,0"  controls:ButtonHelper.CornerRadius="10" Content="Search" Click="bntRemoveSearch_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ControlsHelper.ContentCharacterCasing="Normal" />
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -144,7 +144,7 @@
                                                     <classes:Client/>
                                                 </Grid.DataContext>
                                                 <Label Content="Restore Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                                <ListView x:Name="LvRestoreClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectionChanged="lvRestoreClient_SelectionChanged"  SelectedIndex="{Binding Path=SelectedIndexValue}" ItemsSource="{Binding Path=Items}">
+                                                <ListView x:Name="LvRestoreClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectionChanged="lvRestoreClient_SelectionChanged"  SelectedIndex="{Binding Path=SelectedIndexValue}" ItemsSource="{Binding Path=Items}" Loaded="LvRestoreClient_Loaded">
                                                     <ListView.View>
                                                         <GridView>
                                                             <GridViewColumn x:Name="IdRestoreColumn" Width="100" DisplayMemberBinding="{Binding idNumber}" >
@@ -193,9 +193,9 @@
                                                 </ListView>
                                                 <Label Content="Enter Client ID:" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,355,0,0"/>
                                                 <TextBox x:Name="TxtBoxRestoreClientId"  Width="250" Height="18" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="120,10,0,80" TextChanged="txtBoxRestoreClientID_TextChanged" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput"  />
-                                                <Button x:Name="BtnRestoreSearch" Height="25" Width="68" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="400,0,0,80"  controls:ButtonHelper.CornerRadius="10" Content="Search" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreSearch_Click" />
-                                                <Button x:Name="BtnRestoreClient" Height="25" Width="100" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="220,0,0,40"  controls:ButtonHelper.CornerRadius="10" Content="Restore Client" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreClient_Click" />
-                                                <Button x:Name="BtnRestoreListAll" Height="25" Style="{StaticResource AccentedSquareButtonStyle}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="386,0,0,39.8"  controls:ButtonHelper.CornerRadius="10" Content="List All" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreListAll_Click" />
+                                                <Button x:Name="BtnRestoreSearch" Width="68" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="400,0,0,80"  controls:ButtonHelper.CornerRadius="10" Content="Search" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreSearch_Click" controls:ControlsHelper.ContentCharacterCasing="Normal" />
+                                                <Button x:Name="BtnRestoreClient" Width="100" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="220,0,0,40"  controls:ButtonHelper.CornerRadius="10" Content="Restore Client" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreClient_Click" controls:ControlsHelper.ContentCharacterCasing="Normal" />
+                                                <Button x:Name="BtnRestoreListAll" Style="{StaticResource AccentedSquareButtonStyle}" Width="100" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="386,0,0,39.8"  controls:ButtonHelper.CornerRadius="10" Content="List All" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="btnRestoreListAll_Click" controls:ControlsHelper.ContentCharacterCasing="Normal" />
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -206,7 +206,7 @@
                                                     <classes:Client/>
                                                 </Grid.DataContext>
                                                 <Label Content="List Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                                <ListView x:Name="LvListClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
+                                                <ListView x:Name="LvListClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Loaded="LvListClient_Loaded" >
                                                     <ListView.View>
                                                         <GridView>
                                                             <GridViewColumn x:Name="IdListColumn" Width="100" DisplayMemberBinding="{Binding idNumber}" >
@@ -216,7 +216,7 @@
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="NameListeColumn" Width="100" DisplayMemberBinding="{Binding FirstName}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="FirstName" Click="lvListClientsColumnHeader_Click">name</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="FirstName" Click="lvListClientsColumnHeader_Click">Name</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="SurnameListColumn"  Width="100" DisplayMemberBinding="{Binding LastName}" >
@@ -252,9 +252,9 @@
                                                         </GridView>
                                                     </ListView.View>
                                                 </ListView>
-                                                <Image x:Name="ImgRefresh" Height="30" Width="64" Margin="260,0,0,80" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
+                                                <Image x:Name="ImgRefresh" Height="30" Margin="260,0,0,80" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
                                                     <Image.Source>
-                                                        <BitmapImage DecodePixelWidth="64" UriSource="Images/refresh.png"/>
+                                                        <BitmapImage DecodePixelWidth="64" UriSource="/Images/refresh.png"/>
                                                     </Image.Source>
                                                 </Image>
 
@@ -262,8 +262,8 @@
                                                     <ComboBoxItem>Search by:</ComboBoxItem>
                                                 </ComboBox>
 
-                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,49.8"></TextBox>
-                                                <Button x:Name="BtnListSearch" Width="100" Height="25" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="286,109,0,50.8" Click="btnListSearch_Click" BorderThickness="0"></Button>
+                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,49.8" TextChanged="TxtBoxListSearch_TextChanged"></TextBox>
+                                                <Button x:Name="BtnListSearch" Width="100" Height="30" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="292,0,0,48.8" Click="btnListSearch_Click" BorderThickness="0" controls:ControlsHelper.ContentCharacterCasing="Normal"></Button>
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -280,50 +280,124 @@
                         <TabItem Header="Lease Units"  HorizontalAlignment="Center" >
                             <!--==================================================================================================================================================================================-->
                             <Grid>
+                                <Grid.DataContext>
+                                    <classes:Client>
+                                    </classes:Client>
+                                </Grid.DataContext>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20*"/>
-                                    <ColumnDefinition Width="79*"/>
+                                    <ColumnDefinition Width="125*"/>
+                                    <ColumnDefinition Width="15*"/>
+                                    <ColumnDefinition Width="554*"/>
                                 </Grid.ColumnDefinitions>
-                                <TabControl x:Name="LeasUnitsTabControl" Margin="10,10,-1.4,10.4" TabStripPlacement="Left" Width="684.8" Grid.ColumnSpan="2" Height="477.6">
+                                <TabControl x:Name="LeasUnitsTabControl" Margin="10,10,-1.4,-5.6" TabStripPlacement="Left" Width="684.8" Grid.ColumnSpan="3" Height="477.6">
                                     <TabItem Header="New Booking"  Margin="0,36,-2.2,-39">
-                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5,7,5,17" Width="568">
-                                            <Grid>
+                                        <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5,7,5,17" Width="535" Height="440">
+                                            <Grid x:Name="LeaeseUnitsLayout">
+
                                                 <Label Content="Client ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"></Label>
-                                                <TextBox x:Name="LeaseId" Height="20" Width="250" MaxLength="13"  HorizontalAlignment="Center"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" VerticalAlignment="Top" Margin="30,50,0,0" controls:TextBoxHelper.Watermark="ID Number Must Be 13-Digits" TextChanged="LeaseId_TextChanged"></TextBox>
-                                                <Label x:Name="LblClientExist" Height="25" Margin="427,50,10,379.4"/>
+                                                <TextBox Name="TxtBoxLeaseId"  Height="20" Width="250" MaxLength="13"  HorizontalAlignment="Center"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" VerticalAlignment="Top" Margin="172,48,109.2,0" controls:TextBoxHelper.Watermark="ID Number Must Be 13-Digits" TextChanged="LeaseId_TextChanged"
+                                                         Text ="{Binding idNumber}"></TextBox>
                                                 <Label Content="Client Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,80,0,0"></Label>
-                                                <TextBox x:Name="LeaseName" Height="20" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,80,0,0" controls:TextBoxHelper.Watermark="Can Only Contain Letters"></TextBox>
+                                                <TextBox x:Name="LeaseName" Height="20" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="172,79,109.2,0" controls:TextBoxHelper.Watermark="Can Only Contain Letters"></TextBox>
                                                 <Label Content="Client Surname:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,110,0,0"></Label>
-                                                <TextBox x:Name="LeaseSurname" Height="20" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,110,0,0" controls:TextBoxHelper.Watermark="Can Only Contain Letters"></TextBox>
+                                                <TextBox x:Name="LeaseSurname" Height="20" Width="250" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="172,110,109.2,0" controls:TextBoxHelper.Watermark="Can Only Contain Letters"></TextBox>
 
                                                 <Label x:Name="Label1" Content="Choose Unit Class :" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
-                                                <ComboBox x:Name="CbLeaseSelectClass" SelectedIndex="0"   HorizontalAlignment="Center" Margin="0,140,95,0"  VerticalAlignment="Top" Width="125"  DropDownOpened="CbLeaseSelectClass_DropDownOpened" SelectionChanged="CbLeaseSelectClass_SelectionChanged"  >
+                                                <ComboBox x:Name="CbLeaseSelectClass" SelectedIndex="0"   HorizontalAlignment="Center" Margin="172,144,234.2,0"  VerticalAlignment="Top" Width="125"  DropDownOpened="CbLeaseSelectClass_DropDownOpened" SelectionChanged="CbLeaseSelectClass_SelectionChanged"  >
                                                     <ComboBoxItem  Name="CbAddClassDefaultItem">---Select Class---</ComboBoxItem>
                                                 </ComboBox>
                                                 <Label x:Name="Label21" Content="Current Unit Dimensions :" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
-                                                <Label x:Name="LbCurrentDimensions" Content="....." HorizontalAlignment="Left" Margin="175,170,0,0" VerticalAlignment="Top"/>
-                                                <Label Name="LbCurrentPrice" Content="....." HorizontalAlignment="Left" Margin="175,199,0,0" VerticalAlignment="Top"/>
+                                                <Label x:Name="LbCurrentDimensions" Content="....." HorizontalAlignment="Left" Margin="172,169,0,0" VerticalAlignment="Top"/>
+                                                <Label Name="LbCurrentPrice" Content="....." HorizontalAlignment="Left" Margin="172,199,0,0" VerticalAlignment="Top"/>
                                                 <Label x:Name="Label28" Content="Current Unit Price :" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top"/>
                                                 <Label x:Name="Label29" Content="Enter Number of Units :" HorizontalAlignment="Left" Margin="10,262,0,0" VerticalAlignment="Top"/>
                                                 <Label x:Name="LabelAvailable" Content="Availabe Units :" HorizontalAlignment="Left" Margin="12,231,0,0" VerticalAlignment="Top"/>
-                                                <Label x:Name="LblAvailableUnits" Content="....." HorizontalAlignment="Left" Margin="175,230,0,0" VerticalAlignment="Top"/>
-                                                <TextBox x:Name="TbNoOfNewUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="172,262,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="125" KeyDown="TbNoOfNewUnits_KeyDown" controls:TextBoxHelper.Watermark="Only Digits" TextChanged="TbNoOfNewUnits_TextChanged"  />
+                                                <Label x:Name="LblAvailableUnits" Content="....." HorizontalAlignment="Left" Margin="172,230,0,0" VerticalAlignment="Top"/>
+                                                <TextBox x:Name="TbNoOfNewUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="172,262,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="125"  controls:TextBoxHelper.Watermark="Only Digits" TextChanged="TbNoOfNewUnits_TextChanged"  />
+                                                <Button x:Name="BtnCheck" Content="Total"  Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Margin="0,0,95.2,144" VerticalAlignment="Bottom" HorizontalAlignment="Right" controls:ControlsHelper.ContentCharacterCasing="Normal" Click="BtnCheck_Click" Width="50"/>
                                                 <Label x:Name="LblTot" Content="Total Unit Price :" HorizontalAlignment="Left" Margin="12,295,0,0" VerticalAlignment="Top"/>
-                                                <Label x:Name="LblTotal" Content="....." HorizontalAlignment="Center" Margin="172,295,342,0" VerticalAlignment="Top" Width="50"/>
-                                                <Button x:Name="BtnLeaseSubmit"  Content="Submit" HorizontalAlignment="Center" Margin="246,336,243,0"  VerticalAlignment="Top" Width="75" Click="BtnLeaseSubmit_Click" />
+                                                <Label x:Name="LblTotal" Content="....." HorizontalAlignment="Center" Margin="172,295,309.2,0" VerticalAlignment="Top" Width="50"/>
+                                                <Button x:Name="BtnLeaseSubmit"  Style="{StaticResource AccentedSquareButtonStyle}"
+                                                        Content="Submit" HorizontalAlignment="Center" Margin="246,336,199.2,0"  VerticalAlignment="Top" Click="BtnLeaseSubmit_Click"  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ButtonHelper.PreserveTextCase="True" />
+                                                <controls:ProgressRing Name="ProgressRingLeaseUnits" Foreground="{DynamicResource AccentColorBrush}" Margin="254,369,207.2,14.2" Width="70" IsActive="False"/>
+
+
                                             </Grid>
                                         </Border>
                                     </TabItem>
                                     <TabItem Header="List Bookings"  Margin="0,36,-2.2,-39">
-                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="520" Height="470.4">
-
+                                        <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5" Height="440">
+                                            <Grid>
+                                                <Grid.DataContext>
+                                                    <classes:LeaseUnits/>
+                                                </Grid.DataContext>
+                                                <Label Content="List Bookings" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"></Label>
+                                                <ListView x:Name ="LvLeaseUnits" Loaded="LvLeaseUnits_Loaded" Width="530" Margin="0,54,2,82" Height="300">
+                                                    <ListView.View>
+                                                        <GridView>
+                                                            <GridViewColumn x:Name="LeaseID" Width="100" 
+                                                                      DisplayMemberBinding="{Binding LeaseID}">
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader Tag="LeaseID" Click="lvLeaseUnitsClientsColumnHeader_Click">Lease ID</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="ClientID" Width="100" 
+                                                                      DisplayMemberBinding="{Binding Client.idNumber}">
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader Tag="idNumber" Click="lvLeaseUnitsClientsColumnHeader_Click">Client ID</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="ClientName" Width="100" 
+                                                                      DisplayMemberBinding="{Binding Client.FirstName}">
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader Tag="FirstName">Name</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="ClientSurname" Width="100" 
+                                                                      DisplayMemberBinding="{Binding Client.LastName}">
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader Tag="LastName" Click="lvLeaseUnitsClientsColumnHeader_Click">Surname</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="AmountPaid" Width="100" 
+                                                                      DisplayMemberBinding="{Binding AmountPaid}">
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader Tag ="AmountPaid" Click="lvLeaseUnitsClientsColumnHeader_Click">Amount Paid</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="AmountOwed" Width="100" 
+                                                                      DisplayMemberBinding="{Binding AmountOwed}">
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader Tag="AmountOwed" Click="lvLeaseUnitsClientsColumnHeader_Click">Amount Owed</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="UnitLeased" Width="100" 
+                                                                      DisplayMemberBinding="{Binding UnitLeased}">
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader Tag="UnitLeased" Click="lvLeaseUnitsClientsColumnHeader_Click">Unit Leased</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="Datepaid" Width="100" 
+                                                                      DisplayMemberBinding="{Binding DateOfPayment}">
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader Tag="DateOfPayment" Click="lvLeaseUnitsClientsColumnHeader_Click">Date Paid</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
+                                                            </GridViewColumn>
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                                <Label Content="Search:"  Margin="28,394,419,17" FontSize="13" FontWeight="Bold"/>
+                                                <TextBox x:Name="LeaseUnitsSearch" Margin="118,394,214,16" controls:TextBoxHelper.Watermark="Enter Lease ID"/>
+                                                <Button x:Name="BtnEditLeaseUnit" Content="Edit Bookings" Margin="372,394,60,14" Style="{StaticResource AccentedSquareButtonStyle}" controls:ControlsHelper.ContentCharacterCasing="Normal"  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="BtnEditLeaseUnit_Click" Height="28"/>
+                                                <Image x:Name="ImgRefreshLease" Height="30" Width="32" Margin="235,0,0,47" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="ImgRefreshLease_MouseDown">
+                                                    <Image.Source>
+                                                        <BitmapImage DecodePixelWidth="64" UriSource="/Images/refresh.png"/>
+                                                    </Image.Source>
+                                                </Image>
+                                            </Grid>
                                         </Border>
                                     </TabItem>
-                                    <TabItem Header="Leased Units"  Margin="0,36,-2.2,-39">
-                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="520" Height="470.4">
 
-                                        </Border>
-                                    </TabItem>
                                 </TabControl>
                             </Grid>
                         </TabItem>
@@ -333,7 +407,7 @@
 
                                 <TabControl x:Name="tabControl2" Margin="10" TabStripPlacement="Left">
                                     <TabItem Header="Add Units" Margin="0,36,-2.2,-39">
-                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5">
+                                        <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5">
                                             <Grid>
                                                 <Label x:Name="label18" Content="Add A New Unit" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="0,10,0,0"/>
                                                 <Label x:Name="label19" Content="Choose Unit Class :" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
