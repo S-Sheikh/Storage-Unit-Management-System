@@ -31,12 +31,21 @@ namespace StorageUnitManagementSystem
         public List<StorageUnit> StorageUnits { get; set; }
         public List<Client> Clients { get; set; } 
         public List<string> Data { get; } = new List<string> {"Client ID", "Name", "Surname", "City", "Province"};
+
+        public List<string> cb_UnitListSearchItems { get; } = new List<string>
+        {
+            "Vacant Units",
+            "Occupied Units",
+            "In Arrears",
+            "Up-To-Date",
+            "In Advance"
+        };
         private GridViewColumnHeader _listViewSortCol = null;
         private SortAdorner _listViewSortAdorner = null;
-        private GridViewColumnHeader listViewSortColUnits = null;
-        private SortAdorner listViewSortAdornerUnits = null;
-        public List<StorageUnit> suObjects { get; set; }
-        private StorageUnit insertStorageUnit;
+        private GridViewColumnHeader _listViewSortColUnits = null;
+        private SortAdorner _listViewSortAdornerUnits = null;
+        private List<StorageUnit> _suObjects;
+        private StorageUnit _insertStorageUnit;
         public MainWindow()
         {
             InitializeComponent();
@@ -406,9 +415,9 @@ namespace StorageUnitManagementSystem
             cb_addClass.Items.Clear();
             //suObjects.Clear();
             //MessageBox.Show(cb_addClass.SelectedItem.ToString());
-            suObjects = _subl.SelectAll();
+            _suObjects = _subl.SelectAll();
             List<string> classArray = new List<string>();
-            foreach (StorageUnit unit in suObjects)
+            foreach (StorageUnit unit in _suObjects)
             {
                 classArray.Add(unit.UnitClassification);
             }
@@ -656,6 +665,20 @@ namespace StorageUnitManagementSystem
             }
         }
 
+        private void cb_UnitListSearch_DropDownOpened(object sender, EventArgs e)
+        {
+            try
+            {
+                cb_UnitListSearch.Items.Clear();
+                cb_UnitListSearch.ItemsSource = cb_UnitListSearchItems;
+                cb_UnitListSearch.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                // Go Home WPF
+            }
+        }
+
         private void btnListSearch_Click(object sender, RoutedEventArgs e)
         {
 
@@ -715,6 +738,109 @@ namespace StorageUnitManagementSystem
             else
             {
                 this.ShowMessageAsync("Client Does Not Exist", "No Client");
+            }
+
+        }
+
+        private void btn_UnitListSearch_Click(object sender, RoutedEventArgs e)
+        {
+
+            int rc = 0;
+            List<StorageUnit> suObjects = new List<StorageUnit>();
+            StorageUnit storageUnit = new StorageUnit();
+            switch (cb_UnitListSearch.SelectedItem.ToString())
+            {
+                case "Sort By:":
+                    this.ShowMessageAsync("Error", "Please Choose an Option from the Drop Down Box");
+                    break;
+                case "Vacant Units":
+                    lv_Units.Items.Clear();
+                    suObjects = _subl.SelectAll();
+                    foreach (StorageUnit unit in suObjects)
+                    {
+                        if (unit.UnitOccupied.Equals(false))
+                        {
+                            lv_Units.Items.Add(unit);
+                            rc = 1;
+                        }
+                        else rc = 0;
+                    }
+                    if (rc == 0)
+                    {
+                        this.ShowMessageAsync("Error", "No Vacant Units Found");
+                    }
+                    break;
+                case "Occupied Units":
+                    lv_Units.Items.Clear();
+                    suObjects = _subl.SelectAll();
+                    foreach (StorageUnit unit in suObjects)
+                    {
+                        if (unit.UnitOccupied.Equals(true))
+                        {
+                            lv_Units.Items.Add(unit);
+                            rc = 1;
+                        }
+                        else rc = 0;
+                    }
+                    if (rc == 0)
+                    {
+                        this.ShowMessageAsync("Error", "No Occupied Units Found");
+                    }
+                    break;
+                case "In Arrears":
+                    lv_Units.Items.Clear();
+                    suObjects = _subl.SelectAll();
+                    foreach (StorageUnit unit in suObjects)
+                    {
+                        if (unit.UnitArrears.Equals(true))
+                        {
+                            lv_Units.Items.Add(unit);
+                            rc = 1;
+                        }
+                        else rc = 0;
+                    }
+                    if (rc == 0)
+                    {
+                        this.ShowMessageAsync("Error", "No Units in Arrears Found");
+                    }
+                    break;
+                case "Up-To-Date":
+                    lv_Units.Items.Clear();
+                    suObjects = _subl.SelectAll();
+                    foreach (StorageUnit unit in suObjects)
+                    {
+                        if (unit.UnitUpToDate.Equals(true))
+                        {
+                            lv_Units.Items.Add(unit);
+                            rc = 1;
+                        }
+                        else rc = 0;
+                    }
+                    if (rc == 0)
+                    {
+                        this.ShowMessageAsync("Error", "No Up-To-Date Units Found");
+                    }
+                    break;
+                case "In Advance":
+                    lv_Units.Items.Clear();
+                    suObjects = _subl.SelectAll();
+                    foreach (StorageUnit unit in suObjects)
+                    {
+                        if (unit.UnitInAdvance.Equals(true))
+                        {
+                            lv_Units.Items.Add(unit);
+                            rc = 1;
+                        }
+                        else rc = 0;
+                    }
+                    if (rc == 0)
+                    {
+                        this.ShowMessageAsync("Error", "No Units Paid for in Advance Found");
+                    }
+                    break;
+                default:
+                    this.ShowMessageAsync("Unit Does Not Exist", "No Unit");
+                    break;
             }
 
         }
@@ -810,7 +936,7 @@ namespace StorageUnitManagementSystem
             try
             {
 
-                foreach (StorageUnit unit in suObjects)
+                foreach (StorageUnit unit in _suObjects)
                 {
                     if (unit.UnitClassification == cb_addClass.SelectedValue.ToString())
                     {
@@ -819,14 +945,14 @@ namespace StorageUnitManagementSystem
                         lb_currentDimensions.Content = "Width : " + charSize[0] + "m ; "
                             + "Length : " + charSize[2] + "m ; "
                             + "Height : " + charSize[4] + "m ; ";
-                        insertStorageUnit = new StorageUnit();
-                        insertStorageUnit.UnitSize = unit.UnitSize;
-                        insertStorageUnit.UnitPrice = unit.UnitPrice;
-                        insertStorageUnit.UnitArrears = Convert.ToBoolean(0);
-                        insertStorageUnit.UnitUpToDate = Convert.ToBoolean(0);
-                        insertStorageUnit.UnitInAdvance = Convert.ToBoolean(0);
-                        insertStorageUnit.UnitOccupied = Convert.ToBoolean(0);
-                        insertStorageUnit.UnitOwnerId = null;
+                        _insertStorageUnit = new StorageUnit();
+                        _insertStorageUnit.UnitSize = unit.UnitSize;
+                        _insertStorageUnit.UnitPrice = unit.UnitPrice;
+                        _insertStorageUnit.UnitArrears = Convert.ToBoolean(0);
+                        _insertStorageUnit.UnitUpToDate = Convert.ToBoolean(0);
+                        _insertStorageUnit.UnitInAdvance = Convert.ToBoolean(0);
+                        _insertStorageUnit.UnitOccupied = Convert.ToBoolean(0);
+                        _insertStorageUnit.UnitOwnerId = null;
                         break;
                     }
 
@@ -943,20 +1069,20 @@ namespace StorageUnitManagementSystem
 
                     StorageUnit suObject = new StorageUnit();
                     suObject.UnitClassification = cb_addClass.SelectedValue.ToString();
-                    suObject.UnitSize = insertStorageUnit.UnitSize;
-                    suObject.UnitPrice = insertStorageUnit.UnitPrice;
-                    suObject.UnitArrears = insertStorageUnit.UnitArrears;
-                    suObject.UnitUpToDate = insertStorageUnit.UnitUpToDate;
-                    suObject.UnitInAdvance = insertStorageUnit.UnitInAdvance;
-                    suObject.UnitOccupied = insertStorageUnit.UnitOccupied;
+                    suObject.UnitSize = _insertStorageUnit.UnitSize;
+                    suObject.UnitPrice = _insertStorageUnit.UnitPrice;
+                    suObject.UnitArrears = _insertStorageUnit.UnitArrears;
+                    suObject.UnitUpToDate = _insertStorageUnit.UnitUpToDate;
+                    suObject.UnitInAdvance = _insertStorageUnit.UnitInAdvance;
+                    suObject.UnitOccupied = _insertStorageUnit.UnitOccupied;
                     suObject.UnitOwnerId = "0";
 
                     for (int x = 0; x < Convert.ToInt16(tb_noOfNewUnits.Text); x++)
                     {
-                        suObjects.Clear();
-                        suObjects = _subl.SelectAll();
+                        _suObjects.Clear();
+                        _suObjects = _subl.SelectAll();
                         int max = 0;
-                        foreach (StorageUnit temp in suObjects)
+                        foreach (StorageUnit temp in _suObjects)
                         {
                             if (Convert.ToInt16(temp.UnitId) >= max)
                             {
@@ -1241,19 +1367,19 @@ namespace StorageUnitManagementSystem
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
             string sortBy = column.Tag.ToString();
-            if (listViewSortColUnits != null)
+            if (_listViewSortColUnits != null)
             {
-                AdornerLayer.GetAdornerLayer(listViewSortColUnits).Remove(listViewSortAdornerUnits);
+                AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Remove(_listViewSortAdornerUnits);
                 lv_Units.Items.SortDescriptions.Clear();
             }
 
             ListSortDirection newDir = ListSortDirection.Ascending;
-            if (listViewSortColUnits == column && listViewSortAdornerUnits.Direction == newDir)
+            if (_listViewSortColUnits == column && _listViewSortAdornerUnits.Direction == newDir)
                 newDir = ListSortDirection.Descending;
 
-            listViewSortColUnits = column;
-            listViewSortAdornerUnits = new SortAdorner(listViewSortColUnits, newDir);
-            AdornerLayer.GetAdornerLayer(listViewSortColUnits).Add(listViewSortAdornerUnits);
+            _listViewSortColUnits = column;
+            _listViewSortAdornerUnits = new SortAdorner(_listViewSortColUnits, newDir);
+            AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Add(_listViewSortAdornerUnits);
             lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
 
         }
