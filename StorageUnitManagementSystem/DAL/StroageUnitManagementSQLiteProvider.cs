@@ -525,9 +525,5 @@ namespace StorageUnitManagementSystem.DAL
             } // end finally
             return rc; // single return
         } // end method
-
-
-
-
     } // end class
 }
