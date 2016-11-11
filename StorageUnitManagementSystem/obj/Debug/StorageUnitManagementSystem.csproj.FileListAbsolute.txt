@@ -196,6 +196,8 @@ C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitMana
 C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.xml
 C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.Extensions.xml
 C:\Users\Watlinton\Desktop\OPG_CLONE\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\Vevan\Desktop\OPG\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\EASendMail45.dll
+C:\Users\Vevan\Desktop\OPG\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe.config
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.exe.manifest
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.application
@@ -231,5 +233,4 @@ C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.application
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.pdb
-C:\Users\Vevan\Desktop\OPG\storageunitmanagementsystem\StorageUnitManagementSystem\bin\Debug\EASendMail45.dll
-C:\Users\Vevan\Desktop\OPG\storageunitmanagementsystem\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache
+C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache

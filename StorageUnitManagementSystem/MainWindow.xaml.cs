@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using MahApps.Metro.Controls;
 using EASendMail;
 
+
 namespace StorageUnitManagementSystem
 {
     /// <summary>
@@ -30,7 +31,7 @@ namespace StorageUnitManagementSystem
         public Client ClientObj { get; set; }
         public List<LeaseUnits> LeaseUnits { get; set; }
         public List<StorageUnit> StorageUnits { get; set; }
-        public List<Client> Clients { get; set; } 
+        public List<Client> Clients { get; set; }
         public List<string> Data { get; } = new List<string> {"Client ID", "Name", "Surname", "City", "Province"};
 
         public List<string> cb_UnitListSearchItems { get; } = new List<string>
@@ -40,6 +41,16 @@ namespace StorageUnitManagementSystem
             "In Arrears",
             "Up-To-Date",
             "In Advance"
+        };
+
+        public List<string> cb_UnitListSearchItemsCopy { get; } = new List<string>
+        {
+            "Vacant Units",
+            "Occupied Units",
+            "In Arrears",
+            "Up-To-Date",
+            "In Advance",
+            "ID"
         };
         private GridViewColumnHeader _listViewSortCol = null;
         private SortAdorner _listViewSortAdorner = null;
@@ -59,19 +70,7 @@ namespace StorageUnitManagementSystem
             //Test
         }
 
-
-
-        private void textBox10_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void tabControl1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
@@ -88,16 +87,6 @@ namespace StorageUnitManagementSystem
             LoginWindow login = new LoginWindow();
             login.Show();
             this.Close();
-        }
-
-        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         //TO:DO COPY PASTE VALIDATION
@@ -617,6 +606,26 @@ namespace StorageUnitManagementSystem
                 foreach (StorageUnit temp in suObjects)
                 {
                     lv_Units.Items.Add(temp);
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("There are no Storage Units to list", "No Units");
+            }
+        }
+        private void imgRefreshUnitsSearch_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            List<StorageUnit> suObjects = new List<StorageUnit>();
+            suObjects = _subl.SelectAll();
+            lv_Units_Search.Items.Clear();
+
+            if (suObjects.Count > 0)
+            {
+                lv_Units_Search.Items.Clear();
+                foreach (StorageUnit temp in suObjects)
+                {
+                    lv_Units_Search.Items.Add(temp);
                 }
             }
             else
@@ -1317,6 +1326,27 @@ namespace StorageUnitManagementSystem
 
         }
 
+        private void lvUnitsSearchColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+            string sortBy = column.Tag.ToString();
+            if (_listViewSortColUnits != null)
+            {
+                AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Remove(_listViewSortAdornerUnits);
+                lv_Units.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (_listViewSortColUnits == column && _listViewSortAdornerUnits.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            _listViewSortColUnits = column;
+            _listViewSortAdornerUnits = new SortAdorner(_listViewSortColUnits, newDir);
+            AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Add(_listViewSortAdornerUnits);
+            lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+
+        }
+
         private void TbNoOfNewUnits_TextChanged(object sender, TextChangedEventArgs e)
             //clears the textbox when there is no input
         {
@@ -1349,6 +1379,20 @@ namespace StorageUnitManagementSystem
             {
                 LblClientExist.Content = "Client Does Not Exist!";
             }
-        }    
+        }
+
+        private void cb_UnitListSearchCopy_DropDownOpened(object sender, EventArgs e)
+        {
+            try
+            {
+                cb_UnitListSearch_Copy.Items.Clear();
+                cb_UnitListSearch_Copy.ItemsSource = cb_UnitListSearchItemsCopy;
+                cb_UnitListSearch_Copy.SelectedIndex = 0;
+            }
+            catch (Exception)
+            {
+                // Go Home WPF
+            }
+        }
     }
 }
