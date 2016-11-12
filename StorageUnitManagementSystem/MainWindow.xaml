@@ -606,11 +606,11 @@
                                         <Border  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="6,79,4,1">
                                             <Grid Margin="0,0,-2,-2">
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="86*"/>
-                                                    <RowDefinition Height="36*"/>
-                                                    <RowDefinition Height="42*"/>
+                                                    <RowDefinition Height="98*"/>
                                                     <RowDefinition Height="41*"/>
-                                                    <RowDefinition Height="137*"/>
+                                                    <RowDefinition Height="48*"/>
+                                                    <RowDefinition Height="46"/>
+                                                    <RowDefinition Height="156*"/>
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="19*"/>
@@ -621,7 +621,7 @@
                                                 <TextBox x:Name="textBox15" controls:TextBoxHelper.Watermark="Enter New User Password" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="2"/>
                                                 <TextBox x:Name="textBox17" controls:TextBoxHelper.Watermark="Enter New User Role" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="3"/>
                                                 <Button x:Name="button8" Content="SAVE" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="4" Height="25"/>
-                                                <Label x:Name="label21" Content="ID: " HorizontalAlignment="Left" Margin="60,68,0,0" VerticalAlignment="Top" Height="26" Width="36"/>
+                                                <Label x:Name="label21" Content="ID: " HorizontalAlignment="Left" Margin="100,68,0,0" VerticalAlignment="Top" Height="26" Width="41"/>
                                                 <Label x:Name="label20" Content="Username: " HorizontalAlignment="Left" Margin="58,7,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="65"/>
                                                 <Label x:Name="label210" Content="Password: " HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.308" Grid.Row="2" Height="26" Width="63"/>
                                                 <Label x:Name="label24" Content="Role: " HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="38"/>
