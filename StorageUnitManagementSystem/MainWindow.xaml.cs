@@ -28,6 +28,7 @@ namespace StorageUnitManagementSystem
         private SUBL _subl;
         private CBL _cbl;
         private LUBL _lubl;
+        private UBL _ubl;
         public Client ClientObj { get; set; }
         public List<LeaseUnits> LeaseUnits { get; set; }
         public List<StorageUnit> StorageUnits { get; set; }
@@ -65,6 +66,7 @@ namespace StorageUnitManagementSystem
             _cbl = new CBL("ClientSQLiteProvider");
             _subl = new SUBL("StorageUnitSQLiteProvider");
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
+            _ubl = new UBL("UserSQLiteProvider");
             //DataContext = new Client();
             DataContext = new StorageUnit();
             //Test
