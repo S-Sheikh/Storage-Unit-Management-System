@@ -372,9 +372,7 @@
                                                 <Grid.DataContext>
                                                     <classes:StorageUnit/>
                                                 </Grid.DataContext>
-                                                <TabControl x:Name="tabControl4" Margin="8,71,8,8">
-
-                                                </TabControl>
+                                                <TabControl x:Name="tabControl4" Margin="8,71,8,8"/>
                                                 <Label  Content="List Units" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top" FontWeight="Bold" Width="Auto"/>
 
                                                 <ListView  x:Name="lv_Units" Height="300" Width="519" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
@@ -459,7 +457,8 @@
                                                 <ComboBox x:Name="cb_UnitListSearch" Height="28" VerticalContentAlignment="Center"  Margin="10,390,330,23" SelectedIndex="0" DropDownOpened="cb_UnitListSearch_DropDownOpened" >
                                                     <ComboBoxItem>Sort By:</ComboBoxItem>
                                                 </ComboBox>
-                                                <Button x:Name="btn_UnitListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="0,390,0,23" Click="btn_UnitListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
+                                                <Button x:Name="btn_UnitListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="0,390,0,23" Click="btn_UnitListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" IsDefault="True"/>
+                                                <Button x:Name="button1" Content="Clear Lessee" Height="auto"   HorizontalAlignment="Left" Margin="443,390,0,0" VerticalAlignment="Top" BorderThickness="0" Width="auto" controls:ButtonHelper.PreserveTextCase="True" ToolTip="This Will Clear the Selected user of it's lessee" />
 
 
                                             </Grid>
@@ -527,11 +526,10 @@
                                                         </EventTrigger>
                                                     </Image.Triggers>
                                                 </Image>
-                                                <ComboBox x:Name="cb_UnitListSearch_Copy" VerticalContentAlignment="Center"  Margin="10,403,425,10" SelectedIndex="0" DropDownOpened="cb_UnitListSearchCopy_DropDownOpened" >
-                                                    <ComboBoxItem Content="Sort By:"/>
-                                                </ComboBox>
-                                                <Button x:Name="btn_UnitListSearch_Copy" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="419,403,10,10" Click="btn_UnitListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
-                                                <TextBox x:Name="textBox6" HorizontalAlignment="Center" Height="28" Margin="110,403,115,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="296"/>
+
+                                                <Button x:Name="btn_UnitListSearch_Copy" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="419,403,10,10" Click="btn_UnitListSearch_Copy_OnClick" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
+                                                <TextBox x:Name="tb_SearchUnit" HorizontalAlignment="Center" Height="28" Margin="138,403,119,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="272"/>
+                                                <Label x:Name="label" Content="Search Units by ID:" HorizontalAlignment="Left" Margin="10,403,0,0" VerticalAlignment="Top" Width="123"/>
 
                                             </Grid>
                                         </Border>

@@ -707,7 +707,6 @@ namespace StorageUnitManagementSystem
                     LvListClient.Items.Clear();
                     LvListClient.Items.Add(clientObj);
                 }
-
             }
             else if (CboListSearch.SelectedItem.ToString() == "Name")
             {
@@ -1383,18 +1382,23 @@ namespace StorageUnitManagementSystem
             }
         }
 
-        private void cb_UnitListSearchCopy_DropDownOpened(object sender, EventArgs e)
+        private void btn_UnitListSearch_Copy_OnClick(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                cb_UnitListSearch_Copy.Items.Clear();
-                cb_UnitListSearch_Copy.ItemsSource = cb_UnitListSearchItemsCopy;
-                cb_UnitListSearch_Copy.SelectedIndex = 0;
-            }
-            catch (Exception)
-            {
-                // Go Home WPF
-            }
+            int rc = 0;
+            StorageUnit unitObject = new StorageUnit();
+            lv_Units_Search.Items.Clear();
+
+                    //lv_Units_Search.Items.Clear();
+                    rc = _subl.SelectStorageUnit(tb_SearchUnit.Text, ref unitObject);
+                    if (rc == 0)
+                    {
+                        //lv_Units_Search.Items.Clear();
+                        lv_Units_Search.Items.Add(unitObject);
+                    }
+                    else
+                    {
+                        this.ShowMessageAsync("Error", "No Matching Unit ID Found");
+                    }
         }
     }
 }
