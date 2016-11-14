@@ -1400,5 +1400,40 @@ namespace StorageUnitManagementSystem
                         this.ShowMessageAsync("Error", "No Matching Unit ID Found");
                     }
         }
+
+        private void Btn_ClearLessee_OnClick(object sender, RoutedEventArgs e)
+        {
+            int rc = 0;
+            StorageUnit selectedUnit = new StorageUnit();
+            if (lv_Units.SelectedIndex >= 0)
+            {
+                //Get Selected Item as a SU Object , possible because of class binding
+                var unitObj = lv_Units.SelectedItem as StorageUnit;
+                string selectedID = unitObj.UnitId;
+                rc = _subl.SelectStorageUnit(selectedID,ref selectedUnit);
+                if (rc != 0)
+                {
+                    this.ShowMessageAsync("Error", "Could Not Find Storage Unit ... \n Please Refresh Unit List ");
+                }
+                else
+                {
+                    selectedUnit.UnitOccupied = false;
+                    selectedUnit.UnitOwnerId = "0";
+                    rc = _subl.Update(selectedUnit);
+                    if (rc != 0)
+                    {
+                        this.ShowMessageAsync("Error", "Could not Remove Client from Unit");
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("Warning", "Please Choose a Unit in the List");
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:local="clr-namespace:StorageUnitManagementSystem"
         mc:Ignorable="d"
+        WindowCloseButtonStyle="{DynamicResource CleanCloseWindowButtonStyle}"
         Title="Login" Height="600" Width="800"  ShowMaxRestoreButton="False" WindowStartupLocation="CenterScreen" 
                       GlowBrush="{DynamicResource AccentBaseColorBrush}" 
                       BorderThickness="2" >

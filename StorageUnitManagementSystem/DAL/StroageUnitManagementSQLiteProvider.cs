@@ -28,7 +28,7 @@ namespace StorageUnitManagementSystem.DAL
 
             try
             {
-                _sqlCon = new SQLiteConnection(_conStr);  // new connection
+                _sqlCon = new SQLiteConnection(_conStr);// new connection
                 bool bRead = false;
                 StorageUnits = new List<StorageUnit>(); // this ensures that if there are no records,
                                                         // the returned list will not be null, but
