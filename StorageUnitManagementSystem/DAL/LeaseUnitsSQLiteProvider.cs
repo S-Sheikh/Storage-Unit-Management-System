@@ -171,9 +171,6 @@ namespace StorageUnitManagementSystem.DAL
             {
                 bool doesExist = false;
                 int rowsAffected = 0;
-
-                doesExist = DoesExist(LeaseUnit.Client.idNumber);
-                if (doesExist == false)
                 {
                     //TO:DO 
                     _sqlCon = new SQLiteConnection(_conStr); // new connection
@@ -182,8 +179,8 @@ namespace StorageUnitManagementSystem.DAL
                                          "[UnitID],[UnitClass],[UnitPrice],[NoOfUnits]," +
                                          "[ClientWaitingList],[AvailableUnits],[TypeOfPayment],[DatePaid]," +
                                          "[DateOfContractStart],[DateOfContractEnd],[AmountDeposit],[AmountOwed]," +
-                                         "[AmountPaid],[ClientCurrentTotal],[UnitLeased],[ClientAdded] ) VALUES(" + "@LeaseID" +
-                                         "@ClientID, @ClientName, @ClientSurname, @UnitID,@UnitClass,@UnitPrice," +
+                                         "[AmountPaid],[ClientCurrentTotal],[UnitLeased],[ClientAdded] ) VALUES(" +
+                                         "@LeaseID,@ClientID, @ClientName, @ClientSurname, @UnitID,@UnitClass,@UnitPrice," +
                                          "@NoOfUnits,@ClientWaitingList,@AvailableUnits,@TypeOfPayment,@DatePaid," +
                                          "@DateOfContractStart,@DateOfContractEnd,@AmountDeposit,@AmountOwed,@AmountPaid," +
                                          "@ClientCurrentTotal,@UnitLeased,@ClientAdded)";
@@ -240,11 +237,6 @@ namespace StorageUnitManagementSystem.DAL
                         rc = 0;
                     } // end if  
                 } // end if
-                else
-                {
-                    rc = -1;
-                } // end else
-
             } // end try
             catch (Exception ex)
             {

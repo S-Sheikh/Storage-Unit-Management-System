@@ -9,7 +9,7 @@
          
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:classes="clr-namespace:StorageUnitManagementSystem.BL.Classes"
-        Title="MainWindow" Height="710" Width="780" MinHeight="710"  MinWidth="780" MaxHeight="710" MaxWidth="780"
+        Title="Storage Unit Management System" Height="710" Width="780" MinHeight="710"  MinWidth="780" MaxHeight="710" MaxWidth="780"
                       ShowMaxRestoreButton="False" WindowStartupLocation="CenterScreen" GlowBrush="{DynamicResource AccentBaseColorBrush}" 
                       BorderThickness="2"  >
 
@@ -69,7 +69,7 @@
                         <ColumnDefinition Width="223*"/>
                     </Grid.ColumnDefinitions>
                     <TabControl x:Name="TabControl" Margin="10" Grid.ColumnSpan="5" Grid.Row="1">
-                        <TabItem Header="Home" Width="100" />
+                        <TabItem Header="Home" Width="100" Margin="1,0,-1,0" />
                         <TabItem Header="Clients" Width="100" HorizontalAlignment="Center" >
                             <Grid Height="Auto" Margin="0,0,-10,3">
                                 <TabControl x:Name="TabControlClients" Margin="10,10,9.6,-8.6" TabStripPlacement="Left">
@@ -102,7 +102,7 @@
                                                 <Label x:Name="LblAddressLine1" Content="City:"   VerticalAlignment="Top" Margin="50,275,0,0" HorizontalAlignment="Left" Width="64"/>
                                                 <Label x:Name="LblEmail" Content="Email:"   VerticalAlignment="Top" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" Margin="50,365,0,0" RenderTransformOrigin="0.462,1.5" HorizontalAlignment="Left" Width="78"/>
                                                 <TextBox x:Name="TxtBoxEmail" VerticalAlignment="Top" Margin="144,368,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Valid Email"/>
-                                                <Button x:Name="BtnAddClient" Style="{StaticResource AccentedSquareButtonStyle}" Height="25" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,220,8"  controls:ButtonHelper.CornerRadius="10" Content="Submit" Click="btnAddClient_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1"  />
+                                                <Button x:Name="BtnAddClient" Style="{StaticResource AccentedSquareButtonStyle}" Height="auto" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,224,10"  controls:ButtonHelper.CornerRadius="10" Content="Submit" Click="btnAddClient_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ButtonHelper.PreserveTextCase="True"  />
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -252,18 +252,34 @@
                                                         </GridView>
                                                     </ListView.View>
                                                 </ListView>
-                                                <Image x:Name="ImgRefresh" Height="30" Width="64" Margin="260,0,0,80" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
+                                                <Image x:Name="ImgRefresh" RenderTransformOrigin=".5,.5" Height="30" Width="auto" Margin="0,0,0,72" HorizontalAlignment="Center" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
                                                     <Image.Source>
                                                         <BitmapImage DecodePixelWidth="64" UriSource="Images/refresh.png"/>
                                                     </Image.Source>
+                                                    <Image.RenderTransform>
+                                                        <RotateTransform x:Name="AnimateClientButton" Angle="0" />
+                                                    </Image.RenderTransform>
+                                                    <Image.Triggers>
+                                                        <EventTrigger RoutedEvent="Mouse.MouseDown">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="AnimateClientButton" Storyboard.TargetProperty="Angle" 
+                                                                        By="10"        
+                                                                        To="360" 
+                                                                        Duration="0:0:0.5" 
+                                                                        FillBehavior="Stop" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Image.Triggers>
                                                 </Image>
 
-                                                <ComboBox x:Name="CboListSearch" Width="100" Height="25" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,49.9" SelectionChanged="cboListSearch_SelectionChanged" SelectedIndex="0" DropDownOpened="cboListSearch_DropDownOpened" >
+                                                <ComboBox x:Name="CboListSearch" Width="100" Height="29" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,38" SelectionChanged="cboListSearch_SelectionChanged" SelectedIndex="0" DropDownOpened="cboListSearch_DropDownOpened" RenderTransformOrigin="0.57,-0.231" >
                                                     <ComboBoxItem>Search by:</ComboBoxItem>
                                                 </ComboBox>
 
-                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,49.8"></TextBox>
-                                                <Button x:Name="BtnListSearch" Width="100" Height="25" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="286,109,0,50.8" Click="btnListSearch_Click" BorderThickness="0"></Button>
+                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"></TextBox>
+                                                <Button x:Name="BtnListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="275,0,0,38" Click="btnListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True"></Button>
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -285,8 +301,8 @@
                                     <ColumnDefinition Width="79*"/>
                                 </Grid.ColumnDefinitions>
                                 <TabControl x:Name="LeasUnitsTabControl" Margin="10,10,-1.4,10.4" TabStripPlacement="Left" Width="684.8" Grid.ColumnSpan="2" Height="477.6">
-                                    <TabItem Header="New Contract"  Margin="0,36,-2.2,-39">
-                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="568" Height="458.4">
+                                    <TabItem Header="New Booking"  Margin="0,36,-2.2,-39">
+                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5,7,5,17" Width="568">
                                             <Grid>
                                                 <Label Content="Client ID:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"></Label>
                                                 <TextBox x:Name="LeaseId" Height="20" Width="250" MaxLength="13"  HorizontalAlignment="Center"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" VerticalAlignment="Top" Margin="30,50,0,0" controls:TextBoxHelper.Watermark="ID Number Must Be 13-Digits" TextChanged="LeaseId_TextChanged"></TextBox>
@@ -314,7 +330,7 @@
                                             </Grid>
                                         </Border>
                                     </TabItem>
-                                    <TabItem Header="List Contracts"  Margin="0,36,-2.2,-39">
+                                    <TabItem Header="List Bookings"  Margin="0,36,-2.2,-39">
                                         <Border BorderBrush="Black" BorderThickness="2" Margin="5" Width="520" Height="470.4">
 
                                         </Border>
@@ -337,30 +353,31 @@
                                             <Grid>
                                                 <Label x:Name="label18" Content="Add A New Unit" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="0,10,0,0"/>
                                                 <Label x:Name="label19" Content="Choose Unit Class :" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
-                                                <ComboBox x:Name="cb_addClass" SelectedIndex="0"   HorizontalAlignment="Left" Margin="125,51,0,0"  VerticalAlignment="Top" Width="125"  DropDownOpened="cb_addClass_DropDownOpened" SelectionChanged="cb_addClass_SelectionChanged"  >
+                                                <ComboBox x:Name="cb_addClass" SelectedIndex="0"   HorizontalAlignment="Left" Margin="177,49,0,0"  VerticalAlignment="Top" Width="125"  DropDownOpened="cb_addClass_DropDownOpened" SelectionChanged="cb_addClass_SelectionChanged"  >
                                                     <ComboBoxItem  Name="cb_addClass_defaultItem">---Select Class---</ComboBoxItem>
                                                 </ComboBox>
                                                 <Label  Content="Current Unit Dimensions :" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
-                                                <Label x:Name="lb_currentDimensions" Content="....." HorizontalAlignment="Left" Margin="156,80,0,0" VerticalAlignment="Top"/>
-                                                <Label Name="lb_currentPrice" Content="....." HorizontalAlignment="Left" Margin="120,111,0,0" VerticalAlignment="Top"/>
+                                                <Label x:Name="lb_currentDimensions" Content="....." HorizontalAlignment="Left" Margin="177,80,0,0" VerticalAlignment="Top"/>
+                                                <Label Name="lb_currentPrice" Content="....." HorizontalAlignment="Left" Margin="177,114,0,0" VerticalAlignment="Top"/>
                                                 <Label Content="Current Unit Price :" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
-                                                <Label Content="Enter Number of New Units :" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top"/>
+                                                <Label Content="Enter Number of New Units :" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tb_noOfNewUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="177,145,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="48"/>
-                                                <Button x:Name="btn_addNewUnits"  Content="ADD" HorizontalAlignment="Center" Margin="0,183,0,0"  VerticalAlignment="Top" Width="75" Click="btn_addNewUnits_Click"/>
+                                                <Button x:Name="btn_addNewUnits"  Content="ADD" HorizontalAlignment="Center" Margin="0,176,0,0"  VerticalAlignment="Top" Width="75" Click="btn_addNewUnits_Click" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
                                             </Grid>
                                         </Border>
                                     </TabItem>
-                                    <TabItem Header="List Units" Margin="0,38,-2,-42">
-
+                                    <TabItem Header="List Units" Margin="0,36,-2,-40" >
                                         <Border BorderBrush="Black" BorderThickness="2" Margin="5">
                                             <Grid>
                                                 <Grid.DataContext>
                                                     <classes:StorageUnit/>
                                                 </Grid.DataContext>
-                                                <TabControl x:Name="tabControl4" Margin="8,71,8,8"/>
+                                                <TabControl x:Name="tabControl4" Margin="8,71,8,8">
+
+                                                </TabControl>
                                                 <Label  Content="List Units" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top" FontWeight="Bold" Width="Auto"/>
 
-                                                <ListView  x:Name="lv_Units" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
+                                                <ListView  x:Name="lv_Units" Height="300" Width="519" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
                                                     <ListView.View>
                                                         <GridView>
 
@@ -401,44 +418,120 @@
                                                             </GridViewColumn>
                                                             <GridViewColumn x:Name="clm_unitUpToDate"  Width="100" DisplayMemberBinding="{Binding UnitUpToDate}" >
                                                                 <GridViewColumn.Header>
-                                                                    <GridViewColumnHeader  Tag="UnitUpToDate" >Up To Date</GridViewColumnHeader>
+                                                                    <GridViewColumnHeader  Tag="UnitUpToDate" Click="lvUnitsColumnHeader_Click" >Up To Date</GridViewColumnHeader>
                                                                 </GridViewColumn.Header>
                                                             </GridViewColumn>
-                                                            <GridViewColumn x:Name="clm_unitOwner"  Width="100" DisplayMemberBinding="{Binding UnitOwnerId}" >
-
+                                                            <GridViewColumn x:Name="clm_unitOwner"  Width="auto" DisplayMemberBinding="{Binding UnitOwnerId}" >
+                                                                <GridViewColumn.Header>
+                                                                    <GridViewColumnHeader  Tag="UnitOwnerId" Click="lvUnitsColumnHeader_Click" >Unit Owner ID</GridViewColumnHeader>
+                                                                </GridViewColumn.Header>
                                                             </GridViewColumn>
                                                         </GridView>
                                                     </ListView.View>
                                                 </ListView>
-                                                <Image x:Name="ImgRefreshUnits" Height="30" Width="auto"  HorizontalAlignment="Center"  MouseDown="imgRefreshUnits_MouseDown" Margin="0,355,0,56">
+                                                <Image x:Name="ImgRefreshUnits" RenderTransformOrigin=".5,.5"  Height="30" Width="auto"  HorizontalAlignment="Center" MouseDown="imgRefreshUnits_MouseDown" Margin="0,355,0,56">
+                                                    <Image.ToolTip>
+                                                        <ToolTip x:Name="ImgRefreshUnitsToolTip" Placement="Top">
+                                                            Click to Refresh List
+                                                        </ToolTip>
+                                                    </Image.ToolTip>
                                                     <Image.Source>
                                                         <BitmapImage DecodePixelWidth="64" UriSource="Images/refresh.png"/>
                                                     </Image.Source>
+                                                    <Image.RenderTransform>
+                                                        <RotateTransform x:Name="Animate" Angle="0" />
+                                                    </Image.RenderTransform>
+                                                    <Image.Triggers>
+                                                        <EventTrigger RoutedEvent="Mouse.MouseDown">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="Animate" Storyboard.TargetProperty="Angle" 
+                                                                        By="10"        
+                                                                        To="360" 
+                                                                        Duration="0:0:0.5" 
+                                                                        FillBehavior="Stop" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Image.Triggers>
                                                 </Image>
+
+                                                <ComboBox x:Name="cb_UnitListSearch" Height="28" VerticalContentAlignment="Center"  Margin="10,390,330,23" SelectedIndex="0" DropDownOpened="cb_UnitListSearch_DropDownOpened" >
+                                                    <ComboBoxItem>Sort By:</ComboBoxItem>
+                                                </ComboBox>
+                                                <Button x:Name="btn_UnitListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="0,390,0,23" Click="btn_UnitListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
+
+
                                             </Grid>
                                         </Border>
                                     </TabItem>
-                                    <TabItem Header="Search Units" Margin="0,40,-2.4,-38.8">
-                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5,10,5,5">
+                                    <TabItem Header="Search Units" Margin="0,40,-2,-39" Height="30" VerticalAlignment="Top">
+                                        <Border BorderBrush="Black" BorderThickness="2" Margin="5">
                                             <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="126*"/>
-                                                    <ColumnDefinition Width="124*"/>
-                                                    <ColumnDefinition Width="257*"/>
-                                                    <ColumnDefinition Width="89*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="31*"/>
-                                                    <RowDefinition Height="15*"/>
-                                                    <RowDefinition Height="101*"/>
-                                                </Grid.RowDefinitions>
-                                                <Label x:Name="label26" Content="Unit ID:" HorizontalAlignment="Left" Margin="63.6,60,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="50"/>
-                                                <TextBox x:Name="textBox23" Grid.Column="2" HorizontalAlignment="Right" Height="23" Margin="0,60,16,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="228"/>
-                                                <Button x:Name="button9" Content="Search" Grid.Column="1" Margin="0,9.8,150,0" Grid.Row="1" VerticalAlignment="Top" Height="20" HorizontalAlignment="Right" Width="100" Grid.ColumnSpan="2"/>
-                                                <Button x:Name="button10" Content="Advanced Search" Grid.Column="2" Margin="0,10.2,16,0" Grid.Row="1" VerticalAlignment="Top" Height="20" HorizontalAlignment="Right" Width="100"/>
-                                                <Label x:Name="label27" Content="Specific Search" Grid.Column="1" HorizontalAlignment="Left" Margin="24.6,10.4,0,0" Grid.Row="2" VerticalAlignment="Top" Height="26" Width="90"/>
-                                                <RadioButton x:Name="radioButton" Content="All vacant units" Grid.Column="2" Margin="0,10.4,145,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="99" Height="15"/>
-                                                <RadioButton x:Name="radioButton1" Content="all occupied units" Grid.Column="2" Margin="0,44.4,133,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Right" Width="111" Height="15"/>
+                                                <Label  Content="Search Units" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top" FontWeight="Bold" Width="108" Margin="0,0,0,0"/>
+                                                <ListView  x:Name="lv_Units_Search" Height="300" Width="519" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
+                                                    <ListView.View>
+                                                        <GridView>
+
+                                                            <GridViewColumn x:Name="clm_unitID1" Width="50" DisplayMemberBinding="{Binding UnitId}" >
+                                                                <GridViewColumnHeader  Tag="UnitId" Click="lvUnitsSearchColumnHeader_Click" Content="ID"/>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitClass1" Width="120" DisplayMemberBinding="{Binding UnitClassification}" >
+                                                                <GridViewColumnHeader  Tag="UnitClassification" Click="lvUnitsSearchColumnHeader_Click" Content="Classification"/>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitPrice1"  Width="100" DisplayMemberBinding="{Binding UnitPrice}" >
+                                                                <GridViewColumnHeader  Tag="UnitPrice" Click="lvUnitsSearchColumnHeader_Click" Content="Price"/>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitSize1"  Width="120" DisplayMemberBinding="{Binding UnitSize}" >
+                                                                <GridViewColumnHeader  Tag="UnitSize" Click="lvUnitsSearchColumnHeader_Click" Content="Size"/>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitArrears1"  Width="100" DisplayMemberBinding="{Binding UnitArrears}" >
+                                                                <GridViewColumnHeader  Tag="UnitArrears" Click="lvUnitsSearchColumnHeader_Click" Content="Arrears"/>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitOccupied1"  Width="100" DisplayMemberBinding="{Binding UnitOccupied}" >
+                                                                <GridViewColumnHeader  Tag="UnitOccupied" Click="lvUnitsSearchColumnHeader_Click" Content="Occupied"/>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitAdvance1"  Width="100" DisplayMemberBinding="{Binding UnitInAdvance}" >
+                                                                <GridViewColumnHeader  Tag="UnitInAdvance" Click="lvUnitsSearchColumnHeader_Click" Content="Advance Payment"/>
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitUpToDate1"  Width="100" DisplayMemberBinding="{Binding UnitUpToDate}" >
+                                                                <GridViewColumnHeader  Tag="UnitUpToDate"  Click="lvUnitsSearchColumnHeader_Click" Content="Up To Date" />
+                                                            </GridViewColumn>
+                                                            <GridViewColumn x:Name="clm_unitOwner1"  Width="auto" DisplayMemberBinding="{Binding UnitOwnerId}" >
+                                                                <GridViewColumnHeader  Tag="UnitOwnerId"  Click="lvUnitsSearchColumnHeader_Click" Content="Unit Owner ID" />
+                                                            </GridViewColumn>
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                                <Image x:Name="ImgRefreshUnits_Search" RenderTransformOrigin=".5,.5"  Height="30" Width="auto"  HorizontalAlignment="Center" MouseDown="imgRefreshUnitsSearch_MouseDown" Margin="0,355,0,56">
+                                                    <Image.ToolTip>
+                                                        <ToolTip x:Name="ImgRefreshUnitsToolTip1" Placement="Top" Content="Click to Refresh List"/>
+                                                    </Image.ToolTip>
+                                                    <Image.Source>
+                                                        <BitmapImage DecodePixelWidth="64" UriSource="Images/refresh.png"/>
+                                                    </Image.Source>
+                                                    <Image.RenderTransform>
+                                                        <RotateTransform x:Name="Animate1" Angle="0" />
+                                                    </Image.RenderTransform>
+                                                    <Image.Triggers>
+                                                        <EventTrigger RoutedEvent="Mouse.MouseDown">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetName="Animate1" Storyboard.TargetProperty="Angle" 
+                                                                        By="10"        
+                                                                        To="360" 
+                                                                        Duration="0:0:0.5" 
+                                                                        FillBehavior="Stop" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Image.Triggers>
+                                                </Image>
+                                                <ComboBox x:Name="cb_UnitListSearch_Copy" VerticalContentAlignment="Center"  Margin="10,403,425,10" SelectedIndex="0" DropDownOpened="cb_UnitListSearchCopy_DropDownOpened" >
+                                                    <ComboBoxItem Content="Sort By:"/>
+                                                </ComboBox>
+                                                <Button x:Name="btn_UnitListSearch_Copy" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="419,403,10,10" Click="btn_UnitListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
+                                                <TextBox x:Name="textBox6" HorizontalAlignment="Center" Height="28" Margin="110,403,115,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="296"/>
 
                                             </Grid>
                                         </Border>
@@ -523,14 +616,16 @@
                                                     <ColumnDefinition Width="19*"/>
                                                     <ColumnDefinition Width="25*"/>
                                                 </Grid.ColumnDefinitions>
-                                                <TextBox x:Name="textBox13" HorizontalAlignment="Left" Height="26" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="1"/>
-                                                <TextBox x:Name="textBox14" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="2"/>
-                                                <TextBox x:Name="textBox15" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="3"/>
+                                                <TextBox x:Name="textBox13" controls:TextBoxHelper.Watermark="Enter New User ID" HorizontalAlignment="Left" Height="20" Margin="10,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1"/>
+                                                <TextBox x:Name="textBox14" controls:TextBoxHelper.Watermark="Enter New User Username" HorizontalAlignment="Left" Height="26" Margin="10,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="1"/>
+                                                <TextBox x:Name="textBox15" controls:TextBoxHelper.Watermark="Enter New User Password" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="2"/>
+                                                <TextBox x:Name="textBox17" controls:TextBoxHelper.Watermark="Enter New User Role" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" Grid.Column="1" Grid.Row="3"/>
                                                 <Button x:Name="button8" Content="SAVE" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="4" Height="25"/>
+                                                <Label x:Name="label21" Content="ID: " HorizontalAlignment="Left" Margin="60,68,0,0" VerticalAlignment="Top" Height="26" Width="36"/>
                                                 <Label x:Name="label20" Content="Username: " HorizontalAlignment="Left" Margin="58,7,0,0" VerticalAlignment="Top" Grid.Row="1" Height="26" Width="65"/>
                                                 <Label x:Name="label210" Content="Password: " HorizontalAlignment="Left" Margin="60,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.474,0.308" Grid.Row="2" Height="26" Width="63"/>
                                                 <Label x:Name="label24" Content="Role: " HorizontalAlignment="Left" Margin="85,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="38"/>
-                                                <Label x:Name="label280" Content="Add A New User" HorizontalAlignment="Left" Margin="164,37,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="133" FontWeight="Bold"/>
+                                                <Label x:Name="label280" Content="Add A New User" HorizontalAlignment="Left" Margin="195,23,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="144" FontWeight="Bold" Height="28"/>
 
                                             </Grid>
                                         </Border>
@@ -555,7 +650,7 @@
                                                 <Label x:Name="label15" Content="Username:" HorizontalAlignment="Left" Margin="68,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="70"/>
                                                 <Label x:Name="label16" Content="Password:" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="65"/>
                                                 <Label x:Name="label17" Content=" Role:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Grid.Row="4" Height="26" Width="40"/>
-                                                <TextBox x:Name="textBox10" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="1"/>
+                                                <TextBox x:Name="textBox10" controls:TextBoxHelper.Watermark="Enter User ID To Search" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="1"/>
                                                 <TextBox x:Name="textBox11" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="2"/>
                                                 <TextBox x:Name="textBox12" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="3"/>
                                                 <TextBox x:Name="textBox16" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="4"/>
@@ -576,7 +671,7 @@
                     <Label x:Name="Label10" Content="Storage Unit Management System" Margin="16,20,0,9" Grid.Column="3" HorizontalAlignment="Left" Width="221" FontWeight="Bold"/>
                     <Label x:Name="Label11" Content="User: " Grid.Column="4" Margin="0,20,171,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,0.5" HorizontalAlignment="Right" Width="40" Height="26"/>
                     <Button x:Name="Button1" Content="Help" Margin="10,10,0,0" Grid.Row="2" Width="40" Click="button1_Click" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <Button x:Name="Button2" Content="Support" Margin="10,10,10,0" Grid.Row="2" Width="82" Grid.Column="1" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <Button x:Name="Button2" Content="Support" Margin="10,10,10.435,0" Grid.Row="2" Width="81" Grid.Column="1" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center"/>
                     <TextBlock x:Name="TextBlock1" Grid.Column="4" Margin="0,25,10,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" HorizontalAlignment="Right" Width="144" ToolTip="current user" Height="16"/>
                     <TextBlock x:Name="TextBlock2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="237">
                         <TextBlock.TextAlignment>Center</TextBlock.TextAlignment>

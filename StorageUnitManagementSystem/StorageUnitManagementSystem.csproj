@@ -148,15 +148,20 @@
     <Compile Include="BL\Classes\Address.cs" />
     <Compile Include="BL\Classes\Client.cs" />
     <Compile Include="BL\Classes\LeaseUnits.cs" />
+    <Compile Include="BL\Classes\SortAdorner.cs" />
     <Compile Include="BL\Classes\StorageUnit.cs" />
+    <Compile Include="BL\Classes\User.cs" />
     <Compile Include="BL\LUBL.cs" />
     <Compile Include="BL\SUBL.cs" />
+    <Compile Include="BL\UBL.cs" />
     <Compile Include="DAL\ClientProviderBase.cs" />
     <Compile Include="DAL\ClientSQLiteProvider.cs" />
     <Compile Include="DAL\LeaseUnitsProviderBase.cs" />
     <Compile Include="DAL\LeaseUnitsSQLiteProvider.cs" />
     <Compile Include="DAL\StorageUnitManagementProviderBase.cs" />
     <Compile Include="DAL\StroageUnitManagementSQLiteProvider.cs" />
+    <Compile Include="DAL\UserProviderBase.cs" />
+    <Compile Include="DAL\UserSQLiteProvider.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
