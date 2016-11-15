@@ -1426,7 +1426,23 @@ namespace StorageUnitManagementSystem
                     }
                     else
                     {
-                        
+                        LeaseUnits = _lubl.SelectAll();
+                        this.ShowMessageAsync("DEBUG", "Im HERE");
+                        foreach (LeaseUnits leaseUnit in LeaseUnits)
+                        {
+                            if (leaseUnit.StorageUnit.UnitId.Equals(selectedUnit.UnitId))
+                            {
+                                rc = _lubl.Delete(leaseUnit.LeaseID);
+                                if (rc != 0)
+                                {
+                                    this.ShowMessageAsync("Error", "Could not Delete Lease Information");
+                                }
+                                else
+                                {
+                                    this.ShowMessageAsync("Success", "Removed Leasing Information for selected Unit");
+                                }
+                            }
+                        }
                     }
                 }
             }
