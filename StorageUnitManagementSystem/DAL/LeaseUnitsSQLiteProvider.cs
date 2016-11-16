@@ -53,7 +53,7 @@ namespace StorageUnitManagementSystem.DAL
                     LeaseUnit.StorageUnit.UnitPrice = Convert.ToDouble(sdr["UnitPrice"]);
                     LeaseUnit.NoOfUnits = Convert.ToInt32(sdr["NoOfUnits"]);
                     LeaseUnit.ClientWaitingList =(Convert.ToInt16(sdr["ClientWaitingList"])==1) ? true:false;
-                    LeaseUnit.AvailableUnits = Convert.ToInt32(sdr["AvailableUnits"]);
+                    LeaseUnit.AvailableUnits = Convert.ToString(sdr["AvailableUnits"]);
                     LeaseUnit.TypeOfPayment = Convert.ToString(sdr["TypeOfPayment"]);
                     LeaseUnit.DateOfPayment= Convert.ToString(sdr["DatePaid"]);
                     LeaseUnit.DateOfContractStart = Convert.ToString(sdr["DateOfContractStart"]);
@@ -121,7 +121,7 @@ namespace StorageUnitManagementSystem.DAL
                     LeaseUnit.StorageUnit.UnitPrice = Convert.ToDouble(sdr["UnitPrice"]);
                     LeaseUnit.NoOfUnits = Convert.ToInt32(sdr["NoOfUnits"]);
                     LeaseUnit.ClientWaitingList = (Convert.ToInt16(sdr["ClientWaitingList"]) == 1) ? true : false;
-                    LeaseUnit.AvailableUnits = Convert.ToInt32(sdr["AvailableUnits"]);
+                    LeaseUnit.AvailableUnits = Convert.ToString(sdr["AvailableUnits"]);
                     LeaseUnit.TypeOfPayment = Convert.ToString(sdr["TypeOfPayment"]);
                     LeaseUnit.DateOfPayment = Convert.ToString(sdr["DatePaid"]);
                     LeaseUnit.DateOfContractStart = Convert.ToString(sdr["DateOfContractStart"]);

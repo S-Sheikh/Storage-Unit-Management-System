@@ -236,7 +236,7 @@ namespace StorageUnitManagementSystem.DAL
                 // A better option would be to only update the fields that actually changed
                 //
                 string updateQuery = string.Format("UPDATE StorageUnits SET [suClassification]=@suClassification, [suPrice]=@suPrice, " +
-                                         "[suSize]=@suSize,[suArrears]=@suArrears," +
+                                         "[suSize]=@suSize,[suArrears]=@suArrears,[suOwnerID]=@suOwnerID," +
                                                    "[suOccupied]=@suOccupied,[suAdvance]=@suAdvance," +
                                                    "[suUpToDate]=@suUpToDate WHERE " +
                                          "[suID] = '{0}'", StorageUnit.UnitId);
@@ -250,7 +250,8 @@ namespace StorageUnitManagementSystem.DAL
                         new SQLiteParameter("@suArrears",DbType.Int16),
                         new SQLiteParameter("@suOccupied",DbType.Int16),
                         new SQLiteParameter("@suAdvance",DbType.Int16),
-                        new SQLiteParameter("@suUpToDate",DbType.Int16)
+                        new SQLiteParameter("@suUpToDate",DbType.Int16),
+                        new SQLiteParameter("@suOwnerID",DbType.String) 
 
                 };
                 sqlParams[0].Value = StorageUnit.UnitId; // Populate SQLiteParameters from StorageUnit
@@ -261,6 +262,7 @@ namespace StorageUnitManagementSystem.DAL
                 sqlParams[5].Value = StorageUnit.UnitOccupied ? 1 : 0;
                 sqlParams[6].Value = StorageUnit.UnitInAdvance ? 1 : 0;
                 sqlParams[7].Value = StorageUnit.UnitUpToDate ? 1 : 0;
+                sqlParams[8].Value = StorageUnit.UnitOwnerId;
                 sqlCommand.Parameters.AddRange(sqlParams);
                 rowsAffected = sqlCommand.ExecuteNonQuery();
                 if (rowsAffected == 0) // Test rowsAffected

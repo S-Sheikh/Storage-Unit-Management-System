@@ -15,7 +15,7 @@ using MahApps.Metro.Controls.Dialogs;
 using StorageUnitManagementSystem.BL;
 using StorageUnitManagementSystem.BL.Classes;
 
-namespace StorageUnitManagementSystem.PL
+namespace StorageUnitManagementSystem
 {
     /// <summary>
     /// Interaction logic for PopUp.xaml

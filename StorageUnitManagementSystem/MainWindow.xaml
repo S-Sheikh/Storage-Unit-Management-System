@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="StorageUnitManagementSystem.PL.MainWindow"
+﻿<controls:MetroWindow x:Class="StorageUnitManagementSystem.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,7 +14,7 @@
 
 
 
-<!--><-->
+    <!--><-->
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Content="About Us" />
@@ -252,7 +252,8 @@
                                                         </GridView>
                                                     </ListView.View>
                                                 </ListView>
-                                                <Image x:Name="ImgRefresh" RenderTransformOrigin=".5,.5" Height="30" Width="auto" Margin="0,0,0,72" HorizontalAlignment="Center" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">                                                    <Image.Source>
+                                                <Image x:Name="ImgRefresh" RenderTransformOrigin=".5,.5" Height="30" Width="auto" Margin="0,0,0,72" HorizontalAlignment="Center" VerticalAlignment="Bottom" MouseDown="imgRefresh_MouseDown">
+                                                    <Image.Source>
                                                         <BitmapImage DecodePixelWidth="64" UriSource="/Images/refresh.png"/>
                                                     </Image.Source>
                                                     <Image.RenderTransform>
@@ -277,7 +278,9 @@
                                                     <ComboBoxItem>Search by:</ComboBoxItem>
                                                 </ComboBox>
 
-                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"></TextBox>                                                <Button x:Name="BtnListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="275,0,0,38" Click="btnListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True"></Button>                                            </Grid>
+                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"></TextBox>
+                                                <Button x:Name="BtnListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="275,0,0,38" Click="btnListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True"></Button>
+                                            </Grid>
                                         </Border>
                                     </TabItem>
 
@@ -317,6 +320,8 @@
 
                                                 <Label x:Name="Label1" Content="Choose Unit Class :" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
                                                 <ComboBox x:Name="CbLeaseSelectClass" SelectedIndex="0"   HorizontalAlignment="Center" Margin="172,144,234.2,0"  VerticalAlignment="Top" Width="125"  DropDownOpened="CbLeaseSelectClass_DropDownOpened" SelectionChanged="CbLeaseSelectClass_SelectionChanged"  >
+                                                    <!--CbLeaseSelectClass_DropDownOpened-->
+                                                    <!--cb_addClass_DropDownOpened-->
                                                     <ComboBoxItem  Name="CbAddClassDefaultItem">---Select Class---</ComboBoxItem>
                                                 </ComboBox>
                                                 <Label x:Name="Label21" Content="Current Unit Dimensions :" HorizontalAlignment="Left" Margin="10,170,0,0" VerticalAlignment="Top"/>
@@ -433,7 +438,7 @@
                                                 <Label Content="Current Unit Price :" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
                                                 <Label Content="Enter Number of New Units :" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="tb_noOfNewUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="177,145,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="48"/>
-                                                <Button x:Name="btn_addNewUnits"  Content="ADD" HorizontalAlignment="Center" Margin="0,176,0,0"  VerticalAlignment="Top" Width="75" Click="btn_addNewUnits_Click" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
+                                                <Button x:Name="btn_addNewUnits"  Content="ADD" Style="{StaticResource AccentedSquareButtonStyle}" BorderThickness="0" HorizontalAlignment="Center" Margin="0,176,0,0"  VerticalAlignment="Top" Width="75" Click="btn_addNewUnits_Click" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -447,7 +452,7 @@
                                                 <Label  Content="List Units" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top" FontWeight="Bold" Width="Auto"/>
 
                                                 <ListView  x:Name="lv_Units" Height="300" Width="519" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
-                                                    <ListView.View>
+                                                    <ListView.View >
                                                         <GridView>
 
                                                             <GridViewColumn x:Name="clm_unitID" Width="50" DisplayMemberBinding="{Binding UnitId}" >
@@ -529,7 +534,8 @@
                                                     <ComboBoxItem>Sort By:</ComboBoxItem>
                                                 </ComboBox>
                                                 <Button x:Name="btn_UnitListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="0,390,0,23" Click="btn_UnitListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" IsDefault="True"/>
-                                                <Button x:Name="btn_ClearLessee" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick" Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,390,10,23" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" />
+                                                <Button x:Name="btn_ClearLessee" Tag="listUnits" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick" Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,390,10,23" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"  />
+
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -539,8 +545,7 @@
                                                 <Label  Content="Search Units" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Top" FontWeight="Bold" Width="108" Margin="0,0,0,0"/>
                                                 <ListView  x:Name="lv_Units_Search" Height="300" Width="519" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" >
                                                     <ListView.View>
-                                                        <GridView>
-
+                                                        <GridView >
                                                             <GridViewColumn x:Name="clm_unitID1" Width="50" DisplayMemberBinding="{Binding UnitId}" >
                                                                 <GridViewColumnHeader  Tag="UnitId" Click="lvUnitsSearchColumnHeader_Click" Content="ID"/>
                                                             </GridViewColumn>
@@ -599,7 +604,7 @@
                                                 <Button x:Name="btn_UnitListSearch_Copy" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="269,402,160,11" Click="btn_UnitListSearch_Copy_OnClick" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
                                                 <TextBox x:Name="tb_SearchUnit" HorizontalAlignment="Center" Height="28" Margin="124,403,265,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140"/>
                                                 <Label x:Name="label" Content="Search Units by ID:" HorizontalAlignment="Left" Margin="10,403,0,0" VerticalAlignment="Top" Width="auto"/>
-                                                <Button x:Name="btn_ClearLessee_Copy" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick" Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,401,10,12" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" />
+                                                <Button x:Name="btn_ClearLessee_Copy" Tag="SearchUnits" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick" Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,401,10,12" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" />
 
                                             </Grid>
                                         </Border>
@@ -612,33 +617,19 @@
                                 <TabControl x:Name="tabControl1" HorizontalAlignment="Left" Height="477" Margin="10,-26,0,0" VerticalAlignment="Top" Width="672" TabStripPlacement="Left" >
                                     <TabItem Header="New Unit Pricing" Margin="10,101,-10,-100">
                                         <Border  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="20,69,5,4">
-                                            <Grid Margin="0,-2,-2,-2">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="77*"/>
-                                                    <RowDefinition Height="39*"/>
-                                                    <RowDefinition Height="46*"/>
-                                                    <RowDefinition Height="47*"/>
-                                                    <RowDefinition Height="195*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="185*"/>
-                                                    <ColumnDefinition Width="292*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Label x:Name="label1" Content="Select a Unit Class: " HorizontalAlignment="Left" Margin="52,5,0,0" VerticalAlignment="Top" Height="26" Width="112" Grid.Row="1"/>
-                                                <ComboBox x:Name="comboBox7_Copy" HorizontalAlignment="Left" Margin="14,5,0,0"  VerticalAlignment="Top" Width="100" Grid.Column="1" Height="26" Grid.Row="1">
-                                                    <ComboBoxItem Content="Class A" IsSelected="True"/>
-                                                    <ComboBoxItem Content="Class B"/>
-                                                    <ComboBoxItem Content="Class C"/>
-                                                    <ComboBoxItem Content="Class D"/>
-                                                    <ComboBoxItem Content="Class E"/>
-                                                    <ComboBoxItem Content="Class F"/>
-                                                </ComboBox>
-                                                <Label x:Name="label2" Content="Previous Price:" HorizontalAlignment="Left" Margin="78,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="86"/>
-                                                <Label x:Name="label3" Content="New Price:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="66"/>
-                                                <Button x:Name="button" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="14,22,0,0" VerticalAlignment="Top" Width="75" Grid.Row="4" Height="26"/>
-                                                <TextBox x:Name="textBox" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
-                                                <TextBox x:Name="textBox1" controls:TextBoxHelper.Watermark="Enter New Price" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="14,10,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="197"/>
+                                            <Grid >
 
+
+                                                <Label x:Name="label1" Content="Select a Unit Class: " HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Height="26" Width="112"/>
+                                                <ComboBox x:Name="cb_selectNewClass" HorizontalAlignment="Left" Margin="135,49,0,0" DropDownOpened="Cb_selectNewClass_OnDropDownOpened" SelectionChanged="cb_selectNewClass_OnSelectionChanged"  VerticalAlignment="Top" Width="117" Height="26">
+                                                    <ComboBoxItem Content="---Select Class---" IsSelected="True"/>
+                                                </ComboBox>
+                                                <Label x:Name="label2" Content="Previous Price:" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Height="26" Width="86"/>
+                                                <Label x:Name="label3" Content="New Price:" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
+                                                <Button x:Name="btn_updatePrices"   Style="{StaticResource AccentedSquareButtonStyle}" Click="Btn_updatePrices_OnClick" BorderThickness="0" Content="Update Price" HorizontalAlignment="Center" Margin="0,142,0,0" VerticalAlignment="Top" Width="100" Height="auto" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
+                                                <Label x:Name="lb_previousPrice" Content="....." HorizontalAlignment="Left" Height="26" Margin="135,80,0,0"  VerticalAlignment="Top" Width="117"/>
+                                                <TextBox x:Name="textBox1"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" MaxLength="10" controls:TextBoxHelper.Watermark="Enter New Price" HorizontalAlignment="Left" Height="26" Margin="135,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117"/>
+                                                <Label x:Name="label18_Copy" Content="Change Existing Unit Class Pricing" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="0,10,0,0"/>
                                             </Grid>
                                         </Border>
                                     </TabItem>

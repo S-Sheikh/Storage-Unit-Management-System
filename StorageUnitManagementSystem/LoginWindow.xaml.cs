@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using StorageUnitManagementSystem.BL.Classes;using System.Windows;
 using StorageUnitManagementSystem.BL;using System.Windows.Input;
 using StorageUnitManagementSystem.DAL;using System.Windows.Navigation;
 //
-namespace StorageUnitManagementSystem.PL
+namespace StorageUnitManagementSystem
 {
     /// <summary>
     /// Interaction logic for LoginWindow.xaml

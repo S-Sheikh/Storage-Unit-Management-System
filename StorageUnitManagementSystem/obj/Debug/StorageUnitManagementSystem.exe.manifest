@@ -138,14 +138,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StorageUnitManagementSystem.exe" size="151040">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StorageUnitManagementSystem.exe" size="163328">
       <assemblyIdentity name="StorageUnitManagementSystem" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nL/A+YOdHFKAzLYBAG/29ALzJvWR+2gsvxqT87fJKk8=</dsig:DigestValue>
+        <dsig:DigestValue>zaOoT8p81Jy1P0hB/tF+xT6ksJe1sxSDk5NzILrU3o8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
