@@ -15,7 +15,7 @@
 
 
 
-
+<!--><-->
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Content="About Us" />

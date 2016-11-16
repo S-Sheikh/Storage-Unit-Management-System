@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using StorageUnitManagementSystem.BL.Classes;
-
+//
 namespace StorageUnitManagementSystem.DAL
 {
     public abstract class StorageUnitManagementProviderBase

@@ -5,7 +5,7 @@ using System.Data.SQLite;
 using StorageUnitManagementSystem.DAL;
 using StorageUnitManagementSystem.BL.Classes;
 
-
+////
 namespace StorageUnitManagementSystem.DAL
 {
     public class UserSQLiteProvider : UserProviderBase

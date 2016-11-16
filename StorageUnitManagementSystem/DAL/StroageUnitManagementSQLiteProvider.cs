@@ -5,7 +5,7 @@ using System.Text;
 using System.Data.SQLite;
 using System.Data;
 using StorageUnitManagementSystem.BL.Classes;
-
+//
 namespace StorageUnitManagementSystem.DAL
 {
     class StroageUnitManagementSQLiteProvider : StorageUnitManagementProviderBase

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using StorageUnitManagementSystem.BL.Classes;
-
+/// <summary>
+/// /
+/// </summary>
 namespace StorageUnitManagementSystem.DAL
 {
     public abstract class UserProviderBase

@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:StorageUnitManagementSystem"
              StartupUri="LoginWindow.xaml">
     <Application.Resources>
+    ///
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
