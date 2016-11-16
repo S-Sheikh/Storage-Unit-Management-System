@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using StorageUnitManagementSystem.BL.Classes;
-
+//
 namespace StorageUnitManagementSystem.DAL
 {
     public abstract class StorageUnitManagementProviderBase

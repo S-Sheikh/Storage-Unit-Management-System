@@ -20,6 +20,7 @@ using StorageUnitManagementSystem.BL;
 using StorageUnitManagementSystem.BL.Classes;
 using Paragraph = Novacode.Paragraph;
 using Table = Novacode.Table;
+//
 
 namespace StorageUnitManagementSystem.PL
 {
@@ -33,10 +34,11 @@ namespace StorageUnitManagementSystem.PL
         private SUBL _subl;
         private CBL _cbl;
         private LUBL _lubl;
+        private UBL _ubl;
         public Client ClientObj { get; set; }
         public List<LeaseUnits> LeaseUnits { get; set; }
         public List<StorageUnit> StorageUnits { get; set; }
-        public List<Client> Clients { get; set; } 
+        public List<Client> Clients { get; set; }
         public List<string> Data { get; } = new List<string> {"Client ID", "Name", "Surname", "City", "Province"};
         public PopUp PopUp = new PopUp();
         public List<string> cb_UnitListSearchItems { get; } = new List<string>
@@ -46,6 +48,16 @@ namespace StorageUnitManagementSystem.PL
             "In Arrears",
             "Up-To-Date",
             "In Advance"
+        };
+
+        public List<string> cb_UnitListSearchItemsCopy { get; } = new List<string>
+        {
+            "Vacant Units",
+            "Occupied Units",
+            "In Arrears",
+            "Up-To-Date",
+            "In Advance",
+            "ID"
         };
         private GridViewColumnHeader _listViewSortCol = null;
         private SortAdorner _listViewSortAdorner = null;
@@ -60,25 +72,12 @@ namespace StorageUnitManagementSystem.PL
             _cbl = new CBL("ClientSQLiteProvider");
             _subl = new SUBL("StorageUnitSQLiteProvider");
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
-            DataContext = new Client();
-            DataContext = new StorageUnit();
+            _ubl = new UBL("UserSQLiteProvider");            DataContext = new StorageUnit();            DataContext = new StorageUnit();
            
             //Test
         }
 
-
-
-        private void textBox10_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void tabControl1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
@@ -95,16 +94,6 @@ namespace StorageUnitManagementSystem.PL
             LoginWindow login = new LoginWindow();
             login.Show();
             this.Close();
-        }
-
-        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         //TO:DO COPY PASTE VALIDATION
@@ -649,6 +638,26 @@ namespace StorageUnitManagementSystem.PL
                 this.ShowMessageAsync("There are no Storage Units to list", "No Units");
             }
         }
+        private void imgRefreshUnitsSearch_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            List<StorageUnit> suObjects = new List<StorageUnit>();
+            suObjects = _subl.SelectAll();
+            lv_Units_Search.Items.Clear();
+
+            if (suObjects.Count > 0)
+            {
+                lv_Units_Search.Items.Clear();
+                foreach (StorageUnit temp in suObjects)
+                {
+                    lv_Units_Search.Items.Add(temp);
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("There are no Storage Units to list", "No Units");
+            }
+        }
         private void cboListSearch_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -721,7 +730,6 @@ namespace StorageUnitManagementSystem.PL
                 {
                     LvListClient.Items.Add(clientObj);
                 }
-
             }
             else if (CboListSearch.SelectedItem.ToString() == "Name")
             {     
@@ -795,7 +803,7 @@ namespace StorageUnitManagementSystem.PL
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        else rc = 0;
+                        
                     }
                     if (rc == 0)
                     {
@@ -811,8 +819,7 @@ namespace StorageUnitManagementSystem.PL
                         {
                             lv_Units.Items.Add(unit);
                             rc = 1;
-                        }
-                        else rc = 0;
+                        }                        
                     }
                     if (rc == 0)
                     {
@@ -829,7 +836,6 @@ namespace StorageUnitManagementSystem.PL
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        else rc = 0;
                     }
                     if (rc == 0)
                     {
@@ -846,7 +852,6 @@ namespace StorageUnitManagementSystem.PL
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        else rc = 0;
                     }
                     if (rc == 0)
                     {
@@ -863,7 +868,6 @@ namespace StorageUnitManagementSystem.PL
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        else rc = 0;
                     }
                     if (rc == 0)
                     {
@@ -1133,6 +1137,8 @@ namespace StorageUnitManagementSystem.PL
                                     break;
                                 }
                             }
+
+
                         }
                         leaseUnit.LeaseID = unitId;
                         leaseUnit.StorageUnit.UnitId = unitId;
@@ -1302,6 +1308,27 @@ namespace StorageUnitManagementSystem.PL
         }
 
         private void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = (sender as GridViewColumnHeader);
+            string sortBy = column.Tag.ToString();
+            if (_listViewSortColUnits != null)
+            {
+                AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Remove(_listViewSortAdornerUnits);
+                lv_Units.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (_listViewSortColUnits == column && _listViewSortAdornerUnits.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            _listViewSortColUnits = column;
+            _listViewSortAdornerUnits = new SortAdorner(_listViewSortColUnits, newDir);
+            AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Add(_listViewSortAdornerUnits);
+            lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+
+        }
+
+        private void lvUnitsSearchColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
             string sortBy = column.Tag.ToString();
@@ -1666,6 +1693,5 @@ namespace StorageUnitManagementSystem.PL
             {
                 this.ShowMessageAsync("Item Not Selected!", "Please Select an item");
             }
-        }     
-    }
+        }       }
 }
