@@ -78,7 +78,7 @@
                                                 <Label x:Name="LblHeader" Content="Add Clients"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="219,3,0,0" HorizontalAlignment="Left" Width="125"/>
                                                 <Label x:Name="LblId" Content="ID Number:"   VerticalAlignment="Top" Margin="50,35,70,0" HorizontalAlignment="Left" Width="76"/>
                                                 <TextBox x:Name="TxtBoxId"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" VerticalAlignment="Top" Margin="0,40,0,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="ID Number Must Be 13-Digits" TextChanged="AddClientTextBoxValidation"/>
-                                                <Label x:Name="LblName" Content="Name:"   VerticalAlignment="Top" Margin="50,65,0,0" HorizontalAlignment="Left" Width="58"/>
+                                                <Label x:Name="LblName" Content="Name:"   VerticalAlignment="Top" Margin="50,65,0,0" HorizontalAlignment="Left" Width="58" />
                                                 <TextBox x:Name="TxtBoxName" VerticalAlignment="Top" Margin="0,70,0,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
                                                 <Label x:Name="LblSurname" Content="Surname:"    VerticalAlignment="Top" Margin="50,95,0,0" HorizontalAlignment="Left" Width="64"/>
                                                 <TextBox x:Name="TxtBoxSurname" VerticalAlignment="Top" Margin="0,98,0,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
@@ -144,7 +144,7 @@
                                                     <classes:Client/>
                                                 </Grid.DataContext>
                                                 <Label Content="Restore Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                                <ListView x:Name="LvRestoreClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectionChanged="lvRestoreClient_SelectionChanged"  SelectedIndex="{Binding Path=SelectedIndexValue}" ItemsSource="{Binding Path=Items}" Loaded="LvRestoreClient_Loaded">
+                                                <ListView x:Name="LvRestoreClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectionChanged="lvRestoreClient_SelectionChanged"  SelectedIndex="{Binding Path=SelectedIndexValue}" ItemsSource="{Binding Path=Items}" >
                                                     <ListView.View>
                                                         <GridView>
                                                             <GridViewColumn x:Name="IdRestoreColumn" Width="100" DisplayMemberBinding="{Binding idNumber}" >
@@ -206,7 +206,7 @@
                                                     <classes:Client/>
                                                 </Grid.DataContext>
                                                 <Label Content="List Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                                <ListView x:Name="LvListClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Loaded="LvListClient_Loaded" >
+                                                <ListView x:Name="LvListClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"  >
                                                     <ListView.View>
                                                         <GridView>
                                                             <GridViewColumn x:Name="IdListColumn" Width="100" DisplayMemberBinding="{Binding idNumber}" >
@@ -327,7 +327,7 @@
                                                 <Label x:Name="LabelAvailable" Content="Availabe Units :" HorizontalAlignment="Left" Margin="12,231,0,0" VerticalAlignment="Top"/>
                                                 <Label x:Name="LblAvailableUnits" Content="....." HorizontalAlignment="Left" Margin="172,230,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="TbNoOfNewUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="172,262,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="125"  controls:TextBoxHelper.Watermark="Only Digits" TextChanged="TbNoOfNewUnits_TextChanged"  />
-                                                <Button x:Name="BtnCheck" Content="Total"  Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Margin="0,0,95.2,144" VerticalAlignment="Bottom" HorizontalAlignment="Right" controls:ControlsHelper.ContentCharacterCasing="Normal" Click="BtnCheck_Click" Width="50"/>
+                                                <Button x:Name="BtnCheck" Content="Calculate"  Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Margin="0,0,95.2,144" VerticalAlignment="Bottom" HorizontalAlignment="Right" controls:ControlsHelper.ContentCharacterCasing="Normal" Click="BtnCheck_Click"/>
                                                 <Label x:Name="LblTot" Content="Total Unit Price :" HorizontalAlignment="Left" Margin="12,295,0,0" VerticalAlignment="Top"/>
                                                 <Label x:Name="LblTotal" Content="....." HorizontalAlignment="Center" Margin="172,295,309.2,0" VerticalAlignment="Top" Width="50"/>
                                                 <Button x:Name="BtnLeaseSubmit"  Style="{StaticResource AccentedSquareButtonStyle}"
@@ -345,7 +345,7 @@
                                                     <classes:LeaseUnits/>
                                                 </Grid.DataContext>
                                                 <Label Content="List Bookings" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"></Label>
-                                                <ListView x:Name ="LvLeaseUnits" Loaded="LvLeaseUnits_Loaded" Width="530" Margin="0,54,2,82" Height="300">
+                                                <ListView x:Name ="LvLeaseUnits" Width="530" Margin="0,54,2,82" Height="300">
                                                     <ListView.View>
                                                         <GridView>
                                                             <GridViewColumn x:Name="LeaseID" Width="100" 

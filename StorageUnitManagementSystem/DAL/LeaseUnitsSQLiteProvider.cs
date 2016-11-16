@@ -6,11 +6,10 @@ using System.Data;
 
 namespace StorageUnitManagementSystem.DAL
 {
-   public class LeaseUnitsSQLiteProvider : LeaseUnitsProviderBase
+    public class LeaseUnitsSQLiteProvider : LeaseUnitsProviderBase
     {
-        private string _conStr = "Data Source=c:\\DataStores\\StorageUnitManagementDB.db;Version=3;";
         private SQLiteConnection _sqlCon;
-
+        private string _conStr = CreateDatabase.ConStr;
         public override List<LeaseUnits> SelectAll()
         {
             //
@@ -29,8 +28,8 @@ namespace StorageUnitManagementSystem.DAL
                 _sqlCon = new SQLiteConnection(_conStr);  // new connection
                 bool bRead = false;
                 LeaseUnits = new List<LeaseUnits>(); // this ensures that if there are no records,
-                                              // the returned list will not be null, but
-                                              // it will be empty (Count = 0)
+                                                     // the returned list will not be null, but
+                                                     // it will be empty (Count = 0)
 
                 _sqlCon.Open(); // open connection
                 string selectQuery = "SELECT * FROM LeaseUnits";
@@ -52,17 +51,17 @@ namespace StorageUnitManagementSystem.DAL
                     LeaseUnit.StorageUnit.UnitClassification = Convert.ToString(sdr["UnitClass"]);
                     LeaseUnit.StorageUnit.UnitPrice = Convert.ToDouble(sdr["UnitPrice"]);
                     LeaseUnit.NoOfUnits = Convert.ToInt32(sdr["NoOfUnits"]);
-                    LeaseUnit.ClientWaitingList =(Convert.ToInt16(sdr["ClientWaitingList"])==1) ? true:false;
+                    LeaseUnit.ClientWaitingList = (Convert.ToInt16(sdr["ClientWaitingList"]) == 1) ? true : false;
                     LeaseUnit.AvailableUnits = Convert.ToString(sdr["AvailableUnits"]);
                     LeaseUnit.TypeOfPayment = Convert.ToString(sdr["TypeOfPayment"]);
-                    LeaseUnit.DateOfPayment= Convert.ToString(sdr["DatePaid"]);
+                    LeaseUnit.DateOfPayment = Convert.ToString(sdr["DatePaid"]);
                     LeaseUnit.DateOfContractStart = Convert.ToString(sdr["DateOfContractStart"]);
                     LeaseUnit.DateOfContractEnd = Convert.ToString(sdr["DateOfContractEnd"]);
                     LeaseUnit.AmountDeposited = Convert.ToString(sdr["AmountDeposited"]);
                     LeaseUnit.AmountOwed = Convert.ToString(sdr["AmountOwed"]);
                     LeaseUnit.AmountPaid = Convert.ToString(sdr["AmountPaid"]);
                     LeaseUnit.ClientCurrentTotal = Convert.ToString(sdr["ClientCurrentTotal"]);
-                    LeaseUnit.UnitLeased = (Convert.ToInt16(sdr["UnitLeased"])==1) ? true:false;
+                    LeaseUnit.UnitLeased = (Convert.ToInt16(sdr["UnitLeased"]) == 1) ? true : false;
                     LeaseUnit.ClientAdded = (Convert.ToInt16(sdr["ClientAdded"]) == 1) ? true : false;
                     LeaseUnit.TotalUnitPrice = Convert.ToString(sdr["TotalUnitPrice"]);
                     LeaseUnit.StorageUnit.UnitSize = Convert.ToString(sdr["UnitSize"]);
@@ -189,7 +188,7 @@ namespace StorageUnitManagementSystem.DAL
                     SQLiteCommand sqlCommand = new SQLiteCommand(insertQuery, _sqlCon); // setup command
                     SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
                     {
-                        new SQLiteParameter("@LeaseID",DbType.String), 
+                        new SQLiteParameter("@LeaseID",DbType.String),
                         new SQLiteParameter("@ClientID",DbType.String),
                         new SQLiteParameter("@ClientName",DbType.String),
                         new SQLiteParameter("@ClientSurname", DbType.String),
