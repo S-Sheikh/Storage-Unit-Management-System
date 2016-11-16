@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StorageUnitManagementSystem.BL.Classes
 {
@@ -293,7 +289,7 @@ namespace StorageUnitManagementSystem.BL.Classes
             }
         }
 
-        public static bool TableExists(String tableName)
+        public static bool TableExists(string tableName)
         {
             bool rc = false;
             try
@@ -327,6 +323,15 @@ namespace StorageUnitManagementSystem.BL.Classes
             }
 
             return rc;
+        }
+
+        public static string CreateFile(string fileName, string folderName)
+        {
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OnesAndZeroes" + "\\" + folderName;
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+            string path = Path.Combine(directory, fileName);
+            return path;
         }
     }
 }

@@ -69,7 +69,6 @@ namespace StorageUnitManagementSystem
         public MainWindow()
         {
             InitializeComponent();
-            LoginWindow login = new LoginWindow();
             _cbl = new CBL("ClientSQLiteProvider");
             _subl = new SUBL("StorageUnitSQLiteProvider");
             _lubl = new LUBL("LeaseUnitsSQLiteProvider");
@@ -139,7 +138,7 @@ namespace StorageUnitManagementSystem
             try
             {
                 if (TxtBoxId.Text.Equals("") && TxtBoxName.Text.Equals("") &&
-                    TxtBoxSurname.Text.Equals("") && TxtBoxDateOfBirth.Text.Equals("") &&
+                    TxtBoxSurname.Text.Equals("") && ClientDatePicker.Text.Equals("") &&
                     TxtBoxCellPhone.Text.Equals("") && TxtBoxTelephone.Text.Equals("") &&
                     TxtBoxEmail.Text.Equals("") && TxtBoxAddress.Text.Equals("") &&
                     TxtBoxLine2.Text.Equals("") && TxtBoxCity.Text.Equals("") &&
@@ -152,7 +151,9 @@ namespace StorageUnitManagementSystem
                     clientObj.idNumber = TxtBoxId.Text;
                     clientObj.FirstName = TxtBoxName.Text;
                     clientObj.LastName = TxtBoxSurname.Text;
-                    clientObj.DateOfBirth = TxtBoxDateOfBirth.Text;
+                    //clientObj.DateOfBirth = TxtBoxDateOfBirth.Text;
+                    if (ClientDatePicker.SelectedDate != null)
+                        clientObj.DateOfBirth = ClientDatePicker.SelectedDate.Value.Date.ToShortDateString();
                     clientObj.Cellphone = TxtBoxCellPhone.Text;
                     clientObj.Telephone = TxtBoxTelephone.Text;
                     clientObj.EMailAddress = TxtBoxEmail.Text;
@@ -170,7 +171,7 @@ namespace StorageUnitManagementSystem
                         TxtBoxId.Clear();
                         TxtBoxName.Clear();
                         TxtBoxSurname.Clear();
-                        TxtBoxDateOfBirth.Clear();
+                        ClientDatePicker.Text = "";
                         TxtBoxCellPhone.Clear();
                         TxtBoxTelephone.Clear();
                         TxtBoxEmail.Clear();
@@ -720,7 +721,6 @@ namespace StorageUnitManagementSystem
 
         private void btnListSearch_Click(object sender, RoutedEventArgs e)
         {
-
             int rc = 0;
             List<Client> clients = new List<Client>();
             clients = _cbl.SelectAll();
@@ -1225,32 +1225,32 @@ namespace StorageUnitManagementSystem
                             {
                                 if (client.idNumber.Equals(leaseUnit.Client.idNumber))
                                 {
-                                    string fileTemplate = CreateFile("Quotation.docx", "Quotations");
+                                    string fileTemplate = CreateDatabase.CreateFile("Quotation.docx", "Quotations");
                                     string outputFileName = string.Format(fileTemplate);
                                     //SendEmail(client.EMailAddress, "Please find the attached document!");
                                     DocX letter = GetTemplate(leaseUnit.Client.idNumber);
-                                    foreach (KeyValuePair<string, string> pair in dictionary)
-                                    {
-                                        if (pair.Value == leaseUnit.Client.idNumber)
-                                            letter.ReplaceText("ClientID", leaseUnit.Client.idNumber);
-                                        else if (pair.Value == leaseUnit.Client.FirstName)
-                                            letter.ReplaceText("ClientName", leaseUnit.Client.FirstName);
-                                        else if (pair.Value == leaseUnit.Client.LastName)
-                                            letter.ReplaceText("ClientSurname", leaseUnit.Client.LastName);
-                                        else if (pair.Value == leaseUnit.StorageUnit.UnitClassification)
-                                            letter.ReplaceText("UnitClass", leaseUnit.StorageUnit.UnitClassification);
-                                        else if (pair.Value == leaseUnit.StorageUnit.UnitSize)
-                                            letter.ReplaceText("UnitSize", leaseUnit.StorageUnit.UnitSize);
-                                        else if (pair.Value ==
-                                                 leaseUnit.StorageUnit.UnitPrice.ToString(CultureInfo.InvariantCulture))
-                                            letter.ReplaceText("UnitPrice",
-                                                leaseUnit.StorageUnit.UnitPrice.ToString(
-                                                    CultureInfo.InvariantCulture));
-                                        else if (pair.Value == leaseUnit.NoOfUnits.ToString())
-                                            letter.ReplaceText("NoOfUnits", leaseUnit.NoOfUnits.ToString());
-                                        else if (pair.Value == leaseUnit.TotalUnitPrice)
-                                            letter.ReplaceText("TotalUnitPrice", leaseUnit.TotalUnitPrice);
-                                    }
+                                    //foreach (KeyValuePair<string, string> pair in dictionary)
+                                    //{
+                                    //    if (pair.Value == leaseUnit.Client.idNumber)
+                                    //        letter.ReplaceText("ClientID", leaseUnit.Client.idNumber);
+                                    //    else if (pair.Value == leaseUnit.Client.FirstName)
+                                    //        letter.ReplaceText("ClientName", leaseUnit.Client.FirstName);
+                                    //    else if (pair.Value == leaseUnit.Client.LastName)
+                                    //        letter.ReplaceText("ClientSurname", leaseUnit.Client.LastName);
+                                    //    else if (pair.Value == leaseUnit.StorageUnit.UnitClassification)
+                                    //        letter.ReplaceText("UnitClass", leaseUnit.StorageUnit.UnitClassification);
+                                    //    else if (pair.Value == leaseUnit.StorageUnit.UnitSize)
+                                    //        letter.ReplaceText("UnitSize", leaseUnit.StorageUnit.UnitSize);
+                                    //    else if (pair.Value ==
+                                    //             leaseUnit.StorageUnit.UnitPrice.ToString(CultureInfo.InvariantCulture))
+                                    //        letter.ReplaceText("UnitPrice",
+                                    //            leaseUnit.StorageUnit.UnitPrice.ToString(
+                                    //                CultureInfo.InvariantCulture));
+                                    //    else if (pair.Value == leaseUnit.NoOfUnits.ToString())
+                                    //        letter.ReplaceText("NoOfUnits", leaseUnit.NoOfUnits.ToString());
+                                    //    else if (pair.Value == leaseUnit.TotalUnitPrice)
+                                    //        letter.ReplaceText("TotalUnitPrice", leaseUnit.TotalUnitPrice);
+                                    //}
                                         letter.ReplaceText("ClientID", leaseUnit.Client.idNumber);
                                         letter.ReplaceText("ClientName", leaseUnit.Client.FirstName);
                                         letter.ReplaceText("ClientSurname", leaseUnit.Client.LastName);
@@ -1259,7 +1259,7 @@ namespace StorageUnitManagementSystem
                                         letter.ReplaceText("UnitPrice",
                                             leaseUnit.StorageUnit.UnitPrice.ToString(CultureInfo.InvariantCulture));
                                         letter.ReplaceText("NoOfUnits", leaseUnit.NoOfUnits.ToString());
-                                        letter.ReplaceText("TotalUnitPrice", leaseUnit.TotalUnitPrice);
+                                        letter.ReplaceText("TotalPrice", leaseUnit.TotalUnitPrice);
                                         letter.SaveAs(outputFileName);
                                         // Open in word:
                                         Process.Start("WINWORD.EXE", "\"" + outputFileName + "\""); //For Debugging Purposes
@@ -1299,7 +1299,7 @@ namespace StorageUnitManagementSystem
 
         private void SendEmail(string to,string body)
         {
-            string directory = CreateFile("Quotation.docx", "Quotations");
+            string directory = CreateDatabase.CreateFile("Quotation.docx", "Quotations");
             ProgressRingLeaseUnits.IsActive = true;
                 SmtpMail oMail = new SmtpMail("TryIt");
                 SmtpClient oSmtp = new SmtpClient();
@@ -1426,14 +1426,14 @@ namespace StorageUnitManagementSystem
             }
         }
 
-        private string CreateFile(string fileName, string folderName)
-        {
-            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OnesAndZeroes" + "\\" + folderName;
-            if (!Directory.Exists(directory))
-                Directory.CreateDirectory(directory);
-            string path = Path.Combine(directory, fileName);
-            return path;
-        }
+        //private string CreateFile(string fileName, string folderName)
+        //{
+        //    string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OnesAndZeroes" + "\\" + folderName;
+        //    if (!Directory.Exists(directory))
+        //        Directory.CreateDirectory(directory);
+        //    string path = Path.Combine(directory, fileName);
+        //    return path;
+        //}
         //private string CreateFile(string fileName, string folderName)
         //{
         //    string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -1445,7 +1445,7 @@ namespace StorageUnitManagementSystem
         {  
             string address = "";
             //string fileName = @"C:\\Users\\Watlinton\Documents\\DocXExample.docx";
-            string fileName = CreateFile("Template.docx","Template");
+            string fileName = CreateDatabase.CreateFile("Template.docx","Template");
             var doc = DocX.Create(fileName);
             LeaseUnits = _lubl.SelectAll();
             Clients = _cbl.SelectAll();
@@ -1466,7 +1466,7 @@ namespace StorageUnitManagementSystem
                         client.Address.PostalCode + "\n";
                     if (!dictionary.ContainsKey("Address"))
                     {
-                        dictionary.Add("Address", address);
+                        dictionary.Add("Address", "");
                     }
                     break;
                 }           
@@ -1477,6 +1477,7 @@ namespace StorageUnitManagementSystem
                 {
                     //char[] charSize = leaseUnit.StorageUnit.UnitSize.ToCharArray();
                     // Set up our paragraph contents:
+                    string companyName = "One'sAndZero's";
                     string headerText = "Unit Quotation";
                     string date = "Date: " + DateTime.Now.ToShortDateString();
                     string time = "Time: " + DateTime.Now.ToShortTimeString();
@@ -1491,11 +1492,16 @@ namespace StorageUnitManagementSystem
                                      + clientName + "\t" + "\t" + leaseUnit.Client.FirstName + "\n"
                                      + clientSurname + "\t" + leaseUnit.Client.LastName
                                      + Environment.NewLine;
+                    var companyNameFormat = new Formatting();
+                    companyNameFormat.FontFamily = new System.Drawing.FontFamily("Tahoma");
+                    companyNameFormat.Size = 18D;
+                    companyNameFormat.FontColor = Color.Cyan;
+                    companyNameFormat.Position = 12;
 
                     // Title Formatting:
                     var titleFormat = new Formatting();
                     titleFormat.FontFamily = new System.Drawing.FontFamily("Arial Black");
-                    titleFormat.Size = 18D;
+                    titleFormat.Size = 16D;
                     titleFormat.FontColor = Color.Black;
                     titleFormat.Position = 12;
 
@@ -1513,6 +1519,10 @@ namespace StorageUnitManagementSystem
                     variableFormat.Bold = variableFormat.Bold;
 
                     // Insert each prargraph, with appropriate spacing and alignment:
+                    Paragraph _companyName = doc.InsertParagraph(companyName, false, companyNameFormat);
+                    _companyName.Alignment = Alignment.center;
+                    doc.InsertParagraph(Environment.NewLine);
+
                     Paragraph title = doc.InsertParagraph(headerText, false, titleFormat);
                     title.Alignment = Alignment.center;
                     doc.InsertParagraph(Environment.NewLine);
@@ -1540,11 +1550,11 @@ namespace StorageUnitManagementSystem
                     table.Rows[0].Cells[2].Paragraphs.First().Append("Unit Price").Bold();
                     table.Rows[0].Cells[3].Paragraphs.First().Append("Number of Units").Bold();
                     table.Rows[0].Cells[4].Paragraphs.First().Append("Total Unit Price (R)").Bold();
-                    table.Rows[1].Cells[0].Paragraphs.First().Append(leaseUnit.StorageUnit.UnitClassification);
-                    table.Rows[1].Cells[1].Paragraphs.First().Append(leaseUnit.StorageUnit.UnitSize);
-                    table.Rows[1].Cells[2].Paragraphs.First().Append(leaseUnit.StorageUnit.UnitPrice.ToString(CultureInfo.InvariantCulture));
-                    table.Rows[1].Cells[3].Paragraphs.First().Append(leaseUnit.NoOfUnits.ToString());
-                    table.Rows[1].Cells[4].Paragraphs.First().Append(leaseUnit.TotalUnitPrice);
+                    table.Rows[1].Cells[0].Paragraphs.First().Append("UnitClass");
+                    table.Rows[1].Cells[1].Paragraphs.First().Append("UnitSize");
+                    table.Rows[1].Cells[2].Paragraphs.First().Append("UnitPrice");
+                    table.Rows[1].Cells[3].Paragraphs.First().Append("NoOfUnits");
+                    table.Rows[1].Cells[4].Paragraphs.First().Append("TotalPrice");
                     doc.InsertTable(table);
 
                     doc.InsertParagraph(Environment.NewLine);
@@ -1574,16 +1584,16 @@ namespace StorageUnitManagementSystem
 
                     if (!(dictionary.ContainsKey("ClientID") || dictionary.ContainsKey("ClientName") || dictionary.ContainsKey("ClientSurname")
                         || dictionary.ContainsKey("UnitClass") || dictionary.ContainsKey("UnitSize") || dictionary.ContainsKey("UnitPrice")
-                        || dictionary.ContainsKey("NoOfUnits") || dictionary.ContainsKey("TotalUnitPrice")))
+                        || dictionary.ContainsKey("NoOfUnits") || dictionary.ContainsKey("TotalPrice")))
                     {
-                        dictionary.Add("ClientID", leaseUnit.Client.idNumber);
-                        dictionary.Add("ClientName", leaseUnit.Client.FirstName);
-                        dictionary.Add("ClientSurname", leaseUnit.Client.LastName);
-                        dictionary.Add("UnitClass", leaseUnit.StorageUnit.UnitClassification);
-                        dictionary.Add("UnitSize", leaseUnit.StorageUnit.UnitSize);
-                        dictionary.Add("UnitPrice", leaseUnit.StorageUnit.UnitPrice.ToString(CultureInfo.InvariantCulture));
-                        dictionary.Add("NoOfUnits", leaseUnit.NoOfUnits.ToString());
-                        dictionary.Add("TotalUnitPrice", leaseUnit.TotalUnitPrice);
+                        dictionary.Add("ClientID", "");
+                        dictionary.Add("ClientName", "");
+                        dictionary.Add("ClientSurname","");
+                        dictionary.Add("UnitClass", "");
+                        dictionary.Add("UnitSize", "");
+                        dictionary.Add("UnitPrice","");
+                        dictionary.Add("NoOfUnits", "");
+                        dictionary.Add("TotalPrice","");
                     }
                     break;
                 }
@@ -1618,7 +1628,7 @@ namespace StorageUnitManagementSystem
                     }
                     if (double.TryParse(noOfUnits_, out noOfUnits))
                     {
-                        LblTotal.Content = unitPrice*Convert.ToDouble(noOfUnits);
+                        LblTotal.Content = "R " + unitPrice*Convert.ToDouble(noOfUnits);
                     }
                     else
                     {
@@ -1748,6 +1758,19 @@ namespace StorageUnitManagementSystem
             {
                 this.ShowMessageAsync("Error", "No Matching Unit ID Found");
             }
+        }
+
+        private void TxtBoxListSearch_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            if (TxtBoxListSearch.Text == "")
+            {
+                LvListClient.Items.Clear();
+            }
+        }
+
+        private void BtnSupport_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

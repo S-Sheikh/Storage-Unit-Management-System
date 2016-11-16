@@ -38,10 +38,10 @@
             <Label x:Name="label1" Content="Username:" Margin="0,9.4,45.6,0" Grid.Row="1" VerticalAlignment="Top" Height="26" HorizontalAlignment="Right" Width="66"/>
             <Label x:Name="label2" Content="Password:" Margin="0,9.4,44.6,0" Grid.Row="2" VerticalAlignment="Top" Height="27" HorizontalAlignment="Right" Width="62"/>
             <TextBox x:Name="textBox" Height="23" Margin="120,9.4,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="301" Grid.ColumnSpan="2"/>
-            <TextBox x:Name="textBox1" Height="23" Margin="120,9.4,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="301" Grid.ColumnSpan="2"/>
-            <Button x:Name="btnLogin" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="28.4,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="117" Click="btnLogin_Click" Height="20" IsDefault="True" />
-            
-            <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="-4,-6,-0.2,0" Height="266" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
+            <PasswordBox x:Name="textBox1" PasswordChar="*" FontWeight="ExtraBold"  Height="23" Margin="120,9.4,0,0" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="301" Grid.ColumnSpan="2"/>
+            <Button x:Name="btnLogin" Style="{StaticResource AccentedSquareButtonStyle}"  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Content="Login" Grid.Column="1" HorizontalAlignment="Left" Margin="28.4,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="117" Click="btnLogin_Click" IsDefault="True" controls:ControlsHelper.ContentCharacterCasing="Normal" />
+
+            <Border  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2"  Margin="-4,-6,-0.2,0" Height="266" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="5"/>
 
         </Grid>
 

@@ -62,7 +62,7 @@ namespace StorageUnitManagementSystem
 
             foreach (User user in User)
             {
-                if (textBox.Text.ToString() == user.UserName.ToString() && textBox1.Text.ToString() == user.Password.ToString())
+                if (textBox.Text.ToString() == user.UserName.ToString() && textBox1.Password.ToString() == user.Password.ToString())
                 {
                     window.Show();
                     MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(window, "Logging In", "Successfull Press OK to continue");
