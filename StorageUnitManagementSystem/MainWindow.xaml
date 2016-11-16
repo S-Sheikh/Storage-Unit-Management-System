@@ -344,7 +344,7 @@
                             </Grid>
                         </TabItem>
                         <!--=================================================================================================================================================================================-->
-                        <TabItem   Header="Units" Width="100"  Margin="21,0,-21,0" >
+                        <TabItem   Header="Units" Width="100"  Margin="0,0,-21,0" HorizontalAlignment="Right" >
                             <Grid>
 
                                 <TabControl x:Name="tabControl2" Margin="10" TabStripPlacement="Left">

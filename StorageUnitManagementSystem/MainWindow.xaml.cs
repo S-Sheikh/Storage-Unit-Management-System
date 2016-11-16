@@ -1427,7 +1427,6 @@ namespace StorageUnitManagementSystem
                     else
                     {
                         LeaseUnits = _lubl.SelectAll();
-                        this.ShowMessageAsync("DEBUG", "Im HERE");
                         foreach (LeaseUnits leaseUnit in LeaseUnits)
                         {
                             if (leaseUnit.StorageUnit.UnitId.Equals(selectedUnit.UnitId))
