@@ -153,6 +153,7 @@
     <Compile Include="BL\CBL.cs" />
     <Compile Include="BL\Classes\Address.cs" />
     <Compile Include="BL\Classes\Client.cs" />
+    <Compile Include="BL\Classes\CreateDatabase.cs" />
     <Compile Include="BL\Classes\LeaseUnits.cs" />
     <Compile Include="BL\Classes\SortAdorner.cs" />
     <Compile Include="BL\Classes\StorageUnit.cs" />
