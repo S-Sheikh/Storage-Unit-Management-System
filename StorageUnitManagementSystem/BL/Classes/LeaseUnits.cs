@@ -17,7 +17,7 @@
 
         public int NoOfUnits { get; set; }
 
-        public int AvailableUnits { get; set; }
+        public string AvailableUnits { get; set; }
 
         public string TypeOfPayment { get; set; }
 

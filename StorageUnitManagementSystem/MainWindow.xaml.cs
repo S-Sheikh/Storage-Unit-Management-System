@@ -22,7 +22,7 @@ using Paragraph = Novacode.Paragraph;
 using Table = Novacode.Table;
 //
 
-namespace StorageUnitManagementSystem.PL
+namespace StorageUnitManagementSystem
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -1693,5 +1693,74 @@ namespace StorageUnitManagementSystem.PL
             {
                 this.ShowMessageAsync("Item Not Selected!", "Please Select an item");
             }
-        }       }
+        }
+        private void Btn_ClearLessee_OnClick(object sender, RoutedEventArgs e)
+        {
+            int rc = 0;
+            StorageUnit selectedUnit = new StorageUnit();
+            if (lv_Units.SelectedIndex >= 0)
+            {
+                //Get Selected Item as a SU Object , possible because of class binding
+                var unitObj = lv_Units.SelectedItem as StorageUnit;
+                string selectedID = unitObj.UnitId;
+                rc = _subl.SelectStorageUnit(selectedID, ref selectedUnit);
+                if (rc != 0)
+                {
+                    this.ShowMessageAsync("Error", "Could Not Find Storage Unit ... \n Please Refresh Unit List ");
+                }
+                else
+                {
+                    selectedUnit.UnitOccupied = false;
+                    selectedUnit.UnitOwnerId = "0";
+                    rc = _subl.Update(selectedUnit);
+                    if (rc != 0)
+                    {
+                        this.ShowMessageAsync("Error", "Could not Remove Client from Unit");
+                    }
+                    else
+                    {
+                        LeaseUnits = _lubl.SelectAll();
+                        foreach (LeaseUnits leaseUnit in LeaseUnits)
+                        {
+                            if (leaseUnit.StorageUnit.UnitId.Equals(selectedUnit.UnitId))
+                            {
+                                rc = _lubl.Delete(leaseUnit.LeaseID);
+                                if (rc != 0)
+                                {
+                                    this.ShowMessageAsync("Error", "Could not Delete Lease Information");
+                                }
+                                else
+                                {
+                                    this.ShowMessageAsync("Success", "Removed Leasing Information for selected Unit");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                this.ShowMessageAsync("Warning", "Please Choose a Unit in the List");
+            }
+        }
+
+        private void btn_UnitListSearch_Copy_OnClick(object sender, RoutedEventArgs e)
+        {
+            int rc = 0;
+            StorageUnit unitObject = new StorageUnit();
+            lv_Units_Search.Items.Clear();
+
+            //lv_Units_Search.Items.Clear();
+            rc = _subl.SelectStorageUnit(tb_SearchUnit.Text, ref unitObject);
+            if (rc == 0)
+            {
+                //lv_Units_Search.Items.Clear();
+                lv_Units_Search.Items.Add(unitObject);
+            }
+            else
+            {
+                this.ShowMessageAsync("Error", "No Matching Unit ID Found");
+            }
+        }
+    }
 }
