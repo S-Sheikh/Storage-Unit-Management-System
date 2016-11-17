@@ -78,12 +78,12 @@
                                                 <Label x:Name="LblHeader" Content="Add Clients"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="219,3,0,0" HorizontalAlignment="Left" Width="125"/>
                                                 <Label x:Name="LblId" Content="ID Number:"   VerticalAlignment="Top" Margin="50,35,70,0" HorizontalAlignment="Left" Width="76"/>
                                                 <TextBox x:Name="TxtBoxId"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" VerticalAlignment="Top" Margin="0,40,0,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="ID Number Must Be 13-Digits" TextChanged="AddClientTextBoxValidation"/>
-                                                <Label x:Name="LblName" Content="Name:"   VerticalAlignment="Top" Margin="50,65,0,0" HorizontalAlignment="Left" Width="58"/>
+                                                <Label x:Name="LblName" Content="Name:"   VerticalAlignment="Top" Margin="50,65,0,0" HorizontalAlignment="Left" Width="58" />
                                                 <TextBox x:Name="TxtBoxName" VerticalAlignment="Top" Margin="0,70,0,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
                                                 <Label x:Name="LblSurname" Content="Surname:"    VerticalAlignment="Top" Margin="50,95,0,0" HorizontalAlignment="Left" Width="64"/>
                                                 <TextBox x:Name="TxtBoxSurname" VerticalAlignment="Top" Margin="0,98,0,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
-                                                <Label x:Name="LblDateOfBith" Content="Date of Birth:"  VerticalAlignment="Top" Margin="50,123,0,0" RenderTransformOrigin="0.017,0.548" HorizontalAlignment="Left" Width="89"/>
-                                                <TextBox x:Name="TxtBoxDateOfBirth" VerticalAlignment="Top" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" Margin="144,128,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="DD-MM-YYYY" Text="{Binding Path=DateOfBirth, StringFormat=dd-MM-yyyy}"/>
+                                                <Label x:Name="LblDateOfBith" Content="Date of Birth:"  VerticalAlignment="Top" Margin="50,129,0,0" RenderTransformOrigin="0.017,0.548" HorizontalAlignment="Left" Width="89"/>
+                                                <!--<TextBox x:Name="TxtBoxDateOfBirth" VerticalAlignment="Top" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" Margin="144,128,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="DD-MM-YYYY" Text="{Binding Path=DateOfBirth, StringFormat=dd-MM-yyyy}"/>-->
                                                 <Label x:Name="LblCellPhone" Content="Cell Phone:"   VerticalAlignment="Top" Margin="50,156,0,0" RenderTransformOrigin="0.462,1.5" HorizontalAlignment="Left" Width="89"/>
                                                 <Label x:Name="LblTelephone" Content="Telephone:"    VerticalAlignment="Top" Margin="50,185,0,0" HorizontalAlignment="Left" Width="76"/>
                                                 <TextBox x:Name="TxtBoxTelephone" VerticalAlignment="Top" Margin="144,188,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Must Be 10 Digits" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" TextChanged="txtBoxTelephone_TextChanged"/>
@@ -94,7 +94,7 @@
                                                 <TextBox x:Name="TxtBoxLine2" VerticalAlignment="Top" Margin="144,248,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Address Line 2"/>
 
                                                 <TextBox x:Name="TxtBoxCity" VerticalAlignment="Top" Margin="144,278,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Can Only Contain Letters"/>
-                                                <TextBox x:Name="TxtBoxCode" VerticalAlignment="Top" Margin="334,338,0,0" HorizontalAlignment="Left" Width="90" controls:TextBoxHelper.Watermark="Only Digits" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput"/>
+                                                <TextBox x:Name="TxtBoxCode" VerticalAlignment="Top" Margin="334,338,0,0" HorizontalAlignment="Left" Width="90" controls:TextBoxHelper.Watermark="Only Digits" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" MaxLength="5"/>
                                                 <Label x:Name="LblAddressCode" Content="Code:"   VerticalAlignment="Top" Margin="280,335,0,0" HorizontalAlignment="Left" Width="40"/>
                                                 <Label x:Name="LblAddressLine2" Content="Province:"   VerticalAlignment="Top" Margin="50,305,0,0" RenderTransformOrigin="0.462,1.5" HorizontalAlignment="Left" Width="78"/>
                                                 <TextBox x:Name="TxtBoxCellPhone" VerticalAlignment="Top"  Margin="144,158,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Must Be 10 Digits" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" TextChanged="txtBoxCellPhone_TextChanged"/>
@@ -103,6 +103,7 @@
                                                 <TextBox x:Name="TxtBoxEmail" VerticalAlignment="Top" Margin="144,368,144,0" HorizontalAlignment="Center" Width="280" controls:TextBoxHelper.Watermark="Valid Email"/>
                                                 <Button x:Name="BtnAddClient" Style="{StaticResource AccentedSquareButtonStyle}" Height="auto" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,198,10.4"  controls:ButtonHelper.CornerRadius="10" Content="Submit" Click="btnAddClient_Click" 
                                                         BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ButtonHelper.PreserveTextCase="True" Width="70"  />
+                                                <DatePicker x:Name="ClientDatePicker" HorizontalAlignment="Left" Margin="144,129,0,0" VerticalAlignment="Top" SelectedDateFormat="Short" Width="280"/>
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -132,7 +133,7 @@
                                                 <TextBox x:Name="TxtBoxRemoveClientUnitClass"  IsEnabled="False"  Width="250"  Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,359,50,0" Visibility="Hidden"/>
                                                 <Label x:Name="LblClientNoOfUnits" Content="Client No. of Units:"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,384,0,0" Visibility="Hidden"/>
                                                 <TextBox x:Name="TxtBoxRemoveClientNoOfUnits"  IsEnabled="False" Width="250" Height="18" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="140,389,50,0" Visibility="Hidden"/>
-                                                <Button x:Name="BtnRemoveClient" Height="25" Width="101" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,420,0,0"  controls:ButtonHelper.CornerRadius="10" Content="Remove Client" Click="btnRemoveClient_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Visibility="Hidden" />
+                                                <Button x:Name="BtnRemoveClient" Height="25" Width="101" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100,420,0,0"  controls:ButtonHelper.CornerRadius="10" Content="Remove Client" Click="btnRemoveClient_Click"  Visibility="Hidden"  Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
                                                 <Button x:Name="BtnRemoveSearch" Width="68" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="438,48,10,0"  controls:ButtonHelper.CornerRadius="10" Content="Search" Click="bntRemoveSearch_Click" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ControlsHelper.ContentCharacterCasing="Normal" />
                                             </Grid>
                                         </Border>
@@ -144,7 +145,7 @@
                                                     <classes:Client/>
                                                 </Grid.DataContext>
                                                 <Label Content="Restore Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                                <ListView x:Name="LvRestoreClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectionChanged="lvRestoreClient_SelectionChanged"  SelectedIndex="{Binding Path=SelectedIndexValue}" ItemsSource="{Binding Path=Items}" Loaded="LvRestoreClient_Loaded">
+                                                <ListView x:Name="LvRestoreClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" SelectionChanged="lvRestoreClient_SelectionChanged"  SelectedIndex="{Binding Path=SelectedIndexValue}" ItemsSource="{Binding Path=Items}" >
                                                     <ListView.View>
                                                         <GridView>
                                                             <GridViewColumn x:Name="IdRestoreColumn" Width="100" DisplayMemberBinding="{Binding idNumber}" >
@@ -206,7 +207,7 @@
                                                     <classes:Client/>
                                                 </Grid.DataContext>
                                                 <Label Content="List Clients" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                                <ListView x:Name="LvListClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0" Loaded="LvListClient_Loaded" >
+                                                <ListView x:Name="LvListClient" Height="300" Width="550" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,50,0,0"  >
                                                     <ListView.View>
                                                         <GridView>
                                                             <GridViewColumn x:Name="IdListColumn" Width="100" DisplayMemberBinding="{Binding idNumber}" >
@@ -278,10 +279,9 @@
                                                     <ComboBoxItem>Search by:</ComboBoxItem>
                                                 </ComboBox>
 
-                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"></TextBox>
+                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" TextChanged="TxtBoxListSearch_TextChanged" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"></TextBox>
                                                 <Button x:Name="BtnListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="275,0,0,38" Click="btnListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True"></Button>
-                                            </Grid>
-                                        </Border>
+                                            </Grid>                                        </Border>
                                     </TabItem>
 
                                     <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5">
@@ -297,8 +297,8 @@
                             <!--==================================================================================================================================================================================-->
                             <Grid>
                                 <Grid.DataContext>
-                                    <classes:Client>
-                                    </classes:Client>
+                                    
+                                    <classes:Client/>
                                 </Grid.DataContext>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="125*"/>
@@ -332,9 +332,9 @@
                                                 <Label x:Name="LabelAvailable" Content="Availabe Units :" HorizontalAlignment="Left" Margin="12,231,0,0" VerticalAlignment="Top"/>
                                                 <Label x:Name="LblAvailableUnits" Content="....." HorizontalAlignment="Left" Margin="172,230,0,0" VerticalAlignment="Top"/>
                                                 <TextBox x:Name="TbNoOfNewUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="23" Margin="172,262,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="125"  controls:TextBoxHelper.Watermark="Only Digits" TextChanged="TbNoOfNewUnits_TextChanged"  />
-                                                <Button x:Name="BtnCheck" Content="Total"  Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Margin="0,0,95.2,144" VerticalAlignment="Bottom" HorizontalAlignment="Right" controls:ControlsHelper.ContentCharacterCasing="Normal" Click="BtnCheck_Click" Width="50"/>
+                                                <Button x:Name="BtnCheck" Content="Calculate"  Style="{StaticResource AccentedSquareButtonStyle}" BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Margin="0,0,95.2,144" VerticalAlignment="Bottom" HorizontalAlignment="Right" controls:ControlsHelper.ContentCharacterCasing="Normal" Click="BtnCheck_Click"/>
                                                 <Label x:Name="LblTot" Content="Total Unit Price :" HorizontalAlignment="Left" Margin="12,295,0,0" VerticalAlignment="Top"/>
-                                                <Label x:Name="LblTotal" Content="....." HorizontalAlignment="Center" Margin="172,295,309.2,0" VerticalAlignment="Top" Width="50"/>
+                                                <Label x:Name="LblTotal" Content="....." HorizontalAlignment="Center" Margin="172,295,234.2,0" VerticalAlignment="Top" Width="125"/>
                                                 <Button x:Name="BtnLeaseSubmit"  Style="{StaticResource AccentedSquareButtonStyle}"
                                                         Content="Submit" HorizontalAlignment="Center" Margin="246,336,199.2,0"  VerticalAlignment="Top" Click="BtnLeaseSubmit_Click"  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" controls:ButtonHelper.PreserveTextCase="True" />
                                                 <controls:ProgressRing Name="ProgressRingLeaseUnits" Foreground="{DynamicResource AccentColorBrush}" Margin="254,369,207.2,14.2" Width="70" IsActive="False"/>
@@ -350,7 +350,7 @@
                                                     <classes:LeaseUnits/>
                                                 </Grid.DataContext>
                                                 <Label Content="List Bookings" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"></Label>
-                                                <ListView x:Name ="LvLeaseUnits" Loaded="LvLeaseUnits_Loaded" Width="530" Margin="0,54,2,82" Height="300">
+                                                <ListView x:Name ="LvLeaseUnits" Width="530" Margin="0,54,2,82" Height="300">
                                                     <ListView.View>
                                                         <GridView>
                                                             <GridViewColumn x:Name="LeaseID" Width="100" 
@@ -406,7 +406,7 @@
                                                 </ListView>
                                                 <Label Content="Search:"  Margin="28,394,419,17" FontSize="13" FontWeight="Bold"/>
                                                 <TextBox x:Name="LeaseUnitsSearch" Margin="118,394,214,16" controls:TextBoxHelper.Watermark="Enter Lease ID"/>
-                                                <Button x:Name="BtnEditLeaseUnit" Content="Edit Bookings" Margin="372,394,60,14" Style="{StaticResource AccentedSquareButtonStyle}" controls:ControlsHelper.ContentCharacterCasing="Normal"  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="BtnEditLeaseUnit_Click" Height="28"/>
+                                                <Button x:Name="BtnEditLeaseUnit" Content="Review  Bookings" Margin="372,394,52,14" Style="{StaticResource AccentedSquareButtonStyle}" controls:ControlsHelper.ContentCharacterCasing="Normal"  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="1" Click="BtnEditLeaseUnit_Click" Height="28"/>
                                                 <Image x:Name="ImgRefreshLease" Height="30" Width="32" Margin="235,0,0,47" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="ImgRefreshLease_MouseDown">
                                                     <Image.Source>
                                                         <BitmapImage DecodePixelWidth="64" UriSource="/Images/refresh.png"/>
@@ -534,7 +534,7 @@
                                                     <ComboBoxItem>Sort By:</ComboBoxItem>
                                                 </ComboBox>
                                                 <Button x:Name="btn_UnitListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="0,390,0,23" Click="btn_UnitListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" IsDefault="True"/>
-                                                <Button x:Name="btn_ClearLessee" Tag="listUnits" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick" Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,390,10,23" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"  />
+                                                <Button x:Name="btn_ClearLessee" Tag="listUnits" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick"  Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,390,10,23" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"  />
 
                                             </Grid>
                                         </Border>
@@ -601,10 +601,10 @@
                                                     </Image.Triggers>
                                                 </Image>
 
-                                                <Button x:Name="btn_UnitListSearch_Copy" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="269,402,160,11" Click="btn_UnitListSearch_Copy_OnClick" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
+                                                <Button x:Name="btn_UnitListSearch_Copy" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" Click="btn_UnitListSearch_Click"  HorizontalAlignment="Center" Margin="269,402,160,11"  BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
                                                 <TextBox x:Name="tb_SearchUnit" HorizontalAlignment="Center" Height="28" Margin="124,403,265,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140"/>
                                                 <Label x:Name="label" Content="Search Units by ID:" HorizontalAlignment="Left" Margin="10,403,0,0" VerticalAlignment="Top" Width="auto"/>
-                                                <Button x:Name="btn_ClearLessee_Copy" Tag="SearchUnits" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick" Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,401,10,12" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" />
+                                                <Button x:Name="btn_ClearLessee_Copy" Click="Btn_ClearLessee_OnClick" Tag="SearchUnits" Width="100" Height="auto"  Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,401,10,12" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" />
 
                                             </Grid>
                                         </Border>
@@ -729,8 +729,8 @@
                     </TabControl>
                     <Label x:Name="Label10" Content="Storage Unit Management System" Margin="16,20,0,9" Grid.Column="3" HorizontalAlignment="Left" Width="221" FontWeight="Bold"/>
                     <Label x:Name="Label11" Content="User: " Grid.Column="4" Margin="0,20,171,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,0.5" HorizontalAlignment="Right" Width="40" Height="26"/>
-                    <Button x:Name="Button1" Content="Help" Margin="10,10,0,0" Grid.Row="2" Width="40" Click="button1_Click" Height="21" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <Button x:Name="Button2" Content="Support" Margin="10,10,10.435,0" Grid.Row="2" Width="81" Grid.Column="1" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <Button x:Name="Button1" Content="Help" Margin="10,10,0,0" Grid.Row="2" Width="40"  Height="21" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <Button x:Name="BtnSupport" Content="Support" Margin="10,10,10.435,0" Grid.Row="2" Width="81" Grid.Column="1" Height="21" VerticalAlignment="Top" HorizontalAlignment="Center" />
                     <TextBlock x:Name="TextBlock1" Grid.Column="4" Margin="0,25,10,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" HorizontalAlignment="Right" Width="144" ToolTip="current user" Height="16"/>
                     <TextBlock x:Name="TextBlock2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Height="16" Width="237">
                         <TextBlock.TextAlignment>Center</TextBlock.TextAlignment>

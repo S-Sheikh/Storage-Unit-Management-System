@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using StorageUnitManagementSystem.DAL;
 using StorageUnitManagementSystem.BL.Classes;
-
-////
 namespace StorageUnitManagementSystem.DAL
 {
     public class UserSQLiteProvider : UserProviderBase
     {
-        private string _conStr = "Data Source=c:\\DataStores\\StorageUnitManagementDB.db;Version=3;";
+       //private string _conStr = "Data Source=c:\\DataStores\\StorageUnitManagementDB.db;Version=3;";
         private SQLiteConnection _sqlCon;
-
+        private string _conStr = CreateDatabase.ConStr;
         public override List<User> SelectAll()
         {
             //

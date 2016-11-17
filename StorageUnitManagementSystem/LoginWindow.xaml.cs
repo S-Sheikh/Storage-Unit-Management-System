@@ -4,14 +4,19 @@ using System.Diagnostics;
 using StorageUnitManagementSystem.BL.Classes;using System.Windows;
 using StorageUnitManagementSystem.BL;using System.Windows.Input;
 using StorageUnitManagementSystem.DAL;using System.Windows.Navigation;
-//
-namespace StorageUnitManagementSystem
-{
+using System.Data;
+using System.Data.SQLite;
+using System.IO;
+namespace StorageUnitManagementSystem{
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
     public partial class LoginWindow
     {
+        //private static string Path = System.IO.Path.Combine(Environment.GetFolderPath(
+        //                             Environment.SpecialFolder.ApplicationData), "StorageUnitManagementDB.db");
+        //private string _conStr;
+        //private SQLiteConnection _sqlCon;
         private UBL _ubl;
         public List<User> User
         {
@@ -28,8 +33,9 @@ namespace StorageUnitManagementSystem
             set;
         } // end property
         public LoginWindow()
-        {
-            InitializeComponent();
+        {   
+           InitializeComponent();
+           CreateDatabase.CreateDb();
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -55,14 +61,12 @@ namespace StorageUnitManagementSystem
 
             foreach (User user in User)
             {
-                if (textBox.Text.ToString() == user.UserName.ToString() && textBox1.Text.ToString() == user.Password.ToString())
+                if (textBox.Text.ToString() == user.UserName.ToString() && textBox1.Password.ToString() == user.Password.ToString())
                 {
                     window.Show();
                     MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(window, "Logging In", "Successfull Press OK to continue");
-
+                    //window.TextBlock1.Text = user.UserName;
                     this.Close();
-
-                    window.TextBlock1.Text = user.UserName;
                 }
                 else
                 {
