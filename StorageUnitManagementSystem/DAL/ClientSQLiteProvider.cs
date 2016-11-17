@@ -3,66 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Linq;
-using System.Windows.Documents.Serialization;
 using StorageUnitManagementSystem.BL.Classes;
 
 namespace ClientManagementSystem.DAL
 {
     public class ClientSQLiteProvider : ClientProviderBase
     {
-
-        ////private static string Path = System.IO.Path.Combine(Environment.GetFolderPath(
-        //    Environment.SpecialFolder.ApplicationData), "StorageUnitManagementDB.db");
-        private string _conStr = "Data Source=c:\\DataStores\\StorageUnitManagementDB.db;Version=3;";
-        //private string _conStr;
+        private string _conStr = CreateDatabase.ConStr;
         private SQLiteConnection _sqlCon;
-
-        //public ClientSQLiteProvider ()
-        //{
-        //    _conStr = "Data Source=" + Path + ";Version=3;";
-        //    if (!File.Exists(Path))
-        //    {
-        //        SQLiteConnection.CreateFile(Path);
-        //        CreateTable();
-        //    }        
-        //}
-
-        //private  void CreateTable()
-        //{  
-        //    try
-        //    {    
-        //        _sqlCon = new SQLiteConnection(_conStr);
-        //        _sqlCon.Open();
-                
-        //            string query = "CREATE TABLE Clients (clientID TEXT PRIMARY KEY NOT NULL,"
-        //              + "clientFirstNames TEXT,"
-        //              + "clientLastName TEXT,"
-        //              + "clientDateOfBirth TEXT,"
-        //              + "clientCellPhone	TEXT,"
-        //              + "clientEmail	TEXT,"
-        //              + "clientTelephone	TEXT,"
-        //              + "clientALine1 TEXT,"
-        //              + "clientALine2 TEXT,"
-        //              + "clientACity TEXT,"
-        //              + "clientAProvince TEXT,"
-        //              + "clientPostalCode TEXT ,"
-        //              + "clientArchived	INTEGER ,"
-        //              + "unitId TEXT); ";
-        //            SQLiteCommand sqlCommand = new SQLiteCommand(query, _sqlCon); // setup command
-        //            sqlCommand.ExecuteNonQuery();
-                
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //    finally
-        //    {
-        //        _sqlCon.Close();  // Close connection
-        //    } // end finally
-
-        //}
 
         public override List<Client> SelectAll()
         {
@@ -82,8 +30,8 @@ namespace ClientManagementSystem.DAL
                 _sqlCon = new SQLiteConnection(_conStr);  // new connection
                 bool bRead = false;
                 Clients = new List<Client>(); // this ensures that if there are no records,
-                                                        // the returned list will not be null, but
-                                                        // it will be empty (Count = 0)
+                                              // the returned list will not be null, but
+                                              // it will be empty (Count = 0)
 
                 _sqlCon.Open(); // open connection
                 string selectQuery = "SELECT * FROM Clients";
@@ -189,7 +137,7 @@ namespace ClientManagementSystem.DAL
             } // end finally
             return rc; // single return
         } // end method
-       
+
 
         public override int Insert(Client Client)
         {
