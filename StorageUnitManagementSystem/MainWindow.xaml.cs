@@ -409,25 +409,28 @@ namespace StorageUnitManagementSystem
 
         private void cb_addClass_DropDownOpened(object sender, EventArgs e)
         {
+            ComboBox ourComboBox = sender as ComboBox;
+            
+                ourComboBox.Items.Clear();
+                //suObjects.Clear();
+                //MessageBox.Show(cb_addClass.SelectedItem.ToString());
+                _suObjects = _subl.SelectAll();
+                List<string> classArray = new List<string>();
+                foreach (StorageUnit unit in _suObjects)
+                {
+                    classArray.Add(unit.UnitClassification);
+                }
 
-            cb_addClass.Items.Clear();
-            //suObjects.Clear();
-            //MessageBox.Show(cb_addClass.SelectedItem.ToString());
-            _suObjects = _subl.SelectAll();
-            List<string> classArray = new List<string>();
-            foreach (StorageUnit unit in _suObjects)
-            {
-                classArray.Add(unit.UnitClassification);
-            }
-
-            // You can convert it back to an array if you would like to
-            string[] classStrings = classArray.ToArray();
-            classStrings = classStrings.Distinct().ToArray();
-            for (int x = 0; x < classStrings.Length; x++)
-            {
-                cb_addClass.Items.Add(classStrings[x]);
-            }
-            cb_addClass.SelectedIndex = 0;
+                // You can convert it back to an array if you would like to
+                string[] classStrings = classArray.ToArray();
+                classStrings = classStrings.Distinct().ToArray();
+                for (int x = 0; x < classStrings.Length; x++)
+                {
+                    ourComboBox.Items.Add(classStrings[x]);
+                }
+                ourComboBox.SelectedIndex = 0;
+            
+            
         }
         private void btnRestoreSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -1309,6 +1312,7 @@ namespace StorageUnitManagementSystem
 
         private void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
         {
+            
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
             string sortBy = column.Tag.ToString();
             if (_listViewSortColUnits != null)
@@ -1335,7 +1339,7 @@ namespace StorageUnitManagementSystem
             if (_listViewSortColUnits != null)
             {
                 AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Remove(_listViewSortAdornerUnits);
-                lv_Units.Items.SortDescriptions.Clear();
+                lv_Units_Search.Items.SortDescriptions.Clear();
             }
 
             ListSortDirection newDir = ListSortDirection.Ascending;
@@ -1345,7 +1349,7 @@ namespace StorageUnitManagementSystem
             _listViewSortColUnits = column;
             _listViewSortAdornerUnits = new SortAdorner(_listViewSortColUnits, newDir);
             AdornerLayer.GetAdornerLayer(_listViewSortColUnits).Add(_listViewSortAdornerUnits);
-            lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
+            lv_Units_Search.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
 
         }
 
@@ -1698,49 +1702,110 @@ namespace StorageUnitManagementSystem
         {
             int rc = 0;
             StorageUnit selectedUnit = new StorageUnit();
-            if (lv_Units.SelectedIndex >= 0)
+            if ((sender as Button).Tag.ToString().Equals("listUnits"))
             {
-                //Get Selected Item as a SU Object , possible because of class binding
-                var unitObj = lv_Units.SelectedItem as StorageUnit;
-                string selectedID = unitObj.UnitId;
-                rc = _subl.SelectStorageUnit(selectedID, ref selectedUnit);
-                if (rc != 0)
+                if (lv_Units.SelectedIndex >= 0)
                 {
-                    this.ShowMessageAsync("Error", "Could Not Find Storage Unit ... \n Please Refresh Unit List ");
-                }
-                else
-                {
-                    selectedUnit.UnitOccupied = false;
-                    selectedUnit.UnitOwnerId = "0";
-                    rc = _subl.Update(selectedUnit);
-                    if (rc != 0)
+                    //Get Selected Item as a SU Object , possible because of class binding
+                    var unitObj = lv_Units.SelectedItem as StorageUnit;
+                    if (unitObj != null && unitObj.UnitOccupied != false)
                     {
-                        this.ShowMessageAsync("Error", "Could not Remove Client from Unit");
-                    }
-                    else
-                    {
-                        LeaseUnits = _lubl.SelectAll();
-                        foreach (LeaseUnits leaseUnit in LeaseUnits)
+                        string selectedID = unitObj.UnitId;
+                        rc = _subl.SelectStorageUnit(selectedID, ref selectedUnit);
+                        if (rc != 0)
                         {
-                            if (leaseUnit.StorageUnit.UnitId.Equals(selectedUnit.UnitId))
+                            this.ShowMessageAsync("Error", "Could Not Find Storage Unit ... \n Please Refresh Unit List ");
+                        }
+                        else
+                        {
+                            selectedUnit.UnitOccupied = false;
+                            selectedUnit.UnitOwnerId = "0";
+                            rc = _subl.Update(selectedUnit);
+                            if (rc != 0)
                             {
-                                rc = _lubl.Delete(leaseUnit.LeaseID);
-                                if (rc != 0)
+                                this.ShowMessageAsync("Error", "Could not Remove Client from Unit");
+                            }
+                            else
+                            {
+                                LeaseUnits = _lubl.SelectAll();
+                                foreach (LeaseUnits leaseUnit in LeaseUnits)
                                 {
-                                    this.ShowMessageAsync("Error", "Could not Delete Lease Information");
-                                }
-                                else
-                                {
-                                    this.ShowMessageAsync("Success", "Removed Leasing Information for selected Unit");
+                                    if (leaseUnit.StorageUnit.UnitId.Equals(selectedUnit.UnitId))
+                                    {
+                                        rc = _lubl.Delete(leaseUnit.LeaseID);
+                                        if (rc != 0)
+                                        {
+                                            this.ShowMessageAsync("Error", "Could not Delete Lease Information");
+                                        }
+                                        else
+                                        {
+                                            this.ShowMessageAsync("Success", "Removed Leasing Information for selected Unit");
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+                    else
+                    {
+                        this.ShowMessageAsync("Warning", "Selected Unit is not occupied");
+                    }
+
                 }
-            }
-            else
+                else
+                {
+                    this.ShowMessageAsync("Warning", "Please Choose a Unit in the List");
+                }
+            }else if ((sender as Button).Tag.ToString().Equals("SearchUnits"))
             {
-                this.ShowMessageAsync("Warning", "Please Choose a Unit in the List");
+                if (lv_Units_Search.SelectedIndex >= 0)
+                {
+                    //Get Selected Item as a SU Object , possible because of class binding
+                    var unitObj = lv_Units_Search.SelectedItem as StorageUnit;
+                    if (unitObj != null && unitObj.UnitOccupied != false)
+                    {
+                        string selectedID = unitObj.UnitId;
+                        rc = _subl.SelectStorageUnit(selectedID, ref selectedUnit);
+                        if (rc != 0)
+                        {
+                            this.ShowMessageAsync("Error", "Could Not Find Storage Unit ... \n Please Refresh Unit List ");
+                        }
+                        else
+                        {
+                            selectedUnit.UnitOccupied = false;
+                            selectedUnit.UnitOwnerId = "0";
+                            rc = _subl.Update(selectedUnit);
+                            if (rc != 0)
+                            {
+                                this.ShowMessageAsync("Error", "Could not Remove Client from Unit");
+                            }
+                            else
+                            {
+                                LeaseUnits = _lubl.SelectAll();
+                                foreach (LeaseUnits leaseUnit in LeaseUnits)
+                                {
+                                    if (leaseUnit.StorageUnit.UnitId.Equals(selectedUnit.UnitId))
+                                    {
+                                        rc = _lubl.Delete(leaseUnit.LeaseID);
+                                        if (rc != 0)
+                                        {
+                                            this.ShowMessageAsync("Error", "Could not Delete Lease Information");
+                                        }
+                                        else
+                                        {
+                                            this.ShowMessageAsync("Success", "Removed Leasing Information for selected Unit");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        this.ShowMessageAsync("Warning", "Selected Unit is not occupied");
+                    }
+
+                }
             }
         }
 
@@ -1761,6 +1826,66 @@ namespace StorageUnitManagementSystem
             {
                 this.ShowMessageAsync("Error", "No Matching Unit ID Found");
             }
+        }
+
+        private void cb_selectNewClass_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (StorageUnits == null)
+                {
+                    StorageUnits = _subl.SelectAll();
+                }else if (StorageUnits != null)
+                {
+                    StorageUnits.Clear();
+                    StorageUnits = _subl.SelectAll();
+                
+                }
+                foreach (StorageUnit unit in StorageUnits)
+                {
+                    if (unit.UnitClassification == cb_selectNewClass.SelectedValue.ToString())
+                    {
+                        lb_previousPrice.Content = "R" + unit.UnitPrice;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                //GO AWAY WPF!!!
+            }
+        }
+
+        private void Cb_selectNewClass_OnDropDownOpened(object sender, EventArgs e)
+        {
+
+
+            cb_selectNewClass.Items.Clear();
+            //suObjects.Clear();
+            //MessageBox.Show(cb_addClass.SelectedItem.ToString());
+            _suObjects = _subl.SelectAll();
+            List<string> classArray = new List<string>();
+            foreach (StorageUnit unit in _suObjects)
+            {
+                classArray.Add(unit.UnitClassification);
+            }
+
+            // You can convert it back to an array if you would like to
+            string[] classStrings = classArray.ToArray();
+            classStrings = classStrings.Distinct().ToArray();
+            for (int x = 0; x < classStrings.Length; x++)
+            {
+                cb_selectNewClass.Items.Add(classStrings[x]);
+            }
+            cb_selectNewClass.SelectedIndex = 0;
+        }
+
+        private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+            string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
+                                                               "Click cancel to stop price change" ).ToString();
+            this.ShowMessageAsync("title", confirmation);
         }
     }
 }
