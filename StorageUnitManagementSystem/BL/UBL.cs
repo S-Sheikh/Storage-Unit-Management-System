@@ -41,12 +41,12 @@ namespace StorageUnitManagementSystem.BL
         /// </summary>
         /// <param name="ID">The Client ID of the Client to load from the datastore.</param>
         /// <param name="Client">The Client object loaded from the datastore.</param>
-        public int SelectClient(string ID, ref User User)
+        public int SelectUser(string ID, ref User User)
         {
             return providerBase.SelectUser(ID, ref User);
         } // end method
 
-        public int SelectClientName(string Name, ref User User)
+        public int SelectUserName(string Name, ref User User)
         {
             return providerBase.SelectUser(Name, ref User);
         } // end method
