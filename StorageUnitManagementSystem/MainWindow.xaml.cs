@@ -1850,9 +1850,25 @@ namespace StorageUnitManagementSystem
 
         private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
         {
-            
-            string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
-                                                               "Click cancel to stop price change" ).ToString();
-            this.ShowMessageAsync("title", confirmation);
+            int rc = -1;
+            StorageUnits = _subl.SelectAll();
+            foreach (StorageUnit unit in StorageUnits)
+            {
+                if (unit.UnitPrice.ToString().Equals(lb_previousPrice.Content.ToString().Substring(1)))
+                {
+                    unit.UnitPrice = Convert.ToDouble(tb_newPrice.Text.ToString());
+                    rc = _subl.Update(unit);
+                    
+                    
+                }
+            }
+            if (rc != 0)
+            {
+                this.ShowMessageAsync("Error", "Could not Update With new Price");
+            }
+            else
+            {
+                this.ShowMessageAsync("Notice", "New Price will only affect new Leases");
+            }
         }
     }}
