@@ -321,4 +321,3 @@ C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManageme
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.exe
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.pdb
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManagementSystem\bin\Debug\StorageUnitManagementSystem.pdb
-C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManagementSystem\obj\Debug\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache

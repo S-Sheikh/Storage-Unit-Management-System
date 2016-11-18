@@ -61,16 +61,19 @@ namespace StorageUnitManagementSystem{
 
             foreach (User user in User)
             {
-                if (textBox.Text.ToString() == user.UserName.ToString() && textBox1.Password.ToString() == user.Password.ToString())
+                if (textBox.Text.ToString() == user.UserName.ToString() &&
+                    textBox1.Password.ToString() == user.Password.ToString())
                 {
                     window.Show();
-                    MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(window, "Logging In", "Successfull Press OK to continue");
-                    //window.TextBlock1.Text = user.UserName;
+                    MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(window, "Logging In",
+                        "Successfull Press OK to continue");
                     this.Close();
                 }
+                //window.TextBlock1.Text = user.UserName;                
                 else
                 {
-                    MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(this, "Logging In", "Unsuccessfull, Password or Username Incorrect");
+                    MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(this, "Logging In",
+                        "Unsuccessfull, Password or Username Incorrect");
                     break;
                 }
             }
