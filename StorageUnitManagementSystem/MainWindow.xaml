@@ -298,7 +298,7 @@
                             <!--==================================================================================================================================================================================-->
                             <Grid>
                                 <Grid.DataContext>
-                                    
+
                                     <classes:Client/>
                                 </Grid.DataContext>
                                 <Grid.ColumnDefinitions>
@@ -636,28 +636,19 @@
                                     </TabItem>
                                     <TabItem Header="New Unit Class" Margin="10,101,-6,-102">
                                         <Border  BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="6,79,4,1">
-                                            <Grid Margin="2,-2,-2,2">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="56*"/>
-                                                    <RowDefinition Height="42*"/>
-                                                    <RowDefinition Height="43*"/>
-                                                    <RowDefinition Height="44*"/>
-                                                    <RowDefinition Height="48*"/>
-                                                    <RowDefinition Height="131*"/>
-                                                </Grid.RowDefinitions>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="149*"/>
-                                                    <ColumnDefinition Width="342*"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Label x:Name="label4" Content="Unit Classification:" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top" Grid.Row="1" Width="109" Height="25"/>
-                                                <Label x:Name="label5" Content="Unit Price (R):" HorizontalAlignment="Left" Margin="56,10,0,0" VerticalAlignment="Top" Grid.Row="2" Width="83" Height="26"/>
-                                                <Label x:Name="label6" Content="Unit Size (w, l, h):" HorizontalAlignment="Left" Margin="37,10,0,0" VerticalAlignment="Top" Grid.Row="3" Width="102" Height="26"/>
-                                                <Label x:Name="label7" Content="Total Number of Units:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="4" Width="129" Height="26"/>
-                                                <TextBox x:Name="textBox2" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Unit Class" Width="173"/>
-                                                <TextBox x:Name="textBox3" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Unit Price" Width="173"/>
-                                                <TextBox x:Name="textBox4" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Unit Size" Width="173"/>
-                                                <TextBox x:Name="textBox5" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,12,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Number of Units" Width="173"/>
-                                                <Button x:Name="button4" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="76" Height="25"/>
+                                            <Grid >
+
+                                                <Label x:Name="label4" Content="Unit Classification:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="109" Height="25"/>
+                                                <Label x:Name="label5" Content="Unit Price (R):" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="83" Height="26"/>
+                                                <Label x:Name="label6" Content="Unit Size (w, l, h):" HorizontalAlignment="Left" Margin="10,97,0,0" VerticalAlignment="Top" Width="102" Height="26"/>
+                                                <Label x:Name="label7" Content="Total Number of Units:" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="129" Height="26"/>
+                                                <TextBox x:Name="tb_newUnitClass" MaxLength="1" CharacterCasing="Upper" KeyDown="lettersOnlyTextBox_KeyDown"  HorizontalAlignment="Left" Height="26" Margin="144,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Unit Class" Width="173"/>
+                                                <TextBox x:Name="tb_newUnitPrice" MaxLength="9" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="26" Margin="144,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Unit Price" Width="173"/>
+                                                <TextBox x:Name="tb_newUnitSizeWidth" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="26" Margin="144,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Unit Width" Width="80"/>
+                                                <TextBox x:Name="tb_newNumUnits" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="26" Margin="144,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Number of Units" Width="173"/>
+                                                <Button x:Name="btn_saveNewUnitClass" Click="Btn_saveNewUnitClass_OnClick" Content="Save" BorderThickness="0" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Center" Margin="0,161,0.4,0" VerticalAlignment="Top" Width="100" Height="auto" controls:ButtonHelper.PreserveTextCase="True"/>
+                                                <TextBox x:Name="tb_newUnitSizeLength" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="26" Margin="229,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Unit Length" Width="80"/>
+                                                <TextBox x:Name="tb_newUnitSizeHeight" MaxLength="2" DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" HorizontalAlignment="Left" Height="26" Margin="314,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" controls:TextBoxHelper.Watermark="Unit Height" Width="80"/>
 
                                             </Grid>
                                         </Border>
@@ -710,7 +701,7 @@
                                                 <Label x:Name="label15" Content="Username:" HorizontalAlignment="Left" Margin="68,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="70"/>
                                                 <Label x:Name="label16" Content="Password:" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="65"/>
                                                 <Label x:Name="label17" Content=" Role:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Grid.Row="4" Height="26" Width="40"/>
-                                                <ComboBox x:Name="ComboBoxUpdate"  Grid.Column="1" SelectionChanged="cb_selectNewClass1_OnSelectionChanged" DropDownOpened="Cb_selectNewClass1_OnDropDownOpened" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0"  VerticalAlignment="Top" Width="223" Grid.Row="1" >
+                                                <ComboBox x:Name="ComboBoxUpdate"  Grid.Column="1" SelectionChanged="cb_selectNewClass1_OnSelectionChanged"  HorizontalAlignment="Left" Height="26" Margin="10,9,0,0"  VerticalAlignment="Top" Width="223" Grid.Row="1" >
                                                     <ComboBoxItem Content="---Select ID---" IsSelected="True"/>
                                                 </ComboBox>
                                                 <TextBox x:Name="TextBoxUpdateUName" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="2"/>

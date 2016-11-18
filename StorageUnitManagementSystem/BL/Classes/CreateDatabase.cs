@@ -105,14 +105,14 @@ namespace StorageUnitManagementSystem.BL.Classes
                 SqlCon.Open();
 
                 string query = "CREATE TABLE StorageUnits (suID TEXT PRIMARY KEY NOT NULL,"
-                  + "suClassification TEXT,"
-                  + "suPrice NUMERIC,"
-                  + "suSize TEXT,"
+                  + "suClassification TEXT DEFAULT 'A',"
+                  + "suPrice NUMERIC DEFAULT '650',"
+                  + "suSize TEXT DEFAULT '3,3,3',"
                   + "suArrears	INT DEFAULT 0,"
                   + "suOccupied	INT DEFAULT 0,"
                   + "suAdvance	INT DEFAULT 0,"
                   + "suUpToDate INT DEFAULT 0,"
-                  + "suOwnerID TEXT DEFAULT '0'); ";
+                  + "suOwnerID TEXT DEFAULT '0');";
                 SQLiteCommand sqlCommand = new SQLiteCommand(query, SqlCon); // setup command
                 sqlCommand.ExecuteNonQuery();
 
