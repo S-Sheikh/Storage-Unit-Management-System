@@ -86,8 +86,16 @@ namespace StorageUnitManagementSystem
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
+            try
+            {
+                Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessageAsync("Error:", ex.GetType().ToString());
+            }
+            
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
@@ -97,7 +105,17 @@ namespace StorageUnitManagementSystem
             this.Close();
         }
 
-        //TO:DO COPY PASTE VALIDATION
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void lettersOnlyTextBox_KeyDown(object sender, EventArgs e)
+        //Purpose     : Only allows text input on keydown
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              EventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
+
         private void lettersOnlyTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             //if (char.IsLetter((char) e.Key))
@@ -109,12 +127,12 @@ namespace StorageUnitManagementSystem
                 if ((e.Key < Key.A) || (e.Key > Key.Z))
                 {
                     e.Handled = true;
-                }
-            }
+                }//end if
+            }//end try
             catch (Exception ex)
             {
                 this.ShowMessageAsync(ex.Message, "Main Window : lettersOnlyTextBox_KeyDown");
-            }
+            }//end catch
 
         }
 
@@ -399,6 +417,20 @@ namespace StorageUnitManagementSystem
             }
         }
 
+
+
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void cb_addClass_DropDownOpened(object sender, EventArgs e)
+        //Purpose     : DropDown Event that Gets Distinct Unit Classes and populates 
+        //              DropDown
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              EventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
+
         private void cb_addClass_DropDownOpened(object sender, EventArgs e)
         {
             ComboBox ourComboBox = sender as ComboBox;
@@ -421,9 +453,7 @@ namespace StorageUnitManagementSystem
                 ourComboBox.Items.Add(classStrings[x]);
             }
             ourComboBox.SelectedIndex = 0;
-
-
-        }
+        }//end Method
 
         private void btnRestoreSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -551,6 +581,7 @@ namespace StorageUnitManagementSystem
             LvListClient.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
+        
         private void lvLeaseUnitsClientsColumnHeader_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
@@ -570,6 +601,8 @@ namespace StorageUnitManagementSystem
             AdornerLayer.GetAdornerLayer(_listViewSortCol).Add(_listViewSortAdorner);
             LvLeaseUnits.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
+
+
 
         private void btnRestoreListAll_Click(object sender, RoutedEventArgs e)
         {
@@ -699,6 +732,17 @@ namespace StorageUnitManagementSystem
             }
         }
 
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void cb_UnitListSearch_DropDownOpened(object sender, EventArgs e)
+        //Purpose     : Re-Populates ComboBox Without unnecessary items 
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              EventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
+
         private void cb_UnitListSearch_DropDownOpened(object sender, EventArgs e)
         {
             try
@@ -706,12 +750,12 @@ namespace StorageUnitManagementSystem
                 cb_UnitListSearch.Items.Clear();
                 cb_UnitListSearch.ItemsSource = cb_UnitListSearchItems;
                 cb_UnitListSearch.SelectedIndex = 0;
-            }
+            }//end try
             catch (Exception)
             {
                 // Go Home WPF
-            }
-        }
+            }//end catch
+        }//end method
 
         private void btnListSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -778,7 +822,16 @@ namespace StorageUnitManagementSystem
             }
 
         }
-
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void btn_UnitListSearch_Click(object sender, EventArgs e)
+        //Purpose     :  Populates ListView with all Units and unit information
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              EventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
         private void btn_UnitListSearch_Click(object sender, RoutedEventArgs e)
         {
 
@@ -799,12 +852,12 @@ namespace StorageUnitManagementSystem
                         {
                             lv_Units.Items.Add(unit);
                             rc = 1;
-                        }
-                    }
+                        }//end if
+                    }//end foreach
                     if (rc == 0)
                     {
                         this.ShowMessageAsync("Error", "No Vacant Units Found");
-                    }
+                    }//end if
                     break;
                 case "Occupied Units":
                     lv_Units.Items.Clear();
@@ -815,12 +868,12 @@ namespace StorageUnitManagementSystem
                         {
                             lv_Units.Items.Add(unit);
                             rc = 1;
-                        }
-                    }
+                        }//end if
+                    }//end foreach
                     if (rc == 0)
                     {
                         this.ShowMessageAsync("Error", "No Occupied Units Found");
-                    }
+                    }//end if
                     break;
                 case "In Arrears":
                     lv_Units.Items.Clear();
@@ -831,12 +884,12 @@ namespace StorageUnitManagementSystem
                         {
                             lv_Units.Items.Add(unit);
                             rc = 1;
-                        }
-                    }
+                        }//end if
+                    }//end foreach
                     if (rc == 0)
                     {
                         this.ShowMessageAsync("Error", "No Units in Arrears Found");
-                    }
+                    }//end if
                     break;
                 case "Up-To-Date":
                     lv_Units.Items.Clear();
@@ -847,12 +900,12 @@ namespace StorageUnitManagementSystem
                         {
                             lv_Units.Items.Add(unit);
                             rc = 1;
-                        }
-                    }
+                        }//end if
+                    }//end foreach
                     if (rc == 0)
                     {
                         this.ShowMessageAsync("Error", "No Up-To-Date Units Found");
-                    }
+                    }//end if
                     break;
                 case "In Advance":
                     lv_Units.Items.Clear();
@@ -863,19 +916,19 @@ namespace StorageUnitManagementSystem
                         {
                             lv_Units.Items.Add(unit);
                             rc = 1;
-                        }
-                    }
+                        }//end if
+                    }//end foreach
                     if (rc == 0)
                     {
                         this.ShowMessageAsync("Error", "No Units Paid for in Advance Found");
-                    }
+                    }//end if
                     break;
                 default:
                     this.ShowMessageAsync("Unit Does Not Exist", "No Unit");
                     break;
-            }
+            }//end switch
 
-        }
+        }//end method
 
         private void AddClientTextBoxValidation(object sender, TextChangedEventArgs e)
         {
@@ -890,18 +943,50 @@ namespace StorageUnitManagementSystem
             }
         }
 
+
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void UIElement_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        //Purpose     : Prevents key Input from keyboard using Regex filtering
+        //              
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              TextCompositionEventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
         private void UIElement_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !IsTextAllowed(e.Text);
-        }
+        }//end method
 
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void IsTextAllowed(string text)
+        //Purpose     : Prevents key Input from keyboard using Regex filtering
+        //              
+        //Re-use      : 
+        //Input       : string text 
+        //              -Text to be tested for invalid input
+        //Output      : bool
+        //              -Lets UIElement_OnPreviewTextInput Check if valid text using this flag
+        //
         private static bool IsTextAllowed(string text)
         {
             Regex regex = new Regex("[^0-9]+"); //regex that matches disallowed text
             return !regex.IsMatch(text);
-        }
+        }//end method
 
-        // Use the DataObject.Pasting Handler 
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void TextBoxPasting(object sender, DataObjectPastingEventArgs e)
+        //Purpose     : Prevents Copy Pasting malicious code since keyDowns do not handle
+        //              
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              DataObjectPastingEventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
         private void TextBoxPasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(typeof (String)))
@@ -910,13 +995,13 @@ namespace StorageUnitManagementSystem
                 if (!IsTextAllowed(text))
                 {
                     e.CancelCommand();
-                }
-            }
+                }//end if
+            }//end if
             else
             {
                 e.CancelCommand();
-            }
-        }
+            }//end else
+        }//end method
 
         private void txtBoxCellPhone_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -964,6 +1049,18 @@ namespace StorageUnitManagementSystem
             return availableUnits;
         }
 
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void cb_addClass_SelectionChanged(object sender, EventArgs e)
+        //Purpose     : Changes Various controls based on the selected Item in comboBox
+        //              
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              EventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
+
         private void cb_addClass_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -987,15 +1084,15 @@ namespace StorageUnitManagementSystem
                         _insertStorageUnit.UnitOccupied = Convert.ToBoolean(0);
                         _insertStorageUnit.UnitOwnerId = null;
                         break;
-                    }
+                    }//end if
 
-                }
-            }
+                }//end foreach
+            }//end try
             catch (Exception)
             {
                 //Go Home WPF , You're Drunk
-            }
-        }
+            }//end catch
+        }//end method
 
         private int CountOccupiedUnits(string unitClass) //returns number of occupied units
         {
@@ -1036,6 +1133,17 @@ namespace StorageUnitManagementSystem
             }
         }
 
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void btn_addNewUnits_Click(object sender, EventArgs e)
+        //Purpose     : Inserts new Units based on give paramters from various controls
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              EventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
+
         private void btn_addNewUnits_Click(object sender, RoutedEventArgs e)
         {
             int rc = 0;
@@ -1064,30 +1172,30 @@ namespace StorageUnitManagementSystem
                             if (Convert.ToInt16(temp.UnitId) >= max)
                             {
                                 max = Convert.ToInt16(temp.UnitId);
-                            }
-                        }
+                            }//end if
+                        }//end foreach
                         suObject.UnitId = Convert.ToString(max + 1);
                         rc = _subl.Insert(suObject);
-                    }
+                    }//end loop
                     if (rc == 0)
                     {
                         this.ShowMessageAsync("Success", "Added New Unit/s ");
-                    }
+                    }//end if
                     else
                     {
                         this.ShowMessageAsync("Error", "Could not Add New Unit");
-                    }
-                }
+                    }//end else
+                }//end try
                 catch (Exception exception)
                 {
                     MessageBox.Show(exception.ToString());
-                }
-            }
+                }//end catch
+            }//end if
             else
             {
                 this.ShowMessageAsync("Warning", "Please Enter all options");
-            }
-        }
+            }//end else
+        }//end method
 
         private void BtnLeaseSubmit_Click(object sender, RoutedEventArgs e)
         {
@@ -1340,6 +1448,17 @@ namespace StorageUnitManagementSystem
             }
         }
 
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
+        //Purpose     : Passes Appropiate Data to sorter method
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              RoutedEventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
+
         private void lvUnitsColumnHeader_Click(object sender, RoutedEventArgs e)
         {
 
@@ -1361,6 +1480,17 @@ namespace StorageUnitManagementSystem
             lv_Units.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
 
         }
+
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void lvUnitsSearchColumnHeader_Click(object sender, RoutedEventArgs e)
+        //Purpose     : Passes Appropiate Data to sorter method
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              RoutedEventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
 
         private void lvUnitsSearchColumnHeader_Click(object sender, RoutedEventArgs e)
         {
@@ -1420,21 +1550,7 @@ namespace StorageUnitManagementSystem
             }
         }
 
-        //private string CreateFile(string fileName, string folderName)
-        //{
-        //    string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OnesAndZeroes" + "\\" + folderName;
-        //    if (!Directory.Exists(directory))
-        //        Directory.CreateDirectory(directory);
-        //    string path = Path.Combine(directory, fileName);
-        //    return path;
-        //}
-        //private string CreateFile(string fileName, string folderName)
-        //{
-        //    string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        //    Directory.CreateDirectory(directory);
-        //    string path = Path.Combine(directory, "OnesAndZeroes", folderName, fileName);
-        //    return path;
-        //}
+        
         private DocX GetTemplate(string txtBox)
         {
             string address = "";
@@ -1692,7 +1808,17 @@ namespace StorageUnitManagementSystem
 
 
 
-
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void Btn_ClearLessee_OnClick(object sender, RoutedEventArgs e)
+        //Purpose     : Clears a selected Unit (From List) of leasing information
+        //              Removes lease table entry as well
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              RoutedEventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
 
         private void Btn_ClearLessee_OnClick(object sender, RoutedEventArgs e)
         {
@@ -1712,7 +1838,7 @@ namespace StorageUnitManagementSystem
                         {
                             this.ShowMessageAsync("Error",
                                 "Could Not Find Storage Unit ... \n Please Refresh Unit List ");
-                        }
+                        }//end if
                         else
                         {
                             selectedUnit.UnitOccupied = false;
@@ -1721,7 +1847,7 @@ namespace StorageUnitManagementSystem
                             if (rc != 0)
                             {
                                 this.ShowMessageAsync("Error", "Could not Remove Client from Unit");
-                            }
+                            }//end if
                             else
                             {
                                 LeaseUnits = _lubl.SelectAll();
@@ -1733,28 +1859,28 @@ namespace StorageUnitManagementSystem
                                         if (rc != 0)
                                         {
                                             this.ShowMessageAsync("Error", "Could not Delete Lease Information");
-                                        }
+                                        }//end if
                                         else
                                         {
                                             this.ShowMessageAsync("Success",
                                                 "Removed Leasing Information for selected Unit");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                                        }//end else
+                                    }//end if
+                                }//end foreach
+                            }//end else
+                        }//end else
+                    }//end if
                     else
                     {
                         this.ShowMessageAsync("Warning", "Selected Unit is not occupied");
-                    }
+                    }//end else
 
-                }
+                }//end if
                 else
                 {
                     this.ShowMessageAsync("Warning", "Please Choose a Unit in the List");
-                }
-            }
+                }//end else
+            }//end if
             else if ((sender as Button).Tag.ToString().Equals("SearchUnits"))
             {
                 if (lv_Units_Search.SelectedIndex >= 0)
@@ -1769,7 +1895,7 @@ namespace StorageUnitManagementSystem
                         {
                             this.ShowMessageAsync("Error",
                                 "Could Not Find Storage Unit ... \n Please Refresh Unit List ");
-                        }
+                        }//end if
                         else
                         {
                             selectedUnit.UnitOccupied = false;
@@ -1778,7 +1904,7 @@ namespace StorageUnitManagementSystem
                             if (rc != 0)
                             {
                                 this.ShowMessageAsync("Error", "Could not Remove Client from Unit");
-                            }
+                            }//end if
                             else
                             {
                                 LeaseUnits = _lubl.SelectAll();
@@ -1790,25 +1916,25 @@ namespace StorageUnitManagementSystem
                                         if (rc != 0)
                                         {
                                             this.ShowMessageAsync("Error", "Could not Delete Lease Information");
-                                        }
+                                        }//end if
                                         else
                                         {
                                             this.ShowMessageAsync("Success",
                                                 "Removed Leasing Information for selected Unit");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                                        }//end else
+                                    }//end if
+                                }//end foreach
+                            }//end else
+                        }//end else
+                    }//end if
                     else
                     {
                         this.ShowMessageAsync("Warning", "Selected Unit is not occupied");
-                    }
+                    }//end else
 
-                }
-            }
-        }
+                }//end if
+            }//end else if
+        }//end method
 
 
 
@@ -1841,6 +1967,17 @@ namespace StorageUnitManagementSystem
             }
         }
 
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void Cb_selectNewClass_OnDropDownOpened(object sender, EventArgs e)
+        //Purpose     : Populates comboBox with Distinct unit classifications from DB
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              EventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
+
         private void Cb_selectNewClass_OnDropDownOpened(object sender, EventArgs e)
         {
 
@@ -1853,7 +1990,7 @@ namespace StorageUnitManagementSystem
             foreach (StorageUnit unit in _suObjects)
             {
                 classArray.Add(unit.UnitClassification);
-            }
+            }//end foreach
 
             // You can convert it back to an array if you would like to
             string[] classStrings = classArray.ToArray();
@@ -1861,9 +1998,20 @@ namespace StorageUnitManagementSystem
             for (int x = 0; x < classStrings.Length; x++)
             {
                 cb_selectNewClass.Items.Add(classStrings[x]);
-            }
+            }//end foreach
             cb_selectNewClass.SelectedIndex = 0;
-        }
+        }//end method
+
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
+        //Purpose     : Sets new price to selected class from comboBox and use loop to update
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              RoutedEventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
 
         private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
         {
@@ -1875,10 +2023,11 @@ namespace StorageUnitManagementSystem
                 {
                     unit.UnitPrice = Convert.ToDouble(tb_newPrice.Text.ToString());
                     rc = _subl.Update(unit);
-                }
-            }
+                }//end if 
+            }//end foreach
             if (rc != 0)
             {
+                this.ShowMessageAsync("Error:", "Could not Update price");
             }
         }
 
@@ -2020,7 +2169,16 @@ namespace StorageUnitManagementSystem
         }
 
 
-
+        //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+        //Method Name : void Btn_saveNewUnitClass_OnClick(object sender, RoutedEventArgs e)
+        //Purpose     : Saves new non-duplicate unit class(Object) to DB
+        //Re-use      : 
+        //Input       : object sender
+        //              - The Control that called an this event
+        //              RoutedEventArgs e
+        //              - Various Event Arguments
+        //Output      : None
+        //
 
 
         private void Btn_saveNewUnitClass_OnClick(object sender, RoutedEventArgs e)
@@ -2035,26 +2193,22 @@ namespace StorageUnitManagementSystem
                 foreach (StorageUnit unit in _suObjects)
                 {
                     classArray.Add(unit.UnitClassification);
-                }
+                }//end if
 
                 // You can convert it back to an array if you would like to
                 string[] classStrings = classArray.ToArray();
                 classStrings = classStrings.Distinct().ToArray();
-                //for (int x = 0; x < classStrings.Length; x++)
-                //{
-                //    cb_selectNewClass.Items.Add(classStrings[x]);
-                //}
                 for (int x = 0; x < classStrings.Length; x++)
                 {
                     if (tb_newUnitClass.Text.ToString().Equals(classStrings[x]))
                     {
                         isDuplicateClass = true;
-                    }
-                }
+                    }//end if
+                }//end for
                 if (isDuplicateClass)
                 {
                     this.ShowMessageAsync("ERROR", "Duplicate Class Found");
-                }
+                }//end if
                 else
                 {
                     int max = 0;
@@ -2063,8 +2217,8 @@ namespace StorageUnitManagementSystem
                         if (Convert.ToInt16(temp.UnitId) >= max)
                         {
                             max = Convert.ToInt16(temp.UnitId);
-                        }
-                    }
+                        }//end if
+                    }//end foreach
                     newUnitClass.UnitId = Convert.ToString(max + 1);
                     newUnitClass.UnitPrice = Convert.ToDouble(tb_newUnitPrice.Text);
                     newUnitClass.UnitClassification = tb_newUnitClass.Text;
@@ -2078,27 +2232,23 @@ namespace StorageUnitManagementSystem
                     for (int x = 0; x < Convert.ToInt32(tb_newNumUnits.Text); x++)
                     {
                         rc = _subl.Insert(newUnitClass);
-                    }
+                    }//end loop
                 }
                 if (rc == 0)
                 {
                     this.ShowMessageAsync("Success", "New Unit Class Successfully Created");
-                }
+                }//end if
                 else
                 {
                     this.ShowMessageAsync("Error", "New Unit Class Could not be created");
-                }
+                }//end else
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
+            }//end catch
+        
+        }//end method
 
-
-
-
-
-        }
-
-    }
-}
+    }//end class
+}//end namspace

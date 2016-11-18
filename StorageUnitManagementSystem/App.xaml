@@ -5,6 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!-- Custom Controls/Layouts/Styles -->
                 <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
@@ -14,10 +15,15 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <!-- Animated Tab Controls -->
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <!--END Custom Controls/Layouts/Styles END -->
             </ResourceDictionary.MergedDictionaries>
+            <!-- Custom Button color -->
             <Style x:Key="btnStyleRed" BasedOn="{StaticResource AccentedSquareButtonStyle}" TargetType="Button">
                 <Setter Property="Background" Value="OrangeRed"/>
             </Style>
+            <!-- END Custom button Color -->
+            
+            <!-- Custom Close window button Color -->
             <Style x:Key="CleanCloseWindowButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MetroWindowButtonStyle}">
                 <Style.Triggers>
 
@@ -31,6 +37,7 @@
 
                 </Style.Triggers>
             </Style>
+            <!-- END Custom Close window button Color END-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

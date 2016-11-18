@@ -1,5 +1,7 @@
 ﻿namespace StorageUnitManagementSystem.BL.Classes
 {
+    //Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+    //Purpose     : Class for StorageUnits
     public class StorageUnit
     {
         private string _unitClassification;

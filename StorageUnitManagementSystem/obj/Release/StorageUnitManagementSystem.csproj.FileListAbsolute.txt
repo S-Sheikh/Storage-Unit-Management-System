@@ -9,3 +9,14 @@ C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManageme
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManagementSystem\obj\Release\GeneratedInternalTypeHelper.g.cs
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManagementSystem\obj\Release\StorageUnitManagementSystem_MarkupCompile.cache
 C:\Users\Shahbaaz Sheikh\Desktop\OPG LEASE Backup 10-11-2016\StorageUnitManagementSystem\obj\Release\StorageUnitManagementSystem_MarkupCompile.lref
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\StorageUnitManagementSystem.csprojResolveAssemblyReference.cache
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\LoginWindow.baml
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\PopUp.baml
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\App.baml
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\LoginWindow.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\MainWindow.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\PopUp.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\App.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\StorageUnitManagementSystem_MarkupCompile.cache
+C:\Users\Shahbaaz Sheikh\Desktop\OPG BROKEN NIGHT\StorageUnitManagementSystem\obj\Release\StorageUnitManagementSystem_MarkupCompile.lref

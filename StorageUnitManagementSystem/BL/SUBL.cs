@@ -2,6 +2,9 @@
 using StorageUnitManagementSystem.BL.Classes;
 using StorageUnitManagementSystem.DAL;
 
+//Programmer  : Shahbaaz Sheikh; Student Number: 214066614
+//Purpose     : Publicall exposed methods to be used in PL
+
 namespace StorageUnitManagementSystem.BL
 {
     public class SUBL
