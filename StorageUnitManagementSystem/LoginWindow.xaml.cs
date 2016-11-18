@@ -21,21 +21,30 @@ namespace StorageUnitManagementSystem{
         public List<User> User
         {
             //
-            //Property Name : Automatic property List<SalaryEmployee> SEObjects
-            //Purpose       : Automatic Public property containing all the SalaryEmployee objects
+            //Property Name : Automatic property List<User> User
+            //Purpose       : Automatic Public property containing all the User objects
             //Re-use        : none
-            //Input         : List<SalaryEmployee>
-            //                - generic list containing all the SalaryEmployee objects
-            //Output        : List<SalaryEmployee>
-            //                - generic list containing all the SalaryEmployee objects
+            //Input         : List<User>
+            //                - generic list containing all the User objects
+            //Output        : List<User>
+            //                - generic list containing all the User objects
             //
             get;
             set;
         } // end property
         public LoginWindow()
-        {   
-           InitializeComponent();
-           CreateDatabase.CreateDb();
+        {
+            //
+            //Method Name : deflault constructor
+            //Purpose       : Automatic Public property containing all the User objects
+            //Re-use        : none
+            //Input         : List<User>
+            //                - generic list containing all the User objects
+            //Output        : List<User>
+            //                - generic list containing all the User objects
+            //
+            InitializeComponent();
+           CreateDatabase.CreateDb();// Call create db
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -44,10 +53,28 @@ namespace StorageUnitManagementSystem{
         }
         private void Hyperlink_Register(object sender, RequestNavigateEventArgs e)
         {
+
+            //Method Name : Hyperlink_Register
+            //Purpose       : Automatic Public property containing all the User objects
+            //Re-use        : none
+            //Input         : List<User>
+            //                - generic list containing all the User objects
+            //Output        : List<User>
+            //                - generic list containing all the User objects
+            //
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
         }
         private void Hyperlink_ForgotPassword(object sender, RequestNavigateEventArgs e)
+
+        //Method Name : Hyperlink_ForgotPassword
+        //Purpose       : none
+        //Re-use        : none
+        //Input         : List<User>
+        //                - generic list containing all the User objects
+        //Output        : List<User>
+        //                - generic list containing all the User objects
+        //
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
@@ -55,34 +82,44 @@ namespace StorageUnitManagementSystem{
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
+
+            //Method Name : void btnLogin_Click
+            //Purpose       : loggin
+            //Re-use        : none
+            //Input         : none
+            //                - generic list containing all the User objects
+            //Output        : none
+            //                - generic list containing all the User objects
+            //
             _ubl = new UBL("UserSQLiteProvider");
-            User = _ubl.SelectAll();
+            User = _ubl.SelectAll();        //calling database to get list
             MainWindow window = new MainWindow();
 
             foreach (User user in User)
             {
                 if (textBox.Text.ToString() == user.UserName.ToString() &&
-                    textBox1.Password.ToString() == user.Password.ToString())
+                    textBox1.Password.ToString() == user.Password.ToString()) // Validating user email
                 {
                     window.Show();
                     MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(window, "Logging In",
                         "Successfull Press OK to continue");
                     window.TextBlock1.Text = user.UserName;
                    this.Close();
-                }
+                }//end if
                               
                 else
                 {
                     MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(this, "Logging In",
                         "Unsuccessfull, Password or Username Incorrect");
                     break;
-                }
-            }
-        }
+                }//end else
+            }//end foreach
+        }//end method
 
         private void lettersOnlyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            
             if (Char.IsLetter((char)e.Key)) e.Handled = true;
-        }
-    }
-}
+        }//end method
+    }//end class 
+}//end namespace
