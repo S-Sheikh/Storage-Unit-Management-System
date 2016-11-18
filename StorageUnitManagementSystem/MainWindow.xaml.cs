@@ -1817,12 +1817,14 @@ namespace StorageUnitManagementSystem
                         break;
                     }
                 }
-            }            catch
+            }
+            catch
             {
                 //GO AWAY WPF!!!
             }
         }
-private void Cb_selectNewClass_OnDropDownOpened(object sender, EventArgs e)
+
+        private void Cb_selectNewClass_OnDropDownOpened(object sender, EventArgs e)
         {
 
 
@@ -1845,62 +1847,108 @@ private void Cb_selectNewClass_OnDropDownOpened(object sender, EventArgs e)
             }
             cb_selectNewClass.SelectedIndex = 0;
         }
-       private void cb_selectNewClass_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (StorageUnits == null)
-                {
-                    StorageUnits = _subl.SelectAll();
-                }else if (StorageUnits != null)
-                {
-                    StorageUnits.Clear();
-                    StorageUnits = _subl.SelectAll();
-                
-                }
+                int rc = -1;
+                StorageUnits = _subl.SelectAll();
                 foreach (StorageUnit unit in StorageUnits)
                 {
-                    if (unit.UnitClassification == cb_selectNewClass.SelectedValue.ToString())
+                    if (unit.UnitPrice.ToString().Equals(lb_previousPrice.Content.ToString().Substring(1)))
                     {
-                        lb_previousPrice.Content = "R" + unit.UnitPrice;
-                        break;
+                        unit.UnitPrice = Convert.ToDouble(tb_newPrice.Text.ToString());
+                        rc = _subl.Update(unit);
                     }
                 }
+                if (rc != 0)
+                {
+                    this.ShowMessageAsync("Error", "Could not Update With new Price");
+                }
+                else
+                {
+                    this.ShowMessageAsync("Notice", "New Price will only affect new Leases");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                //GO AWAY WPF!!!            }
-// You can convert it back to an array if you would like to
-            string[] classStrings = classArray.ToArray();
-            classStrings = classStrings.Distinct().ToArray();
-            for (int x = 0; x < classStrings.Length; x++)
-            {
-                cb_selectNewClass.Items.Add(classStrings[x]);
+                this.ShowMessageAsync("Error", "Please Fill In All Options");
             }
-            cb_selectNewClass.SelectedIndex = 0;        }
-       
-
-
-        private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
-        {            
-            string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
-                                                               "Click cancel to stop price change" ).ToString();
-            this.ShowMessageAsync("title", confirmation);
-        }    }
-}        {
-
-           
-
-
-
             
+        }
 
-        private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
+        private void Btn_saveNewUnitClass_OnClick(object sender, RoutedEventArgs e)
         {
+            int rc = -1;
+            try
+            {
+                StorageUnit newUnitClass = new StorageUnit();
+                Boolean isDuplicateClass = false;
+                _suObjects = _subl.SelectAll();
+                List<string> classArray = new List<string>();
+                foreach (StorageUnit unit in _suObjects)
+                {
+                    classArray.Add(unit.UnitClassification);
+                }
+
+                // You can convert it back to an array if you would like to
+                string[] classStrings = classArray.ToArray();
+                classStrings = classStrings.Distinct().ToArray();
+                //for (int x = 0; x < classStrings.Length; x++)
+                //{
+                //    cb_selectNewClass.Items.Add(classStrings[x]);
+                //}
+                for (int x = 0; x < classStrings.Length; x++)
+                {
+                    if (tb_newUnitClass.Text.ToString().Equals(classStrings[x]))
+                    {
+                        isDuplicateClass = true;
+                    }
+                }
+                if (isDuplicateClass)
+                {
+                    this.ShowMessageAsync("ERROR", "Duplicate Class Found");
+                }
+                else
+                {
+                    int max = 0;
+                    foreach (StorageUnit temp in _suObjects)
+                    {
+                        if (Convert.ToInt16(temp.UnitId) >= max)
+                        {
+                            max = Convert.ToInt16(temp.UnitId);
+                        }
+                    }
+                    newUnitClass.UnitId = Convert.ToString(max + 1);
+                    newUnitClass.UnitPrice = Convert.ToDouble(tb_newUnitPrice.Text);
+                    newUnitClass.UnitClassification = tb_newUnitClass.Text;
+                    newUnitClass.UnitSize = tb_newUnitSizeWidth.Text + "," + tb_newUnitSizeLength.Text + "," +
+                                            tb_newUnitSizeHeight.Text;
+                    newUnitClass.UnitArrears = false;
+                    newUnitClass.UnitOccupied = false;
+                    newUnitClass.UnitInAdvance = false;
+                    newUnitClass.UnitUpToDate = false;
+                    newUnitClass.UnitOwnerId = "0";
+                    for (int x = 0; x < Convert.ToInt32(tb_newNumUnits.Text); x++)
+                    {
+                       rc = _subl.Insert(newUnitClass);
+                    }
+                }
+                if (rc == 0)
+                {
+                    this.ShowMessageAsync("Success", "New Unit Class Successfully Created");
+                }
+                else
+                {
+                    this.ShowMessageAsync("Error", "New Unit Class Could not be created");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             
-            string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
-                                                               "Click cancel to stop price change" ).ToString();
-            this.ShowMessageAsync("title", confirmation);
-      }
+        }
     }
 }
