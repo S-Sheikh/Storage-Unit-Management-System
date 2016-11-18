@@ -13,12 +13,12 @@ namespace StorageUnitManagementSystem.DAL
         public override List<User> SelectAll()
         {
             //
-            //Method Name : List<StorageUnit> SelectAll()
-            //Purpose     : Try to get all the StorageUnit objects from the datastore
+            //Method Name : List<User> SelectAll()
+            //Purpose     : Try to get all the User objects from the datastore
             //Re-use      : None
             //Input       : None        
-            //Output      : - ref List<StorageUnit>
-            //                - the list that will contain the StorageUnit objects loaded from datastore         
+            //Output      : - ref List<User>
+            //                - the list that will contain the User objects loaded from datastore         
             //
 
             List<User> User; // will be returned, thus can not be declared in try block
@@ -64,16 +64,16 @@ namespace StorageUnitManagementSystem.DAL
         public override int SelectUser(string ID, ref User User)
         {
             //
-            //Method Name : int SelectStorageUnit(string ID, ref StorageUnit StorageUnit)
-            //Purpose     : Try to get a single StorageUnit object from the StorageUnit datastore
+            //Method Name : int SelectUser(string ID, ref User User)
+            //Purpose     : Try to get a single User object from the User datastore
             //Re-use      : 
             //Input       : string ID
-            //              - The ID of the StorageUnit to load from the datastore
-            //              ref StorageUnit StorageUnit
-            //              - The StorageUnit object loaded from the datastore
+            //              - The ID of the User to load from the datastore
+            //              ref User User
+            //              - The User object loaded from the datastore
             //Output      : - int
-            //                0 : StorageUnit loaded from datastore
-            //               -1 : no StorageUnit was loaded from the datastore (not found)
+            //                0 : User loaded from datastore
+            //               -1 : no User was loaded from the datastore (not found)
             //
 
             int rc = 0;  // will be returned, thus can not be declared in try block
@@ -118,14 +118,14 @@ namespace StorageUnitManagementSystem.DAL
         public override int Insert(User User)
         {
             //
-            //Method Name : int Insert(StorageUnit StorageUnit)
-            //Purpose     : Try to insert a row in the StorageUnit datastore
+            //Method Name : int Insert(User User)
+            //Purpose     : Try to insert a row in the User datastore
             //Re-use      : DoesExist()
-            //Input       : StorageUnit StorageUnit
-            //              - The StorageUnit object to add to the StorageUnit datastore
+            //Input       : User User
+            //              - The StorageUnit object to add to the User datastore
             //Output      : - int
-            //                0 : StorageUnit inserted into datastore
-            //               -1 : StorageUnit not inserted because a duplicate was found
+            //                0 : User inserted into datastore
+            //               -1 : User not inserted because a duplicate was found
             //
             int rc = 0; // will be returned, thus can not be declared in try block
 
@@ -186,14 +186,14 @@ namespace StorageUnitManagementSystem.DAL
         public override int Update(User User)
         {
             //
-            //Method Name : int Update(StorageUnit StorageUnit)
-            //Purpose     : Try to update a row in the StorageUnit datastore
+            //Method Name : int Update(User User)
+            //Purpose     : Try to update a row in the User datastore
             //Re-use      : None
-            //Input       : StorageUnit StorageUnit
-            //              - The new StorageUnit data for the row in the StorageUnit datastore
+            //Input       : User User
+            //              - The new User data for the row in the User datastore
             //Output      : - int
-            //                0 : StorageUnit found and updated successfully
-            //               -1 : StorageUnit not updated because the record was not found
+            //                0 : User found and updated successfully
+            //               -1 : User not updated because the record was not found
             //
             int rc = 0; // will be returned, thus can not be declared in try block
             try
@@ -254,13 +254,13 @@ namespace StorageUnitManagementSystem.DAL
         {
             //
             //Method Name : int Delete(string ID)
-            //Purpose     : Try to delete a row from the StorageUnit datastore
+            //Purpose     : Try to delete a row from the User datastore
             //Re-use      : None
             //Input       : string ID
-            //              - the ID of the StorageUnit to delete in the StorageUnit datastore
+            //              - the ID of the User to delete in the User datastore
             //Output      : - int
-            //                0 : StorageUnit found and deleted successfully
-            //               -1 : StorageUnit not deleted because the record was not found
+            //                0 : User found and deleted successfully
+            //               -1 : User not deleted because the record was not found
             //
             int rc = 0;  // will be returned, thus can not be declared in try block
 
@@ -304,8 +304,8 @@ namespace StorageUnitManagementSystem.DAL
             //Input       : string ID
             //              - the ID of the StorageUnit to search in the StorageUnit datastore
             //Output      : - bool
-            //                true : StorageUnit found
-            //               false : StorageUnit not found
+            //                true : User found
+            //               false : User not found
             //
             bool rc = false;  // will be returned, thus can not be declared in try block
 
