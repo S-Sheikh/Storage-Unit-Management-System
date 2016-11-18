@@ -1822,8 +1822,7 @@ namespace StorageUnitManagementSystem
                 //GO AWAY WPF!!!
             }
         }
-
-        private void Cb_selectNewClass_OnDropDownOpened(object sender, EventArgs e)
+private void Cb_selectNewClass_OnDropDownOpened(object sender, EventArgs e)
         {
 
 
@@ -1846,8 +1845,49 @@ namespace StorageUnitManagementSystem
             }
             cb_selectNewClass.SelectedIndex = 0;
         }
+       private void cb_selectNewClass_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (StorageUnits == null)
+                {
+                    StorageUnits = _subl.SelectAll();
+                }else if (StorageUnits != null)
+                {
+                    StorageUnits.Clear();
+                    StorageUnits = _subl.SelectAll();
+                
+                }
+                foreach (StorageUnit unit in StorageUnits)
+                {
+                    if (unit.UnitClassification == cb_selectNewClass.SelectedValue.ToString())
+                    {
+                        lb_previousPrice.Content = "R" + unit.UnitPrice;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                //GO AWAY WPF!!!            }
+// You can convert it back to an array if you would like to
+            string[] classStrings = classArray.ToArray();
+            classStrings = classStrings.Distinct().ToArray();
+            for (int x = 0; x < classStrings.Length; x++)
+            {
+                cb_selectNewClass.Items.Add(classStrings[x]);
+            }
+            cb_selectNewClass.SelectedIndex = 0;        }
        
 
+
+        private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
+        {            
+            string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
+                                                               "Click cancel to stop price change" ).ToString();
+            this.ShowMessageAsync("title", confirmation);
+        }    }
+}        {
 
            
 
@@ -1861,6 +1901,6 @@ namespace StorageUnitManagementSystem
             string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
                                                                "Click cancel to stop price change" ).ToString();
             this.ShowMessageAsync("title", confirmation);
-        }
+      }
     }
 }

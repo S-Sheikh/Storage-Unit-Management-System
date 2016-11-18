@@ -278,10 +278,9 @@
                                                 <ComboBox x:Name="CboListSearch" Width="100" Height="29" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,38" SelectionChanged="cboListSearch_SelectionChanged" SelectedIndex="0" DropDownOpened="cboListSearch_DropDownOpened" RenderTransformOrigin="0.57,-0.231" >
                                                     <ComboBoxItem>Search by:</ComboBoxItem>
                                                 </ComboBox>
-                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"/>                                                <Button x:Name="BtnListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="275,0,0,38" Click="btnListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True"></Button>
-                                            </Grid>                                        
-                                        </Border>
-                                    </TabItem>
+
+TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"></TextBox>                                                <Button x:Name="BtnListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="275,0,0,38" Click="btnListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True"></Button>
+                                            </Grid>                                          </TabItem>
 
                                     <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5">
                                         <Grid>
