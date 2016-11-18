@@ -142,7 +142,7 @@ namespace StorageUnitManagementSystem.DAL
                     //TO:DO 
                     _sqlCon = new SQLiteConnection(_conStr); // new connection
                     _sqlCon.Open(); // open connection
-                    string insertQuery = "INSERT INTO Users([UId], [UserName], " +
+                    string insertQuery = "INSERT INTO Users([UId], [UName], " +
                                          "[UPassword], [UPosition] ) VALUES(" +
                                          "@UId, @UName, @UPassword, @UPosition" +
                                          ")";
@@ -157,8 +157,8 @@ namespace StorageUnitManagementSystem.DAL
                     };
                     sqlParams[0].Value = User.Id; // Populate SQLiteParameters from StorageUnit
                     sqlParams[1].Value = User.UserName;
-                    sqlParams[3].Value = User.Password;
-                    sqlParams[4].Value = User.Role;
+                    sqlParams[2].Value = User.Password;
+                    sqlParams[3].Value = User.Role;
 
                     sqlCommand.Parameters.AddRange(sqlParams);
                     rowsAffected = sqlCommand.ExecuteNonQuery();
@@ -225,8 +225,8 @@ namespace StorageUnitManagementSystem.DAL
                 };
                 sqlParams[0].Value = User.Id; // Populate SQLiteParameters from StorageUnit
                 sqlParams[1].Value = User.UserName;  
-                sqlParams[3].Value = User.Password;
-                sqlParams[4].Value = User.Role;
+                sqlParams[2].Value = User.Password;
+                sqlParams[3].Value = User.Role;
 
                 sqlCommand.Parameters.AddRange(sqlParams);
                 rowsAffected = sqlCommand.ExecuteNonQuery();

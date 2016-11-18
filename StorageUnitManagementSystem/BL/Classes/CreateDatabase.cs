@@ -136,7 +136,6 @@ namespace StorageUnitManagementSystem.BL.Classes
 
                 string query = "CREATE TABLE Users (UId TEXT DEFAULT '0' PRIMARY KEY NOT NULL,"
                   + "UName TEXT DEFAULT 'ADMIN',"
-                  + "USurname TEXT DEFAULT 'ADMIN',"
                   + "UPassword TEXT DEFAULT 'ADMIN',"
                   + "UPosition TEXT DEFAULT 'ADMIN');";
                 SQLiteCommand sqlCommand = new SQLiteCommand(query, SqlCon); // setup command
@@ -250,23 +249,22 @@ namespace StorageUnitManagementSystem.BL.Classes
                 //TO:DO 
                 SqlCon = new SQLiteConnection(ConStr); // new connection
                 SqlCon.Open(); // open connection
-                string insertQuery = "INSERT INTO Users([UId], [UName],[USurname], [UPassword], " +
+                string insertQuery = "INSERT INTO Users([UId], [UName], [UPassword], " +
                                      "[UPosition]) VALUES(" +
-                                     "@UId, @UName, @USurname,@UPassword, @UPosition)";
+                                     "@UId, @UName,@UPassword, @UPosition)";
                 SQLiteCommand sqlCommand = new SQLiteCommand(insertQuery, SqlCon); // setup command
                 SQLiteParameter[] sqlParams = new SQLiteParameter[] // setup parameters
                 {
                     new SQLiteParameter("@UId", DbType.String),
                     new SQLiteParameter("@UName", DbType.String),
-                    new SQLiteParameter("@USurname", DbType.String),
                     new SQLiteParameter("@UPassword", DbType.String),
                     new SQLiteParameter("@UPosition", DbType.String)
                 };
                 sqlParams[0].Value = "ADMIN"; // Populate SQLiteParameters from StorageUnit
                 sqlParams[1].Value = "ADMIN";
+  
                 sqlParams[2].Value = "ADMIN";
                 sqlParams[3].Value = "ADMIN";
-                sqlParams[4].Value = "ADMIN";
                 sqlCommand.Parameters.AddRange(sqlParams);
                 rowsAffected = sqlCommand.ExecuteNonQuery();
                 if (rowsAffected == 1) // Test rowsAffected

@@ -39,6 +39,7 @@ namespace StorageUnitManagementSystem
         public List<LeaseUnits> LeaseUnits { get; set; }
         public List<StorageUnit> StorageUnits { get; set; }
         public List<Client> Clients { get; set; }
+        public List<User> Users { get; set; }
         public List<string> Data { get; } = new List<string> {"Client ID", "Name", "Surname", "City", "Province"};
         public PopUp PopUp = new PopUp();
         public List<string> cb_UnitListSearchItems { get; } = new List<string>
@@ -1882,5 +1883,134 @@ namespace StorageUnitManagementSystem
             string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
                                                                "Click cancel to stop price change" ).ToString();
             this.ShowMessageAsync("title", confirmation);
-        }    }
+        }
+
+        private void BtnSupport_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       
+        private void btnCreateUser_Click(object sender, RoutedEventArgs e)
+        {
+            int rc = 0;
+            User userObj;
+            try
+            {
+                if (txtUID.Text.Equals("") && txtUName.Text.Equals("") &&
+                    txtUPassword.Text.Equals("") &&
+                    txtURole.Text.Equals(""))
+                {
+                    this.ShowMessageAsync("Please Enter All Required Fields!", "");
+                }
+                else
+                {
+                    userObj = new User();
+                    userObj.Id = txtUID.Text;
+                    userObj.UserName = txtUName.Text;
+                    userObj.Password = txtUPassword.Text;
+                    userObj.Role = txtURole.Text;
+                    rc = _ubl.Insert(userObj);
+
+                    
+                    if (rc == 0)
+                    {
+                        this.ShowMessageAsync(
+                            "User: " + userObj.UserName + " Successfully Added!",
+                            "User Added");
+                        txtUID.Clear();
+                        txtUName.Clear();
+                        txtUPassword.Clear();
+                        txtURole.Clear();
+                    } // end if
+                    else
+                    {
+                        this.ShowMessageAsync("Duplicate User exists. Please try again.", "User Not Added");
+                    } // end else
+                }
+
+            } // end try
+            catch (Exception ex)
+            {
+                this.ShowMessageAsync(ex.Message, "Add User: CreateUser_Click");
+            } // end catch
+
+        }
+
+        private void Cb_selectNewClass1_OnDropDownOpened(object sender, EventArgs e)
+        {
+            TextBoxRemoveUID.Items.Clear();
+            TextBoxRemoveUID.SelectedIndex = 0;
+            //suObjects.Clear();
+            //MessageBox.Show(cb_addClass.SelectedItem.ToString());
+            Users = _ubl.SelectAll();
+            //List<string> classArray = new List<string>();
+            foreach (User user in Users)
+            {
+                TextBoxRemoveUID.Items.Add(user.Id);
+            }
+
+           
+        }
+
+        private void cb_selectNewClass1_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (Users == null)
+                {
+                    Users = _ubl.SelectAll();
+                }
+                else if (StorageUnits != null)
+                {
+                    Users.Clear();
+                    Users = _ubl.SelectAll();
+
+                }
+                foreach (User user in Users)
+                {
+                    if (TextBoxRemoveUID.SelectedItem.Equals(user.Id))
+                    {
+                        TextBoxRemoveUName.Text = user.UserName;
+                        TextBoxRemoveUPassword.Text = user.Password;
+                        TextBoxRemoveURole.Text = user.Role;
+                    }
+                }
+            }
+            catch
+            {
+                //GO AWAY WPF!!!
+            }
+        }
+
+        private void btnUpdateUser(object sender, RoutedEventArgs e)
+        {
+            int rc = 0;
+            try
+            {
+                User user = new User();
+                user.Id = TextBoxRemoveUID.Text;
+                user.UserName = TextBoxRemoveUName.Text;
+                user.Password = TextBoxRemoveUPassword.Text;
+                user.Role = TextBoxRemoveURole.Text;
+                rc = _ubl.Update(user);
+                if (rc == 0)
+                {
+                    this.ShowMessageAsync(
+                                "User: " + user.UserName + " Successfully Updated!",
+                                "User Updated");
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ShowMessageAsync(ex.Message, "Add User: btnUpdateUser");
+            }
+            
+            
+        }
+    }
 }

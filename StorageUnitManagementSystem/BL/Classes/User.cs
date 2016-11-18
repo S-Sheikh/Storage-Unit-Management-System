@@ -9,20 +9,20 @@ namespace StorageUnitManagementSystem.BL.Classes
     public class User
     {
         private string _id;
-        private string userName;
-        private string password;
-        private string role;
+        private string _userName;
+        private string _password;
+        private string _role;
 
         public string UserName
         {
             get
             {
-                return userName;
+                return _userName;
             }
 
             set
             {
-                userName = value;
+                _userName = value;
             }
         }
 
@@ -30,12 +30,12 @@ namespace StorageUnitManagementSystem.BL.Classes
         {
             get
             {
-                return password;
+                return _password;
             }
 
             set
             {
-                password = value;
+                _password = value;
             }
         }
 
@@ -43,12 +43,12 @@ namespace StorageUnitManagementSystem.BL.Classes
         {
             get
             {
-                return role;
+                return _role;
             }
 
             set
             {
-                role = value;
+                _role = value;
             }
         }
 
