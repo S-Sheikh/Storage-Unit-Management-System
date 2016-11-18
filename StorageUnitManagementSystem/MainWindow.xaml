@@ -710,12 +710,12 @@
                                                 <Label x:Name="label15" Content="Username:" HorizontalAlignment="Left" Margin="68,10,0,0" VerticalAlignment="Top" Grid.Row="2" Height="26" Width="70"/>
                                                 <Label x:Name="label16" Content="Password:" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Grid.Row="3" Height="26" Width="65"/>
                                                 <Label x:Name="label17" Content=" Role:" HorizontalAlignment="Left" Margin="98,10,0,0" VerticalAlignment="Top" Grid.Row="4" Height="26" Width="40"/>
-                                                <ComboBox x:Name="TextBoxRemoveUID"  Grid.Column="1" SelectionChanged="cb_selectNewClass1_OnSelectionChanged" DropDownOpened="Cb_selectNewClass1_OnDropDownOpened" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0"  VerticalAlignment="Top" Width="223" Grid.Row="1" >
+                                                <ComboBox x:Name="ComboBoxUpdate"  Grid.Column="1" SelectionChanged="cb_selectNewClass1_OnSelectionChanged" DropDownOpened="Cb_selectNewClass1_OnDropDownOpened" HorizontalAlignment="Left" Height="26" Margin="10,9,0,0"  VerticalAlignment="Top" Width="223" Grid.Row="1" >
                                                     <ComboBoxItem Content="---Select ID---" IsSelected="True"/>
                                                 </ComboBox>
-                                                <TextBox x:Name="TextBoxRemoveUName" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="2"/>
-                                                <TextBox x:Name="TextBoxRemoveUPassword" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="3"/>
-                                                <TextBox x:Name="TextBoxRemoveURole" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="4"/>
+                                                <TextBox x:Name="TextBoxUpdateUName" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="2"/>
+                                                <TextBox x:Name="TextBoxUpdateUPassword" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="3"/>
+                                                <TextBox x:Name="TextBoxUpdateURole" Grid.Column="1" HorizontalAlignment="Left" Height="26" Margin="10,11,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" Grid.Row="4"/>
                                                 <Button x:Name="button11" Content="SAVE" Grid.Column="1" HorizontalAlignment="Left" Margin="55,10,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Height="25" Click="btnUpdateUser"/>
                                                 <Label x:Name="label8" Content="Edit an Existing User" Grid.Column="1" HorizontalAlignment="Left" Margin="55,25,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
 

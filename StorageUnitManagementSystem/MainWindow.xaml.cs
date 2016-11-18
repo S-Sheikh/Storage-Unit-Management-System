@@ -1862,7 +1862,8 @@ namespace StorageUnitManagementSystem
                 }
             }
             if (rc != 0)
-            {
+            { }
+        }
         private void btnCreateUser_Click(object sender, RoutedEventArgs e)
         {
             int rc = 0;
@@ -1911,15 +1912,15 @@ namespace StorageUnitManagementSystem
 
         private void Cb_selectNewClass1_OnDropDownOpened(object sender, EventArgs e)
         {
-            TextBoxRemoveUID.Items.Clear();
-            TextBoxRemoveUID.SelectedIndex = 0;
+            ComboBoxUpdate.Items.Clear();
+            ComboBoxUpdate.SelectedIndex = 0;
             //suObjects.Clear();
             //MessageBox.Show(cb_addClass.SelectedItem.ToString());
             Users = _ubl.SelectAll();
             //List<string> classArray = new List<string>();
             foreach (User user in Users)
             {
-                TextBoxRemoveUID.Items.Add(user.Id);
+                ComboBoxUpdate.Items.Add(user.Id);
             }
 
            
@@ -1941,11 +1942,11 @@ namespace StorageUnitManagementSystem
                 }
                 foreach (User user in Users)
                 {
-                    if (TextBoxRemoveUID.SelectedItem.Equals(user.Id))
+                    if (ComboBoxUpdate.SelectedItem.Equals(user.Id))
                     {
-                        TextBoxRemoveUName.Text = user.UserName;
-                        TextBoxRemoveUPassword.Text = user.Password;
-                        TextBoxRemoveURole.Text = user.Role;
+                        TextBoxUpdateUName.Text = user.UserName;
+                        TextBoxUpdateUPassword.Text = user.Password;
+                        TextBoxUpdateURole.Text = user.Role;
                     }
                 }
             }
@@ -1961,10 +1962,10 @@ namespace StorageUnitManagementSystem
             try
             {
                 User user = new User();
-                user.Id = TextBoxRemoveUID.Text;
-                user.UserName = TextBoxRemoveUName.Text;
-                user.Password = TextBoxRemoveUPassword.Text;
-                user.Role = TextBoxRemoveURole.Text;
+                user.Id = ComboBoxUpdate.Text;
+                user.UserName = TextBoxUpdateUName.Text;
+                user.Password = TextBoxUpdateUPassword.Text;
+                user.Role = TextBoxUpdateURole.Text;
                 rc = _ubl.Update(user);
                 if (rc == 0)
                 {
