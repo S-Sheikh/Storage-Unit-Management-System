@@ -3,7 +3,7 @@
     public class Address
     {
         private string _line1; //'x'x All correct according to UML/specs
-       private string _line2;
+        private string _line2;
         private string _city;
         private string _province;
         private string _postalCode;

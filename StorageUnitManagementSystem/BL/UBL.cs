@@ -22,7 +22,7 @@ namespace StorageUnitManagementSystem.BL
         } // end method
 
         /// <summary>
-        /// This method gets the list of all the business objects from the Client datastore.
+        /// This method gets the list of all the business objects from the User datastore.
         /// It returns the list of business objects
         /// </summary>
         public List<User> SelectAll()
@@ -37,10 +37,10 @@ namespace StorageUnitManagementSystem.BL
 
 
         /// <summary>
-        /// This method gets a single Client object from the Client datastore.
+        /// This method gets a single User object from the Client datastore.
         /// </summary>
-        /// <param name="ID">The Client ID of the Client to load from the datastore.</param>
-        /// <param name="Client">The Client object loaded from the datastore.</param>
+        /// <param name="ID">The User ID of the User to load from the datastore.</param>
+        /// <param name="User">The User object loaded from the datastore.</param>
         public int SelectUser(string ID, ref User User)
         {
             return providerBase.SelectUser(ID, ref User);
@@ -52,38 +52,38 @@ namespace StorageUnitManagementSystem.BL
         } // end method
 
         /// <summary>
-        /// This method inserts a row in the Client datastore
+        /// This method inserts a row in the User datastore
         /// </summary>
-        /// <param name="Client">The Client object to add to the Client datastore.</param>
+        /// <param name="User">The User object to add to the User datastore.</param>
         public int Insert(User User)
         {
             return providerBase.Insert(User);
         } // end method
 
         /// <summary>
-        /// This method updates a row in the Client datastore.
+        /// This method updates a row in the User datastore.
         /// </summary>
-        /// <param name="Client">The new Client data for the row in the Client datastore.</param>
+        /// <param name="User">The new User data for the row in the User datastore.</param>
         public int Update(User User)
         {
             return providerBase.Update(User);
         } // end method
 
         /// <summary>
-        /// This method deletes a row in the Client datastore.
+        /// This method deletes a row in the User datastore.
         /// </summary>
-        /// <param name="ID">The Client ID of the Client to delete in the Client datastore.</param>
+        /// <param name="ID">The User ID of the User to delete in the User datastore.</param>
         public int Delete(string ID)
         {
             return providerBase.Delete(ID);
         } // end method
 
         /// <summary>
-        /// This method determines if a given Client exists in the Client datastore.
-        /// It returns true to indicate the Client was foundy, or
-        ///  false to indicate the Client was not found
+        /// This method determines if a given User exists in the User datastore.
+        /// It returns true to indicate the User was foundy, or
+        ///  false to indicate the User was not found
         /// </summary>
-        /// <param name="ID">The Client ID of the Client to search in the Client datastore.</param>
+        /// <param name="ID">The User ID of the User to search in the User datastore.</param>
         public bool DoesExist(string ID)
         {
             return providerBase.DoesExist(ID);
