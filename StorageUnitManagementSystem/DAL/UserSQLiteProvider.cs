@@ -7,11 +7,9 @@ namespace StorageUnitManagementSystem.DAL
 {
     public class UserSQLiteProvider : UserProviderBase
     {
-        private static string Path = System.IO.Path.Combine(Environment.GetFolderPath(
-                                     Environment.SpecialFolder.ApplicationData), "StorageUnitManagementDB.db");
-        //private string _conStr = "Data Source=c:\\DataStores\\StorageUnitManagementDB.db;Version=3;";
+       //private string _conStr = "Data Source=c:\\DataStores\\StorageUnitManagementDB.db;Version=3;";
         private SQLiteConnection _sqlCon;
-        private string _conStr = "Data Source=" + Path + ";Version=3;";
+        private string _conStr = CreateDatabase.ConStr;
         public override List<User> SelectAll()
         {
             //

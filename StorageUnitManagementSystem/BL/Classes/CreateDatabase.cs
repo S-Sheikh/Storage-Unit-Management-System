@@ -166,29 +166,29 @@ namespace StorageUnitManagementSystem.BL.Classes
                     CreateTableLeaseUnits();
                     CreateTableUsers();
                     InsertUsers();
-                    for (int i = 1; i < 47; i++)
+                    for (int i = 1; i < 46; i++)
                     {
                         Insert(i.ToString(), "A", 650, "3,3,3");
                     }
-                    for (int i = 47; i < 68; i++)
+                    for (int i = 46; i < 66; i++)
                     {
                         Insert(i.ToString(), "B", 750, "3,5,3");
                     }
-                    for (int i = 68; i < 84; i++)
+                    for (int i = 66; i < 81; i++)
                     {
                         Insert(i.ToString(), "C", 950, "3,5,5");
                     }
-                    for (int i = 84; i < 95; i++)
+                    for (int i = 81; i < 91; i++)
                     {
                         Insert(i.ToString(), "D", 1150, "3,7,3");
                     }
-                    for (int i = 95; i < 106; i++)
+                    for (int i = 91; i < 101; i++)
                     {
                         Insert(i.ToString(), "E", 1250, "3,7,5");
                     }
-                    for (int i = 106; i < 111; i++)
+                    for (int i = 101; i < 106; i++)
                     {
-                        Insert(i.ToString(), "F", 400, "5,6,4");
+                        Insert(i.ToString(), "F", 1400, "5,6,4");
                     }
                 }
             }

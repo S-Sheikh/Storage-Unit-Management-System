@@ -9,7 +9,8 @@ namespace ClientManagementSystem.DAL
 {
     public class ClientSQLiteProvider : ClientProviderBase
     {
-        private string _conStr = CreateDatabase.ConStr;
+
+private string _conStr = CreateDatabase.ConStr;
         private SQLiteConnection _sqlCon;
 
         public override List<Client> SelectAll()

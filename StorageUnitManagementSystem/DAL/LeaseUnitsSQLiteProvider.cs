@@ -51,9 +51,8 @@ namespace StorageUnitManagementSystem.DAL
                     LeaseUnit.StorageUnit.UnitClassification = Convert.ToString(sdr["UnitClass"]);
                     LeaseUnit.StorageUnit.UnitPrice = Convert.ToDouble(sdr["UnitPrice"]);
                     LeaseUnit.NoOfUnits = Convert.ToInt32(sdr["NoOfUnits"]);
-                    LeaseUnit.ClientWaitingList = (Convert.ToInt16(sdr["ClientWaitingList"]) == 1) ? true : false;
-                    LeaseUnit.AvailableUnits = Convert.ToString(sdr["AvailableUnits"]);
-                    LeaseUnit.TypeOfPayment = Convert.ToString(sdr["TypeOfPayment"]);
+LeaseUnit.ClientWaitingList = (Convert.ToInt16(sdr["ClientWaitingList"]) == 1) ? true : false;
+                    LeaseUnit.AvailableUnits = Convert.ToString(sdr["AvailableUnits"]);                    LeaseUnit.TypeOfPayment = Convert.ToString(sdr["TypeOfPayment"]);
                     LeaseUnit.DateOfPayment = Convert.ToString(sdr["DatePaid"]);
                     LeaseUnit.DateOfContractStart = Convert.ToString(sdr["DateOfContractStart"]);
                     LeaseUnit.DateOfContractEnd = Convert.ToString(sdr["DateOfContractEnd"]);

@@ -80,10 +80,6 @@ namespace StorageUnitManagementSystem
             //Test
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
@@ -93,7 +89,6 @@ namespace StorageUnitManagementSystem
 
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            //TEST COMMITTTTTTTTTTTTTTTTTTTTTTTTTTTT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             LoginWindow login = new LoginWindow();
             login.Show();
             this.Close();
@@ -117,17 +112,6 @@ namespace StorageUnitManagementSystem
             {
                 this.ShowMessageAsync(ex.Message, "Main Window : lettersOnlyTextBox_KeyDown");
             }
-
-        }
-
-
-        private void btn_Submit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void clients_cbo_class_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
 
         }
 
@@ -810,7 +794,6 @@ namespace StorageUnitManagementSystem
                             lv_Units.Items.Add(unit);
                             rc = 1;
                         }
-                        
                     }
                     if (rc == 0)
                     {
@@ -1696,6 +1679,11 @@ namespace StorageUnitManagementSystem
                 this.ShowMessageAsync("Item Not Selected!", "Please Select an item");
             }
         }
+        
+
+       
+
+        
         private void Btn_ClearLessee_OnClick(object sender, RoutedEventArgs e)
         {
             int rc = 0;
@@ -1807,25 +1795,9 @@ namespace StorageUnitManagementSystem
             }
         }
 
-        private void btn_UnitListSearch_Copy_OnClick(object sender, RoutedEventArgs e)
-        {
-            int rc = 0;
-            StorageUnit unitObject = new StorageUnit();
-            lv_Units_Search.Items.Clear();
+        
 
-            //lv_Units_Search.Items.Clear();
-            rc = _subl.SelectStorageUnit(tb_SearchUnit.Text, ref unitObject);
-            if (rc == 0)
-            {
-                //lv_Units_Search.Items.Clear();
-                lv_Units_Search.Items.Add(unitObject);
-            }
-            else
-            {
-                this.ShowMessageAsync("Error", "No Matching Unit ID Found");
-            }
-        }
-       private void cb_selectNewClass_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cb_selectNewClass_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
@@ -1879,18 +1851,18 @@ namespace StorageUnitManagementSystem
 
         private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
         {
-            
-            string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
-                                                               "Click cancel to stop price change" ).ToString();
-            this.ShowMessageAsync("title", confirmation);
-        }
-
-        private void BtnSupport_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-       
+            int rc = -1;
+            StorageUnits = _subl.SelectAll();
+            foreach (StorageUnit unit in StorageUnits)
+            {
+                if (unit.UnitPrice.ToString().Equals(lb_previousPrice.Content.ToString().Substring(1)))
+                {
+                    unit.UnitPrice = Convert.ToDouble(tb_newPrice.Text.ToString());
+                    rc = _subl.Update(unit);
+                }
+            }
+            if (rc != 0)
+            {
         private void btnCreateUser_Click(object sender, RoutedEventArgs e)
         {
             int rc = 0;
