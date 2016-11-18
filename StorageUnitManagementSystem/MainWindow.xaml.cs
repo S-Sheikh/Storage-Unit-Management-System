@@ -1969,8 +1969,7 @@ namespace StorageUnitManagementSystem
                 if (rc == 0)
                 {
                     this.ShowMessageAsync(
-                                "User: " + user.UserName + " Successfully Updated!",
-                                "User Updated");
+                                "User: " + user.UserName + " Successfully Updated!","");
                 }
                 else
                 {
