@@ -1995,6 +1995,11 @@ namespace StorageUnitManagementSystem
                 user.UserName = TextBoxUpdateUName.Text;
                 user.Password = TextBoxUpdateUPassword.Text;
                 user.Role = TextBoxUpdateURole.Text;
+
+                TextBoxUpdateUName.Clear();
+                TextBoxUpdateUPassword.Clear();
+                TextBoxUpdateURole.Clear();
+
                 rc = _ubl.Update(user);
                 if (rc == 0)
                 {
@@ -2094,5 +2099,6 @@ namespace StorageUnitManagementSystem
 
 
         }
+
     }
 }

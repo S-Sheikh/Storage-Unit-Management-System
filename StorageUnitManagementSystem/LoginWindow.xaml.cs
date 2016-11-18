@@ -65,10 +65,12 @@ namespace StorageUnitManagementSystem{
                     textBox1.Password.ToString() == user.Password.ToString())
                 {
                     window.Show();
- MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(window, "Logging In",
-                        "Successfull Press OK to continue");                    this.Close();
-  }
-                //window.TextBlock1.Text = user.UserName;                
+                    MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(window, "Logging In",
+                        "Successfull Press OK to continue");
+                    window.TextBlock1.Text = user.UserName;
+                   this.Close();
+                }
+                              
                 else
                 {
                     MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(this, "Logging In",
