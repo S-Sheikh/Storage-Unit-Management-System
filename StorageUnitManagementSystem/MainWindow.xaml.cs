@@ -1817,8 +1817,7 @@ namespace StorageUnitManagementSystem
                         break;
                     }
                 }
-            }
-            catch
+            }            catch
             {
                 //GO AWAY WPF!!!
             }
@@ -1847,28 +1846,67 @@ namespace StorageUnitManagementSystem
             }
             cb_selectNewClass.SelectedIndex = 0;
         }
+       private void cb_selectNewClass_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (StorageUnits == null)
+                {
+                    StorageUnits = _subl.SelectAll();
+                }else if (StorageUnits != null)
+                {
+                    StorageUnits.Clear();
+                    StorageUnits = _subl.SelectAll();
+                
+                }
+                foreach (StorageUnit unit in StorageUnits)
+                {
+                    if (unit.UnitClassification == cb_selectNewClass.SelectedValue.ToString())
+                    {
+                        lb_previousPrice.Content = "R" + unit.UnitPrice;
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                //GO AWAY WPF!!!
+            }
+        }
+
 
         private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
         {
-            int rc = -1;
-            StorageUnits = _subl.SelectAll();
-            foreach (StorageUnit unit in StorageUnits)
+            
+            string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
+                                                               "Click cancel to stop price change" ).ToString();
+            this.ShowMessageAsync("title", confirmation);
+        }    }
+}        {
+
+
+            cb_selectNewClass.Items.Clear();
+            //suObjects.Clear();
+            //MessageBox.Show(cb_addClass.SelectedItem.ToString());
+            _suObjects = _subl.SelectAll();
+            List<string> classArray = new List<string>();
+            foreach (StorageUnit unit in _suObjects)            {
+                classArray.Add(unit.UnitClassification);            }
+
+            // You can convert it back to an array if you would like to
+            string[] classStrings = classArray.ToArray();
+            classStrings = classStrings.Distinct().ToArray();
+            for (int x = 0; x < classStrings.Length; x++)
             {
-                if (unit.UnitPrice.ToString().Equals(lb_previousPrice.Content.ToString().Substring(1)))
-                {
-                    unit.UnitPrice = Convert.ToDouble(tb_newPrice.Text.ToString());
-                    rc = _subl.Update(unit);
-                    
-                    
-                }
+                cb_selectNewClass.Items.Add(classStrings[x]);
             }
-            if (rc != 0)
-            {
-                this.ShowMessageAsync("Error", "Could not Update With new Price");
-            }
-            else
-            {
-                this.ShowMessageAsync("Notice", "New Price will only affect new Leases");
-            }
-        }
-    }}
+            cb_selectNewClass.SelectedIndex = 0;        }
+
+        private void Btn_updatePrices_OnClick(object sender, RoutedEventArgs e)
+        {
+            
+            string confirmation = this.ShowInputAsync("Notice","New Pricing will only affect new Units, Type \"YES\" to change Prices \n " +
+                                                               "Click cancel to stop price change" ).ToString();
+            this.ShowMessageAsync("title", confirmation);
+        }    }
+}

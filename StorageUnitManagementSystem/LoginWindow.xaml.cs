@@ -65,9 +65,9 @@ namespace StorageUnitManagementSystem{
                 {
                     window.Show();
                     MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(window, "Logging In", "Successfull Press OK to continue");
-                    //window.TextBlock1.Text = user.UserName;
                     this.Close();
-                }
+
+                    //window.TextBlock1.Text = user.UserName;                }
                 else
                 {
                     MahApps.Metro.Controls.Dialogs.DialogManager.ShowMessageAsync(this, "Logging In", "Unsuccessfull, Password or Username Incorrect");
