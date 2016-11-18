@@ -279,8 +279,10 @@
                                                     <ComboBoxItem>Search by:</ComboBoxItem>
                                                 </ComboBox>
 
-TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"></TextBox>                                                <Button x:Name="BtnListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="275,0,0,38" Click="btnListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True"></Button>
-                                            </Grid>                                          </TabItem>
+                                                <TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" TextChanged="TxtBoxListSearch_TextChanged" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="120,0,0,38"></TextBox>
+                                                <Button x:Name="BtnListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" VerticalAlignment="Bottom"  HorizontalAlignment="Left" Margin="275,0,0,38" Click="btnListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True"></Button>
+                                            </Grid>                                        </Border>
+                                    </TabItem>
 
                                     <Border BorderBrush="{DynamicResource AccentBaseColorBrush}" BorderThickness="2" Margin="5">
                                         <Grid>
@@ -532,7 +534,8 @@ TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bot
                                                     <ComboBoxItem>Sort By:</ComboBoxItem>
                                                 </ComboBox>
                                                 <Button x:Name="btn_UnitListSearch" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search"   HorizontalAlignment="Center" Margin="0,390,0,23" Click="btn_UnitListSearch_Click" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" IsDefault="True"/>
- <Button x:Name="btn_ClearLessee" Tag="listUnits" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick" Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,390,10,23" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"  />
+                                                <Button x:Name="btn_ClearLessee" Tag="listUnits" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick"  Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,390,10,23" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"  />
+
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -601,7 +604,8 @@ TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bot
                                                 <Button x:Name="btn_UnitListSearch_Copy" Width="100" Height="auto" Style="{StaticResource AccentedSquareButtonStyle}" Content="Search" Click="btn_UnitListSearch_Click"  HorizontalAlignment="Center" Margin="269,402,160,11"  BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
                                                 <TextBox x:Name="tb_SearchUnit" HorizontalAlignment="Center" Height="28" Margin="124,403,265,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140"/>
                                                 <Label x:Name="label" Content="Search Units by ID:" HorizontalAlignment="Left" Margin="10,403,0,0" VerticalAlignment="Top" Width="auto"/>
-                                                <Button x:Name="btn_ClearLessee_Copy" Tag="SearchUnits" Width="100" Height="auto" Click="Btn_ClearLessee_OnClick" Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,401,10,12" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" />
+                                                <Button x:Name="btn_ClearLessee_Copy" Click="Btn_ClearLessee_OnClick" Tag="SearchUnits" Width="100" Height="auto"  Style="{StaticResource btnStyleRed}" Content="Clear Lessee"   HorizontalAlignment="Center" Margin="419,401,10,12" BorderThickness="0" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal" />
+
                                             </Grid>
                                         </Border>
                                     </TabItem>
@@ -620,12 +624,13 @@ TextBox x:Name="TxtBoxListSearch" Width="150" Height="29" VerticalAlignment="Bot
                                                 <ComboBox x:Name="cb_selectNewClass" HorizontalAlignment="Left" Margin="135,49,0,0" DropDownOpened="Cb_selectNewClass_OnDropDownOpened" SelectionChanged="cb_selectNewClass_OnSelectionChanged"  VerticalAlignment="Top" Width="117" Height="26">
                                                     <ComboBoxItem Content="---Select Class---" IsSelected="True"/>
                                                 </ComboBox>
-<Label x:Name="label2" Content="Previous Price:" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Height="26" Width="86"/>
+                                                <Label x:Name="label2" Content="Previous Price:" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Height="26" Width="86"/>
                                                 <Label x:Name="label3" Content="New Price:" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
                                                 <Button x:Name="btn_updatePrices"   Style="{StaticResource AccentedSquareButtonStyle}" Click="Btn_updatePrices_OnClick" BorderThickness="0" Content="Update Price" HorizontalAlignment="Center" Margin="0,142,0,0" VerticalAlignment="Top" Width="100" Height="auto" controls:ButtonHelper.PreserveTextCase="True" controls:ControlsHelper.ContentCharacterCasing="Normal"/>
                                                 <Label x:Name="lb_previousPrice" Content="....." HorizontalAlignment="Left" Height="26" Margin="135,80,0,0"  VerticalAlignment="Top" Width="117"/>
-                                                <TextBox x:Name="textBox1"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" MaxLength="10" controls:TextBoxHelper.Watermark="Enter New Price" HorizontalAlignment="Left" Height="26" Margin="135,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117"/>
-                                                <Label x:Name="label18_Copy" Content="Change Existing Unit Class Pricing" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="0,10,0,0"/>                                            </Grid>
+                                                <TextBox x:Name="tb_newPrice"  DataObject.Pasting="TextBoxPasting" PreviewTextInput="UIElement_OnPreviewTextInput" MaxLength="10" controls:TextBoxHelper.Watermark="Enter New Price" HorizontalAlignment="Left" Height="26" Margin="135,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117"/>
+                                                <Label x:Name="label18_Copy" Content="Change Existing Unit Class Pricing" HorizontalAlignment="Center"  FontWeight="Bold" FontSize="18" VerticalAlignment="Top" Margin="0,10,0,0"/>
+                                            </Grid>
                                         </Border>
                                     </TabItem>
                                     <TabItem Header="New Unit Class" Margin="10,101,-6,-102">
